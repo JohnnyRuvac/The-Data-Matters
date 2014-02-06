@@ -84,6 +84,23 @@ html[xmlns] .clearfix {
   box-sizing: border-box;
 }
 
+/* General stuff */
+body {
+  width: 100%;
+  overflow: hidden;
+}
+#wrapper {
+  width: 100%;
+  float: right;
+
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+/* End of general stuff */
+
 /* header */
 h1.logo {
   width: 70px;
@@ -124,10 +141,44 @@ h1.logo {
   width: 32px;
   height: 30px;
   border-right: 1px solid #ccc;
+}
+.main-nav .menu-icon a {
+  display: block;
   text-indent: -9999px;
   background: url(../img/menu-icon.png) no-repeat center center;
 }
 /* end of header */
+
+/* Slideout menu */
+#slideout-menu {
+  float: left;
+  width: 0;
+  height: 500px;
+  overflow: hidden;
+  border-right: 1px solid #ccc;
+  background: #efefef;
+
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.slideout-menu-opened #slideout-menu {
+  width: 270px;
+}
+.slideout-menu-opened #wrapper {
+  margin-right: -270px;
+}
+#slideout-menu li a {
+  display: block;
+  padding-left: 16px;
+  line-height: 40px;
+  color: #646464;
+  border-bottom: 1px solid #ccc;
+  text-decoration: none;
+}
+/* End of slideout menu */
 
 /* Projects */
 .projects {
