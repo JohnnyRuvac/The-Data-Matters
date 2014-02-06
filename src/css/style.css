@@ -84,10 +84,34 @@ html[xmlns] .clearfix {
   box-sizing: border-box;
 }
 
+/* Fonts */
+@font-face {
+  font-family: 'simplon';
+  src: url('fonts/simplonnorm-bold-webfont.eot');
+  src: url('fonts/simplonnorm-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('fonts/simplonnorm-bold-webfont.woff') format('woff'),
+       url('fonts/simplonnorm-bold-webfont.ttf') format('truetype'),
+       url('fonts/simplonnorm-bold-webfont.svg#simplon_normbold') format('svg');
+  font-weight: 700;
+  font-style: bold;
+}
+@font-face {
+  font-family: 'simplon';
+  src: url('fonts/simplonnorm-regular-webfont.eot');
+  src: url('fonts/simplonnorm-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('fonts/simplonnorm-regular-webfont.woff') format('woff'),
+       url('fonts/simplonnorm-regular-webfont.ttf') format('truetype'),
+       url('fonts/simplonnorm-regular-webfont.svg#simplon_normregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* END fonts */
+
 /* General stuff */
 body {
   width: 100%;
   overflow: hidden;
+  font-family: "Simplon", Helvetica, Arial, sans-serif;
 }
 #wrapper {
   width: 100%;
