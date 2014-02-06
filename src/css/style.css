@@ -68,5 +68,81 @@ html[xmlns] .clearfix {
   height: 1%;
 }
 
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: " ";
+}
+.clearfix:after {
+  clear: both;
+}
 
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+}
 
+/* header */
+h1.logo {
+  width: 70px;
+  height: 75px;
+  margin: 34px 0 30px 20px;
+  text-indent: -9999px;
+  background: url(../img/logo.png) no-repeat center center;
+}
+.main-nav {
+  width: 100%;
+  height: 32px;
+  margin-bottom: 16px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.main-nav ul {
+  position: relative;
+  width: 100%;
+  padding-left: 33px;
+}
+.main-nav li {
+  width: 50%;
+  float: left;
+  line-height: 30px;
+  text-indent: 10px;
+  border-left: 1px solid #ccc;
+  background: #efefef url(../img/dropdown-arrows.png);
+  background-repeat: no-repeat;
+  background-position: center right 10px;
+}
+.main-nav li:first-child {
+  border: none;
+}
+.main-nav .menu-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 30px;
+  border-right: 1px solid #ccc;
+  text-indent: -9999px;
+  background: url(../img/menu-icon.png) no-repeat center center;
+}
+/* end of header */
+
+/* Projects */
+.projects {
+  padding: 0 16px;
+}
+.projects .project {
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+}
+.project img {
+  float: left;
+  width: 45.45%;
+}
+.project .content {
+  float: left;
+  width: 54.55%;
+}
+/* End of projects */
