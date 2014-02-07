@@ -17,7 +17,7 @@ o.slideoutMenu = function () {
 
 }
 o.slideoutMenuHeight = function () {
-	o.$slideoutMenu.height( o.$window.height() );
+	o.$slideoutMenu.css({ "min-height": $(document).height() });
 }
 // END slideout menu
 

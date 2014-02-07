@@ -22,7 +22,7 @@
 /* END fonts */
 
 /* General stuff */
-body {
+#outer-wrapper {
   overflow: hidden;
 }
 #wrapper {
@@ -102,6 +102,7 @@ h1.logo {
   left: 0;
   width: 33px;
   height: 30px;
+  border-left: none;
   border-right: 1px solid #ccc;
 }
 .main-nav .menu-icon a {
@@ -109,12 +110,24 @@ h1.logo {
   text-indent: -9999px;
   background: url(../img/menu-icon.png) no-repeat center center;
 }
+
+@media (min-width: 492px) {
+  .main-nav li {
+    width: 145px;
+    border-left: none;
+    border-right: 1px solid #ccc;
+  }
+  .main-nav li:first-child {
+    border-right: 1px solid #ccc;
+  }
+}
 /* end of header */
 
 /* Slideout menu */
 #slideout-menu {
   float: left;
   width: 0;
+  margin-left: -1px;
   overflow: hidden;
   border-right: 1px solid #ccc;
   background: #efefef;
@@ -127,6 +140,7 @@ h1.logo {
 }
 .slideout-menu-opened #slideout-menu {
   width: 270px;
+  margin-left: 0;
 }
 .slideout-menu-opened #wrapper {
   margin-right: -270px;
@@ -326,3 +340,41 @@ h1.logo {
   text-decoration: none;
 }
 /* END of Projects Country dropdown */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
