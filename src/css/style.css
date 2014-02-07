@@ -150,7 +150,6 @@ h1.logo {
 
 @media (min-width: 492px) {
   .main-nav li {
-    width: 145px;
     border-left: none;
     border-right: 1px solid #ccc;
   }
@@ -161,6 +160,7 @@ h1.logo {
 
 @media (min-width: 768px) {
   .main-nav {
+    width: 145px;
     height: 34px;
   }
   .main-nav li {
