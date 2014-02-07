@@ -26,7 +26,9 @@ o.fieldDropdown = function () {
 
 	$("#field-button, #field-dropdown .close").click(function(e){
 		e.preventDefault();
-		$("#field-dropdown").toggleClass("active");
+		$("#field-dropdown")
+			.height( $(document).height() )
+			.toggleClass("active");
 	});
 
 }
@@ -37,7 +39,9 @@ o.countryDropdown = function () {
 
 	$("#country-button, #country-dropdown .close").click(function(e){
 		e.preventDefault();
-		$("#country-dropdown").toggleClass("active");
+		$("#country-dropdown")
+			.height( $(document).height() )
+			.toggleClass("active");
 	});
 
 }
