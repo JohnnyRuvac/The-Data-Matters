@@ -71,7 +71,7 @@ h1.logo {
 }
 .main-nav {
   width: 100%;
-  height: 32px;
+  height: 34px;
   margin-bottom: 16px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -84,7 +84,7 @@ h1.logo {
 .main-nav li {
   width: 50%;
   float: left;
-  line-height: 30px;
+  line-height: 32px;
   text-indent: 10px;
   border-left: 1px solid #ccc;
   background: #efefef url(../img/dropdown-arrows.png);
@@ -105,9 +105,10 @@ h1.logo {
   top: 0;
   left: 0;
   width: 33px;
-  height: 30px;
+  height: 32px;
   border-left: none;
   border-right: 1px solid #ccc;
+  background-image: none;
 }
 .main-nav .menu-icon a {
   display: block;
@@ -280,7 +281,9 @@ h1.logo {
   }
   .project .country {
     bottom: 32px;
+    padding-left: 25px;
     border-right: none;
+    background-position: 10px center;
   }
 
 }
@@ -314,6 +317,7 @@ h1.logo {
   padding: 0 16px;
   font-size: 14px;
   line-height: 36px;
+  text-indent: 0;
   border: 1px solid #ccc;
   background: #fff;
 }
@@ -324,6 +328,7 @@ h1.logo {
 .filter-content li {
   width: 100%;
   float: none;
+  text-indent: 0;
 }
 .filter-content h3 a {
   display: block;
@@ -366,7 +371,52 @@ h1.logo {
 }
 /* END of filter content */
 
+/* Retina images */
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
+only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min-device-pixel-ratio: 1.5) {
+  .filter-content h3 a {
+    background: white url(../img/close-icon@2x.png) no-repeat 0 0;
+    -webkit-background-size: 10px 10px;
+    background-size: 10px 10px;
+  }
+  .project .country {
+    background-image: url(../img/country-pin@2x.png);
+    -webkit-background-size: 6px 12px;
+    background-size: 6px 12px;
+  }
+  .main-nav li {
+    background-image: url(../img/dropdown-arrows@2x.png);
+    -webkit-background-size: 7px 9px;
+    background-size: 7px 9px;
+  }
+  .main-nav .filter-content li {
+    background-image: none;
+  }
+  .project .field {
+    background-image: url(../img/field-icon@2x.png);
+    -webkit-background-size: 11px 11px;
+    background-size: 11px 11px;
+  }
+  h1.logo {
+    background-image: url(../img/logo@2x.png);
+    -webkit-background-size: 70px 75px;
+    background-size: 70px 75px;
+  }
+  .main-nav .menu-icon a {
+    background-image: url(../img/menu-icon@2x.png);
+    -webkit-background-size: 9px 5px;
+    background-size: 9px 5px;
+  }
+  .main-nav .menu-search a {
+    background-image: url(../img/search-icon@2x.png);
+    -webkit-background-size: 9px 9px;
+    background-size: 9px 9px;
+  }
 
+}
+/* END of retina images */
 
 
 
