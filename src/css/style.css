@@ -203,11 +203,15 @@ h1.logo {
 .slideout-menu-opened #wrapper {
   margin-right: -270px;
 }
+#slideout-menu ul {
+  margin-top: -1px;
+}
 #slideout-menu li a {
   display: block;
   padding-left: 16px;
-  line-height: 40px;
-  color: #646464;
+  line-height: 46px;
+  font-size: 16px;
+  color: #000;
   border-bottom: 1px solid #ccc;
   text-decoration: none;
 }
