@@ -292,12 +292,10 @@ h1.logo {
 }
 /* End of projects */
 
-/* Projects Field dropdown */
-#field-dropdown {
+/* Filter content */
+.filter-content {
   display: none;
   opacity: 0;
-  width: 100%;
-  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -305,11 +303,11 @@ h1.logo {
   padding: 32px 16px;
   background: #efefef;
 }
-#field-dropdown.active {
+.filter-content.active {
   display: block;
   opacity: 1;
 }
-#field-dropdown h3 {
+.filter-content h3 {
   position: relative;
   height: 34px;
   margin: 0;
@@ -319,7 +317,15 @@ h1.logo {
   border: 1px solid #ccc;
   background: #fff;
 }
-#field-dropdown h3 a {
+.filter-content ul {
+  padding: 0;
+  width: 100%;
+}
+.filter-content li {
+  width: 100%;
+  float: none;
+}
+.filter-content h3 a {
   display: block;
   width: 10px;
   height: 10px;
@@ -331,10 +337,10 @@ h1.logo {
   text-indent: -9999px;
   background: white url(../img/close-icon.png) no-repeat 0 0;
 }
-#field-dropdown ul {
+.filter-content ul {
   border-bottom: 1px solid #ccc;
 }
-#field-dropdown li {
+.filter-content li {
   height: 34px;
   padding: 0 16px;
   font-size: 14px;
@@ -344,85 +350,22 @@ h1.logo {
   border-right: 1px solid #ccc;
   background: #fff;
 }
-#field-dropdown li:first-child {
+.filter-content li:first-child {
   border-top: none;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
 }
-#field-dropdown li a {
+.filter-content li a {
   display: block;
   color: #646464;
 }
-#field-dropdown li a:hover,
-#field-dropdown li a.active {
+.filter-content li a:hover,
+.filter-content li a.active {
   color: #f00;
   text-decoration: none;
 }
-/* END of Projects Field dropdown */
+/* END of filter content */
 
-/* Projects Country dropdown */
-#country-dropdown {
-  display: none;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  padding: 32px 16px;
-  background: #efefef;
-}
-#country-dropdown.active {
-  display: block;
-  opacity: 1;
-}
-#country-dropdown h3 {
-  position: relative;
-  height: 34px;
-  margin: 0;
-  padding: 0 16px;
-  font-size: 14px;
-  line-height: 36px;
-  border: 1px solid #ccc;
-  background: #fff;
-}
-#country-dropdown h3 a {
-  display: block;
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 11px;
-  right: 11px;
-  z-index: 101;
-  color: #646464;
-  text-indent: -9999px;
-  background: white url(../img/close-icon.png) no-repeat 0 0;
-}
-#country-dropdown ul {
-  border-bottom: 1px solid #ccc;
-}
-#country-dropdown li {
-  height: 34px;
-  padding: 0 16px;
-  font-size: 14px;
-  line-height: 36px;
-  border-top: 1px dotted #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  background: #fff;
-}
-#country-dropdown li:first-child {
-  border-top: none;
-}
-#country-dropdown li a {
-  display: block;
-  color: #646464;
-}
-#country-dropdown li a:hover,
-#country-dropdown li a.active {
-  color: #f00;
-  text-decoration: none;
-}
-/* END of Projects Country dropdown */
 
 
 

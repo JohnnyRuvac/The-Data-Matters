@@ -22,37 +22,30 @@ o.slideoutMenuHeight = function () {
 // END slideout menu
 
 // Field dropdown
-o.fieldDropdown = function () {
-
-	$("#field-button, #field-dropdown .close").click(function(e){
+o.activateProjectFilters = function () {
+	
+	$(".filter-button").click(function(e){
 		e.preventDefault();
-		$("#field-dropdown")
+		$(this).parent().find(".filter-content")
 			.height( $(document).height() )
+			.css("width", $(window).width() )
 			.toggleClass("active");
+	});
+
+	//close
+	$(".filter-content .close").click(function(e){
+		e.preventDefault();
+		$(this).parent().parent().removeClass("active");
 	});
 
 }
 // END Field dropdown
 
-// Country dropdown
-o.countryDropdown = function () {
-
-	$("#country-button, #country-dropdown .close").click(function(e){
-		e.preventDefault();
-		$("#country-dropdown")
-			.height( $(document).height() )
-			.toggleClass("active");
-	});
-
-}
-// END Country dropdown
-
 // DOM ready
 $(function(){
 
 	o.slideoutMenu();
-	o.fieldDropdown();
-	o.countryDropdown();
+	o.activateProjectFilters();
 
 });
 // END DOM ready
