@@ -386,6 +386,31 @@ h1.logo {
   color: #f00;
   text-decoration: none;
 }
+
+@media (min-width: 768px) {
+  .filter-button {
+    position: relative;
+  }
+  .filter-content {
+    top: 32px;
+    left: -1px;
+    padding: 0;
+  }
+  .filter-content h3 {
+    display: none;
+  }
+  .filter-content li:first-child {
+    border-top: 1px solid #ccc;
+  }
+  .filter-content li {
+    width: 146px;
+    padding-left: 10px;
+    padding-right: 0;
+  }
+  .filter-content li a {
+    font-size: 12px;
+  }
+}
 /* END of filter content */
 
 /* Retina images */

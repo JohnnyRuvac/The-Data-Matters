@@ -1,11 +1,21 @@
 var o = {};
 
-// Slideout menu
-o.slideoutMenu = function () {
+// Init variables
+o.initVars = function() {
 
 	o.$body = $("body");
 	o.$window = $(window);
+	o.ww = o.$window.width();
+
 	o.$slideoutMenu = $("#slideout-menu");
+
+	o.$filterContents = $(".filter-content");
+
+}
+// END Init variables
+
+// Slideout menu
+o.slideoutMenu = function () {
 
 	$(".main-nav .menu-icon").click(function(e){
 		e.preventDefault();
@@ -24,12 +34,27 @@ o.slideoutMenuHeight = function () {
 // Field dropdown
 o.activateProjectFilters = function () {
 	
-	$(".filter-button").click(function(e){
+	$(".filter-button a").click(function(e){
+		
 		e.preventDefault();
-		$(this).parent().find(".filter-content")
-			.height( $(document).height() )
-			.css("width", $(window).width() )
-			.toggleClass("active");
+		var $filterContent = $(this).parent().find(".filter-content");
+
+		//close other filters if they are open
+		var isActive;
+		if ( $filterContent.hasClass("active") ) isActive = true;
+		o.$filterContents.removeClass("active");
+		
+		//for mobile devices filter should be fullscreen, for tablets and larger it should be dropdown
+		var width  = (o.ww < 768) ? $(window).width() : $filterContent.css("width"),
+			  height = (o.ww < 768) ? $(document).height() : $filterContent.height();
+
+		$filterContent
+			.height( height )
+			.css("width", width )
+			.addClass("active");
+
+		if (isActive) $filterContent.removeClass("active");
+
 	});
 
 	//close
@@ -44,6 +69,7 @@ o.activateProjectFilters = function () {
 // DOM ready
 $(function(){
 
+	o.initVars();
 	o.slideoutMenu();
 	o.activateProjectFilters();
 
@@ -52,6 +78,9 @@ $(function(){
 
 // Window resize
 $(window).resize(function(){
+
+	o.ww = o.$window.width();
 	o.slideoutMenuHeight();
+
 });
 // END window resize
