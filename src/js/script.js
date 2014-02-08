@@ -31,7 +31,7 @@ o.slideoutMenuHeight = function () {
 }
 // END slideout menu
 
-// Field dropdown
+// Filter dropdown
 o.activateProjectFilters = function () {
 	
 	$(".filter-button a").click(function(e){
@@ -75,7 +75,13 @@ o.activateProjectFilters = function () {
 	});
 
 }
-// END Field dropdown
+o.fixFilters = function() {
+	//after resize from tablet to large desktop, we have to remove inline width and height
+	if (o.ww > 767) {
+		o.$filterContents.removeAttr("style");
+	}
+}
+// END Filter dropdown
 
 // DOM ready
 $(function(){
@@ -92,6 +98,7 @@ $(window).resize(function(){
 
 	o.ww = o.$window.width();
 	o.slideoutMenuHeight();
+	o.fixFilters();
 
 });
 // END window resize

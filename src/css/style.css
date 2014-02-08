@@ -179,6 +179,43 @@ h1.logo {
     margin: 0;
   }
 }
+
+@media (min-width: 1200px) {
+  .filter-button.menu-tablet {
+    width: auto;
+    border: none;
+  }
+  .filter-button.menu-tablet .label {
+    display: none;
+  }
+  .filter-button.menu-tablet .filter-content {
+    display: block;
+    position: static;
+    opacity: 1;
+  }
+  .filter-button.menu-tablet .filter-content ul {
+    border: none;
+    border-right: 1px solid #ccc;
+  }
+  .filter-button.menu-tablet .filter-content li {
+    float: left;
+    width: auto;
+    height: 32px;
+    padding-left: 0;
+    padding-right: 20px;
+    border: none;
+  }
+  .filter-button.menu-tablet .filter-content li a {
+    font-size: 14px;
+    line-height: 32px;
+    color: #000;
+  }
+  .filter-button.menu-tablet .filter-content li a.active,
+  .filter-button.menu-tablet .filter-content li a:active,
+  .filter-button.menu-tablet .filter-content li a:hover {
+    color: #f00;
+  }
+}
 /* end of header */
 
 /* Slideout menu */
