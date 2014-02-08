@@ -67,7 +67,10 @@ o.activateProjectFilters = function () {
 	$(".filter-content li a").click(function(e){
 
 		e.preventDefault();
-		$(this).closest(".filter-button").find(".label").text( $(this).text() );
+		$(this).closest(".filter-button")
+					 .find(".label")
+					 .text( $(this).text() )
+					 .addClass("active");
 
 	});
 

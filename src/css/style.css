@@ -119,13 +119,13 @@ h1.logo {
   background: url(../img/menu-icon.png) no-repeat center center;
 }
 .main-nav .menu-tablet {
-  margin-left: 83px;
+  margin-left: 82px;
   border-left: 1px solid #ccc;
   color: #f00;
   background-color: #fff;
 }
-.main-nav .secondary {
-  display: none;
+.main-nav .menu-tablet li {
+  width: 145px;
 }
 .main-nav .menu-search {
   width: 180px;
@@ -315,6 +315,9 @@ h1.logo {
 /* End of projects */
 
 /* Filter content */
+.filter-button .label.active {
+  color: #f00;
+}
 .filter-content {
   display: none;
   opacity: 0;
