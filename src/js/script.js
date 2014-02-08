@@ -83,12 +83,24 @@ o.fixFilters = function() {
 }
 // END Filter dropdown
 
+// Project preview
+o.activateProjectPreview = function() {
+
+	$(".project").click(function(e){
+		e.preventDefault();
+		
+	});
+
+}
+// END project preview
+
 // DOM ready
 $(function(){
 
 	o.initVars();
 	o.slideoutMenu();
 	o.activateProjectFilters();
+	o.activateProjectPreview();
 
 });
 // END DOM ready

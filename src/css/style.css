@@ -268,6 +268,15 @@ h1.logo {
   margin-bottom: 16px;
   border: 1px solid #ccc;
 }
+.projects .project a {
+  color: #000;
+}
+.projects .project a:hover h2 {
+  text-decoration: underline;
+}
+.projects .project a:hover img {
+  opacity: 0.8;
+}
 .project img {
   float: left;
   width: 45.5%;
@@ -309,6 +318,90 @@ h1.logo {
   width: 38.8%;
   left: 61.2%;
   background: url(../img/field-icon.png) no-repeat 7px center;
+}
+
+#project-preview {
+  display: none;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  background: #fff;
+}
+.project-preview #project-preview {
+  display: block;
+}
+#project-preview img {
+  width: 100%;
+}
+#project-preview h2,
+#project-preview .country,
+#project-preview .link {
+  padding-left: 16px;
+}
+#project-preview h2 {
+  font-size: 16px;
+  line-height: 52px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+#project-preview .country {
+  height: 33px;
+  margin: 0;
+  padding-left: 30px;
+  font-size: 12px;
+  line-height: 34px;
+  color: #646464;
+  border-bottom: 1px dotted #ccc;
+  background: url(../img/country-pin.png) no-repeat 16px center;
+}
+#project-preview .field {
+  display: inline-block;
+  padding-left: 35px;
+  background: url(../img/field-icon.png) no-repeat 15px 10px;
+}
+#project-preview .link {
+  height: 33px;
+  margin: 0;
+  padding-left: 32px;
+  font-size: 12px;
+  line-height: 34px;
+  color: #646464;
+  border-bottom: 1px solid #ccc;
+  background: url(../img/world-icon.png) no-repeat 14px center;
+}
+#project-preview .content {
+  padding: 16px;
+  padding-bottom: 0;
+}
+#project-preview .content p {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 18px;
+  color: #000;
+}
+
+.project-preview h1.logo,
+.project-preview .filter-button {
+  display: none;
+}
+.project-preview .main-nav {
+  background: #efefef;
+}
+.project-preview .main-nav .menu-icon {
+  border-right: 1px solid #ccc;
+}
+.main-nav .close-full-preview {
+  display: none;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  text-indent: -9999px;
+  background: url(../img/close-icon) no-repeat center center;
+}
+.project-preview .main-nav .close-full-preview {
+  display: block;
 }
 
 @media (min-width: 492px) {
