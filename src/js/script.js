@@ -63,6 +63,14 @@ o.activateProjectFilters = function () {
 		$(this).parent().parent().removeClass("active");
 	});
 
+	//filter li click
+	$(".filter-content li a").click(function(e){
+
+		e.preventDefault();
+		$(this).closest(".filter-button").find(".label").text( $(this).text() );
+
+	});
+
 }
 // END Field dropdown
 
