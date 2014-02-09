@@ -481,6 +481,34 @@ h1.logo {
     background-color: #fff;
   }
 }
+
+@media (min-width: 768px) {
+  .project-preview h1.logo,
+  .project-preview .filter-button {
+    display: block;
+  }
+  .project-preview h1.logo {
+    z-index: 100;
+  }
+  .project-preview .main-nav {
+    height: 33px;
+    background: #fff;
+  }
+  .project-preview .main-nav .close-full-preview {
+    display: none;
+  }
+  #project-preview .preview-content {
+    margin-left: 114px;
+  }
+  #project-preview .country,
+  #project-preview .link {
+    float: left;
+    border-bottom: none;
+  }
+  #project-preview .info {
+    border-bottom: 1px dotted #ccc;
+  }
+}
 /* END project full preview */
 
 /* Filter content */
