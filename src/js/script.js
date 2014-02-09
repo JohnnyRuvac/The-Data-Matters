@@ -87,8 +87,38 @@ o.fixFilters = function() {
 o.activateProjectPreview = function() {
 
 	$(".project").click(function(e){
-		e.preventDefault();
 		
+		e.preventDefault();
+		$("body").addClass("project-preview");
+
+		//scroll to top, but save scroll position after preview close
+		var currentScroll = $(window).scrollTop();
+		$(window).scrollTop(0);
+
+		//adjust window height
+		var menuHeight = $(".main-nav").height(),
+				previewHeight = $("#project-preview").height(),
+				height = menuHeight + previewHeight;
+
+		$("#outer-wrapper").height( height );
+
+		o.closeProjectPreview( currentScroll );
+
+	});
+
+}
+o.closeProjectPreview = function(scrollBefore) {
+
+	$(".close-full-preview").click(function(e){
+		
+		e.preventDefault();
+		$("body").removeClass("project-preview");
+		$(window).scrollTop(scrollBefore);
+		$(this).unbind("click");
+
+		//reset height
+		$("#outer-wrapper").css("height", "auto");
+
 	});
 
 }

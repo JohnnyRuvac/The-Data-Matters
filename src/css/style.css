@@ -70,6 +70,7 @@ h1.logo {
   background: url(../img/logo.png) no-repeat center center;
 }
 .main-nav {
+  position: relative;
   width: 100%;
   height: 48px;
   margin-bottom: 16px;
@@ -234,11 +235,11 @@ h1.logo {
   transition: all 0.3s;
 }
 .slideout-menu-opened #slideout-menu {
-  width: 270px;
+  width: 273px;
   margin-left: 0;
 }
 .slideout-menu-opened #wrapper {
-  margin-right: -270px;
+  margin-right: -273px;
 }
 #slideout-menu ul {
   margin-top: -1px;
@@ -258,6 +259,12 @@ h1.logo {
   color: #ff0000;
 }
 /* End of slideout menu */
+
+/* Main content */
+.main-content {
+  position: relative;
+}
+/* End of Main content */
 
 /* Projects */
 .projects {
@@ -323,7 +330,7 @@ h1.logo {
 #project-preview {
   display: none;
   position: absolute;
-  top: 48px;
+  top: -16px;
   left: 0;
   background: #fff;
 }
@@ -343,6 +350,7 @@ h1.logo {
   line-height: 52px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+  background: #efefef;
 }
 #project-preview .country {
   height: 33px;
@@ -352,12 +360,13 @@ h1.logo {
   line-height: 34px;
   color: #646464;
   border-bottom: 1px dotted #ccc;
-  background: url(../img/country-pin.png) no-repeat 16px center;
+  background: #efefef url(../img/country-pin.png) no-repeat 16px center;
 }
 #project-preview .field {
   display: inline-block;
+  height: 32px;
   padding-left: 35px;
-  background: url(../img/field-icon.png) no-repeat 15px 10px;
+  background: #efefef url(../img/field-icon.png) no-repeat 15px 10px;
 }
 #project-preview .link {
   height: 33px;
@@ -367,7 +376,7 @@ h1.logo {
   line-height: 34px;
   color: #646464;
   border-bottom: 1px solid #ccc;
-  background: url(../img/world-icon.png) no-repeat 14px center;
+  background: #efefef url(../img/world-icon.png) no-repeat 14px center;
 }
 #project-preview .content {
   padding: 16px;
@@ -385,20 +394,25 @@ h1.logo {
   display: none;
 }
 .project-preview .main-nav {
+  border-top: none;
+  height: 47px;
   background: #efefef;
+}
+.project-preview #slideout-menu ul {
+  margin-top: 0;
 }
 .project-preview .main-nav .menu-icon {
   border-right: 1px solid #ccc;
 }
 .main-nav .close-full-preview {
   display: none;
-  width: 10px;
-  height: 10px;
+  width: 47px;
+  height: 47px;
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: 0;
+  right: 0;
   text-indent: -9999px;
-  background: url(../img/close-icon) no-repeat center center;
+  background: url(../img/close-icon.png) no-repeat center center;
 }
 .project-preview .main-nav .close-full-preview {
   display: block;
@@ -551,8 +565,14 @@ h1.logo {
 only screen and (-moz-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5) {
+  
   .filter-content h3 a {
     background: white url(../img/close-icon@2x.png) no-repeat 0 0;
+    -webkit-background-size: 10px 10px;
+    background-size: 10px 10px;
+  }
+  .main-nav .close-full-preview {
+    background: url(../img/close-icon@2x.png) no-repeat center center;
     -webkit-background-size: 10px 10px;
     background-size: 10px 10px;
   }
@@ -588,6 +608,22 @@ only screen and (min-device-pixel-ratio: 1.5) {
     background-image: url(../img/search-icon@2x.png);
     -webkit-background-size: 9px 9px;
     background-size: 9px 9px;
+  }
+
+  #project-preview .country {
+    background: url(../img/country-pin@2x.png) no-repeat 16px center;
+    -webkit-background-size: 6px 12px;
+    background-size: 6px 12px;
+  }
+  #project-preview .field {
+    background: url(../img/field-icon@2x.png) no-repeat 15px 10px;
+    -webkit-background-size: 11px 11px;
+    background-size: 11px 11px;
+  }
+  #project-preview .link {
+    background: url(../img/world-icon@2x.png) no-repeat 14px center;
+    -webkit-background-size: 12px 12px;
+    background-size: 12px 12px;
   }
 
 }
