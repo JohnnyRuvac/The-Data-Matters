@@ -458,6 +458,29 @@ h1.logo {
 .project-preview .main-nav .close-full-preview {
   display: block;
 }
+
+@media (min-width: 492px) {
+  body.project-preview {
+    background: #efefef;
+  }
+  #project-preview {
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: #efefef;
+  }
+  #project-preview .preview-content {
+    width: 460px;
+    border: 1px solid #ccc;
+    background: #fff;
+  }
+  #project-preview h2,
+  #project-preview .country,
+  #project-preview .field,
+  #project-preview .link {
+    background-color: #fff;
+  }
+}
 /* END project full preview */
 
 /* Filter content */
