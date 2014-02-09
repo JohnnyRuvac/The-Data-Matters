@@ -6,9 +6,11 @@ o.initVars = function() {
 	o.$body = $("body");
 	o.$window = $(window);
 	o.ww = o.$window.width();
-
+	o.wh = o.$window.height();
+	o.$mainMenu = $(".main-nav");
+	o.$projectPreview = $("#project-preview");
+	o.$wrapper = $("#wrapper");
 	o.$slideoutMenu = $("#slideout-menu");
-
 	o.$filterContents = $(".filter-content");
 
 }
@@ -95,13 +97,7 @@ o.activateProjectPreview = function() {
 		var currentScroll = $(window).scrollTop();
 		$(window).scrollTop(0);
 
-		//adjust window height
-		var menuHeight = $(".main-nav").height(),
-				previewHeight = $("#project-preview").height(),
-				height = menuHeight + previewHeight;
-
-		$("#outer-wrapper").height( height );
-
+		o.fixProjectPreviewHeight();
 		o.closeProjectPreview( currentScroll );
 
 	});
@@ -116,10 +112,16 @@ o.closeProjectPreview = function(scrollBefore) {
 		$(window).scrollTop(scrollBefore);
 		$(this).unbind("click");
 
-		//reset height
-		$("#outer-wrapper").css("height", "auto");
-
 	});
+
+}
+o.fixProjectPreviewHeight = function () {
+
+	var menuHeight = o.$mainMenu.outerHeight(),
+			doc = $(document).height(),
+			height = doc - menuHeight;
+
+	o.$projectPreview.height( height );
 
 }
 // END project preview
@@ -141,6 +143,7 @@ $(window).resize(function(){
 	o.ww = o.$window.width();
 	o.slideoutMenuHeight();
 	o.fixFilters();
+	o.fixProjectPreviewHeight();
 
 });
 // END window resize
