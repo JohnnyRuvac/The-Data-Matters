@@ -1,0 +1,60 @@
+<?php
+function editor_menu_page_build(&$page) {
+
+  drupal_add_js(drupal_get_path('module', 'editor_menu') .'/editor_menu.js');
+  drupal_add_css(drupal_get_path('module', 'editor_menu') .'/editor_menu.css');
+	
+  $usermenu = menu_tree_all_data("user-menu");
+  $editor = "";
+  
+  if (user_access("access overlay")) :
+  
+  $kolko =  count($usermenu);
+  
+			$editor .= '<div id="editormenu">';
+				
+						$pi = 0;
+						$kolko =  count($usermenu);
+					foreach ($usermenu as &$value) {
+						//$value['attributes']['title']; LOGO
+						//$value['href']; LINK
+						//$value['title']; TITULOK
+					    
+					    if($value['link']['hidden'] == 1) $kolko--;
+					    else $pi++;
+					    
+					    if($pi == $kolko){ $last=" last"; }
+					    elseif($pi == 1) $last=" first";
+						else $last = "";
+						
+						
+						
+						
+
+					    
+					    
+					    if(!isset($value['link']['options']['attributes']['title'])){
+					      $value['link']['options']['attributes']['title'] = "";
+					      $last = " hidden";
+					    }
+					    
+					    
+					    
+					    //$editor .= print_r($value['link'], TRUE);
+					   if(!$value['link']['hidden'] == 1) $editor .=  "<div class='editorlink".$last." row".$pi."'><a href='".base_path().$value['link']['href']."'><div class='editoricon' style='background-image: url(".base_path().path_to_theme()."/editor/".$value['link']['options']['attributes']['title'].".png)' alt='".$value['link']['title']."' /></div>".$value['link']['title']."</a></div>";
+					    
+					}
+					unset($pi);
+					//print_r($secondary_menu);
+					
+			
+			
+
+  
+  $page['page_bottom']['editor_menu'] = array(
+    '#weight' => 25, 
+    '#markup' => print_r($editor, TRUE) . '</div>',
+  );
+
+  endif;
+}

@@ -1,0 +1,19 @@
+/* 	HELPERS */
+
+#header, #nav, #page, #footer, #content, #left, #right {
+	
+	margin-bottom: 20px; 
+	
+	border-bottom: 1px dashed silver;
+	border-top: 1px dashed black;
+	
+}
+
+
+#footer p {text-align: center; margin: 10px 0px;}
+
+#console {position: fixed; bottom: 30px; right: 30px; width: 550px; border-bottom: 1px solid silver; font-size: 13px;}
+
+#console a {color: white}
+#console .messages {background: #45ae79; color: white; padding: 10px 20px}
+#console .error {background: #f2367d; border: 0px}

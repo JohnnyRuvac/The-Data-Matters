@@ -1,0 +1,4 @@
+name = The Data Matters | Static
+description = Static theme of The Data Matters, based on Tao.
+core = 7.x
+base theme = tao

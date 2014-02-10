@@ -1,0 +1,11 @@
+name = Editor menu
+description = Adds styled block filled with User menu subset, for user with "Bypass node access" permission. Use description field as name for icon.
+package = Administration
+core = 7.x
+
+; Information added by drupal.org packaging script on 2013-04-04
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "editor_menu"
+datestamp = "1365037010"
+

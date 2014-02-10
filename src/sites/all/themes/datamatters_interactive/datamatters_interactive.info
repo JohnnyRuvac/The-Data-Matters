@@ -1,0 +1,4 @@
+name = The Data Matters | Interactive
+description = Interactive theme of The Data Matters, based on Tao.
+core = 7.x
+base theme = tao
