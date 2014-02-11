@@ -1,4 +1,21 @@
 name = The Data Matters | Static
 description = Static theme of The Data Matters, based on Tao.
 core = 7.x
+project = "datamatters_static"
 base theme = tao
+
+; Regions =====================================================================
+
+regions[top_content] = Top Content
+regions[content] = Content
+regions[help] = Help
+
+; Stylesheets =================================================================
+
+stylesheets[screen][] = css/bootstrap.min.css
+stylesheets[screen][] = css/style.css
+
+; Scripts =================================================================
+
+scripts[] = js/script.js
+scripts[] = js/bootstrap.min.js

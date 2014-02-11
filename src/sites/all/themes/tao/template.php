@@ -49,13 +49,28 @@ function tao_css_alter(&$css) {
     'modules/tracker/tracker.css' => FALSE,
     'modules/update/update.css' => FALSE,
     'modules/user/user.css' => FALSE,
+    'sites/all/modules/jquery_update/replace/ui/themes/base/minified/jquery.ui.core.min.css' => FALSE,
+    'sites/all/modules/jquery_update/replace/ui/themes/base/minified/jquery.ui.theme.min.css' => FALSE,
+    'modules/field/theme/field.css' => FALSE,
+    'sites/all/modules/views/css/views.css' => FALSE,
+    'modules/shortcut/shortcut.css' => FALSE,
+    'sites/all/modules/ckeditor/ckeditor.css' => FALSE,
+    'sites/all/modules/ctools/css/ctools.css' => FALSE
   );
   $css = array_diff_key($css, $exclude);
 }
 
+function tao_js_alter(&$js, &$vars){
+	global $user;
+	
+	if(!in_array("administrator", $user->roles)) unset($js['settings']);
+}
+
+
 /**
  * Implementation of hook_theme().
  */
+ 
 function tao_theme() {
   $items = array();
 
