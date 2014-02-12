@@ -23,7 +23,7 @@
 								<h3>Field <a href="" class="close">Close</a></h3>
 								<ul class="clearfix">
 									<?php foreach($field as $value):?>
-									<li><a href=""><?=$value->name?></a></li>
+									<li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
 									<?php endforeach; ?>
 								</ul>
 							</div>
@@ -34,7 +34,7 @@
 								<h3>Country <a href="" class="close">Close</a></h3>
 								<ul class="clearfix">
 									<?php foreach($countries as $value):?>
-									<li><a href=""><?=$value->name?></a></li>
+									<li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
 									<?php endforeach; ?>
 								</ul>
 							</div>
@@ -44,19 +44,30 @@
 							<a href="" class="submit">Search</a>
 						</li>
 					</ul>
-					<a href="" class="close-full-preview">Close</a>
+					<a href="<?=$back?>" class="close-full-preview">Close</a>
 				</nav>
 			</header>
 			<div class="main-content">
-				<?php if ($primary_local_tasks): ?><ul class='links clearfix'><?php print render($primary_local_tasks) ?></ul><?php endif; ?>
-			    <?php if ($secondary_local_tasks): ?><ul class='links clearfix'><?php print render($secondary_local_tasks) ?></ul><?php endif; ?>
-		    
 				<?php print render($page['content']);?>
 			</div>
 
   	</div>
+  	
+	<div id="slideout-menu">
+		<ul>
+			<li><a href="">Projects</a></li>
+			<li><a href="">Organizations</a></li>
+			<li><a href="">About</a></li>
+			<li><a href="">Search</a></li>
+		</ul>
+	</div>
+  	
+  	
   </div>
 
+
+<?php if ($primary_local_tasks): ?><ul class='links clearfix action-links'><?php print render($primary_local_tasks) ?></ul><?php endif; ?>
+			    <?php if ($secondary_local_tasks): ?><ul class='links clearfix'><?php print render($secondary_local_tasks) ?></ul><?php endif; ?>
 
 <?php if ($page['help'] || ($show_messages && $messages)): ?>
   <div id='console'><div class='limiter clearfix'>

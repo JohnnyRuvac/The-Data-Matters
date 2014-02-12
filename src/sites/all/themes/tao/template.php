@@ -113,7 +113,7 @@ function tao_theme() {
  */
 function tao_preprocess_html(&$vars, $hook) {
 
-	unset($vars['classes_array']);
+	//unset($vars['classes_array']);
 	
   $vars['classes_array'][] = 'mini';
   

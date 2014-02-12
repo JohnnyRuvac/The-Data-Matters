@@ -15,12 +15,12 @@
 	if($view_mode == 'teaser'):
 ?>
 					<li class="project clearfix">
-						<a href="">
+						<a href="<?=$node_url?>">
 							<img src="<?=image_style_url("large", $node->field_image['und'][0]['uri'])?>" alt="project image">
 							<div class="content">
 								<h2><?=$node->title?></h2>
-								<p class="country"><?=$field->name?></p>
-								<p class="field"><?=$country->field_short_name['und'][0]['value']?></p>
+								<p class="country"><?=$country->field_short_name['und'][0]['value']?></p>
+								<p class="field"><?=$field->name?></p>
 							</div>
 						</a>
 					</li>
@@ -38,7 +38,9 @@
 				  	<h2><?=$node->title?></h2>
 				  	<div class="info clearfix">
 				  		<p class="country"><?=$country->name?> <span class="field"><?=$field->name?></span></p>
-				  		<p class="link"><a href="<?=$node->field_link['und'][0]['url']?>" target="_blank"><?=$node->field_link['und'][0]['url']?></a></p>
+				  		<?php if(isset($node->field_link['und'][0]['url'])): ?>
+				  		<p class="link"><a href="<?=$node->field_link['und'][0]['url']?>" target="_blank">Website</a></p>
+				  		<?php endif; ?>
 				  	</div>
 				  	<div class="content">
 				  		<p><?=$node->field_message['und'][0]['value']?></p>

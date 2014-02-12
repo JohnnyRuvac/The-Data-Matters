@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
 			jQuery("#editormenu").hoverIntent(function(){
 				jQuery(this).animate({width: "150", paddingLeft: "15"}, 200);
 			}, function(){
-				jQuery(this).animate({width: "20", paddingLeft: "5"}, 300);
+				jQuery(this).animate({width: "30", paddingLeft: "5"}, 300);
 			});
 	}
 

@@ -406,7 +406,7 @@ h1.logo {
 /* Project full preview */
 #project-preview {
   display: none;
-  position: absolute;
+  position: abso lute;
   top: -16px;
   left: 0;
   background: #fff;

@@ -72,11 +72,17 @@ o.activateProjectFilters = function () {
 	//filter li click
 	$(".filter-content li a").click(function(e){
 
+		
 		e.preventDefault();
+		console.log($(this).attr("href"));
+		window.location.href = "/"+$(this).attr("href");
+		
+		/*
 		$(this).closest(".filter-button")
-					 .find(".label")
-					 .text( $(this).text() )
-					 .addClass("active");
+							 .find(".label")
+							 .text( $(this).text() )
+							 .addClass("active");
+		*/
 
 	});
 
@@ -91,11 +97,13 @@ o.fixFilters = function() {
 
 // Project preview
 o.activateProjectPreview = function() {
-
+	
+	if($("body").hasClass("node-type-project")) $("body").addClass("project-preview");
+	
 	$(".project").click(function(e){
 		
-		e.preventDefault();
-		$("body").addClass("project-preview");
+		//e.preventDefault();
+		
 
 		//scroll to top, but save scroll position after preview close
 		var currentScroll = $(window).scrollTop();
