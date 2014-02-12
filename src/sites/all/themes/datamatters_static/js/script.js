@@ -50,8 +50,8 @@ o.activateProjectFilters = function () {
 		//close slideoutmenu
 		o.$body.removeClass("slideout-menu-opened");
 
-		//change color of body to gray
-		if (o.ww < 769) o.$body.addClass("gray");
+		//change color of body to grey
+		if (o.ww < 769) o.$body.addClass("grey");
 
 		//close other filters if they are open
 		var isActive;
@@ -76,7 +76,7 @@ o.activateProjectFilters = function () {
 		e.preventDefault();
 		$(this).parent().parent().removeClass("active");
 		//change body color back
-		if (o.ww < 769) o.$body.removeClass("gray");
+		if (o.ww < 769) o.$body.removeClass("grey");
 	});
 
 	//filter li click
@@ -104,7 +104,7 @@ o.fixFilters = function() {
 	} else {
 		//adjust width
 		if (o.$currentOpenedFilter)
-			o.$currentOpenedFilter.css("width", o.ww);
+			o.$currentOpenedFilter.css({"width": o.ww, "height": o.wh});
 	}
 }
 // END Filter dropdown
@@ -120,11 +120,11 @@ o.activateProjectPreview = function() {
 		// $("body").addClass("project-preview");
 
 		//scroll to top, but save scroll position after preview close
-		var currentScroll = $(window).scrollTop();
-		$(window).scrollTop(0);
+		// var currentScroll = $(window).scrollTop();
+		// $(window).scrollTop(0);
 
-		o.fixProjectPreviewHeight();
-		o.closeProjectPreview( currentScroll );
+		// o.fixProjectPreviewHeight();
+		// o.closeProjectPreview( currentScroll );
 
 	});
 
@@ -270,7 +270,7 @@ $(window).resize(function(){
 	o.ww = o.$window.width();
 	o.wh = o.$window.height();
 	o.fixFilters();
-	o.fixProjectPreviewHeight();
+	//o.fixProjectPreviewHeight();
 	o.trimLongTexts();
 
 });
