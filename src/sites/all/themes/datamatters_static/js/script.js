@@ -41,7 +41,7 @@ o.slideoutMenuHeight = function () {
 // Filter dropdown
 o.activateProjectFilters = function () {
 	
-	$(".filter-button a").click(function(e){
+	$(".filter-button .label").click(function(e){
 		
 		e.preventDefault();
 		var $filterContent = $(this).parent().find(".filter-content");
@@ -80,7 +80,7 @@ o.activateProjectFilters = function () {
 	});
 
 	//filter li click
-	$(".filter-content li a").click(function(e){
+	$(".filter-button:not(.menu-tablet) .filter-content li a").click(function(e){
 
 		e.preventDefault();
 		window.location.href = "/"+$(this).attr("href");
