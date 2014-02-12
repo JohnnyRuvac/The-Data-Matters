@@ -3,8 +3,7 @@
     
 			<header>
 				<div class="content">
-					<?php if ($site_name): ?><h1 class='logo'><?php print $site_name ?></h1><?php endif; ?>
-
+					<?php if ($site_name): ?><h1 class="logo"><?php print $site_name ?></h1><?php endif; ?>
 					<nav class="main-nav">
 					<ul class="clearfix">
 						<li class="menu-icon visible-xs"><a href="">Menu icon</a></li>

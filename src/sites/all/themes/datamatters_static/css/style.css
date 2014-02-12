@@ -74,8 +74,13 @@ a, a:active, a:focus {
 body {
   font-family: "Simplon", Helvetica, Arial, sans-serif;
 }
-.gray {
+.grey {
   background-color: #efefef;
+}
+@media (min-width: 769px) {
+  .grey {
+    background-color: #fff;
+  }
 }
 h1 {
 
@@ -99,10 +104,15 @@ header .content.affix {
   top: -108px;
   z-index: 50;
 }
-h1.logo {
+.logo {
   width: 70px;
   height: 75px;
   margin: 0 0 32px 20px;
+}
+.logo a {
+  position: absolute;
+  width: 70px;
+  height: 75px;
   text-indent: -9999px;
   background: url(../img/logo.png) no-repeat center center;
 }
@@ -258,11 +268,15 @@ h1.logo {
   .main-nav .menu-icon {
     height: 32px;
   }
-  h1.logo {
+  .logo {
     position: absolute;
     top: 50px;
     left: 30px;
     margin: 0;
+    z-index: 10;
+  }
+  .logged-in .logo {
+    top: 79px;
   }
 }
 
@@ -470,9 +484,11 @@ h1.logo {
 /* Project full preview */
 #project-preview {
   display: none;
-  position: absolute;
+  /*position: absolute;
   top: -16px;
-  left: 0;
+  left: 0;*/
+
+  margin-top: -16px;
   background: #fff;
 }
 .project-preview header {
@@ -519,9 +535,11 @@ h1.logo {
   padding-left: 32px;
   font-size: 12px;
   line-height: 34px;
-  color: #646464;
   border-bottom: 1px solid #ccc;
   background: #efefef url(../img/world-icon.png) no-repeat 14px center;
+}
+#project-preview .link a {
+  color: #646464;
 }
 #project-preview .content {
   padding: 16px;
@@ -534,7 +552,7 @@ h1.logo {
   color: #000;
 }
 
-.project-preview h1.logo,
+.project-preview .logo,
 .project-preview .filter-button {
   display: none;
 }
@@ -590,11 +608,11 @@ h1.logo {
 }
 
 @media (min-width: 769px) {
-  .project-preview h1.logo,
+  .project-preview .logo,
   .project-preview .filter-button {
     display: block;
   }
-  .project-preview h1.logo {
+  .project-preview .logo {
     z-index: 100;
   }
   .project-preview .main-nav {
@@ -802,7 +820,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
     -webkit-background-size: 11px 11px;
     background-size: 11px 11px;
   }
-  h1.logo {
+  .logo {
     background-image: url(../img/logo@2x.png);
     -webkit-background-size: 70px 75px;
     background-size: 70px 75px;
