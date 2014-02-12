@@ -11,10 +11,10 @@
 							<a class="label active" href="">Projects</a>
 							<div class="filter-content">
 								<ul class="clearfix">
-									<li><a href="">Interactive Map</a></li>
-									<li><a class="active" href="">Projects</a></li>
-									<li><a href="">About</a></li>
-									<li><a href="">Organizations</a></li>
+									<li><a class="active" href="/map">Interactive Map</a></li>
+									<li><a href="/projects">Projects</a></li>
+									<li><a href="/about">About</a></li>
+									<li><a href="/organizations">Organizations</a></li>
 								</ul>
 							</div>
 						</li>
