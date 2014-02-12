@@ -206,10 +206,10 @@ $databases = array (
     'default' => 
     array (
       'database' => 'datamatters',
-      'username' => 'root',
-      'password' => 'root',
-      'host' => 'localhost',
-      'port' => '',
+      'username' => 'datamatters',
+      'password' => 'rys9drub',
+      'host' => 'mariadb55.websupport.sk',
+      'port' => '3310',
       'driver' => 'mysql',
       'prefix' => '',
     ),

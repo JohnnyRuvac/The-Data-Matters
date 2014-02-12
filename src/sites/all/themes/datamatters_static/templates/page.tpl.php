@@ -2,8 +2,9 @@
   	<div id="wrapper">
     
 			<header>
-				<?php if ($site_name): ?><h1 class='logo'><?php print $site_name ?></h1><?php endif; ?>
-				<nav class="main-nav">
+				<div class="content">
+					<?php if ($site_name): ?><h1 class='logo'><?php print $site_name ?></h1><?php endif; ?>
+					<nav class="main-nav">
 					<ul class="clearfix">
 						<li class="menu-icon visible-xs"><a href="">Menu icon</a></li>
 						<li class="filter-button menu-tablet hidden-xs">
@@ -17,35 +18,45 @@
 								</ul>
 							</div>
 						</li>
-						<li class="filter-button">
-							<a class="label" href="">Field</a>
-							<div class="filter-content">
-								<h3>Field <a href="" class="close">Close</a></h3>
-								<ul class="clearfix">
+						<div class="right clearfix">
+							<li class="filter-button">
+								<a class="label" href="">Field</a>
+								<div class="filter-content">
+									<h3>Field <a href="" class="close">Close</a></h3>
+									<ul class="clearfix">
 									<?php foreach($field as $value):?>
-									<li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
+										<li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
 									<?php endforeach; ?>
+									</ul>
+								</div>
+							</li>
+							<li class="filter-button">
+								<a class="label" href="">Country</a>
+								<div class="filter-content">
+									<h3>Country <a href="" class="close">Close</a></h3>
+									<ul class="clearfix">
+										<?php foreach($countries as $value):?>
+										<li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
+										<?php endforeach; ?>
+									</ul>
+								</div>
+							</li>
+						
+							<li class="menu-search hidden-xs clearfix">
+								<input type="text" placeholder="Search">
+								<a href="" class="submit">Search</a>
+								<ul class="search-results">
+									<li><a href="">Search result</a></li>
+									<li><a href="">Search result</a></li>
+									<li><a href="">Search result</a></li>
+									<li><a href="">Search result</a></li>
 								</ul>
-							</div>
-						</li>
-						<li class="filter-button">
-							<a class="label" href="">Country</a>
-							<div class="filter-content">
-								<h3>Country <a href="" class="close">Close</a></h3>
-								<ul class="clearfix">
-									<?php foreach($countries as $value):?>
-									<li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
-									<?php endforeach; ?>
-								</ul>
-							</div>
-						</li>
-						<li class="menu-search hidden-xs clearfix">
-							<input type="text" placeholder="Search">
-							<a href="" class="submit">Search</a>
-						</li>
+							</li>
+						</div>
 					</ul>
 					<a href="<?=$back?>" class="close-full-preview">Close</a>
 				</nav>
+				</div>
 			</header>
 			<div class="main-content">
 				<?php print render($page['content']);?>
@@ -58,7 +69,19 @@
 			<li><a href="">Projects</a></li>
 			<li><a href="">Organizations</a></li>
 			<li><a href="">About</a></li>
-			<li><a href="">Search</a></li>
+			<li>
+				<a href="" class="slideout-search">Search</a>
+				<div class="filter-content">
+					<h3>Search <a href="" class="close">Close</a></h3>
+					<input type="text" class="search-input">
+					<ul class="clearfix">
+						<li><a href="">Search autocomplete</a></li>
+						<li><a href="">Search autocomplete</a></li>
+						<li><a href="">Search autocomplete</a></li>
+						<li><a href="">Search autocomplete</a></li>
+					</ul>
+				</div>
+			</li>
 		</ul>
 	</div>
   	
@@ -66,8 +89,8 @@
   </div>
 
 
-<?php if ($primary_local_tasks): ?><ul class='links clearfix action-links'><?php print render($primary_local_tasks) ?></ul><?php endif; ?>
-			    <?php if ($secondary_local_tasks): ?><ul class='links clearfix'><?php print render($secondary_local_tasks) ?></ul><?php endif; ?>
+	<?php if ($primary_local_tasks): ?><ul class='links clearfix action-links'><?php print render($primary_local_tasks) ?></ul><?php endif; ?>
+    <?php if ($secondary_local_tasks): ?><ul class='links clearfix'><?php print render($secondary_local_tasks) ?></ul><?php endif; ?>
 
 <?php if ($page['help'] || ($show_messages && $messages)): ?>
   <div id='console'><div class='limiter clearfix'>

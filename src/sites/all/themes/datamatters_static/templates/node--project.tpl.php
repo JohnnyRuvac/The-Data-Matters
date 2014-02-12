@@ -15,10 +15,10 @@
 	if($view_mode == 'teaser'):
 ?>
 					<li class="project clearfix">
-						<a href="<?=$node_url?>">
+						<a href="<?=$node_url?>" title="<?=$node->title?>">
 							<img src="<?=image_style_url("large", $node->field_image['und'][0]['uri'])?>" alt="project image">
 							<div class="content">
-								<h2><?=$node->title?></h2>
+								<h2><?=truncate_utf8($node->title, 45, TRUE, TRUE)?></h2>
 								<p class="country"><?=$country->field_short_name['und'][0]['value']?></p>
 								<p class="field"><?=$field->name?></p>
 							</div>

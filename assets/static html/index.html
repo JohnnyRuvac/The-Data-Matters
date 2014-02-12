@@ -9,7 +9,7 @@
   <title>The Data Matters</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta name="description" content="">
   <meta name="author" content="">
   <link rel="shortcut icon" href="img/favicon.ico">
@@ -25,52 +25,62 @@
   	<div id="wrapper">
     
 			<header>
-				<h1 class="logo">The Data Matters</h1>
-				<nav class="main-nav">
-					<ul class="clearfix">
-						<li class="menu-icon visible-xs"><a href="">Menu icon</a></li>
-						<li class="filter-button menu-tablet hidden-xs">
-							<a class="label active" href="">Projects</a>
-							<div class="filter-content">
-								<ul class="clearfix">
-									<li><a href="">Interactive Map</a></li>
-									<li><a class="active" href="">Projects</a></li>
-									<li><a href="">About</a></li>
-									<li><a href="">Organizations</a></li>
-								</ul>
+				<div class="content">
+					<h1 class="logo">The Data Matters</h1>
+					<nav class="main-nav">
+						<ul class="clearfix">
+							<li class="menu-icon visible-xs"><a href="">Menu icon</a></li>
+							<li class="filter-button menu-tablet hidden-xs">
+								<a class="label active" href="">Projects</a>
+								<div class="filter-content">
+									<ul class="clearfix">
+										<li><a href="">Interactive Map</a></li>
+										<li><a class="active" href="">Projects</a></li>
+										<li><a href="">About</a></li>
+										<li><a href="">Organizations</a></li>
+									</ul>
+								</div>
+							</li>
+							<div class="right clearfix">
+								<li class="filter-button">
+									<a class="label" href="">Field</a>
+									<div class="filter-content">
+										<h3>Field <a href="" class="close">Close</a></h3>
+										<ul class="clearfix">
+											<li><a href="">Budget</a></li>
+											<li><a href="">Crime</a></li>
+											<li><a href="">Legislation</a></li>
+											<li><a href="">Urban Planning</a></li>
+											<li><a href="">Water Accessibility</a></li>
+											<li><a href="">Municipalities</a></li>
+											<li><a href="">Accountability</a></li>
+										</ul>
+									</div>
+								</li>
+								<li class="filter-button">
+									<a class="label" href="">Country</a>
+									<div class="filter-content">
+										<h3>Country <a href="" class="close">Close</a></h3>
+										<ul class="clearfix">
+											<li><a href="">Slovakia</a></li>
+										</ul>
+									</div>
+								</li>
+								<li class="menu-search hidden-xs clearfix">
+									<input type="text" placeholder="Search">
+									<a href="" class="submit">Search</a>
+									<ul class="search-results">
+										<li><a href="">Search result</a></li>
+										<li><a href="">Search result</a></li>
+										<li><a href="">Search result</a></li>
+										<li><a href="">Search result</a></li>
+									</ul>
+								</li>
 							</div>
-						</li>
-						<li class="filter-button">
-							<a class="label" href="">Field</a>
-							<div class="filter-content">
-								<h3>Field <a href="" class="close">Close</a></h3>
-								<ul class="clearfix">
-									<li><a href="">Budget</a></li>
-									<li><a href="">Crime</a></li>
-									<li><a href="">Legislation</a></li>
-									<li><a href="">Urban Planning</a></li>
-									<li><a href="">Water Accessibility</a></li>
-									<li><a href="">Municipalities</a></li>
-									<li><a href="">Accountability</a></li>
-								</ul>
-							</div>
-						</li>
-						<li class="filter-button">
-							<a class="label" href="">Country</a>
-							<div class="filter-content">
-								<h3>Country <a href="" class="close">Close</a></h3>
-								<ul class="clearfix">
-									<li><a href="">Slovakia</a></li>
-								</ul>
-							</div>
-						</li>
-						<li class="menu-search hidden-xs clearfix">
-							<input type="text" placeholder="Search">
-							<a href="" class="submit">Search</a>
-						</li>
-					</ul>
-					<a href="" class="close-full-preview">Close</a>
-				</nav>
+						</ul>
+						<a href="" class="close-full-preview">Close</a>
+					</nav>
+				</div>
 			</header>
 
 			<div class="main-content">
@@ -154,7 +164,19 @@
 				<li><a href="">Projects</a></li>
 				<li><a href="">Organizations</a></li>
 				<li><a href="">About</a></li>
-				<li><a href="">Search</a></li>
+				<li>
+					<a href="" class="slideout-search">Search</a>
+					<div class="filter-content">
+						<h3>Search <a href="" class="close">Close</a></h3>
+						<input type="text" class="search-input">
+						<ul class="clearfix">
+							<li><a href="">Search autocomplete</a></li>
+							<li><a href="">Search autocomplete</a></li>
+							<li><a href="">Search autocomplete</a></li>
+							<li><a href="">Search autocomplete</a></li>
+						</ul>
+					</div>
+				</li>
 			</ul>
 		</div>
   </div>
