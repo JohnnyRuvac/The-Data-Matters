@@ -35,6 +35,18 @@ function adminimal_preprocess_html(&$vars) {
   }
 }
 
+/*
+* Implementation of hook_form_FORM_ID_alter
+* 
+* Hiding taxonomy term description field
+*/
+
+function adminimal_form_taxonomy_form_term_alter(&$form, &$form_state) {
+  $form['description']['#access'] = FALSE;
+  $form['relations']['#access'] = FALSE;
+  $form['path']['#access'] = FALSE;
+}
+
 /**
  * Override or insert variables into the page template.
  */

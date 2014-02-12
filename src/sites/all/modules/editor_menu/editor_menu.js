@@ -17,6 +17,11 @@ jQuery(document).ready(function($) {
 			}, function(){
 				jQuery(this).animate({width: "30", paddingLeft: "5"}, 300);
 			});
+			
+			jQuery(".action-links a").each(function(){
+				$(this).addClass($(this).html().toLowerCase().replace(" ", "_"));
+			})
+			
 	}
 
 });

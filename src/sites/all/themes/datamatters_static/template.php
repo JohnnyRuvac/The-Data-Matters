@@ -1,7 +1,7 @@
 <?
-/**
- * Implementation of preprocess_page().
- */
+ //
+ // Implementation of preprocess_page().
+ //
 function datamatters_static_preprocess_page(&$vars) {
 
   //
@@ -27,6 +27,10 @@ function datamatters_static_preprocess_page(&$vars) {
   $back = $_SERVER['HTTP_REFERER'];
   if(strpos($back, "dev.datamatters")) $vars['back'] = $back;
   else $vars['back'] = "";
+  
+  $empty = "";
+  
+  $vars['messages'] = print_r($empty, TRUE);
 
 }
 

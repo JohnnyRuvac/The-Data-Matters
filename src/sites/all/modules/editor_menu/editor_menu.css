@@ -1,23 +1,71 @@
-
 #editormenu {position: fixed; left: 0px; top: 190px; background: #efefef; padding: 5px; width: 120px; overflow: hidden; width: 30px; z-index: 550; padding-top: 10px; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-top: 1px solid #ccc;}
 #editormenu a {color: black; text-decoration: none; font-weight: bold; color: #4c4c4c}
 #editormenu .editorlink:hover a {color: #282828}
 
 #editormenu .editorlink {line-height: 20px; width: 120px; margin-bottom: 5px}
 
-
-
 #editormenu .editorlink:first-letter {text-transform: uppercase}
 
 #editormenu .editoricon {display: block; float: left; width: 20px; height: 20px; background-position: center center; background-repeat: no-repeat; margin-right: 10px; opacity: 0.5}
 
-#editormenu .editorlink:hover .editoricon {opacity: 1}
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
+only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min-device-pixel-ratio: 1.5) {
+	#editormenu .editoricon {
+		-webkit-background-size: 20px 20px;
+	    background-size: 20px 20px;
+	}
+}
 
+#editormenu .editorlink:hover .editoricon {opacity: 1}
 
 
 #editormenu .last {margin-bottom: 5px; margin-top: 15px}
 #editormenu .first {margin-bottom: 10px}
 
-.action-links {position: fixed; bottom: 0px; right: 20px;}
-.action-links li {float: left; margin-right: 10px;}
-.action-links li.active {display: none}
+.page-node .action-links {position: fixed; bottom: 10px; right: 20px;}
+.page-node .action-links li {float: left; margin-right: 10px;}
+.page-node .action-links li.active {display: none}
+
+#user-login {width: 500px; margin: 0 auto;}
+
+.page-node #console {position: fixed; bottom: 0px; left: 0px; right: 0px; background: rgba(255,255,255,0.3); padding: 10px;}
+
+html.overlay-open #overlay-disable-message {overflow: hidden; height: 0px}
+
+#edit-filters .form-item {position: relative; height: 39px; }
+#edit-filters select {float: left; clear: none; position: absolute; top: 15px; left: 130px;}
+
+#edit-field-country,
+#edit-field-field,
+#edit-field-year {float: left; width: 33%;}
+
+#edit-field-country {clear: left}
+
+#edit-field-ngo,
+#edit-field-link,
+.node-form .form-item-title,
+#edit-field-image {width: 50%; float: left; margin: 0px; padding: 0px}
+
+.image-widget-data .file {width: 100px; overflow: hidden; 
+	display: inline-block
+}
+.image-widget-data .file-icon {display: none}
+
+.node-form .form-select,
+.node-form .form-text {width: 90%; -moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+
+.filter-wrapper {display: none}
+
+.page-node .action-links .edit { display: block; background: url(images/edit.png) no-repeat left -1px; height: 20px; line-height: 20px; padding-left: 22px;}
+
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
+only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min-device-pixel-ratio: 1.5) {
+	.page-node .action-links .edit {
+		-webkit-background-size: 20px 20px;
+	    background-size: 20px 20px;
+	}
+}
