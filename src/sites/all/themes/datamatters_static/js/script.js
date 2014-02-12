@@ -1,10 +1,10 @@
 var o = {};
-var $ = jQuery;
 
 // Init variables
 o.initVars = function() {
 
 	o.$body = $("body");
+	o.$headerContent = $("header .content");
 	o.$window = $(window);
 	o.ww = o.$window.width();
 	o.wh = o.$window.height();
@@ -44,6 +44,13 @@ o.activateProjectFilters = function () {
 		
 		e.preventDefault();
 		var $filterContent = $(this).parent().find(".filter-content");
+		o.$currentOpenedFilter = $filterContent;
+
+		//close slideoutmenu
+		o.$body.removeClass("slideout-menu-opened");
+
+		//change color of body to gray
+		if (o.ww < 769) o.$body.addClass("gray");
 
 		//close other filters if they are open
 		var isActive;
@@ -51,7 +58,7 @@ o.activateProjectFilters = function () {
 		o.$filterContents.removeClass("active");
 		
 		//for mobile devices filter should be fullscreen, for tablets and larger it should be dropdown
-		var width  = (o.ww < 769) ? $(window).width() : $filterContent.css("width"),
+		var width  = (o.ww < 769) ? o.ww : $filterContent.css("width"),
 			  height = (o.ww < 769) ? $(document).height() : $filterContent.height();
 
 		$filterContent
@@ -67,22 +74,24 @@ o.activateProjectFilters = function () {
 	$(".filter-content .close").click(function(e){
 		e.preventDefault();
 		$(this).parent().parent().removeClass("active");
+		//change body color back
+		if (o.ww < 769) o.$body.removeClass("gray");
 	});
 
 	//filter li click
 	$(".filter-content li a").click(function(e){
 
-		
 		e.preventDefault();
-		console.log($(this).attr("href"));
 		window.location.href = "/"+$(this).attr("href");
-		
-		/*
-		$(this).closest(".filter-button")
-							 .find(".label")
-							 .text( $(this).text() )
-							 .addClass("active");
-		*/
+
+		//check if the name should be shorten
+		var text = $(this).text();
+		if ( text.length > 15 ) text = text.slice(0, 15) + "..."; 
+
+		// $(this).closest(".filter-button")
+		// 			 .find(".label")
+		// 			 .text( text )
+		// 			 .addClass("active");
 
 	});
 
@@ -91,19 +100,23 @@ o.fixFilters = function() {
 	//after resize from tablet to large desktop, we have to remove inline width and height
 	if (o.ww > 767) {
 		o.$filterContents.removeAttr("style");
+	} else {
+		//adjust width
+		if (o.$currentOpenedFilter)
+			o.$currentOpenedFilter.css("width", o.ww);
 	}
 }
 // END Filter dropdown
 
 // Project preview
 o.activateProjectPreview = function() {
-	
+
 	if($("body").hasClass("node-type-project")) $("body").addClass("project-preview");
-	
+
 	$(".project").click(function(e){
 		
-		//e.preventDefault();
-		
+		// e.preventDefault();
+		// $("body").addClass("project-preview");
 
 		//scroll to top, but save scroll position after preview close
 		var currentScroll = $(window).scrollTop();
@@ -185,14 +198,59 @@ o.trimLongTexts = function () {
 }
 // END Trim long texts
 
+// Affix navi
+o.affixNavi = function() {
+
+	o.$headerContent.affix({
+		offset: {
+			top: function(){return (o.ww < 769) ? 140 : 0}
+		}
+	});
+
+}
+// END Affix navi
+
+// Search
+o.activateSearch = function () {
+
+	// in slideout menu
+	$(".slideout-search").click(function(e){
+		
+		e.preventDefault();
+		var $filterContent = $(this).parent().find(".filter-content");
+		o.$currentOpenedFilter = $filterContent;
+
+		$filterContent
+			.height( $(document).height() )
+			.css("width", o.ww )
+			.addClass("active");
+
+		//focus on input
+		$(this).parent().find(".search-input").focus();
+
+	});
+
+	//in header
+	$(".menu-search input").focus(function(){
+		$(this).parent().addClass("active");
+	});
+	$(".menu-search input").blur(function(){
+		$(this).parent().removeClass("active");
+	});	
+
+}
+// END Search
+
 // DOM ready
-$(function(){
+$(function($){
 
 	o.initVars();
 	o.slideoutMenu();
 	o.activateProjectFilters();
 	o.activateProjectPreview();
 	o.trimLongTexts();
+	o.affixNavi();
+	o.activateSearch();
 
 });
 // END DOM ready
