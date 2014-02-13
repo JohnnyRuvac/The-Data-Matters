@@ -77,7 +77,7 @@
 			<div class="main-content">
 				
 				<div id="logo-container"></div>
-				<svg id="map-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/"></svg>
+				<svg id="map-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
 
 			</div>
 

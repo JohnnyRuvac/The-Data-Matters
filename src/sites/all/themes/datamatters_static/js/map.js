@@ -1,6 +1,20 @@
 var or = {};
 var $ = jQuery;
 
+// ids of countries in svg file
+or.idsOfCountries = {
+	"Bosnia and Herzegovina": "selection_12",
+	"Czech Republic": "selection_17",
+	"Estonia": "selection_23",
+	"Georgia": "selection_29",
+	"Hungary": "selection_33",
+	"Latvia": "selection_51",
+	"Macedonia": "selection_55",
+	"Montenegro": "selection_58",
+	"Slovakia": "selection_74"
+}
+// END ids of countries in svg file
+
 // Map
 or.map = {
 	hidden: true
@@ -33,9 +47,6 @@ or.map.init = function () {
 		or.map.place();
 		or.map.show();
 
-		//highlight countries with project
-		or.map.highlightCountriesWithProject();
-
 		//add rectangle behind map, so it can be draggable also on empty spaces
 		or.map.bg = or.s.rect(0, 0, 1243, 756);
 		or.map.bg.attr({
@@ -47,12 +58,30 @@ or.map.init = function () {
 		or.map.countries.drag();
 
 		//countries with project hover
-		or.countries.initHoverAndClick();
+		var url = $("#map-container").attr("data-json-url") + "json/countries";
+		or.map.loadCountriesWithProjects(url);
 
 	});
 
 }
-or.map.highlightCountriesWithProject = function () {
+or.map.loadCountriesWithProjects = function(url) {
+  
+  var json;
+  
+  $.ajax({
+      'async': false,
+      'global': false,
+      'url': url,
+      'dataType': "json",
+      'success': function (data) {
+          json = data;
+          or.map.highlightCountriesWithProject(json);
+          or.countries.initHoverAndClick();
+      }
+  });
+
+}
+or.map.highlightCountriesWithProject = function (json) {
 
 	// or.patternInactive = or.s.path("M0,0L10,10M0,5L5,10M5,0L10,5").attr({
  //      fill: "none",
@@ -67,13 +96,19 @@ or.map.highlightCountriesWithProject = function () {
  //      strokeWidth: 0.5
  //  });
  //  or.patternActive = or.patternActive.pattern(0, 0, 10, 10);
- or.patternInactive = "#999";
- or.patternActive = "#636363";
+	or.patternInactive = "#999";
+	or.patternActive = "#636363";
 
-	or.countries.withProject = or.s.selectAll(".has-project");
-	or.countries.withProject.attr({
-		fill: or.patternInactive
-	});
+	or.countries.withProject = [];
+	
+	for (var i = 0; i < json.length; i++) {
+		
+		or.countries.withProject.push( or.idsOfCountries[ json[i].country.name ] );
+		or.s.selectAll("#" + or.countries.withProject[i] + " path").attr({
+			fill: or.patternInactive
+		});
+
+	}
 
 }
 or.map.place = function () {
@@ -117,11 +152,14 @@ or.map.show = function () {
 or.countries = {};
 or.countries.initHoverAndClick = function() {
 
-	var withProject = or.map.countries.selectAll(".has-project");
+	var withProject = or.countries.withProject;
 
 	for (var i = 0; i < withProject.length; i++) {
 		
-		withProject[i].hover(
+		var country = or.s.select("#" + withProject[i]);
+
+		country.attr({"class": "has-project"});
+		country.hover(
 			function(e){
 				or.countries.hoverIn(e);
 			},
@@ -130,7 +168,7 @@ or.countries.initHoverAndClick = function() {
 			}
 		);
 
-		withProject[i].click(function(e){
+		country.click(function(e){
 			or.countries.click(e, this);
 		});
 
@@ -139,45 +177,56 @@ or.countries.initHoverAndClick = function() {
 }
 or.countries.hoverIn = function (e) {
 
-	var id = e.target.parentNode.id;
-	if (!id) return;
+	var id = e.target.parentNode.id,
+			isActive = $("#" + id).hasClass("has-project");
+
+	if ( isActive ) return;
 	or.s.selectAll("#" + id + " path").attr({fill: or.patternActive});
 
 }
 
 or.countries.hoverOut = function (e) {
 
-	var id = e.target.parentNode.id;
-	if (!id) return;
-	var fillCol = ( $("#" + id + " path").attr("id") ) ? or.patternActive : or.patternInactive;
+	var id = e.target.parentNode.id,
+			isActive = $("#" + id).hasClass("has-project");
+
+	if ( isActive ) return;
+
+	var fillCol = ( $("#" + id).attr("data-active") ) ? or.patternActive : or.patternInactive;
 	or.s.selectAll("#" + id + " path").attr({fill: fillCol});	
 
 }
 or.countries.click = function (e, that) {
 
+	var id = that.attr("id"),
+			$clicked = $("#" + id),
+			isActive = $clicked.attr("data-active");
+
 	//activate or deactivate country
-	if ( that.attr("id") ) {
-		
+	if ( isActive ) {
+		$clicked.removeAttr("data-active");
 		that.attr({
-			id: "",
 			fill: or.patternInactive
 		});
-
 	} else {
 		//deactivate active one
-		var elem = or.s.select("#activeCountry");
-		if (elem) {
-			elem.attr({
-				id: "",
+		if ( o.activeCountry ) {
+			o.$activeCountry.removeAttr("data-active");
+			o.activeCountry.selectAll("path").attr({
 				fill: or.patternInactive
 			});
 		}
 		//activate new one
+		$clicked.attr("data-active", "true");
 		that.attr({
-			id: "activeCountry",
 			fill: or.patternActive
 		});
+
+		o.activeCountry = that;
+		o.$activeCountry = $clicked;
+
 		or.countries.zoomToActive(that);
+		or.countries.showInfo(that);
 	}
 
 }
@@ -190,10 +239,10 @@ or.countries.zoomToActive = function(that){
 		cx: $(window).width() / 2,
 		cy: $(window).height() / 2
 	};
-	var $activeCountry = $("#activeCountry");
+
 	var country = {
-		x: $activeCountry.offset().left,
-		y: $activeCountry.offset().top,
+		x: o.$activeCountry.offset().left,
+		y: o.$activeCountry.offset().top,
 		w: bbox.width,
 		h: bbox.height
 	};
@@ -211,6 +260,12 @@ or.countries.zoomToActive = function(that){
 	//apply it
 	or.map.matrix.translate( shift.x, shift.y );
 	or.map.countries.transform( or.map.matrix );
+
+}
+or.countries.showInfo = function (that) {
+
+	//console.log(that);
+	//console.log(that.node.parentElement.id);
 
 }
 // END Countries
