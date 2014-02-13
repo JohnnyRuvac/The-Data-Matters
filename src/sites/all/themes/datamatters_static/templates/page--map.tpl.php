@@ -8,11 +8,11 @@
 					<ul class="clearfix">
 						<li class="menu-icon visible-xs"><a href="">Menu icon</a></li>
 						<li class="filter-button menu-tablet hidden-xs">
-							<a class="label active" href="">Projects</a>
+							<a class="label active" href=""><?=$active_menu?></a>
 							<div class="filter-content">
 								<ul class="clearfix">
-									<li><a class="active" href="<?=base_path()?>map">Interactive Map</a></li>
-									<li><a href="<?=base_path()?>projects">Projects</a></li>
+									<li><a href="<?=base_path()?>map">Interactive Map</a></li>
+									<li><a class="<?php if($path == "projects") print "active";?>" href="<?=base_path()?>projects">Projects</a></li>
 									<li><a href="<?=base_path()?>about">About</a></li>
 									<li><a href="<?=base_path()?>organizations">Organizations</a></li>
 								</ul>
@@ -20,9 +20,17 @@
 						</li>
 						<div class="right clearfix">
 							<li class="filter-button">
-								<a class="label" href="">Field</a>
+								<a class="label<? if($active_dictionary == "field"): print " active"; endif;?>" href=""><? 
+										if($active_dictionary == "field"): 
+											print $tax_names[$active_term];
+										else:
+									?>Field<? endif;?></a>
 								<div class="filter-content">
-									<h3>Field <a href="" class="close">Close</a></h3>
+									<h3><? 
+										if($active_dictionary == "field"):
+											print $tax_names[$active_term];
+										else:
+									?>Field<? endif;?> <a href="" class="close">Close</a></h3>
 									<ul class="clearfix">
 									<?php foreach($field as $value):?>
 										<li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
@@ -31,9 +39,17 @@
 								</div>
 							</li>
 							<li class="filter-button">
-								<a class="label" href="">Country</a>
+								<a class="label <? if($active_dictionary == "countries"): print " active"; endif;?>" href=""><? 
+										if($active_dictionary == "countries"): 
+											print $tax_names[$active_term];
+										else:
+									?>Country<? endif;?></a>
 								<div class="filter-content">
-									<h3>Country <a href="" class="close">Close</a></h3>
+									<h3><? 
+										if($active_dictionary == "country"): 
+											print $tax_names[$active_term];
+										else:
+									?>Country<? endif;?> <a href="" class="close">Close</a></h3>
 									<ul class="clearfix">
 										<?php foreach($countries as $value):?>
 										<li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
