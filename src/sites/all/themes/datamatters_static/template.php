@@ -32,6 +32,7 @@ function datamatters_static_preprocess_page(&$vars) {
   
   
   if($_GET['q'] == "node/19"){
+    drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
 	  drupal_add_js( path_to_theme().'/js/map.js');
 	  $vars['theme_hook_suggestions'][] = 'page__map';
   }

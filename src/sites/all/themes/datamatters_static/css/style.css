@@ -786,6 +786,33 @@ header .content.affix {
 }
 /* END Slideout Search */
 
+/* Interactive Map */
+.page-node-19 {
+  background: #efefef;
+}
+.page-node-19 .main-content {
+  margin-top: -16px;
+}
+#logo-container {
+  display: block;
+  position: relative;
+  top: 11.11111%; /* 2/18 of height */
+  z-index: -1;
+  width: 70%;
+  height: 55.55555%;
+  margin: 0 auto;
+  /*background: rgba(0, 0, 0, 0.1);*/
+}
+#map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+/* END of Interactive Map */
+
 /* Retina images */
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
 only screen and (-moz-min-device-pixel-ratio: 1.5),
