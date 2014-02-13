@@ -75,7 +75,10 @@
 				</div>
 			</header>
 			<div class="main-content">
-				<?php print render($page['content']);?>
+				
+				<div id="logo-container"></div>
+				<svg id="map-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/"></svg>
+
 			</div>
 
   	</div>
@@ -101,9 +104,7 @@
 		</ul>
 	</div>
   	
-  	
   </div>
-
 
 	<?php if ($primary_local_tasks): ?><ul class='links clearfix action-links'><?php print render($primary_local_tasks) ?></ul><?php endif; ?>
     <?php if ($secondary_local_tasks): ?><ul class='links clearfix'><?php print render($secondary_local_tasks) ?></ul><?php endif; ?>
