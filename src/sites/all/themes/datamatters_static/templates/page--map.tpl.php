@@ -12,7 +12,7 @@
 							<div class="filter-content">
 								<ul class="clearfix">
 									<li><a href="<?=base_path()?>map">Interactive Map</a></li>
-									<li><a class="<?php if($path == "projects") print "active";?>" href="<?=base_path()?>projects">Projects</a></li>
+									<li><a class="<?php if($active_menu == "Projects") print "active";?>" href="<?=base_path()?>projects">Projects</a></li>
 									<li><a href="<?=base_path()?>about">About</a></li>
 									<li><a href="<?=base_path()?>organizations">Organizations</a></li>
 								</ul>

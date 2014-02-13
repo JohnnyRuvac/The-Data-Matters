@@ -14,6 +14,7 @@ function datamatters_static_preprocess_page(&$vars) {
 	  $vars['countries'][$key]['tid'] = $value->tid;
 	  $vars['countries'][$key]['url'] = drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid);
 	  $vars['tax_names'][$value->tid] = $value->name;
+	  
   endforeach;
 
   $field = taxonomy_get_tree(3);
@@ -23,6 +24,7 @@ function datamatters_static_preprocess_page(&$vars) {
 	  $vars['field'][$key]['tid'] = $value->tid;
 	  $vars['field'][$key]['url'] = drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid);
 	  $vars['tax_names'][$value->tid] = $value->name;
+	  
   endforeach;
   
   // BACK referer
@@ -61,7 +63,7 @@ function datamatters_static_preprocess_page(&$vars) {
   
   
   // console
-  $vars['messages'] = print_r($path.$vars['active_menu'], TRUE);
+  // $vars['messages'] = print_r($vars['tax_url'], TRUE);
 }
 
 function datamatters_static_preprocess(&$vars){
