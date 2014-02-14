@@ -40,12 +40,10 @@ or.map.init = function () {
 
 		or.logo = d.select(".logo");
 		or.s.append(or.logo);
-		//hide logo
-		or.logo.attr({opacity: 0});
 
 		or.findBorderCities(".logo .cities");
 		or.map.place();
-		or.map.show();
+		or.map.showOnScroll();
 
 		//add rectangle behind map, so it can be draggable also on empty spaces
 		or.map.bg = or.s.rect(0, 0, 1243, 756);
@@ -98,6 +96,29 @@ or.map.loadCountriesWithProjects = function(url) {
   });
 
 }
+or.map.showOnScroll = function () {
+
+	//if there is hash tag map, show it right away
+	if (window.location.hash == "#map") {
+		var t = window.setTimeout(or.map.show, 1000);
+		return;
+	}
+
+	// On scroll show map
+	var body = document.getElementsByTagName("body")[0];
+
+	if (body.addEventListener) {
+		body.addEventListener("mousewheel", or.map.show, false);
+		body.addEventListener("DOMMouseScroll", or.map.show, false);
+	} else {
+		body.attachEvent("onmousewheel", or.map.show);
+	}
+
+	$(".main-content").hammer().on("touch", function(){
+		or.map.show();
+	});
+
+}
 or.map.highlightCountriesWithProject = function () {
 
 	// or.patternInactive = or.s.path("M0,0L10,10M0,5L5,10M5,0L10,5").attr({
@@ -143,8 +164,7 @@ or.map.place = function () {
 				y: contBBox.y - logoBBox.y2
 			};
 
-	//or.map.scale = contBBox.w / ( or.borderCities.right - or.borderCities.left);
-	or.map.scale = 3;
+	or.map.scale = contBBox.w / ( or.borderCities.right - or.borderCities.left);
 
 	or.map.matrix = new Snap.Matrix()
 										 .translate( offset.x, offset.y )
@@ -157,9 +177,15 @@ or.map.place = function () {
 }
 or.map.show = function () {
 
+	//add hash tag
+	window.location = "#map";
+	$("body").addClass("map-shown");
+
+	//show it
 	if (or.map.hidden) {
 		or.map.hidden = false;
 		or.map.countries.animate({opacity: 1}, 600);
+		or.logo.animate({opacity: 0}, 1200);
 	}
 
 }
@@ -253,6 +279,12 @@ or.countries.click = function (e, that) {
 }
 or.countries.zoomToActive = function(that){
 	
+	//firstly zoom it
+	var m = new Snap.Matrix();
+	m.scale(3);
+	or.map.scale = 3;
+	or.map.countries.transform( m );
+
 	var bbox = that.node.getBoundingClientRect();
 	var win = {
 		w: $(window).width(),
@@ -279,7 +311,7 @@ or.countries.zoomToActive = function(that){
 	or.map.matrix = or.map.countries.matrix
 
 	//apply it
-	or.map.matrix.translate( shift.x, shift.y );
+	or.map.matrix.translate( shift.x, shift.y )
 	or.map.countries.transform( or.map.matrix );
 
 }
