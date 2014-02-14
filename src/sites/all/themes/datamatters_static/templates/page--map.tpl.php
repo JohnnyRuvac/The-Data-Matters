@@ -77,10 +77,10 @@
 			<div class="main-content">
 				
 				<div id="country-info">
-					<h2>Czech republic</h2>
-					<p class="type">Parlementiary republic</p>
-					<p class="population">Population: <span>10,436,560</span></p>
-					<p class="gdp">GDP (PPP): <span>$27,190</span></p>
+					<a href="" class="country"></a>
+					<p class="type"></p>
+					<p class="population">Population: <span></span></p>
+					<p class="gdp">GDP (PPP): <span></span></p>
 					<ul>
 						<li>
 							<a href="" class="project-name">Visualizing local government
