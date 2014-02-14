@@ -101,6 +101,8 @@ indicators</a>
 				</div>
 				<div id="logo-container"></div>
 				<svg id="map-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
+				<!-- <p class="slogan">The Data-driven Policy Research projects from Central and Eastern Europe.<br />Using numbers and context to make the difference.</p>
+				<a href="" class="continue-arrow"></a> -->
 
 			</div>
 

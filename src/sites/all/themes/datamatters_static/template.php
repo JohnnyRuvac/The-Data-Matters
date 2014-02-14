@@ -36,6 +36,7 @@ function datamatters_static_preprocess_page(&$vars) {
   $path = drupal_get_path_alias();
 
   if($path == "map"){
+    drupal_add_js( path_to_theme().'/js/modernizr.js');
     drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
 	  drupal_add_js( path_to_theme().'/js/hammer.min.js');
 	  drupal_add_js( path_to_theme().'/js/map.js');

@@ -21,6 +21,11 @@ or.map = {
 };
 or.map.init = function () {
 
+	if ($(window).width() < 769) {
+		window.location = "/projects";
+		return;
+	}
+
 	var url = $("#map-container").attr("data-url");
 	Snap.load( url + "map_logo.svg", function(d) {
 
@@ -43,7 +48,8 @@ or.map.init = function () {
 
 		or.findBorderCities(".logo .cities");
 		or.map.place();
-		or.map.showOnScroll();
+		//or.map.showOnScroll();
+		or.map.show();
 
 		//add rectangle behind map, so it can be draggable also on empty spaces
 		or.map.bg = or.s.rect(0, 0, 1243, 756);
@@ -53,7 +59,8 @@ or.map.init = function () {
 		or.map.countries.select("#selection").before( or.map.bg );
 
 		//make it dragable
-		or.map.countries.drag();
+		if ( $("html").hasClass("no-touch") )
+			or.map.countries.drag();
 
 		//countries with project hover
 		var url = $("#map-container").attr("data-json-url");
@@ -163,6 +170,11 @@ or.map.place = function () {
 				x: contBBox.cx - logoBBox.x,
 				y: contBBox.y - logoBBox.y2
 			};
+
+	//ipad portrait quickfix
+	if (o.ww < 769) {
+		offset.y -= $("header").outerHeight();
+	}
 
 	or.map.scale = contBBox.w / ( or.borderCities.right - or.borderCities.left);
 

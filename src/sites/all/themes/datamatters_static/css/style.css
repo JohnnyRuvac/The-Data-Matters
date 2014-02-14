@@ -804,6 +804,13 @@ header .content.affix {
   -o-transition: all 1.2s;
   transition: all 1.2s;
 }
+.page-node-19 .slogan {
+  width: 100%;
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  text-align: center;
+}
 .page-node-19.map-shown {
   background: #efefef;
 }
