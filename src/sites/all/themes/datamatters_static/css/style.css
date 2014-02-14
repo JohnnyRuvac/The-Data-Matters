@@ -885,6 +885,40 @@ header .content.affix {
 
 /* END of Interactive Map */
 
+/* Text page */
+
+.main-content .node-page {
+	margin: 0px 15px;
+}
+
+.main-content .node-page .field-name-body p{
+	margin-top: 0px; margin-bottom: 20px;
+}
+
+.main-content .node-page strong {
+	font-size: 18px;
+	font-weight: normal;
+	padding: 18px 0px;
+	display: block;
+	border-top: 1px dotted #cccccc;
+	border-bottom: 1px dotted #cccccc;
+}
+
+@media (min-width: 492px) {
+  .main-content .node-page {
+	   width: 385px;
+	   margin: 0 auto;
+  }
+}
+
+@media (min-width: 769px) {
+  .main-content .node-page {
+  	margin-left: 130px;	
+  }
+}
+
+/* END of Text page */
+
 /* Retina images */
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
 only screen and (-moz-min-device-pixel-ratio: 1.5),

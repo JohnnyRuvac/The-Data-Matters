@@ -233,7 +233,7 @@ o.activateSearch = function () {
 
 	//in header
 	$(".menu-search input").focus(function(){
-		$(this).parent().addClass("active");
+		//$(this).parent().addClass("active");
 	});
 	$(".menu-search input").blur(function(){
 		$(this).parent().removeClass("active");

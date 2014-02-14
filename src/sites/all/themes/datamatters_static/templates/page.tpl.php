@@ -62,10 +62,6 @@
 								<input type="text" placeholder="Search">
 								<a href="" class="submit">Search</a>
 								<ul class="search-results">
-									<li><a href="">Search result</a></li>
-									<li><a href="">Search result</a></li>
-									<li><a href="">Search result</a></li>
-									<li><a href="">Search result</a></li>
 								</ul>
 							</li>
 						</div>
@@ -91,10 +87,6 @@
 					<h3>Search <a href="" class="close">Close</a></h3>
 					<input type="text" class="search-input">
 					<ul class="clearfix">
-						<li><a href="">Search autocomplete</a></li>
-						<li><a href="">Search autocomplete</a></li>
-						<li><a href="">Search autocomplete</a></li>
-						<li><a href="">Search autocomplete</a></li>
 					</ul>
 				</div>
 			</li>
