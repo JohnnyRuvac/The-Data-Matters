@@ -58,7 +58,7 @@ or.map.init = function () {
 		or.map.countries.drag();
 
 		//countries with project hover
-		var url = $("#map-container").attr("data-json-url") + "json/countries";
+		var url = $("#map-container").attr("data-json-url");
 		or.map.loadCountriesWithProjects(url);
 
 	});
@@ -66,22 +66,39 @@ or.map.init = function () {
 }
 or.map.loadCountriesWithProjects = function(url) {
   
-  var json;
-  
+  var bothComplete = 0; //bothComplete has to be == 2, it means that we have loaded both jsons
+
   $.ajax({
-      'async': false,
-      'global': false,
-      'url': url,
-      'dataType': "json",
-      'success': function (data) {
-          json = data;
-          or.map.highlightCountriesWithProject(json);
-          or.countries.initHoverAndClick();
+    'async': false,
+    'global': false,
+    'url': url + "json/countries",
+    'dataType': "json",
+    'success': function (data) {
+      or.countriesJson = data;
+      or.map.highlightCountriesWithProject();
+      bothComplete++;
+      if (bothComplete == 2) {
+      	or.countries.initHoverAndClick();
       }
+    }
+  });
+
+  $.ajax({
+    'async': false,
+    'global': false,
+    'url': url + "json/projects",
+    'dataType': "json",
+    'success': function (data) {
+      or.projectsJson = data;
+      bothComplete++;
+      if (bothComplete == 2) {
+      	or.countries.initHoverAndClick();
+      }
+    }
   });
 
 }
-or.map.highlightCountriesWithProject = function (json) {
+or.map.highlightCountriesWithProject = function () {
 
 	// or.patternInactive = or.s.path("M0,0L10,10M0,5L5,10M5,0L10,5").attr({
  //      fill: "none",
@@ -101,9 +118,9 @@ or.map.highlightCountriesWithProject = function (json) {
 
 	or.countries.withProject = [];
 	
-	for (var i = 0; i < json.length; i++) {
+	for (var i = 0; i < or.countriesJson.length; i++) {
 		
-		or.countries.withProject.push( or.idsOfCountries[ json[i].country.name ] );
+		or.countries.withProject.push( or.idsOfCountries[ or.countriesJson[i].country.name ] );
 		or.s.selectAll("#" + or.countries.withProject[i] + " path").attr({
 			fill: or.patternInactive
 		});
@@ -268,8 +285,52 @@ or.countries.zoomToActive = function(that){
 }
 or.countries.showInfo = function (that) {
 
-	//console.log(that);
-	//console.log(that.node.parentElement.id);
+	var id = that.node.id,
+			country,
+			html = '';
+
+	//get country name
+	$.each( or.idsOfCountries, function(key, value){
+		if (value == id) country = key;
+	});
+
+	//get projects of that country
+	for (var i = 0; i < or.projectsJson.length; i++) {
+		if ( or.projectsJson[i].node.country == country ) {
+			
+			var title = or.projectsJson[i].node.title,
+					field = or.projectsJson[i].node.field,
+					path =  or.projectsJson[i].node.path;
+
+			html += '<li>';
+			html += '<a href="' + path + '" class="project-name">' + title + '</a>';
+			html += '<a href="' + path + '" class="field">' + field + '</a>';
+			html += '</li>';
+
+		}
+	}
+
+	//get details of country
+	for (var i = 0; i < or.countriesJson.length; i++) {
+		if ( or.countriesJson[i].country.name == country ) {
+			var gdp = or.countriesJson[i].country.gdp,
+					population = or.countriesJson[i].country.population,
+					type = or.countriesJson[i].country.type,
+					link = or.countriesJson[i].country.link;
+			break;
+		}
+	}
+
+	//country name
+	or.$countryInfo.find(".country").text( country ).attr("href", link);
+	//type
+	or.$countryInfo.find(".type").text( type );
+	//population
+	or.$countryInfo.find(".population span").text( population );
+	//gdp
+	or.$countryInfo.find(".gdp span").text( gdp );
+	//list projects
+	or.$countryInfo.find("ul").html( html );
 
 	or.$countryInfo.addClass("active");
 

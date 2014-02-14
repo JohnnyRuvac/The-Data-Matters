@@ -411,8 +411,10 @@ header .content.affix {
   margin: 0;
   padding: 8px 0 0 24px;
   font-size: 12px;
-  color: #646464;
   border-top: 1px dotted #ccc;
+}
+.project .country a {
+  color: #646464;
 }
 .project .country {
   float: left;
@@ -508,7 +510,8 @@ header .content.affix {
 }
 #project-preview h2 {
   font-size: 16px;
-  line-height: 52px;
+  line-height: 21px;
+  padding: 15px 16px 17px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   background: #efefef;
@@ -519,9 +522,11 @@ header .content.affix {
   padding-left: 30px;
   font-size: 12px;
   line-height: 34px;
-  color: #646464;
   border-bottom: 1px dotted #ccc;
   background: #efefef url(../img/country-pin.png) no-repeat 16px center;
+}
+#project-preview .country a {
+  color: #646464;
 }
 #project-preview .field {
   display: inline-block;
@@ -831,13 +836,16 @@ header .content.affix {
   transition: top 0.3s;
 }
 #country-info.active {
-  top: 49px;
+  top: 16px;
 }
-#country-info h2 {
+#country-info .country {
+  display: block;
   margin: 0;
-  padding: 0 14px;
+  padding: 14px 14px 12px;
   font-size: 18px;
-  line-height: 50px;
+  line-height: 22px;
+  font-weight: bold;
+  color: #000;
 }
 #country-info .type,
 #country-info .population,
