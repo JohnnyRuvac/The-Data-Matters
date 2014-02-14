@@ -793,6 +793,9 @@ header .content.affix {
 .page-node-19 .main-content {
   margin-top: -16px;
 }
+.page-node-19 .right .filter-button {
+  display: none;
+}
 #logo-container {
   display: block;
   position: relative;
