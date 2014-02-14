@@ -76,6 +76,29 @@
 			</header>
 			<div class="main-content">
 				
+				<div id="country-info">
+					<h2>Czech republic</h2>
+					<p class="type">Parlementiary republic</p>
+					<p class="population">Population: <span>10,436,560</span></p>
+					<p class="gdp">GDP Per Capita: <span>$27,190</span></p>
+					<ul>
+						<li>
+							<a href="" class="project-name">Visualizing local government
+indicators</a>
+							<a href="" class="field">Urban Planning</a>
+						</li>
+						<li>
+							<a href="" class="project-name">Visualizing local government
+indicators</a>
+							<a href="" class="field">Urban Planning</a>
+						</li>
+						<li>
+							<a href="" class="project-name">Visualizing local government
+indicators</a>
+							<a href="" class="field">Urban Planning</a>
+						</li>
+					</ul>
+				</div>
 				<div id="logo-container"></div>
 				<svg id="map-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
 

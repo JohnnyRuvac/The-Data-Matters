@@ -153,6 +153,7 @@ or.countries = {};
 or.countries.initHoverAndClick = function() {
 
 	var withProject = or.countries.withProject;
+	or.$countryInfo = $("#country-info");
 
 	for (var i = 0; i < withProject.length; i++) {
 		
@@ -204,10 +205,13 @@ or.countries.click = function (e, that) {
 
 	//activate or deactivate country
 	if ( isActive ) {
+
 		$clicked.removeAttr("data-active");
 		that.attr({
 			fill: or.patternInactive
 		});
+		or.$countryInfo.removeClass("active");
+		
 	} else {
 		//deactivate active one
 		if ( o.activeCountry ) {
@@ -266,6 +270,8 @@ or.countries.showInfo = function (that) {
 
 	//console.log(that);
 	//console.log(that.node.parentElement.id);
+
+	or.$countryInfo.addClass("active");
 
 }
 // END Countries
