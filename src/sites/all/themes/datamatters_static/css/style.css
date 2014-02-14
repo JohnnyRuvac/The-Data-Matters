@@ -792,8 +792,29 @@ header .content.affix {
 /* END Slideout Search */
 
 /* Interactive Map */
-.page-node-19 {
+.page-node-19 .main-nav .map {
+  display: none;
+}
+.page-node-19 h1.logo {
+  opacity: 0;
+
+  -webkit-transition: all 1.2s;
+  -moz-transition: all 1.2s;
+  -ms-transition: all 1.2s;
+  -o-transition: all 1.2s;
+  transition: all 1.2s;
+}
+.page-node-19.map-shown {
   background: #efefef;
+}
+.page-node-19.map-shown h1.logo {
+  opacity: 1;
+
+  -webkit-transition: all 1.2s;
+  -moz-transition: all 1.2s;
+  -ms-transition: all 1.2s;
+  -o-transition: all 1.2s;
+  transition: all 1.2s;
 }
 .page-node-19 .main-content {
   margin-top: -16px;
@@ -806,7 +827,8 @@ header .content.affix {
   position: relative;
   top: 11.11111%; /* 2/18 of height */
   z-index: -1;
-  width: 70%;
+  width: 33%;
+  max-width: 333px;
   height: 55.55555%;
   margin: 0 auto;
   /*background: rgba(0, 0, 0, 0.1);*/
