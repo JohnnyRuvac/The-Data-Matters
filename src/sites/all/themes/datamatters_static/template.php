@@ -49,7 +49,7 @@ function datamatters_static_preprocess_page(&$vars) {
   $vars['active_menu'] = "Projects";
   if($path == "map") $vars['active_menu'] = "Interactive Map";
   if($path == "about") $vars['active_menu'] = "About";
-  if($path == "Organizations") $vars['active_menu'] = "Organizations";
+  if($path == "organizations") $vars['active_menu'] = "Organizations";
   
   $vars['active_dictionary'] = "";
   if(strpos($_GET['q'], "axonomy/term/")){
