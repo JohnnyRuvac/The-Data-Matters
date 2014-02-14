@@ -80,7 +80,7 @@
 					<h2>Czech republic</h2>
 					<p class="type">Parlementiary republic</p>
 					<p class="population">Population: <span>10,436,560</span></p>
-					<p class="gdp">GDP Per Capita: <span>$27,190</span></p>
+					<p class="gdp">GDP (PPP): <span>$27,190</span></p>
 					<ul>
 						<li>
 							<a href="" class="project-name">Visualizing local government
