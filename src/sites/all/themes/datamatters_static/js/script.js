@@ -1,5 +1,6 @@
 var o = {};
-var $ = jQuery;
+var $ = jQuery.noConflict();
+
 
 // Init variables
 o.initVars = function() {

@@ -1,4 +1,23 @@
 <?
+
+function datamatters_static_js_alter(&$js, &$vars){
+	$path = drupal_get_path_alias();
+	drupal_add_js( path_to_theme().'/js/modernizr.js');
+	drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
+	drupal_add_js( path_to_theme().'/js/hammer.min.js');
+	drupal_add_js( path_to_theme().'/js/script.js');
+	drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
+  if($path != "map"){
+  	  unset($js['sites/all/themes/datamatters_static/js/modernizr.js']);
+  	  unset($js['sites/all/themes/datamatters_static/js/snap.svg-min.js']);
+  	  unset($js['sites/all/themes/datamatters_static/js/hammer.min.js']);
+  	  unset($js['sites/all/themes/datamatters_static/js/map.js']);
+      
+	  
+  } 
+
+}
+
  //
  // Implementation of preprocess_page().
  //
@@ -34,14 +53,8 @@ function datamatters_static_preprocess_page(&$vars) {
   
   // Map template override
   $path = drupal_get_path_alias();
+  if($path == "map") $vars['theme_hook_suggestions'][] = 'page__map';
 
-  if($path == "map"){
-    drupal_add_js( path_to_theme().'/js/modernizr.js');
-    drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
-	  drupal_add_js( path_to_theme().'/js/hammer.min.js');
-	  drupal_add_js( path_to_theme().'/js/map.js');
-	  $vars['theme_hook_suggestions'][] = 'page__map';
-  }
   
   //
   // ACTIVE TRAIL
@@ -67,6 +80,9 @@ function datamatters_static_preprocess_page(&$vars) {
   // console
   // $vars['messages'] = print_r($vars['tax_url'], TRUE);
 }
+
+
+
 
 function datamatters_static_preprocess(&$vars){
 	

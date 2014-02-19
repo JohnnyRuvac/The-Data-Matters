@@ -10,6 +10,7 @@
 
 var nameArray = [];
 
+
 jQuery(document).ready(function($) {
 	
 	if(jQuery("#editormenu").length > 0){
@@ -58,7 +59,6 @@ jQuery(document).ready(function($) {
 
 
 });
-
 
 function searchArray(str, arr){
 	var items = [];

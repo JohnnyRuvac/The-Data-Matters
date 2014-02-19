@@ -425,7 +425,7 @@ $(function(){
 
 	or.s = Snap("#map-container");
 
-	var headerHeight = $("header").outerHeight(),
+	var headerHeight = $(".main-content").offset().top,
 			height = $(window).height() - headerHeight;
 
 	$(".main-content").height( height );

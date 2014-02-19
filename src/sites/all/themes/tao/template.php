@@ -63,7 +63,8 @@ function tao_css_alter(&$css) {
 function tao_js_alter(&$js, &$vars){
 	global $user;
 	
-	if(!in_array("administrator", $user->roles)) unset($js['settings']);
+	if(in_array("anonymous user", $user->roles)) unset($js['settings']);
+	
 }
 
 
