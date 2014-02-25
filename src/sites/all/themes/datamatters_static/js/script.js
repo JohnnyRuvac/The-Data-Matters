@@ -1,6 +1,4 @@
 var o = {};
-var $ = jQuery.noConflict();
-
 
 // Init variables
 o.initVars = function() {
@@ -252,7 +250,7 @@ o.projectsSorting = function () {
 // END projects sorting
 
 // DOM ready
-$(function($){
+$(function(){
 
 	o.initVars();
 	o.slideoutMenu();

@@ -3,9 +3,11 @@
 function datamatters_static_js_alter(&$js, &$vars){
 	$path = drupal_get_path_alias();
 	drupal_add_js( path_to_theme().'/js/modernizr.js');
-  drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
-	drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
+    drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
 	drupal_add_js( path_to_theme().'/js/hammer.min.js');
+	drupal_add_js( path_to_theme().'/js/jquery.js');
+	drupal_add_js( path_to_theme().'/js/jquery.migrate.js');
+	drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
 	drupal_add_js( path_to_theme().'/js/script.js');
 	drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
   if($path != "map"){
@@ -71,7 +73,8 @@ function datamatters_static_preprocess_page(&$vars) {
   $vars['active_dictionary'] = "";
   if(strpos($_GET['q'], "axonomy/term/")){
 	  $vars['active_term'] = str_ireplace("taxonomy/term/", "", $_GET['q']);
-	  $vars['active_dictionary'] = explode("/", $path)[0];
+	  $uhm = explode("/", $path);
+	  $vars['active_dictionary'] = $uhm[0];
 	  
   }
   	

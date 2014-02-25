@@ -10,55 +10,56 @@
 
 var nameArray = [];
 
-
-jQuery(document).ready(function($) {
+(function($) {
+	$(document).ready(function() {
+		
+		if($("#editormenu").length > 0){
+			
+				$("#editormenu").hoverIntent(function(){
+					$(this).animate({width: "150", paddingLeft: "15"}, 200);
+				}, function(){
+					$(this).animate({width: "30", paddingLeft: "5"}, 300);
+				});
+				
+				$(".action-links a").each(function(){
+					$(this).addClass($(this).html().toLowerCase().replace(" ", "_"));
+				})
+				
+		}
 	
-	if(jQuery("#editormenu").length > 0){
-		
-			jQuery("#editormenu").hoverIntent(function(){
-				jQuery(this).animate({width: "150", paddingLeft: "15"}, 200);
-			}, function(){
-				jQuery(this).animate({width: "30", paddingLeft: "5"}, 300);
-			});
-			
-			jQuery(".action-links a").each(function(){
-				$(this).addClass($(this).html().toLowerCase().replace(" ", "_"));
+	
+		$(window).load(function(){
+			$.getJSON("/json/countries", function(data){
+				$.each(data, function(key, val){
+					nameArray.push({"name":val.country.name, "low":val.country.name.toLowerCase(), "link":val.country.link});
+				})
+			})
+			$.getJSON("/json/fields", function(data){
+				$.each(data, function(key, val){
+					nameArray.push({"name":val.field.name,"low":val.field.name.toLowerCase(), "link":val.field.link});
+				})
+			})
+			$.getJSON("/json/projects", function(data){
+				$.each(data, function(key, val){
+					nameArray.push({"name":val.node.title, "low":val.node.title.toLowerCase(), "link":val.node.path});
+				})
+	
 			})
 			
-	}
-
-
-	$(window).load(function(){
-		$.getJSON("/json/countries", function(data){
-			$.each(data, function(key, val){
-				nameArray.push({"name":val.country.name, "low":val.country.name.toLowerCase(), "link":val.country.link});
+			$(".menu-search input, #slideout-menu .search-input").keyup(function(e){
+				var str = $(this).val().toLowerCase();
+				
+				$(".menu-search .search-results, #slideout-menu ul.clearfix")
+				.html(searchArray(str, nameArray));
+				if(!$(this).hasClass("search-input")) $(".menu-search .search-results").parent().addClass("active");
+	
 			})
-		})
-		$.getJSON("/json/fields", function(data){
-			$.each(data, function(key, val){
-				nameArray.push({"name":val.field.name,"low":val.field.name.toLowerCase(), "link":val.field.link});
-			})
-		})
-		$.getJSON("/json/projects", function(data){
-			$.each(data, function(key, val){
-				nameArray.push({"name":val.node.title, "low":val.node.title.toLowerCase(), "link":val.node.path});
-			})
-
-		})
-		
-		$(".menu-search input, #slideout-menu .search-input").keyup(function(e){
-			var str = $(this).val().toLowerCase();
 			
-			$(".menu-search .search-results, #slideout-menu ul.clearfix")
-			.html(searchArray(str, nameArray));
-			if(!$(this).hasClass("search-input")) $(".menu-search .search-results").parent().addClass("active");
-
 		})
-		
-	})
-
-
-});
+	
+	
+	});
+})(jQuery); 
 
 function searchArray(str, arr){
 	var items = [];
