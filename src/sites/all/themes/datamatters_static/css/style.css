@@ -441,7 +441,6 @@ header .content.affix {
   .projects .project {
     width: 220px;
     height: 280px;
-    float: left;
     margin-left: 16px;
     margin-bottom: 16px;
   }
@@ -917,32 +916,32 @@ header .content.affix {
 /* Text page */
 
 .main-content .node-page {
-	margin: 0px 15px;
+  margin: 0px 15px;
 }
 
 .main-content .node-page .field-name-body p{
-	margin-top: 0px; margin-bottom: 20px;
+  margin-top: 0px; margin-bottom: 20px;
 }
 
 .main-content .node-page strong {
-	font-size: 18px;
-	font-weight: normal;
-	padding: 18px 0px;
-	display: block;
-	border-top: 1px dotted #cccccc;
-	border-bottom: 1px dotted #cccccc;
+  font-size: 18px;
+  font-weight: normal;
+  padding: 18px 0px;
+  display: block;
+  border-top: 1px dotted #cccccc;
+  border-bottom: 1px dotted #cccccc;
 }
 
 @media (min-width: 492px) {
   .main-content .node-page {
-	   width: 385px;
-	   margin: 0 auto;
+     width: 385px;
+     margin: 0 auto;
   }
 }
 
 @media (min-width: 769px) {
   .main-content .node-page {
-  	margin-left: 130px;	
+    margin-left: 130px; 
   }
 }
 

@@ -84,16 +84,16 @@ o.activateProjectFilters = function () {
 	$(".filter-button:not(.menu-tablet) .filter-content li a").click(function(e){
 
 		e.preventDefault();
-		window.location.href = "/"+$(this).attr("href");
+		//window.location.href = "/"+$(this).attr("href");
 
 		//check if the name should be shorten
 		var text = $(this).text();
 		if ( text.length > 15 ) text = text.slice(0, 15) + "..."; 
 
-		// $(this).closest(".filter-button")
-		// 			 .find(".label")
-		// 			 .text( text )
-		// 			 .addClass("active");
+		$(this).closest(".filter-button")
+					 .find(".label")
+					 .text( text )
+					 .addClass("active");
 
 	});
 
@@ -243,6 +243,14 @@ o.activateSearch = function () {
 }
 // END Search
 
+// Projects sorting
+o.projectsSorting = function () {
+
+	$("#grid").mixitup();
+
+}
+// END projects sorting
+
 // DOM ready
 $(function($){
 
@@ -253,6 +261,7 @@ $(function($){
 	o.trimLongTexts();
 	o.affixNavi();
 	o.activateSearch();
+	o.projectsSorting();
 
 });
 // END DOM ready

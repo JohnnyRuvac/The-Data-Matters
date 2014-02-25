@@ -13,8 +13,12 @@
 	//
 	
 	if($view_mode == 'teaser'):
+
+		$pField = transliteration_clean_filename($field->name);
+		$pCountry = transliteration_clean_filename($country->name);
+
 ?>
-					<li class="project clearfix">
+					<li class="project mix <?=$pField?> <?=$pCountry?> clearfix">
 						<a href="<?=$node_url?>" title="<?=$node->title?>">
 							<img src="<?=image_style_url("large", $node->field_image['und'][0]['uri'])?>" alt="project image">
 						</a>

@@ -31,7 +31,7 @@
 									?>Field<? endif;?> <a href="" class="close">Close</a></h3>
 									<ul class="clearfix">
 									<?php foreach($field as $value):?>
-										<li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
+										<li class="filter" data-filter="<?=transliteration_clean_filename($value['name'])?>"><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
 									<?php endforeach; ?>
 									</ul>
 								</div>
@@ -50,7 +50,7 @@
 									?>Country<? endif;?> <a href="" class="close">Close</a></h3>
 									<ul class="clearfix">
 										<?php foreach($countries as $value):?>
-										<li><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
+										<li class="filter" data-filter="<?=transliteration_clean_filename($value['name'])?>"><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
 										<?php endforeach; ?>
 									</ul>
 								</div>

@@ -27,6 +27,6 @@
  * @ingroup views_templates
  */
 ?>
-<ul class="projects clearfix">
+<ul id="grid" class="projects clearfix">
 <?php print $rows; ?>
 </ul>

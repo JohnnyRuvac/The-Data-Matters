@@ -3,7 +3,8 @@
 function datamatters_static_js_alter(&$js, &$vars){
 	$path = drupal_get_path_alias();
 	drupal_add_js( path_to_theme().'/js/modernizr.js');
-	drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
+  drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
+	drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
 	drupal_add_js( path_to_theme().'/js/hammer.min.js');
 	drupal_add_js( path_to_theme().'/js/script.js');
 	drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
@@ -28,8 +29,9 @@ function datamatters_static_preprocess_page(&$vars) {
   //
 
   $countries = taxonomy_get_tree(2);
+
   foreach($countries as $key => $value):
-	  $vars['countries'][$key]['name'] = $value->name;
+    $vars['countries'][$key]['name'] = $value->name;
 	  $vars['countries'][$key]['tid'] = $value->tid;
 	  $vars['countries'][$key]['url'] = drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid);
 	  $vars['tax_names'][$value->tid] = $value->name;
