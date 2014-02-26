@@ -175,6 +175,9 @@ header .content.affix {
   color: #f00;
   background-color: #fff;
 }
+.main-nav .menu-tablet.filter-button .label {
+  background: white;
+}
 .main-nav .menu-tablet li {
   width: 145px;
 }
@@ -371,8 +374,12 @@ header .content.affix {
 /* Projects */
 .projects {
   padding: 0 16px;
+  min-height: 700px; /* no results filtering */
 }
 .projects .project {
+  display: none;
+  opacity: 0;
+  overflow: hidden;
   position: relative;
   margin-bottom: 12px;
   border: 1px solid #ccc;
@@ -448,7 +455,7 @@ header .content.affix {
   .project .content,
   .project .country,
   .project .field {
-    float: none;
+    /*float: none;*/
     width: 100%;
   }
   .project .content {
@@ -647,10 +654,29 @@ header .content.affix {
   background-repeat: no-repeat;
   background-position: top 0px right 10px;
 }
-.filter-button .label.active,
+.filter-button .label.active {
+  color: #f00;
+  background-image: none;
+}
 .filter-button .label:hover {
   color: #f00;
   background-position: top -46px right 10px; 
+}
+.filter-button .clear-filter {
+  display: none; 
+  position: absolute;
+  top: 9px;
+  right: 8px;
+  width: 14px;
+  height: 14px;
+  background: url(../img/clear-filter.png) no-repeat -9px 3px;
+}
+.filter-button .clear-filter:hover {
+  display: none;
+}
+.filter-button .clear-filter.active,
+.filter-button .clear-filter.active:hover {
+  display: block;
 }
 .filter-content {
   display: none;
@@ -731,7 +757,6 @@ header .content.affix {
   .filter-button .label {
     background-position: top -8px right 10px;
   }
-  .filter-button .label.active,
   .filter-button .label:hover {
     background-position: top -54px right 10px;
   }
@@ -1017,6 +1042,11 @@ only screen and (min-device-pixel-ratio: 1.5) {
     background: url(../img/world-icon@2x.png) no-repeat 14px center;
     -webkit-background-size: 12px 12px;
     background-size: 12px 12px;
+  }
+  .filter-button .clear-filter {
+    background-image: url(../img/clear-filter@2x.png);
+    -webkit-background-size: 7px 7px;
+    background-size: 7px 7px;
   }
 
 }

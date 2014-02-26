@@ -88,10 +88,14 @@ o.activateProjectFilters = function () {
 		var text = $(this).text();
 		if ( text.length > 15 ) text = text.slice(0, 15) + "..."; 
 
-		$(this).closest(".filter-button")
+		var $filterButton = $(this).closest(".filter-button");
+		$filterButton
 					 .find(".label")
 					 .text( text )
 					 .addClass("active");
+
+		//show clear filter icon
+		$filterButton.find(".clear-filter").addClass("active");
 
 	});
 
@@ -244,7 +248,46 @@ o.activateSearch = function () {
 // Projects sorting
 o.projectsSorting = function () {
 
-	$("#grid").mixitup();
+	// $("#grid").mixitup({
+	// 	onMixStart: function(){
+	// 		console.log("start");
+	// 	}
+	// });
+
+	// save active filter for later use
+	$(".filter a").click(function(){
+		var group = $(this).parent().attr("data-group");
+		if (group == "country") o.activeCountryFilter = $(this).parent().attr("data-filter");
+		else o.activeFieldFilter = $(this).parent().attr("data-filter");
+
+		console.log( o.activeFieldFilter );
+		console.log( o.activeCountryFilter );
+	});
+
+	$("#grid").mixitup({
+		multiFilter: true,
+		filterLogic: 'and'
+	});
+
+	//clear filter
+	$(".clear-filter").click(function(e){
+
+		e.preventDefault();
+		//hide clear filter icon
+		$(this).removeClass("active");
+		//show original label name
+		$label = $(this).parent().find(".label");
+		$label.removeClass("active")
+					.html( $label.attr("data-orig-name") );
+		//show all results
+		$('#grid').mixitup('filter','all');
+
+	});
+
+}
+o.clearProjectsSorting = function () {
+
+
 
 }
 // END projects sorting

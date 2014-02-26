@@ -18,11 +18,12 @@
 						</li>
 						<div class="right clearfix">
 							<li class="filter-button">
-								<a class="label<? if($active_dictionary == "field"): print " active"; endif;?>" href=""><? 
+								<a class="label<? if($active_dictionary == "field"): print " active"; endif;?>" href="" data-orig-name="Field"><? 
 										if($active_dictionary == "field"): 
 											print $tax_names[$active_term];
 										else:
 									?>Field<? endif;?></a>
+								<a href="" class="clear-filter"></a>
 								<div class="filter-content">
 									<h3><? 
 										if($active_dictionary == "field"):
@@ -31,17 +32,20 @@
 									?>Field<? endif;?> <a href="" class="close">Close</a></h3>
 									<ul class="clearfix">
 									<?php foreach($field as $value):?>
-										<li class="filter" data-filter="<?=transliteration_clean_filename($value['name'])?>"><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
+										<li class="filter" data-group="field" data-filter="<?=transliteration_clean_filename($value['name'])?>">
+											<a href="<?=$value['url']?>"><?=$value['name']?></a>
+										</li>
 									<?php endforeach; ?>
 									</ul>
 								</div>
 							</li>
 							<li class="filter-button">
-								<a class="label <? if($active_dictionary == "countries"): print " active"; endif;?>" href=""><? 
+								<a class="label <? if($active_dictionary == "countries"): print " active"; endif;?>" href="" data-orig-name="Countries"><? 
 										if($active_dictionary == "countries"): 
 											print $tax_names[$active_term];
 										else:
 									?>Country<? endif;?></a>
+								<a href="" class="clear-filter"></a>
 								<div class="filter-content">
 									<h3><? 
 										if($active_dictionary == "country"): 
@@ -50,7 +54,9 @@
 									?>Country<? endif;?> <a href="" class="close">Close</a></h3>
 									<ul class="clearfix">
 										<?php foreach($countries as $value):?>
-										<li class="filter" data-filter="<?=transliteration_clean_filename($value['name'])?>"><a href="<?=$value['url']?>"><?=$value['name']?></a></li>
+										<li class="filter" data-group="country" data-filter="<?=transliteration_clean_filename($value['name'])?>">
+											<a href="<?=$value['url']?>"><?=$value['name']?></a>
+										</li>
 										<?php endforeach; ?>
 									</ul>
 								</div>
