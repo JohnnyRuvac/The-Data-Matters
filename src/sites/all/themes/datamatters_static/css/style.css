@@ -649,6 +649,12 @@ header .content.affix {
 /* END project full preview */
 
 /* Filter content */
+.filter-button {
+  position: relative;
+}
+.filter-button.active {
+  position: static;
+}
 .filter-button .label {
   background: #efefef url(../img/dropdown-arrows.png);
   background-repeat: no-repeat;
@@ -665,11 +671,11 @@ header .content.affix {
 .filter-button .clear-filter {
   display: none; 
   position: absolute;
-  top: 9px;
-  right: 8px;
-  width: 14px;
-  height: 14px;
-  background: url(../img/clear-filter.png) no-repeat -9px 3px;
+  top: 0;
+  right: 0;
+  width: 46px;
+  height: 46px;
+  background: url(../img/clear-filter.png) no-repeat 29px 19px;
 }
 .filter-button .clear-filter:hover {
   display: none;
@@ -751,7 +757,7 @@ header .content.affix {
 }
 
 @media (min-width: 769px) {
-  .filter-button {
+  .filter-button.active {
     position: relative;
   }
   .filter-button .label {
@@ -759,6 +765,11 @@ header .content.affix {
   }
   .filter-button .label:hover {
     background-position: top -54px right 10px;
+  }
+  .filter-button .clear-filter {
+    width: 32px;
+    height: 32px;
+    background: url(../img/clear-filter.png) no-repeat 15px 12px;
   }
   .filter-content {
     top: 32px;

@@ -49,8 +49,11 @@ o.activateProjectFilters = function () {
 		//close slideoutmenu
 		o.$body.removeClass("slideout-menu-opened");
 
-		//change color of body to grey
+		//change color of body to grey for mobiles
 		if (o.ww < 769) o.$body.addClass("grey");
+
+		//add active class to filter button to remove position relative
+		$(this).closest(".filter-button").addClass("active");
 
 		//close other filters if they are open
 		var isActive;
@@ -73,7 +76,8 @@ o.activateProjectFilters = function () {
 	//close
 	$(".filter-content .close").click(function(e){
 		e.preventDefault();
-		$(this).parent().parent().removeClass("active");
+		$(this).closest(".filter-content").removeClass("active");
+		$(this).closest(".filter-button").removeClass("active");
 		//change body color back
 		if (o.ww < 769) o.$body.removeClass("grey");
 	});
@@ -86,14 +90,14 @@ o.activateProjectFilters = function () {
 
 		//check if the name should be shorten
 		var text = $(this).text();
-		if ( text.length > 15 ) text = text.slice(0, 15) + "..."; 
+		if ( text.length > 15 ) text = text.slice(0, 15) + "...";
 
 		var $filterButton = $(this).closest(".filter-button");
 		$filterButton
 					 .find(".label")
 					 .text( text )
 					 .addClass("active");
-
+		
 		//show clear filter icon
 		$filterButton.find(".clear-filter").addClass("active");
 
