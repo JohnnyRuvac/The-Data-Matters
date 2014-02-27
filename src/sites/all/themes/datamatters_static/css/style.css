@@ -175,9 +175,6 @@ header .content.affix {
   color: #f00;
   background-color: #fff;
 }
-.main-nav .menu-tablet.filter-button .label {
-  background: white;
-}
 .main-nav .menu-tablet li {
   width: 145px;
 }
@@ -420,9 +417,6 @@ header .content.affix {
   font-size: 12px;
   border-top: 1px dotted #ccc;
 }
-.project .country a {
-  color: #646464;
-}
 .project .country {
   float: left;
   left: 45.5%;
@@ -663,6 +657,10 @@ header .content.affix {
 .filter-button .label.active {
   color: #f00;
   background-image: none;
+}
+.filter-button.menu-tablet .label.active {
+  background-color: #fff;
+  background-image: url(../img/dropdown-arrows.png);
 }
 .filter-button .label:hover {
   color: #f00;
@@ -1004,7 +1002,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
     -webkit-background-size: 6px 12px;
     background-size: 6px 12px;
   }
-  .filter-button .label {
+  .filter-button .label,
+  .filter-button.menu-tablet .label.active {
     background-image: url(../img/dropdown-arrows@2x.png);
     -webkit-background-size: 7px 92px;
     background-size: 7px 92px;

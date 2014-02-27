@@ -86,7 +86,6 @@ o.activateProjectFilters = function () {
 	$(".filter-button:not(.menu-tablet) .filter-content li a").click(function(e){
 
 		e.preventDefault();
-		//window.location.href = "/"+$(this).attr("href");
 
 		//check if the name should be shorten
 		var text = $(this).text();
@@ -97,6 +96,14 @@ o.activateProjectFilters = function () {
 					 .find(".label")
 					 .text( text )
 					 .addClass("active");
+
+		//close filter
+		$filterButton
+						.removeClass("active")
+						.find(".filter-content")
+						.removeClass("active");
+		//change body color back
+		if (o.ww < 769) o.$body.removeClass("grey");
 		
 		//show clear filter icon
 		$filterButton.find(".clear-filter").addClass("active");
