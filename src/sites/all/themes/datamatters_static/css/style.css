@@ -437,7 +437,7 @@ header .content.affix {
     width: 488px;
     margin: 0 auto;
     padding-left: 0;
-    padding-right: 0;
+    padding: 0;
   }
   .projects .project {
     width: 220px;
@@ -479,6 +479,7 @@ header .content.affix {
     width: auto;
     margin: auto;
     padding-left: 114px;
+    padding-right: 20px;
   }
 }
 /* End of projects */
