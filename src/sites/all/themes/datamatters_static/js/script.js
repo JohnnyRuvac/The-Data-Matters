@@ -136,9 +136,11 @@ o.fixFilters = function() {
 		
 		//adjust width and height to fill whole screen on mobiles, check if filter isn't taller than screen
 		var newHeight = ( filterHeight > o.wh ) ? filterHeight : o.wh;
-		o.$currentOpenedFilter.css({"width": o.ww, "height": newHeight});
 		//shorten outer wrapper, so there's no scroll on opened filter
 		o.$outerWrapper.height( newHeight );
+		o.$currentOpenedFilter.css({"height": newHeight});
+		o.ww = o.$window.width();
+		o.$currentOpenedFilter.css({"width": o.ww});
 
 	}
 }
