@@ -11,6 +11,7 @@ o.initVars = function() {
 	o.$mainMenu = $(".main-nav");
 	o.$projectPreview = $("#project-preview");
 	o.$wrapper = $("#wrapper");
+	o.$outerWrapper = $("#outer-wrapper");
 	o.$slideoutMenu = $("#slideout-menu");
 	o.$filterContents = $(".filter-content");
 
@@ -46,6 +47,9 @@ o.activateProjectFilters = function () {
 		var $filterContent = $(this).parent().find(".filter-content");
 		o.$currentOpenedFilter = $filterContent;
 
+		//fix filter dimensions of filter before opening
+		o.fixFilters();
+
 		//close slideoutmenu
 		o.$body.removeClass("slideout-menu-opened");
 
@@ -61,11 +65,9 @@ o.activateProjectFilters = function () {
 		o.$filterContents.removeClass("active");
 		
 		//for mobile devices filter should be fullscreen, for tablets and larger it should be dropdown
-		var width  = (o.ww < 769) ? o.ww : $filterContent.css("width"),
-			  height = (o.ww < 769) ? $(document).height() : $filterContent.height();
+		var width  = (o.ww < 769) ? o.ww : $filterContent.css("width");
 
 		$filterContent
-			.height( height )
 			.css("width", width )
 			.addClass("active");
 
@@ -80,6 +82,9 @@ o.activateProjectFilters = function () {
 		$(this).closest(".filter-button").removeClass("active");
 		//change body color back
 		if (o.ww < 769) o.$body.removeClass("grey");
+		//remove outer wrapper inline height
+		o.$outerWrapper.css("height", "auto");
+		o.$currentOpenedFilter = null;
 	});
 
 	//filter li click
@@ -102,8 +107,12 @@ o.activateProjectFilters = function () {
 						.removeClass("active")
 						.find(".filter-content")
 						.removeClass("active");
+
 		//change body color back
 		if (o.ww < 769) o.$body.removeClass("grey");
+		//remove outer wrapper inline height
+		o.$outerWrapper.css("height", "auto");
+		o.$currentOpenedFilter = null;
 		
 		//show clear filter icon
 		$filterButton.find(".clear-filter").addClass("active");
@@ -112,13 +121,25 @@ o.activateProjectFilters = function () {
 
 }
 o.fixFilters = function() {
-	//after resize from tablet to large desktop, we have to remove inline width and height
+
+	//if there is no opened filter, return, we don't need to check this on every window resize
+	if ( !o.$currentOpenedFilter ) return;
+
+	var filterHeight = o.$currentOpenedFilter.outerHeight();
+
 	if (o.ww > 767) {
+
+		//after resize from tablet to large desktop, we have to remove inline width and height
 		o.$filterContents.removeAttr("style");
+
 	} else {
-		//adjust width
-		if (o.$currentOpenedFilter)
-			o.$currentOpenedFilter.css({"width": o.ww, "height": o.wh});
+		
+		//adjust width and height to fill whole screen on mobiles, check if filter isn't taller than screen
+		var newHeight = ( filterHeight > o.wh ) ? filterHeight : o.wh;
+		o.$currentOpenedFilter.css({"width": o.ww, "height": newHeight});
+		//shorten outer wrapper, so there's no scroll on opened filter
+		o.$outerWrapper.height( newHeight );
+
 	}
 }
 // END Filter dropdown
