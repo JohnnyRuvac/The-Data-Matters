@@ -3,6 +3,7 @@ var o = {};
 // Init variables
 o.initVars = function() {
 
+	o.$html = $("html");
 	o.$body = $("body");
 	o.$headerContent = $("header .content");
 	o.$window = $(window);
@@ -14,6 +15,9 @@ o.initVars = function() {
 	o.$outerWrapper = $("#outer-wrapper");
 	o.$slideoutMenu = $("#slideout-menu");
 	o.$filterContents = $(".filter-content");
+
+	o.isTouch = o.$html.hasClass("touch");
+	o.svgSupport = o.$html.hasClass("svg");
 
 }
 // END Init variables
@@ -35,6 +39,27 @@ o.slideoutMenuHeight = function () {
 			//o.wh is window height
 	o.$slideoutMenu.height( height );
 
+}
+o.swipeToOpenMenu = function () {
+
+	//return if it's not touch device
+	if ( !o.isTouch ) return;
+	var wrapper = document.getElementById("outer-wrapper");
+	
+	var hammerTime = Hammer(wrapper)
+				.on("swipeleft", function() {
+					//close it
+					if (o.ww > 768) return;
+					o.slideoutMenuHeight();
+					o.$body.toggleClass("slideout-menu-opened");
+				})
+				.on("swiperight", function() {
+					//open it
+					if (o.ww > 768) return;
+					o.slideoutMenuHeight();
+					o.$body.toggleClass("slideout-menu-opened");
+				});
+	
 }
 // END slideout menu
 
@@ -353,6 +378,7 @@ $(function(){
 
 	o.initVars();
 	o.slideoutMenu();
+	o.swipeToOpenMenu();
 	o.activateProjectFilters();
 	o.activateProjectPreview();
 	o.trimLongTexts();
