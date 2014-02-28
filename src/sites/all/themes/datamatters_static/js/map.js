@@ -1,8 +1,5 @@
-var or = {};
-var $ = jQuery;
-
 // ids of countries in svg file
-or.idsOfCountries = {
+o.idsOfCountries = {
 	"Bosnia and Herzegovina": "selection_12",
 	"Czech Republic": "selection_17",
 	"Estonia": "selection_23",
@@ -16,11 +13,12 @@ or.idsOfCountries = {
 // END ids of countries in svg file
 
 // Map
-or.map = {
+o.map = {
 	hidden: true
 };
-or.map.init = function () {
+o.map.init = function () {
 
+	//for mobile devices redirect to projects page
 	if ($(window).width() < 769) {
 		window.location = "/projects";
 		return;
@@ -30,46 +28,46 @@ or.map.init = function () {
 	Snap.load( url + "map_logo.svg", function(d) {
 
 		//don't append map for mobile devices
-		if (or.w.w > 500) {
-			or.map.countries = d.select(".countries");
-			or.s.append(or.map.countries);
-			or.map.countries.attr({
+		if (o.w.w > 500) {
+			o.map.countries = d.select(".countries");
+			o.s.append(o.map.countries);
+			o.map.countries.attr({
 				opacity: 0
 			});
-			or.map.countries.selectAll("path").attr({
+			o.map.countries.selectAll("path").attr({
 				fill: "#ffffff",
 				stroke: "#ccc",
 				strokeWidth: 0.25
 			});
 		}
 
-		or.logo = d.select(".logo");
-		or.s.append(or.logo);
+		o.logo = d.select(".logo");
+		o.s.append(o.logo);
 
-		or.findBorderCities(".logo .cities");
-		or.map.place();
-		//or.map.showOnScroll();
-		or.map.show();
+		o.findBorderCities(".logo .cities");
+		o.map.place();
+		//o.map.showOnScroll();
+		o.map.show();
 
 		//add rectangle behind map, so it can be draggable also on empty spaces
-		or.map.bg = or.s.rect(0, 0, 1243, 756);
-		or.map.bg.attr({
+		o.map.bg = o.s.rect(0, 0, 1243, 756);
+		o.map.bg.attr({
 			fill: "#efefef"
 		});
-		or.map.countries.select("#selection").before( or.map.bg );
+		o.map.countries.select("#selection").before( o.map.bg );
 
 		//make it dragable
 		if ( $("html").hasClass("no-touch") )
-			or.map.countries.drag();
+			o.map.countries.drag();
 
 		//countries with project hover
 		var url = $("#map-container").attr("data-json-url");
-		or.map.loadCountriesWithProjects(url);
+		o.map.loadCountriesWithProjects(url);
 
 	});
 
 }
-or.map.loadCountriesWithProjects = function(url) {
+o.map.loadCountriesWithProjects = function(url) {
   
   var bothComplete = 0; //bothComplete has to be == 2, it means that we have loaded both jsons
 
@@ -79,11 +77,11 @@ or.map.loadCountriesWithProjects = function(url) {
     'url': url + "json/countries",
     'dataType': "json",
     'success': function (data) {
-      or.countriesJson = data;
-      or.map.highlightCountriesWithProject();
+      o.countriesJson = data;
+      o.map.highlightCountriesWithProject();
       bothComplete++;
       if (bothComplete == 2) {
-      	or.countries.initHoverAndClick();
+      	o.countries.initHoverAndClick();
       }
     }
   });
@@ -94,20 +92,20 @@ or.map.loadCountriesWithProjects = function(url) {
     'url': url + "json/projects",
     'dataType': "json",
     'success': function (data) {
-      or.projectsJson = data;
+      o.projectsJson = data;
       bothComplete++;
       if (bothComplete == 2) {
-      	or.countries.initHoverAndClick();
+      	o.countries.initHoverAndClick();
       }
     }
   });
 
 }
-or.map.showOnScroll = function () {
+o.map.showOnScroll = function () {
 
 	//if there is hash tag map, show it right away
 	if (window.location.hash == "#map") {
-		var t = window.setTimeout(or.map.show, 1000);
+		var t = window.setTimeout(o.map.show, 1000);
 		return;
 	}
 
@@ -115,48 +113,48 @@ or.map.showOnScroll = function () {
 	var body = document.getElementsByTagName("body")[0];
 
 	if (body.addEventListener) {
-		body.addEventListener("mousewheel", or.map.show, false);
-		body.addEventListener("DOMMouseScroll", or.map.show, false);
+		body.addEventListener("mousewheel", o.map.show, false);
+		body.addEventListener("DOMMouseScroll", o.map.show, false);
 	} else {
-		body.attachEvent("onmousewheel", or.map.show);
+		body.attachEvent("onmousewheel", o.map.show);
 	}
 
 	$(".main-content").hammer().on("touch", function(){
-		or.map.show();
+		o.map.show();
 	});
 
 }
-or.map.highlightCountriesWithProject = function () {
+o.map.highlightCountriesWithProject = function () {
 
-	// or.patternInactive = or.s.path("M0,0L10,10M0,5L5,10M5,0L10,5").attr({
+	// o.patternInactive = o.s.path("M0,0L10,10M0,5L5,10M5,0L10,5").attr({
  //      fill: "none",
  //      stroke: "#ccc",
  //      strokeWidth: 0.5
  //  });
- //  or.patternInactive = or.patternInactive.pattern(0, 0, 10, 10);
+ //  o.patternInactive = o.patternInactive.pattern(0, 0, 10, 10);
 
- //  or.patternActive = or.s.path("M0,0L10,10M0,5L5,10M5,0L10,5").attr({
+ //  o.patternActive = o.s.path("M0,0L10,10M0,5L5,10M5,0L10,5").attr({
  //      fill: "none",
  //      stroke: "#f00",
  //      strokeWidth: 0.5
  //  });
- //  or.patternActive = or.patternActive.pattern(0, 0, 10, 10);
-	or.patternInactive = "#999";
-	or.patternActive = "#636363";
+ //  o.patternActive = o.patternActive.pattern(0, 0, 10, 10);
+	o.patternInactive = "#999";
+	o.patternActive = "#636363";
 
-	or.countries.withProject = [];
+	o.countries.withProject = [];
 	
-	for (var i = 0; i < or.countriesJson.length; i++) {
+	for (var i = 0; i < o.countriesJson.length; i++) {
 		
-		or.countries.withProject.push( or.idsOfCountries[ or.countriesJson[i].country.name ] );
-		or.s.selectAll("#" + or.countries.withProject[i] + " path").attr({
-			fill: or.patternInactive
+		o.countries.withProject.push( o.idsOfCountries[ o.countriesJson[i].country.name ] );
+		o.s.selectAll("#" + o.countries.withProject[i] + " path").attr({
+			fill: o.patternInactive
 		});
 
 	}
 
 }
-or.map.place = function () {
+o.map.place = function () {
 
 	var $cont = $("#logo-container"),
 			contBBox = {
@@ -165,7 +163,7 @@ or.map.place = function () {
 				cx: $cont.offset().left + $cont.width() / 2,
 				y: $cont.offset().top + $cont.height()
 			},
-			logoBBox = or.s.select(".logo-text").getBBox(),
+			logoBBox = o.s.select(".logo-text").getBBox(),
 			offset = {
 				x: contBBox.cx - logoBBox.x,
 				y: contBBox.y - logoBBox.y2
@@ -176,83 +174,83 @@ or.map.place = function () {
 		offset.y -= $("header").outerHeight();
 	}
 
-	or.map.scale = contBBox.w / ( or.borderCities.right - or.borderCities.left);
+	o.map.scale = contBBox.w / ( o.borderCities.right - o.borderCities.left);
 
-	or.map.matrix = new Snap.Matrix()
+	o.map.matrix = new Snap.Matrix()
 										 .translate( offset.x, offset.y )
-										 .scale( or.map.scale, or.map.scale, logoBBox.cx, logoBBox.y2 );
+										 .scale( o.map.scale, o.map.scale, logoBBox.cx, logoBBox.y2 );
 
 	//no map on mobile
-	if (or.w.w > 500) or.map.countries.transform(or.map.matrix);
-	or.logo.transform(or.map.matrix);
+	if (o.w.w > 500) o.map.countries.transform(o.map.matrix);
+	o.logo.transform(o.map.matrix);
 
 }
-or.map.show = function () {
+o.map.show = function () {
 
 	//add hash tag
 	window.location = "#map";
 	$("body").addClass("map-shown");
 
 	//show it
-	if (or.map.hidden) {
-		or.map.hidden = false;
-		or.map.countries.animate({opacity: 1}, 600);
-		or.logo.animate({opacity: 0}, 1200);
+	if (o.map.hidden) {
+		o.map.hidden = false;
+		o.map.countries.animate({opacity: 1}, 600);
+		o.logo.animate({opacity: 0}, 1200);
 	}
 
 }
 // END map
 
 // Countries
-or.countries = {};
-or.countries.initHoverAndClick = function() {
+o.countries = {};
+o.countries.initHoverAndClick = function() {
 
-	var withProject = or.countries.withProject;
-	or.$countryInfo = $("#country-info");
+	var withProject = o.countries.withProject;
+	o.$countryInfo = $("#country-info");
 
 	for (var i = 0; i < withProject.length; i++) {
 		
-		var country = or.s.select("#" + withProject[i]);
+		var country = o.s.select("#" + withProject[i]);
 
 		country.attr({"class": "has-project"});
 		country.hover(
 			function(e){
-				or.countries.hoverIn(e);
+				o.countries.hoverIn(e);
 			},
 			function(e){
-				or.countries.hoverOut(e);
+				o.countries.hoverOut(e);
 			}
 		);
 
 		country.click(function(e){
-			or.countries.click(e, this);
+			o.countries.click(e, this);
 		});
 
 	}
 
 }
-or.countries.hoverIn = function (e) {
+o.countries.hoverIn = function (e) {
 
 	var id = e.target.parentNode.id,
 			isActive = $("#" + id).hasClass("has-project");
 
 	if ( isActive ) return;
-	or.s.selectAll("#" + id + " path").attr({fill: or.patternActive});
+	o.s.selectAll("#" + id + " path").attr({fill: o.patternActive});
 
 }
 
-or.countries.hoverOut = function (e) {
+o.countries.hoverOut = function (e) {
 
 	var id = e.target.parentNode.id,
 			isActive = $("#" + id).hasClass("has-project");
 
 	if ( isActive ) return;
 
-	var fillCol = ( $("#" + id).attr("data-active") ) ? or.patternActive : or.patternInactive;
-	or.s.selectAll("#" + id + " path").attr({fill: fillCol});	
+	var fillCol = ( $("#" + id).attr("data-active") ) ? o.patternActive : o.patternInactive;
+	o.s.selectAll("#" + id + " path").attr({fill: fillCol});	
 
 }
-or.countries.click = function (e, that) {
+o.countries.click = function (e, that) {
 
 	var id = that.attr("id"),
 			$clicked = $("#" + id),
@@ -263,39 +261,39 @@ or.countries.click = function (e, that) {
 
 		$clicked.removeAttr("data-active");
 		that.attr({
-			fill: or.patternInactive
+			fill: o.patternInactive
 		});
-		or.$countryInfo.removeClass("active");
+		o.$countryInfo.removeClass("active");
 		
 	} else {
 		//deactivate active one
 		if ( o.activeCountry ) {
 			o.$activeCountry.removeAttr("data-active");
 			o.activeCountry.selectAll("path").attr({
-				fill: or.patternInactive
+				fill: o.patternInactive
 			});
 		}
 		//activate new one
 		$clicked.attr("data-active", "true");
 		that.attr({
-			fill: or.patternActive
+			fill: o.patternActive
 		});
 
 		o.activeCountry = that;
 		o.$activeCountry = $clicked;
 
-		or.countries.zoomToActive(that);
-		or.countries.showInfo(that);
+		o.countries.zoomToActive(that);
+		o.countries.showInfo(that);
 	}
 
 }
-or.countries.zoomToActive = function(that){
+o.countries.zoomToActive = function(that){
 	
 	//firstly zoom it
 	var m = new Snap.Matrix();
 	m.scale(3);
-	or.map.scale = 3;
-	or.map.countries.transform( m );
+	o.map.scale = 3;
+	o.map.countries.transform( m );
 
 	var bbox = that.node.getBoundingClientRect();
 	var win = {
@@ -315,36 +313,36 @@ or.countries.zoomToActive = function(that){
 	country.cy = country.y + country.h / 2;
 
 	var shift = {
-		x: (win.cx - country.cx) / or.map.scale,
-		y: (win.cy - country.cy) / or.map.scale
+		x: (win.cx - country.cx) / o.map.scale,
+		y: (win.cy - country.cy) / o.map.scale
 	}
 
 	//update matrix because of potentional drag
-	or.map.matrix = or.map.countries.matrix
+	o.map.matrix = o.map.countries.matrix
 
 	//apply it
-	or.map.matrix.translate( shift.x, shift.y )
-	or.map.countries.transform( or.map.matrix );
+	o.map.matrix.translate( shift.x, shift.y )
+	o.map.countries.transform( o.map.matrix );
 
 }
-or.countries.showInfo = function (that) {
+o.countries.showInfo = function (that) {
 
 	var id = that.node.id,
 			country,
 			html = '';
 
 	//get country name
-	$.each( or.idsOfCountries, function(key, value){
+	$.each( o.idsOfCountries, function(key, value){
 		if (value == id) country = key;
 	});
 
 	//get projects of that country
-	for (var i = 0; i < or.projectsJson.length; i++) {
-		if ( or.projectsJson[i].node.country == country ) {
+	for (var i = 0; i < o.projectsJson.length; i++) {
+		if ( o.projectsJson[i].node.country == country ) {
 			
-			var title = or.projectsJson[i].node.title,
-					field = or.projectsJson[i].node.field,
-					path =  or.projectsJson[i].node.path;
+			var title = o.projectsJson[i].node.title,
+					field = o.projectsJson[i].node.field,
+					path =  o.projectsJson[i].node.path;
 
 			html += '<li>';
 			html += '<a href="' + path + '" class="project-name">' + title + '</a>';
@@ -355,34 +353,34 @@ or.countries.showInfo = function (that) {
 	}
 
 	//get details of country
-	for (var i = 0; i < or.countriesJson.length; i++) {
-		if ( or.countriesJson[i].country.name == country ) {
-			var gdp = or.countriesJson[i].country.gdp,
-					population = or.countriesJson[i].country.population,
-					type = or.countriesJson[i].country.type,
-					link = or.countriesJson[i].country.link;
+	for (var i = 0; i < o.countriesJson.length; i++) {
+		if ( o.countriesJson[i].country.name == country ) {
+			var gdp = o.countriesJson[i].country.gdp,
+					population = o.countriesJson[i].country.population,
+					type = o.countriesJson[i].country.type,
+					link = o.countriesJson[i].country.link;
 			break;
 		}
 	}
 
 	//country name
-	or.$countryInfo.find(".country").text( country ).attr("href", link);
+	o.$countryInfo.find(".country").text( country ).attr("href", link);
 	//type
-	or.$countryInfo.find(".type").text( type );
+	o.$countryInfo.find(".type").text( type );
 	//population
-	or.$countryInfo.find(".population span").text( population );
+	o.$countryInfo.find(".population span").text( population );
 	//gdp
-	or.$countryInfo.find(".gdp span").text( gdp );
+	o.$countryInfo.find(".gdp span").text( gdp );
 	//list projects
-	or.$countryInfo.find("ul").html( html );
+	o.$countryInfo.find("ul").html( html );
 
-	or.$countryInfo.addClass("active");
+	o.$countryInfo.addClass("active");
 
 }
 // END Countries
 
 //find cities on the border of logo container, so we can zoom to fit
-or.findBorderCities = function (where) {
+o.findBorderCities = function (where) {
 
 	var topMost 		= 999999,
 			rightMost 	= 0,
@@ -402,7 +400,7 @@ or.findBorderCities = function (where) {
 
 	});
 
-	or.borderCities = {
+	o.borderCities = {
 		top: topMost,
 		bottom: bottomMost,
 		left: leftMost,
@@ -416,26 +414,26 @@ or.findBorderCities = function (where) {
 $(function(){
 
 	//cache vars
-	or.w = {
+	o.w = {
 		h: 	$(window).height(),
 		w: 	$(window).width(),
 		cx: $(window).width() / 2,
 		xy: $(window).height() / 2
 	};
 
-	or.s = Snap("#map-container");
+	o.s = Snap("#map-container");
 
 	var headerHeight = $(".main-content").offset().top,
 			height = $(window).height() - headerHeight;
 
 	$(".main-content").height( height );
-	or.map.init();
+	o.map.init();
 
 });
 // End DOM ready
 
 // Window resize
 $(window).resize(function(){
-	or.map.place();
+	o.map.place();
 });
 // End Window resize
