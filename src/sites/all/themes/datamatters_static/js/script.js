@@ -280,22 +280,21 @@ o.activateSearch = function () {
 // END Search
 
 // Projects sorting
-o.projectsSorting = function () {
-
-	// $("#grid").mixitup({
-	// 	onMixStart: function(){
-	// 		console.log("start");
-	// 	}
-	// });
+o.projectsFiltering = function () {
 
 	// save active filter for later use
-	$(".filter a").click(function(){
+	$(".project-filter a").click(function(e){
+		
+		e.preventDefault();
 		var group = $(this).parent().attr("data-group");
-		if (group == "country") o.activeCountryFilter = $(this).parent().attr("data-filter");
-		else o.activeFieldFilter = $(this).parent().attr("data-filter");
 
-		console.log( o.activeFieldFilter );
-		console.log( o.activeCountryFilter );
+		if (group == "country")
+			o.activeCountryFilter = $(this).parent().attr("data-filter");
+		else
+			o.activeFieldFilter = $(this).parent().attr("data-filter");
+
+		o.filterProjectsByString();
+
 	});
 
 	$("#grid").mixitup({
@@ -313,15 +312,36 @@ o.projectsSorting = function () {
 		$label = $(this).parent().find(".label");
 		$label.removeClass("active")
 					.html( $label.attr("data-orig-name") );
-		//show all results
-		$('#grid').mixitup('filter','all');
+
+		//clear filter variable
+		var group = $(this).attr("data-group");
+		if (group == "countries") 
+			o.activeCountryFilter = undefined;
+		else 
+			o.activeFieldFilter = undefined;
+
+		o.filterProjectsByString();
 
 	});
 
 }
-o.clearProjectsSorting = function () {
+o.filterProjectsByString = function () {
 
+	var filterString = '';
+	//only field
+	if ( o.activeFieldFilter )
+		filterString = o.activeFieldFilter;
+	//only country
+	if ( o.activeCountryFilter )
+		filterString = o.activeCountryFilter;
+	//both
+	if ( o.activeFieldFilter && o.activeCountryFilter )
+		filterString = o.activeFieldFilter + ' ' + o.activeCountryFilter;
+	//none of them
+	if ( !filterString )
+		filterString = 'all';
 
+	$("#grid").mixitup("filter", filterString);
 
 }
 // END projects sorting
@@ -336,7 +356,7 @@ $(function(){
 	o.trimLongTexts();
 	o.affixNavi();
 	o.activateSearch();
-	o.projectsSorting();
+	o.projectsFiltering();
 
 });
 // END DOM ready
