@@ -127,10 +127,12 @@ o.fixFilters = function() {
 
 	var filterHeight = o.$currentOpenedFilter.outerHeight();
 
-	if (o.ww > 767) {
+	if (o.ww > 768) {
 
 		//after resize from tablet to large desktop, we have to remove inline width and height
 		o.$filterContents.removeAttr("style");
+		//also on wrapper
+		o.$outerWrapper.removeAttr("style");
 
 	} else {
 		
