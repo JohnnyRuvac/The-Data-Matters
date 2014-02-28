@@ -20,7 +20,11 @@
 						</a>
 							<div class="content">
 								<h2><a href="<?=$node_url?>" title="<?=$node->title?>"><?=truncate_utf8($node->title, 45, TRUE, TRUE)?></a></h2>
-								<p class="country"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->field_short_name['und'][0]['value']?></a></p>
+								<p class="country">
+									<span class="short"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->field_short_name['und'][0]['value']?></a></span>
+									<span class="long"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->name?></a></span>
+									
+								</p>
 								<p class="field"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$field->tid)?>"><?=$field->name?></a></p>
 							</div>
 						</a>
@@ -44,9 +48,12 @@
 				  		<?php endif; ?>
 				  	</div>
 				  	<div class="content">
-				  		<p><?=$node->field_message['und'][0]['value']?></p>
-						<p><?=$node->field_problem['und'][0]['value']?></p>
+				  		<p><?=$node->field_issue['und'][0]['value']?></p>
 						<p><?=$node->field_solution['und'][0]['value']?></p>
+						<p><?=$node->field_message['und'][0]['value']?></p>
+						<? if(isset($node->field_impact['und'][0])): ?>
+						<p><?=$node->field_impact['und'][0]['value']?></p>
+						<? endif;?>
 				  	</div>
 			  	</div>
 			  </div>

@@ -424,11 +424,19 @@ header .content.affix {
   border-right: 1px dotted #ccc;
   background: url(../img/country-pin.png) no-repeat 9px center;
 }
+
+.project .country .long{
+  display: none;
+}
+
 .project .field {
   float: left;
   width: 38.8%;
   left: 61.2%;
   background: url(../img/field-icon.png) no-repeat 7px center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (min-width: 492px) {
@@ -464,6 +472,12 @@ header .content.affix {
     padding-left: 25px;
     border-right: none;
     background-position: 10px center;
+  }
+  .project .country .short{
+	  display: none;
+  }
+  .project .country .long{
+	  display: inline;
   }
 
 }
@@ -625,7 +639,11 @@ header .content.affix {
     background: #fff;
   }
   .project-preview .main-nav .close-full-preview {
-    display: none;
+    top: auto;
+    right: auto;
+    left: 542px;
+    top: 50px;
+    z-index: 100;
   }
   #project-preview .preview-content {
     margin-left: 114px;
