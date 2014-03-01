@@ -249,7 +249,7 @@ o.countries.click = function (e, that) {
 	if ( isActive ) {
 
 		$clicked.removeAttr("data-active");
-		that.attr({
+		that.selectAll("polygon").attr({
 			fill: o.patternInactive
 		});
 		o.$countryInfo.removeClass("active");
@@ -258,13 +258,13 @@ o.countries.click = function (e, that) {
 		//deactivate active one
 		if ( o.activeCountry ) {
 			o.$activeCountry.removeAttr("data-active");
-			o.activeCountry.selectAll("path").attr({
+			o.activeCountry.selectAll("polygon").attr({
 				fill: o.patternInactive
 			});
 		}
 		//activate new one
 		$clicked.attr("data-active", "true");
-		that.attr({
+		that.selectAll("polygon").attr({
 			fill: o.patternActive
 		});
 
@@ -316,18 +316,12 @@ o.countries.zoomToActive = function(that){
 }
 o.countries.showInfo = function (that) {
 
-	var id = that.node.id,
-			country,
+	var safe_country = that.node.id,
 			html = '';
-
-	//get country name
-	$.each( o.idsOfCountries, function(key, value){
-		if (value == id) country = key;
-	});
 
 	//get projects of that country
 	for (var i = 0; i < o.projectsJson.length; i++) {
-		if ( o.projectsJson[i].node.country == country ) {
+		if ( o.projectsJson[i].node.safe_name_country == safe_country ) {
 			
 			var title = o.projectsJson[i].node.title,
 					field = o.projectsJson[i].node.field,
@@ -343,8 +337,9 @@ o.countries.showInfo = function (that) {
 
 	//get details of country
 	for (var i = 0; i < o.countriesJson.length; i++) {
-		if ( o.countriesJson[i].country.name == country ) {
-			var gdp = o.countriesJson[i].country.gdp,
+		if ( o.countriesJson[i].country.safe_name == safe_country ) {
+			var country = o.countriesJson[i].country.name,
+					gdp = o.countriesJson[i].country.gdp,
 					population = o.countriesJson[i].country.population,
 					type = o.countriesJson[i].country.type,
 					link = o.countriesJson[i].country.link;
