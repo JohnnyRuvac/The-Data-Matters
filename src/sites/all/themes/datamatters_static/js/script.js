@@ -1,4 +1,5 @@
 var o = {};
+var $ = jQuery;
 
 // Init variables
 o.initVars = function() {
