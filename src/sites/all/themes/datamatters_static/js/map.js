@@ -1,17 +1,3 @@
-// ids of countries in svg file
-o.idsOfCountries = {
-	"Bosnia and Herzegovina": "selection_12",
-	"Czech Republic": "selection_17",
-	"Estonia": "selection_23",
-	"Georgia": "selection_29",
-	"Hungary": "selection_33",
-	"Latvia": "selection_51",
-	"Macedonia": "selection_55",
-	"Montenegro": "selection_58",
-	"Slovakia": "selection_74"
-}
-// END ids of countries in svg file
-
 // Map
 o.map = {
 	hidden: true
@@ -29,32 +15,35 @@ o.map.init = function () {
 
 		//don't append map for mobile devices
 		if (o.w.w > 500) {
+			
 			o.map.countries = d.select(".countries");
 			o.s.append(o.map.countries);
 			o.map.countries.attr({
-				opacity: 0
+				opacity: 1
 			});
-			o.map.countries.selectAll("path").attr({
+			o.map.countries.selectAll("polygon, path").attr({
 				fill: "#ffffff",
 				stroke: "#ccc",
 				strokeWidth: 0.25
 			});
+
 		}
 
-		o.logo = d.select(".logo");
+		o.logo = d.select("#whole-logo");
+		o.logoText = d.select("#logo-text");
 		o.s.append(o.logo);
 
-		o.findBorderCities(".logo .cities");
-		o.map.place();
+		o.findBorderCities("#logo-pixels");
+		//o.map.place();
 		//o.map.showOnScroll();
 		o.map.show();
 
 		//add rectangle behind map, so it can be draggable also on empty spaces
-		o.map.bg = o.s.rect(0, 0, 1243, 756);
+		o.map.bg = o.s.rect(0, 700, 2560, 1440);
 		o.map.bg.attr({
 			fill: "#efefef"
 		});
-		o.map.countries.select("#selection").before( o.map.bg );
+		o.map.countries.select("#europe-countries").before( o.map.bg );
 
 		//make it dragable
 		if ( $("html").hasClass("no-touch") )
@@ -163,7 +152,7 @@ o.map.place = function () {
 				cx: $cont.offset().left + $cont.width() / 2,
 				y: $cont.offset().top + $cont.height()
 			},
-			logoBBox = o.s.select(".logo-text").getBBox(),
+			logoBBox = o.logoText.getBBox(),
 			offset = {
 				x: contBBox.cx - logoBBox.x,
 				y: contBBox.y - logoBBox.y2
