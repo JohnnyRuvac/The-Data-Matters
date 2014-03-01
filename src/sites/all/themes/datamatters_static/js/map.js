@@ -34,7 +34,7 @@ o.map.init = function () {
 		o.s.append(o.logo);
 
 		o.findBorderCities("#logo-pixels");
-		//o.map.place();
+		o.map.place();
 		//o.map.showOnScroll();
 		o.map.show();
 
@@ -135,8 +135,9 @@ o.map.highlightCountriesWithProject = function () {
 	
 	for (var i = 0; i < o.countriesJson.length; i++) {
 		
-		o.countries.withProject.push( o.idsOfCountries[ o.countriesJson[i].country.name ] );
-		o.s.selectAll("#" + o.countries.withProject[i] + " path").attr({
+		o.countries.withProject.push( o.countriesJson[i].country.safe_name );
+
+		o.s.selectAll("#" + o.countries.withProject[i] + " polygon").attr({
 			fill: o.patternInactive
 		});
 
@@ -157,11 +158,6 @@ o.map.place = function () {
 				x: contBBox.cx - logoBBox.x,
 				y: contBBox.y - logoBBox.y2
 			};
-
-	//ipad portrait quickfix
-	if (o.ww < 769) {
-		offset.y -= $("header").outerHeight();
-	}
 
 	o.map.scale = contBBox.w / ( o.borderCities.right - o.borderCities.left);
 
