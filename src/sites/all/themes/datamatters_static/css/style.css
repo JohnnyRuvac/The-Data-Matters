@@ -844,6 +844,12 @@ header .content.affix {
 /* END Slideout Search */
 
 /* Interactive Map */
+.page-node-19 {
+  overflow: hidden;
+}
+.page-node-19 #outer-wrapper {
+  overflow: visible;
+}
 .page-node-19 .main-nav .map {
   display: none;
 }

@@ -10,14 +10,15 @@ function datamatters_static_js_alter(&$js, &$vars){
     drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
 	drupal_add_js( path_to_theme().'/js/hammer.min.js');
 	
-	drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
+  drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
+	drupal_add_js( path_to_theme().'/js/mousewheel.js');
 	drupal_add_js( path_to_theme().'/js/script.js');
 
 	drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
   if($path != "map"){
   	  
-  	  unset($js['sites/all/themes/datamatters_static/js/snap.svg-min.js']);
-  	  
+      unset($js['sites/all/themes/datamatters_static/js/snap.svg-min.js']);
+  	  unset($js['sites/all/themes/datamatters_static/js/mousewheel.js']);  	  
   	  unset($js['sites/all/themes/datamatters_static/js/map.js']);
       
   } 

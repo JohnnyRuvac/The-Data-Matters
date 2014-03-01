@@ -19,7 +19,7 @@ o.map.init = function () {
 			o.map.countries = d.select(".countries");
 			o.s.append(o.map.countries);
 			o.map.countries.attr({
-				opacity: 1
+				opacity: 0
 			});
 			o.map.countries.selectAll("polygon, path").attr({
 				fill: "#ffffff",
@@ -35,8 +35,7 @@ o.map.init = function () {
 
 		o.findBorderCities("#logo-pixels");
 		o.map.place();
-		//o.map.showOnScroll();
-		o.map.show();
+		o.map.showOnScroll();
 
 		//add rectangle behind map, so it can be draggable also on empty spaces
 		o.map.bg = o.s.rect(0, 700, 2560, 1440);
@@ -112,6 +111,11 @@ o.map.showOnScroll = function () {
 		o.map.show();
 	});
 
+	//prevent default "fullpage" scroll behaviour on iOS
+	document.ontouchmove = function(e) {
+		e.preventDefault();
+	}
+
 }
 o.map.highlightCountriesWithProject = function () {
 
@@ -180,7 +184,7 @@ o.map.show = function () {
 	if (o.map.hidden) {
 		o.map.hidden = false;
 		o.map.countries.animate({opacity: 1}, 600);
-		o.logo.animate({opacity: 1}, 1200);
+		o.logo.animate({opacity: 0}, 1200);
 	}
 
 }
