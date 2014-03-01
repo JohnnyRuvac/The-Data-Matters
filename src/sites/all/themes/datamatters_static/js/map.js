@@ -141,6 +141,10 @@ o.map.highlightCountriesWithProject = function () {
 			fill: o.patternInactive
 		});
 
+		//highlight capitals of cities with project in logo
+		var id = o.countries.withProject[i] + '_pixel';
+		o.s.select("#" + id + " rect").attr({fill: "#000"});
+
 	}
 
 }
