@@ -145,29 +145,25 @@ o.map.highlightCountriesWithProject = function () {
 
 }
 o.map.place = function () {
+	
+	var logoBBox = o.logo.getBBox();
+	var shift = { //get it to top left window corner
+		x: - logoBBox.x,
+		y: - logoBBox.y
+	};
 
-	var $cont = $("#logo-container"),
-			contBBox = {
-				w: $cont.width(),
-				h: $cont.height(),
-				cx: $cont.offset().left + $cont.width() / 2,
-				y: $cont.offset().top + $cont.height()
-			},
-			logoBBox = o.logoText.getBBox(),
-			offset = {
-				x: contBBox.cx - logoBBox.x,
-				y: contBBox.y - logoBBox.y2
-			};
+	//now center it
+	var left = ( o.ww - logoBBox.w ) / 2;
+	shift.x += left;
 
-	o.map.scale = contBBox.w / ( o.borderCities.right - o.borderCities.left);
+	//adjust top, it should be 11.1111%
+	var top = o.wh * 0.111111;
+	shift.y += top;
 
-	o.map.matrix = new Snap.Matrix()
-										 .translate( offset.x, offset.y )
-										 .scale( o.map.scale, o.map.scale, logoBBox.cx, logoBBox.y2 );
-
-	//no map on mobile
-	if (o.w.w > 500) o.map.countries.transform(o.map.matrix);
-	o.logo.transform(o.map.matrix);
+	var m = new Snap.Matrix();
+	m.translate(shift.x, shift.y);
+	o.map.countries.transform(m);
+	o.logo.transform(m);
 
 }
 o.map.show = function () {
@@ -180,7 +176,7 @@ o.map.show = function () {
 	if (o.map.hidden) {
 		o.map.hidden = false;
 		o.map.countries.animate({opacity: 1}, 600);
-		o.logo.animate({opacity: 0}, 1200);
+		o.logo.animate({opacity: 1}, 1200);
 	}
 
 }

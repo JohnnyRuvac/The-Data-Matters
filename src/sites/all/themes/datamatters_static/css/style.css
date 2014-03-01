@@ -881,17 +881,6 @@ header .content.affix {
 .page-node-19 .right .filter-button {
   display: none;
 }
-#logo-container {
-  display: block;
-  position: relative;
-  top: 11.11111%; /* 2/18 of height */
-  z-index: -1;
-  width: 33%;
-  max-width: 333px;
-  height: 55.55555%;
-  margin: 0 auto;
-  /*background: rgba(0, 0, 0, 0.1);*/
-}
 #map-container {
   position: absolute;
   top: 0;
