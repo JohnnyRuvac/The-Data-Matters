@@ -2,21 +2,31 @@
 
 function datamatters_static_js_alter(&$js, &$vars){
 	$path = drupal_get_path_alias();
+
+	$js['sites/all/modules/jquery_update/replace/jquery/1.8/jquery.min.js']['weight'] = -300;
+	$js['sites/all/modules/jquery_update/replace/jquery/1.8/jquery.min.js']['data'] = 'sites/all/themes/datamatters_static/js/jquery.js';
+	
 	drupal_add_js( path_to_theme().'/js/modernizr.js');
     drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
 	drupal_add_js( path_to_theme().'/js/hammer.min.js');
-	drupal_add_js( path_to_theme().'/js/jquery.js');
-	drupal_add_js( path_to_theme().'/js/jquery.migrate.js');
+	
 	drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
 	drupal_add_js( path_to_theme().'/js/script.js');
+
 	drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
   if($path != "map"){
   	  
   	  unset($js['sites/all/themes/datamatters_static/js/snap.svg-min.js']);
+  	  
   	  unset($js['sites/all/themes/datamatters_static/js/map.js']);
       
   } 
 
+}
+
+
+function datamatters_static_preprocess_html($vars){
+	
 }
 
  //
