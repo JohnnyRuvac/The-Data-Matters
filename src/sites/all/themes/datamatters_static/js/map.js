@@ -97,15 +97,7 @@ o.map.showOnScroll = function () {
 		return;
 	}
 
-	// On scroll show map
-	var body = document.getElementsByTagName("body")[0];
-
-	if (body.addEventListener) {
-		body.addEventListener("mousewheel", o.map.show, false);
-		body.addEventListener("DOMMouseScroll", o.map.show, false);
-	} else {
-		body.attachEvent("onmousewheel", o.map.show);
-	}
+	$("body").on("mousewheel", o.map.show);
 
 	$(".main-content").hammer().on("touch", function(){
 		o.map.show();
@@ -176,16 +168,16 @@ o.map.place = function () {
 }
 o.map.show = function () {
 
+	$("body").off("mousewheel", o.map.show);
+
 	//add hash tag
 	window.location = "#map";
 	$("body").addClass("map-shown");
 
 	//show it
-	if (o.map.hidden) {
-		o.map.hidden = false;
-		o.map.countries.animate({opacity: 1}, 600);
-		o.logo.animate({opacity: 0}, 1200);
-	}
+	o.map.hidden = false;
+	o.map.countries.animate({opacity: 1}, 600);
+	o.logo.animate({opacity: 0}, 1200);
 
 }
 // END map
