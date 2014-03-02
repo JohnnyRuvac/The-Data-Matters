@@ -902,7 +902,7 @@ header .content.affix {
   top: -700px;
   right: 20px;
   z-index: 1000;
-  border: 1px solid #999;
+  border: 1px solid #ccc;
   background: #fff;
 
   -webkit-transition: top 0.3s;
@@ -932,10 +932,10 @@ header .content.affix {
   font-size: 12px;
   line-height: 35px;
   color: #646464;
-  border-top: 1px dotted #999;
+  border-top: 1px dotted #ccc;
 }
 #country-info ul li {
-  border-top: 1px solid #999;
+  border-top: 1px solid #ccc;
 }
 #country-info .project-name,
 #country-info .field {
@@ -955,7 +955,7 @@ header .content.affix {
   height: 33px;
   line-height: 34px;
   color: #646464;
-  border-top: 1px dotted #999;
+  border-top: 1px dotted #ccc;
   background: url(../img/field-icon.png) no-repeat 14px center;
 }
 
