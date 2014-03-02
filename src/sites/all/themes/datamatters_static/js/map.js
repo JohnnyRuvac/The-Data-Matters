@@ -13,6 +13,12 @@ o.map.init = function () {
 	var url = $("#map-container").attr("data-url");
 	Snap.load( url + "map_logo.svg", function(d) {
 
+		//pattern
+		var pattern = d.select("#pattern-active");
+		var pattern2 = d.select("#pattern-inactive");
+		o.s.append(pattern);
+		o.s.append(pattern2);
+
 		//don't append map for mobile devices
 		if (o.w.w > 500) {
 			
@@ -26,6 +32,8 @@ o.map.init = function () {
 				stroke: "#ccc",
 				strokeWidth: 0.25
 			});
+
+			o.europe = o.s.select("#europe-countries");
 
 		}
 
@@ -42,7 +50,7 @@ o.map.init = function () {
 		o.map.bg.attr({
 			fill: "#efefef"
 		});
-		o.map.countries.select("#europe-countries").before( o.map.bg );
+		o.map.countries.select("#other-countries").before( o.map.bg );
 
 		//make it dragable
 		if ( $("html").hasClass("no-touch") )
@@ -111,21 +119,8 @@ o.map.showOnScroll = function () {
 }
 o.map.highlightCountriesWithProject = function () {
 
-	// o.patternInactive = o.s.path("M0,0L10,10M0,5L5,10M5,0L10,5").attr({
- //      fill: "none",
- //      stroke: "#ccc",
- //      strokeWidth: 0.5
- //  });
- //  o.patternInactive = o.patternInactive.pattern(0, 0, 10, 10);
-
- //  o.patternActive = o.s.path("M0,0L10,10M0,5L5,10M5,0L10,5").attr({
- //      fill: "none",
- //      stroke: "#f00",
- //      strokeWidth: 0.5
- //  });
- //  o.patternActive = o.patternActive.pattern(0, 0, 10, 10);
-	o.patternInactive = "#999";
-	o.patternActive = "#636363";
+	o.patternInactive = Snap("#pattern-inactive");
+	o.patternActive = Snap("#pattern-active");
 
 	o.countries.withProject = [];
 	
@@ -177,7 +172,7 @@ o.map.show = function () {
 	//show it
 	o.map.hidden = false;
 	o.map.countries.animate({opacity: 1}, 600);
-	o.logo.animate({opacity: 0}, 1200);
+	o.logo.animate({opacity: 0}, 100);
 
 }
 // END map
@@ -242,7 +237,8 @@ o.countries.click = function (e, that) {
 
 		$clicked.removeAttr("data-active");
 		that.selectAll("polygon").attr({
-			fill: o.patternInactive
+			fill: o.patternInactive,
+			stroke: "#ccc"
 		});
 		o.$countryInfo.removeClass("active");
 		
@@ -251,14 +247,18 @@ o.countries.click = function (e, that) {
 		if ( o.activeCountry ) {
 			o.$activeCountry.removeAttr("data-active");
 			o.activeCountry.selectAll("polygon").attr({
-				fill: o.patternInactive
+				fill: o.patternInactive,
+				stroke: "#ccc"
 			});
 		}
 		//activate new one
 		$clicked.attr("data-active", "true");
 		that.selectAll("polygon").attr({
-			fill: o.patternActive
+			fill: o.patternActive,
+			stroke: "#f00"
 		});
+
+		that.appendTo( o.europe );
 
 		o.activeCountry = that;
 		o.$activeCountry = $clicked;
@@ -297,6 +297,10 @@ o.countries.zoomToActive = function(that){
 		x: (win.cx - country.cx) / o.map.scale,
 		y: (win.cy - country.cy) / o.map.scale
 	}
+
+	//update strokes in patterns
+	o.patternActive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058})
+	o.patternInactive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058})
 
 	//update matrix because of potentional drag
 	o.map.matrix = o.map.countries.matrix
