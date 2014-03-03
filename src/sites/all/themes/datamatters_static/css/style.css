@@ -1088,6 +1088,12 @@ only screen and (min-device-pixel-ratio: 1.5) {
     -webkit-background-size: 7px 7px;
     background-size: 7px 7px;
   }
+  
+  .page-node-19 .continue-arrow {
+    background-image: url(../img/continue-arrow@2x.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+  }
 
 }
 /* END of retina images */
