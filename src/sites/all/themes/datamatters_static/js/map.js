@@ -142,13 +142,14 @@ o.map.highlightCountriesWithProject = function () {
 o.map.place = function () {
 	
 	var logoBBox = o.logo.getBBox();
+	var textBBox = o.logoText.getBBox();
 	var shift = { //get it to top left window corner
-		x: - logoBBox.x,
+		x: - textBBox.x,
 		y: - logoBBox.y
 	};
 
 	//now center it
-	var left = ( o.ww - logoBBox.w ) / 2;
+	var left = ( o.ww - textBBox.w ) / 2;
 	shift.x += left;
 
 	//adjust top, it should be 11.1111%
