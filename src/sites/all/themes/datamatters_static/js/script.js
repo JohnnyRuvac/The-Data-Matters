@@ -374,6 +374,16 @@ o.filterProjectsByString = function () {
 }
 // END projects sorting
 
+//project detail, show NGO contact
+o.showNGO = function () {
+	$(".info .ngo").click(function(e){
+		e.preventDefault();
+		$(this).toggleClass("active");
+		$(".info .contacts").toggleClass("show");
+	});
+}
+//END project detail, show NGO contact
+
 // DOM ready
 $(function(){
 
@@ -386,6 +396,7 @@ $(function(){
 	o.affixNavi();
 	o.activateSearch();
 	o.projectsFiltering();
+	o.showNGO();
 
 });
 // END DOM ready

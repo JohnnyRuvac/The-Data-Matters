@@ -54,15 +54,15 @@
 					  		</p>
 				  		<?php endif; ?>
 
-				  		<span class="ngo active"><?=$ngo->name?></span>
+				  		<span class="ngo"><?=$ngo->name?></span>
 
 				  		<? if(isset($ngo->field_email['und'][0]['safe_value']) || isset($ngo->field_phone['und'][0]['safe_value'])):?>
-					  		<p class="contacts show">
+					  		<p class="contacts">
 						  		<? if(isset($ngo->field_email['und'][0]['safe_value'])) print $ngo->field_email['und'][0]['safe_value'];?>
 						  		<? if(isset($ngo->field_phone['und'][0]['safe_value'])) print $ngo->field_phone['und'][0]['safe_value'];?>
 					  		</p>
 					  	<? else:?>
-					  		<p class="contacts show">
+					  		<p class="contacts">
 						  		No contact detail provided.
 					  		</p>					  		
 				  		<? endif;?>
