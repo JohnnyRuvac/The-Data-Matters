@@ -45,9 +45,23 @@ html.overlay-open #overlay-disable-message {overflow: hidden; height: 0px}
 #edit-field-field,
 #edit-field-year {float: left; width: 33%;}
 
+.vertical-tabs,
+#edit-field-organisation,
+#edit-field-message,
+#edit-field-issue,
 #edit-field-country {clear: left}
 
+#edit-field-issue,
+#edit-field-solution,
+#edit-field-message,
+#edit-field-impact {margin-bottom: 40px}
+
+#edit-field-issue,
+#edit-field-solution,
+#edit-field-message,
+#edit-field-impact,
 #edit-field-ngo,
+#edit-field-organisation,
 #edit-field-link,
 .node-form .form-item-title,
 #edit-field-image {width: 50%; float: left; margin: 0px; padding: 0px}

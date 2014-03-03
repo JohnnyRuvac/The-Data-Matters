@@ -430,6 +430,8 @@ header .content.affix {
   display: none;
 }
 
+
+
 .project .field {
   float: left;
   width: 38.8%;
@@ -528,9 +530,16 @@ header .content.affix {
   line-height: 21px;
   padding: 15px 16px 17px;
   border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px dotted #ccc;
   background: #efefef;
 }
+
+#project-preview .info {
+	border-bottom: 1px solid #ccc;
+	background: #efefef;
+	line-height: 0px;
+}
+
 #project-preview .country {
   height: 33px;
   margin: 0;
@@ -549,18 +558,55 @@ header .content.affix {
   padding-left: 35px;
   background: #efefef url(../img/field-icon.png) no-repeat 15px 10px;
 }
-#project-preview .link {
+#project-preview .link,
+#project-preview .ngo {
   height: 33px;
   margin: 0;
   padding-left: 32px;
   font-size: 12px;
   line-height: 34px;
-  border-bottom: 1px solid #ccc;
-  background: #efefef url(../img/world-icon.png) no-repeat 14px center;
+  color: #646464;
+  background: url(../img/world-icon.png) no-repeat 14px center;
+  display: inline-block;
+  overflow: hidden;
+
 }
+
+#project-preview .link{
+	display: inline-block;
+}
+
+#project-preview .ngo {
+  background: url(../img/ngo-icon.png) no-repeat 14px 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#project-preview .ngo.active {
+	color: #FF0000;
+	background: url(../img/ngo-icon.png) no-repeat 14px -23px;
+}
+
 #project-preview .link a {
   color: #646464;
 }
+
+#project-preview .contacts{
+  height: 33px;
+  margin: 0;
+  padding-left: 32px;
+  font-size: 12px;
+  line-height: 34px;
+  border-top: 1px dotted #ccc;
+  color: #646464;
+  background: url(../img/contact-icon.png) no-repeat 14px center;
+  display: none;
+}
+
+#project-preview .contacts.show {
+	display: block;
+}
+
 #project-preview .content {
   padding: 16px;
   padding-bottom: 0;
@@ -624,6 +670,9 @@ header .content.affix {
   }
   #project-preview .preview-content {
     margin: 0 auto;
+  }
+  #project-preview .info {
+	  background: white
   }
 }
 

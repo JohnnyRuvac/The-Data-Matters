@@ -59,6 +59,18 @@ function datamatters_static_preprocess_page(&$vars) {
 	  
   endforeach;
   
+  $ngo = taxonomy_get_tree(4);
+  foreach($ngo as $key => $value):
+  	
+	$term = taxonomy_term_load($value->tid);
+  		
+	$vars['ngo'][$key]['name'] = $value->name;
+	$vars['ngo'][$key]['tid'] = $value->tid;
+	if(isset($term->field_email['und'][0])) $vars['ngo'][$key]['mail'] = $term->field_email['und'][0]['safe_value'];
+	if(isset($term->field_phone['und'][0])) $vars['ngo'][$key]['phone'] = $term->field_phone['und'][0]['safe_value'];
+	  
+  endforeach;
+  
   // BACK referer
   $back = $_SERVER['HTTP_REFERER'];
   if(strpos($back, "dev.datamatters")) $vars['back'] = $back;

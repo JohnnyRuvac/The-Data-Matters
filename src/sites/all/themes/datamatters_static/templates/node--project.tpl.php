@@ -5,6 +5,7 @@
 	
 	$country = taxonomy_term_load($node->field_country['und'][0]['tid']);
 	$field = taxonomy_term_load($node->field_field['und'][0]['tid']);
+	$ngo = taxonomy_term_load($node->field_organisation['und'][0]['tid']);
 	
 	if(!isset($node->field_image['und'][0]['uri'])) $node->field_image['und'][0]['uri'] = "public://blank.jpg";
 	
@@ -47,16 +48,31 @@
 				  	<h2><?=$node->title?></h2>
 				  	<div class="info clearfix">
 				  		<p class="country"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->name?></a> <span class="field"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$field->tid)?>"><?=$field->name?></a></span></p>
-				  		<?php if(isset($node->field_link['und'][0]['url'])): ?>
-				  		<p class="link"><a href="<?=$node->field_link['und'][0]['url']?>" target="_blank">Website</a></p>
+						<?php if(isset($node->field_link['und'][0]['url'])): ?>
+					  		<p class="link">
+					  			<a href="<?=$node->field_link['und'][0]['url']?>" target="_blank">Website</a>
+					  		</p>
 				  		<?php endif; ?>
+
+				  		<span class="ngo active"><?=$ngo->name?></span>
+
+				  		<? if(isset($ngo->field_email['und'][0]['safe_value']) || isset($ngo->field_phone['und'][0]['safe_value'])):?>
+					  		<p class="contacts show">
+						  		<? if(isset($ngo->field_email['und'][0]['safe_value'])) print $ngo->field_email['und'][0]['safe_value'];?>
+						  		<? if(isset($ngo->field_phone['und'][0]['safe_value'])) print $ngo->field_phone['und'][0]['safe_value'];?>
+					  		</p>
+					  	<? else:?>
+					  		<p class="contacts show">
+						  		No contact detail provided.
+					  		</p>					  		
+				  		<? endif;?>
 				  	</div>
 				  	<div class="content">
 				  		<p><?=$node->field_issue['und'][0]['value']?></p>
 						<p><?=$node->field_solution['und'][0]['value']?></p>
 						<p><?=$node->field_message['und'][0]['value']?></p>
 						<? if(isset($node->field_impact['und'][0])): ?>
-						<p><?=$node->field_impact['und'][0]['value']?></p>
+							<p><?=$node->field_impact['und'][0]['value']?></p>
 						<? endif;?>
 				  	</div>
 			  	</div>
