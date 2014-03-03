@@ -8,23 +8,7 @@
 					<p class="type"></p>
 					<p class="population">Population: <span></span></p>
 					<p class="gdp">GDP (PPP): <span></span></p>
-					<ul>
-						<li>
-							<a href="" class="project-name">Visualizing local government
-indicators</a>
-							<a href="" class="field">Urban Planning</a>
-						</li>
-						<li>
-							<a href="" class="project-name">Visualizing local government
-indicators</a>
-							<a href="" class="field">Urban Planning</a>
-						</li>
-						<li>
-							<a href="" class="project-name">Visualizing local government
-indicators</a>
-							<a href="" class="field">Urban Planning</a>
-						</li>
-					</ul>
+					<ul></ul>
 				</div>
 				
 				<svg id="map-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
@@ -46,9 +30,6 @@ indicators</a>
 					<h3>Search <a href="" class="close">Close</a></h3>
 					<input type="text" class="search-input">
 					<ul class="clearfix">
-						<li><a href="">Search autocomplete</a></li>
-						<li><a href="">Search autocomplete</a></li>
-						<li><a href="">Search autocomplete</a></li>
 						<li><a href="">Search autocomplete</a></li>
 					</ul>
 				</div>
