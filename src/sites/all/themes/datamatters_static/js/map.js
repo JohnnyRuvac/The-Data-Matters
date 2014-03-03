@@ -140,29 +140,40 @@ o.map.highlightCountriesWithProject = function () {
 
 }
 o.map.place = function () {
+
+	//adjust container height
+	var headerHeight = o.$mainContent.offset().top,
+			height = window.innerHeight - headerHeight;
+
+	o.$mainContent.height( height );
+
+	var textBBox = o.logoText.node.getBoundingClientRect(),
+			logoBBox = o.logo.getBBox(),
+			shift = {},
+			w = { //window
+				cx: o.ww / 2,
+				t: o.wh * 0.11111 //top of the logo should be at 11.111% of screen height
+			};
+
+	//calculate difference between center of screen
+	var logoCX = (textBBox.left + textBBox.right) / 2;
+	shift.x = w.cx - logoCX;
+	shift.y = w.t - o.logo.node.getBoundingClientRect().top;
+
+	//apply transform
+	if ( !o.logo.matrix ) {
+		var m = new Snap.Matrix();	
+	} else {
+		var m = o.logo.matrix;
+	}
 	
-	var logoBBox = o.logo.getBBox();
-	var textBBox = o.logoText.getBBox();
-	var shift = { //get it to top left window corner
-		x: - textBBox.x,
-		y: - logoBBox.y
-	};
-
-	//now center it
-	var left = ( o.ww - textBBox.w ) / 2;
-	shift.x += left;
-
-	//adjust top, it should be 11.1111%
-	var top = o.wh * 0.111111;
-	shift.y += top;
-
-	var m = new Snap.Matrix();
 	m.translate(shift.x, shift.y);
 	o.map.countries.transform(m);
 	o.logo.transform(m);
 
+	//place vertically slogan
 	var textTop = $("#logo-text").offset().top,
-			textBottom = textTop + textBBox.h,
+			textBottom = textTop + textBBox.height,
 			headerHeight = o.$headerContent.height(),
 			sloganTop = textBottom + 48 - headerHeight;
 
@@ -408,13 +419,13 @@ $(function(){
 		cx: $(window).width() / 2,
 		xy: $(window).height() / 2
 	};
-
+	o.$mainContent = $(".main-content");
 	o.s = Snap("#map-container");
 
-	var headerHeight = $(".main-content").offset().top,
+	var headerHeight = o.$mainContent.offset().top,
 			height = window.innerHeight - headerHeight;
 
-	$(".main-content").height( height );
+	o.$mainContent.height( height );
 	o.map.init();
 
 });
