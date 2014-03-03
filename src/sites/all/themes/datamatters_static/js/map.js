@@ -142,13 +142,14 @@ o.map.highlightCountriesWithProject = function () {
 o.map.place = function () {
 	
 	var logoBBox = o.logo.getBBox();
+	var textBBox = o.logoText.getBBox();
 	var shift = { //get it to top left window corner
-		x: - logoBBox.x,
+		x: - textBBox.x,
 		y: - logoBBox.y
 	};
 
 	//now center it
-	var left = ( o.ww - logoBBox.w ) / 2;
+	var left = ( o.ww - textBBox.w ) / 2;
 	shift.x += left;
 
 	//adjust top, it should be 11.1111%
@@ -159,6 +160,13 @@ o.map.place = function () {
 	m.translate(shift.x, shift.y);
 	o.map.countries.transform(m);
 	o.logo.transform(m);
+
+	var textTop = $("#logo-text").offset().top,
+			textBottom = textTop + textBBox.h,
+			headerHeight = o.$headerContent.height(),
+			sloganTop = textBottom + 48 - headerHeight;
+
+	$("#homepage-slogan").css("top", sloganTop);
 
 }
 o.map.show = function () {
@@ -404,7 +412,7 @@ $(function(){
 	o.s = Snap("#map-container");
 
 	var headerHeight = $(".main-content").offset().top,
-			height = $(window).height() - headerHeight;
+			height = window.innerHeight - headerHeight;
 
 	$(".main-content").height( height );
 	o.map.init();

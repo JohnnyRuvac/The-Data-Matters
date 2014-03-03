@@ -911,13 +911,29 @@ header .content.affix {
   -o-transition: all 1.2s;
   transition: all 1.2s;
 }
+
 .page-node-19 .slogan {
   width: 100%;
   position: absolute;
-  bottom: 100px;
+  top: 600px;
   left: 0;
+  margin: 0;
+  font-size: 12px;
+  line-height: 18px;
+  color: #ccc;
   text-align: center;
 }
+.page-node-19 .continue-arrow {
+  display: block;
+  width: 13px;
+  height: 18px;
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  margin-left: -7px;
+  background: url(../img/continue-arrow.png);
+}
+
 .page-node-19.map-shown {
   background: #efefef;
 }
@@ -1120,6 +1136,12 @@ only screen and (min-device-pixel-ratio: 1.5) {
     background-image: url(../img/clear-filter@2x.png);
     -webkit-background-size: 7px 7px;
     background-size: 7px 7px;
+  }
+  
+  .page-node-19 .continue-arrow {
+    background-image: url(../img/continue-arrow@2x.png);
+    -webkit-background-size: contain;
+    background-size: contain;
   }
 
 }
