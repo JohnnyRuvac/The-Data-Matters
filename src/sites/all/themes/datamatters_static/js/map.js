@@ -161,11 +161,10 @@ o.map.place = function () {
 	o.map.countries.transform(m);
 	o.logo.transform(m);
 
-	//adjust top position of slogan acording to logo
-	var logoTop = $("#whole-logo").offset().top,
-			logoBottom = logoTop + logoBBox.h, 
+	var textTop = $("#logo-text").offset().top,
+			textBottom = textTop + textBBox.h,
 			headerHeight = o.$headerContent.height(),
-			sloganTop = logoBottom - headerHeight + 15; //33px is bottom gap, so we need 15 more to 48
+			sloganTop = textBottom + 48 - headerHeight;
 
 	$("#homepage-slogan").css("top", sloganTop);
 
