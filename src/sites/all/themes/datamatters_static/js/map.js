@@ -41,7 +41,6 @@ o.map.init = function () {
 		o.logoText = d.select("#logo-text");
 		o.s.append(o.logo);
 
-		o.findBorderCities("#logo-pixels");
 		o.map.place();
 		o.map.showOnScroll();
 
@@ -377,37 +376,6 @@ o.countries.showInfo = function (that) {
 
 }
 // END Countries
-
-//find cities on the border of logo container, so we can zoom to fit
-o.findBorderCities = function (where) {
-
-	var topMost 		= 999999,
-			rightMost 	= 0,
-			bottomMost 	= 0,
-			leftMost 		= 999999;
-
-	$(where).find("rect").each(function(){
-
-		x = $(this).attr("x"),
-		y = $(this).attr("y");
-
-		//check for topMost
-		if ( y < topMost ) 		topMost 		= y;
-		if ( y > bottomMost)	bottomMost 	= y;
-		if ( x < leftMost )		leftMost		= x;
-		if ( x > rightMost )	rightMost 	= x;
-
-	});
-
-	o.borderCities = {
-		top: topMost,
-		bottom: bottomMost,
-		left: leftMost,
-		right: rightMost
-	}
-
-}
-
 
 // DOM ready
 $(function(){
