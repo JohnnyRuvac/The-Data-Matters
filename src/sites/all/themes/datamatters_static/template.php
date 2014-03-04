@@ -2,26 +2,26 @@
 
 function datamatters_static_js_alter(&$js, &$vars){
 	$path = drupal_get_path_alias();
-
+	
+	
+	
 	$js['sites/all/modules/jquery_update/replace/jquery/1.8/jquery.min.js']['weight'] = -300;
 	$js['sites/all/modules/jquery_update/replace/jquery/1.8/jquery.min.js']['data'] = 'sites/all/themes/datamatters_static/js/jquery.js';
 	
+	drupal_add_js( path_to_theme().'/js/bootstrap.min.js', array('weight' => -1000));
 	drupal_add_js( path_to_theme().'/js/modernizr.js');
-    drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
+    if($path == "home" || $path == "map") drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
 	drupal_add_js( path_to_theme().'/js/hammer.min.js');
 	
-  drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
+	drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
 	drupal_add_js( path_to_theme().'/js/mousewheel.js');
 	drupal_add_js( path_to_theme().'/js/script.js');
+	drupal_add_js( path_to_theme().'/js/home.js');
+	
 
-	drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
-  if($path != "map"){
-  	  
-      unset($js['sites/all/themes/datamatters_static/js/snap.svg-min.js']);
-  	  unset($js['sites/all/themes/datamatters_static/js/mousewheel.js']);  	  
-  	  unset($js['sites/all/themes/datamatters_static/js/map.js']);
-      
-  } 
+
+	if($path == "home" || $path == "map") drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
+  
 
 }
 
@@ -76,9 +76,10 @@ function datamatters_static_preprocess_page(&$vars) {
   if(strpos($back, "dev.datamatters")) $vars['back'] = $back;
   else $vars['back'] = "";
   
-  // Map template override
+  // Template override
   $path = drupal_get_path_alias();
   if($path == "map") $vars['theme_hook_suggestions'][] = 'page__map';
+  if($path == "home") $vars['theme_hook_suggestions'][] = 'page__home';
 
   
   //
@@ -88,6 +89,7 @@ function datamatters_static_preprocess_page(&$vars) {
   
   $vars['active_menu'] = "Projects";
   if($path == "map") $vars['active_menu'] = "Interactive Map";
+  if($path == "home") $vars['active_menu'] = "Home";
   if($path == "about") $vars['active_menu'] = "About";
   if($path == "organizations") $vars['active_menu'] = "Organizations";
   

@@ -18,4 +18,4 @@ stylesheets[screen][] = css/style.css
 ; Scripts =================================================================
 
 
-scripts[] = js/bootstrap.min.js
+; scripts[] = js/bootstrap.min.js
