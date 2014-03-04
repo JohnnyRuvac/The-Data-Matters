@@ -382,7 +382,7 @@ header .content.affix {
   border: 1px solid #ccc;
 }
 .projects .project a {
-  color: #000;
+  color: #303030;
 }
 .projects .project a:hover h2 {
   text-decoration: underline;
@@ -424,6 +424,7 @@ header .content.affix {
   padding-left: 20px;
   border-right: 1px dotted #ccc;
   background: url(../img/country-pin.png) no-repeat 9px center;
+  color: #646464;
 }
 
 .project .country .long{
@@ -440,6 +441,7 @@ header .content.affix {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #646464;
 }
 
 @media (min-width: 492px) {
@@ -476,10 +478,10 @@ header .content.affix {
     background-position: 10px center;
   }
   .project .country .short{
-	  display: none;
+    display: none;
   }
   .project .country .long{
-	  display: inline;
+    display: inline;
   }
 
 }
@@ -532,12 +534,13 @@ header .content.affix {
   border-top: 1px solid #ccc;
   border-bottom: 1px dotted #ccc;
   background: #efefef;
+  color: #303030;
 }
 
 #project-preview .info {
-	border-bottom: 1px solid #ccc;
-	background: #efefef;
-	line-height: 0px;
+  border-bottom: 1px solid #ccc;
+  background: #efefef;
+  line-height: 0px;
 }
 
 #project-preview .country {
@@ -573,7 +576,7 @@ header .content.affix {
 }
 
 #project-preview .link{
-	display: inline-block;
+  display: inline-block;
 }
 
 #project-preview .ngo {
@@ -583,8 +586,8 @@ header .content.affix {
 }
 
 #project-preview .ngo.active {
-	color: #FF0000;
-	background: url(../img/ngo-icon.png) no-repeat 14px -23px;
+  color: #FF0000;
+  background: url(../img/ngo-icon.png) no-repeat 14px -23px;
 }
 
 #project-preview .link a {
@@ -604,7 +607,7 @@ header .content.affix {
 }
 
 #project-preview .contacts.show {
-	display: block;
+  display: block;
 }
 
 #project-preview .content {
@@ -614,8 +617,8 @@ header .content.affix {
 #project-preview .content p {
   margin: 0 0 20px;
   font-size: 14px;
-  line-height: 18px;
-  color: #000;
+  line-height: 20px;
+  color: #333;
 }
 
 .project-preview .logo,
@@ -672,7 +675,7 @@ header .content.affix {
     margin: 0 auto;
   }
   #project-preview .info {
-	  background: white
+    background: white
   }
 }
 
@@ -988,7 +991,7 @@ header .content.affix {
   font-size: 18px;
   line-height: 22px;
   font-weight: bold;
-  color: #000;
+  color: #303030;
 }
 #country-info .type,
 #country-info .population,
@@ -1014,7 +1017,7 @@ header .content.affix {
 #country-info .project-name {
   padding: 13px 14px 11px;
   line-height: 16px;
-  color: #000;
+  color: #303030;
   font-weight: bold;
 }
 #country-info .field {
