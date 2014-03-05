@@ -237,7 +237,7 @@ header .content.affix {
   left: -1px;
   width: 181px;
   padding-left: 0;
-  z-index: 10;
+  z-index: 1001;
   border-bottom: 1px solid #ccc;
 }
 .main-nav .active .search-results {
