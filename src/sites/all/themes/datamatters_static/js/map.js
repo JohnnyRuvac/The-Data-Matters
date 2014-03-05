@@ -6,6 +6,8 @@ o.map.init = function () {
 	var url = $("#map-container").attr("data-url");
 	Snap.load( url + "map_logo.svg", function(d) {
 
+		o.map.setContainerHeight();
+
 		//pattern
 		var pattern = d.select("#pattern-active");
 		var pattern2 = d.select("#pattern-inactive");
@@ -24,8 +26,6 @@ o.map.init = function () {
 		});
 
 		o.europe = o.s.select("#europe-countries");
-
-		o.map.place();
 
 		//add rectangle behind map, so it can be draggable also on empty spaces
 		o.map.bg = o.s.rect(0, 700, 2560, 1440);
@@ -60,6 +60,7 @@ o.map.loadCountriesWithProjects = function(url) {
       bothComplete++;
       if (bothComplete == 2) {
       	o.countries.initHoverAndClick();
+      	o.countries.zoomToActive(null, 2);
       	o.map.show();
       }
     }
@@ -75,6 +76,7 @@ o.map.loadCountriesWithProjects = function(url) {
       bothComplete++;
       if (bothComplete == 2) {
       	o.countries.initHoverAndClick();
+      	o.countries.zoomToActive(null, 2);
       	o.map.show();
       }
     }
@@ -100,9 +102,12 @@ o.map.highlightCountriesWithProject = function () {
 	}
 
 }
-o.map.place = function () {
+o.map.setContainerHeight = function () {
 
-	
+	var headerHeight = o.$mainContent.offset().top,
+			height = window.innerHeight - headerHeight;
+
+	o.$mainContent.height( height );
 
 }
 o.map.show = function () {
@@ -155,10 +160,12 @@ o.countries.hoverIn = function (e) {
 		stroke: "#f00"
 	});
 
-	if ( o.activeCountry )
+	if ( o.activeCountry ) {
 		o.s.select("#" + id).insertBefore( o.activeCountry );
-	else
+	}
+	else {
 		o.s.select("#" + id).appendTo( o.europe );
+	}
 
 }
 
@@ -219,17 +226,27 @@ o.countries.click = function (e, that) {
 		o.activeCountry = that;
 		o.$activeCountry = $clicked;
 
-		o.countries.zoomToActive(that);
+		o.countries.zoomToActive(that, 3);
 		o.countries.showInfo(that);
 	}
 
 }
-o.countries.zoomToActive = function(that){
+o.countries.zoomToActive = function(that, scale){
+
+	//hungary is default for zoom
+	if (!that) {
+		that = o.s.select("#hungary");
+	}
+
+	//3 is default zoom
+	if (!scale) {
+		scale = o.map.scale;
+	}
 	
 	//firstly zoom it
 	var m = new Snap.Matrix();
-	m.scale(3);
-	o.map.scale = 3;
+	m.scale(scale);
+	o.map.scale = scale;
 	o.map.countries.transform( m );
 
 	var bbox = that.node.getBoundingClientRect();
@@ -241,11 +258,23 @@ o.countries.zoomToActive = function(that){
 	};
 
 	var country = {
-		x: o.$activeCountry.offset().left,
-		y: o.$activeCountry.offset().top,
 		w: bbox.width,
 		h: bbox.height
 	};
+
+	//at map load, we are zooming to hungary, so o.$activeCountry is not defined
+	if ( o.$activeCountry ) {
+		
+		country.x = o.$activeCountry.offset().left;
+		country.y = o.$activeCountry.offset().top;
+
+	} else {
+
+		var active = $("#" + that.node.id);
+		country.x = active.offset().left;
+		country.y = active.offset().top;
+
+	}
 	country.cx = country.x + country.w / 2;
 	country.cy = country.y + country.h / 2;
 
@@ -328,10 +357,6 @@ $(function(){
 	o.$mainContent = $(".main-content");
 	o.s = Snap("#map-container");
 
-	var headerHeight = o.$mainContent.offset().top,
-			height = window.innerHeight - headerHeight;
-
-	o.$mainContent.height( height );
 	o.map.init();
 
 });
@@ -339,6 +364,7 @@ $(function(){
 
 // Window resize
 $(window).resize(function(){
-	o.map.place();
+	o.map.setContainerHeight();
+	o.countries.zoomToActive( o.selectedCountry, o.map.scale );
 });
 // End Window resize
