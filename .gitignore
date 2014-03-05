@@ -1,3 +1,5 @@
 .DS_Store
 
 /src/files/tmp
+
+/src/.htaccess
