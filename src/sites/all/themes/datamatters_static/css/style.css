@@ -1113,7 +1113,7 @@ header .content.affix {
 	position: static !important;
 }
 
-.main-nav .menu-search a:before{
+.main-nav .menu-search a.submit:before{
 	content: "\e601";
 	left: 12px;
 	top: 11px;
@@ -1194,6 +1194,11 @@ header .content.affix {
 .filter-button .label.active:before{
 
 	right: -10px;
+}
+
+.filter-button.menu-tablet .label.active:before{
+
+	right: 10px;
 }
 
 .filter-button .clear-filter:before{
@@ -1285,6 +1290,7 @@ header .content.affix {
 #project-preview .field a,
 .project .field a,
 #project-preview .link a,
+.logo a,
 #project-preview .ngo a{
 	-webkit-transition: color 0.5s; /* For Safari 3.1 to 6.0 */
 	-moz-transition: color 0.5s;
@@ -1330,6 +1336,7 @@ header .content.affix {
 	display: block;
 }
 
+.logo a:hover,
 .projects .project a:hover,
 #project-preview .country a:hover:before,
 .project .country a:hover:before,

@@ -7,22 +7,7 @@
 
   	</div>
   	
-	<div id="slideout-menu">
-		<ul>
-			<li><a href="">Projects</a></li>
-			<li><a href="">Organizations</a></li>
-			<li><a href="">About</a></li>
-			<li>
-				<a href="" class="slideout-search">Search</a>
-				<div class="filter-content">
-					<h3>Search <a href="" class="close">Close</a></h3>
-					<input type="text" class="search-input">
-					<ul class="clearfix">
-					</ul>
-				</div>
-			</li>
-		</ul>
-	</div>
+	<?php include("slideout-menu.inc.tpl.php"); ?>
   	
   	
   </div>

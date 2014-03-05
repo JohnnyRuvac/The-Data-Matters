@@ -45,7 +45,7 @@
 											print $tax_names[$active_term];
 										else:
 									?>Country<? endif;?></a>
-								<a href="" class="clear-filter" data-group="countries"></a>
+								<a href="" class="icon clear-filter" data-group="countries"></a>
 								<div class="filter-content">
 									<h3><? 
 										if($active_dictionary == "country"): 
