@@ -18,12 +18,12 @@
 						</li>
 						<div class="right clearfix">
 							<li class="filter-button">
-								<a class="label<? if($active_dictionary == "field"): print " active"; endif;?>" href="" data-orig-name="Field"><? 
+								<a class="label icon <? if($active_dictionary == "field"): print " active"; endif;?>" href="" data-orig-name="Field"><? 
 										if($active_dictionary == "field"): 
 											print $tax_names[$active_term];
 										else:
 									?>Field<? endif;?></a>
-								<a href="" class="clear-filter" data-group="field"></a>
+								<a href="" class="clear-filter icon" data-group="field"></a>
 								<div class="filter-content">
 									<h3><? 
 										if($active_dictionary == "field"):
@@ -40,7 +40,7 @@
 								</div>
 							</li>
 							<li class="filter-button">
-								<a class="label <? if($active_dictionary == "countries"): print " active"; endif;?>" href="" data-orig-name="Countries"><? 
+								<a class="label icon <? if($active_dictionary == "countries"): print " active"; endif;?>" href="" data-orig-name="Countries"><? 
 										if($active_dictionary == "countries"): 
 											print $tax_names[$active_term];
 										else:
@@ -64,13 +64,13 @@
 						
 							<li class="menu-search hidden-xs clearfix">
 								<input type="text" placeholder="Search">
-								<a href="" class="submit">Search</a>
+								<a href="" class="submit icon">Search</a>
 								<ul class="search-results">
 								</ul>
 							</li>
 						</div>
 					</ul>
-					<a href="<?=$back?>" class="close-full-preview">Close</a>
+					<a href="<?=$back?>" class="close-full-preview icon">Close</a>
 				</nav>
 				</div>
 			</header>
