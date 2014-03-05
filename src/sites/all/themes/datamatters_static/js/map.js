@@ -160,6 +160,12 @@ o.countries.hoverIn = function (e) {
 		stroke: "#f00"
 	});
 
+	// !!!!!!!!!!!
+	//put this country on top, so borders are not clipped by other country
+	//skip for ie, there is bug that disables hover out event because of this
+	if (o.isIE)
+		return;
+
 	if ( o.activeCountry ) {
 		o.s.select("#" + id).insertBefore( o.activeCountry );
 	}
@@ -354,6 +360,7 @@ $(function(){
 		cx: $(window).width() / 2,
 		xy: $(window).height() / 2
 	};
+	o.isIE = $("html").hasClass("ie") || !!navigator.userAgent.match(/Trident.*rv\:11\./) || !!navigator.userAgent.match(/Trident\/7\./);
 	o.$mainContent = $(".main-content");
 	o.s = Snap("#map-container");
 
