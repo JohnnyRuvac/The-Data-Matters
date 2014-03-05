@@ -166,7 +166,7 @@ o.countries.hoverIn = function (e) {
 	if (o.isIE)
 		return;
 
-	if ( o.activeCountry ) {
+	if ( o.selectedCountry ) {
 		o.s.select("#" + id).insertBefore( o.activeCountry );
 	}
 	else {
@@ -210,6 +210,7 @@ o.countries.click = function (e, that) {
 			stroke: "#aaa"
 		});
 		o.$countryInfo.removeClass("active");
+		o.selectedCountry = null;
 		
 	} else {
 		//deactivate active one
