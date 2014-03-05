@@ -128,7 +128,8 @@ o.map.highlightCountriesWithProject = function () {
 		o.countries.withProject.push( o.countriesJson[i].country.safe_name );
 
 		o.s.selectAll("#" + o.countries.withProject[i] + " polygon").attr({
-			fill: o.patternInactive
+			fill: o.patternInactive,
+			stroke: "#aaa"
 		});
 
 		//highlight capitals of cities with project in logo
@@ -193,7 +194,16 @@ o.countries.hoverIn = function (e) {
 			isActive = $("#" + id).hasClass("has-project");
 
 	if ( isActive ) return;
-	o.s.selectAll("#" + id + " path").attr({fill: o.patternActive});
+
+	o.s.selectAll("#" + id + " polygon").attr({
+		fill: o.patternActive,
+		stroke: "#f00"
+	});
+
+	if ( o.activeCountry )
+		o.s.select("#" + id).insertBefore( o.activeCountry );
+	else
+		o.s.select("#" + id).appendTo( o.europe );
 
 }
 
@@ -204,8 +214,14 @@ o.countries.hoverOut = function (e) {
 
 	if ( isActive ) return;
 
-	var fillCol = ( $("#" + id).attr("data-active") ) ? o.patternActive : o.patternInactive;
-	o.s.selectAll("#" + id + " path").attr({fill: fillCol});	
+	var dataActive = $("#" + id).attr("data-active"); 
+	var fillCol = ( dataActive ) ? o.patternActive : o.patternInactive;
+	var strokeCol = ( dataActive ) ? "#f00" : "#aaa";
+
+	o.s.selectAll("#" + id + " polygon").attr({
+		fill: fillCol,
+		stroke: strokeCol
+	});
 
 }
 o.countries.click = function (e, that) {
@@ -214,13 +230,16 @@ o.countries.click = function (e, that) {
 			$clicked = $("#" + id),
 			isActive = $clicked.attr("data-active");
 
+	//save reference to active one for later use
+	o.selectedCountry = that;
+
 	//activate or deactivate country
 	if ( isActive ) {
 
 		$clicked.removeAttr("data-active");
 		that.selectAll("polygon").attr({
 			fill: o.patternInactive,
-			stroke: "#ccc"
+			stroke: "#aaa"
 		});
 		o.$countryInfo.removeClass("active");
 		
@@ -230,7 +249,7 @@ o.countries.click = function (e, that) {
 			o.$activeCountry.removeAttr("data-active");
 			o.activeCountry.selectAll("polygon").attr({
 				fill: o.patternInactive,
-				stroke: "#ccc"
+				stroke: "#aaa"
 			});
 		}
 		//activate new one
