@@ -1,14 +1,7 @@
 // Map
-o.map = {
-	hidden: true
-};
-o.map.init = function () {
+o.map = {};
 
-	//for mobile devices redirect to projects page
-	if ($(window).width() < 769) {
-		window.location = "/projects";
-		return;
-	}
+o.map.init = function () {
 
 	var url = $("#map-container").attr("data-url");
 	Snap.load( url + "map_logo.svg", function(d) {
@@ -18,31 +11,21 @@ o.map.init = function () {
 		var pattern2 = d.select("#pattern-inactive");
 		o.s.append(pattern);
 		o.s.append(pattern2);
+	
+		o.map.countries = d.select(".countries");
+		o.s.append(o.map.countries);
+		o.map.countries.attr({
+			opacity: 0
+		});	
+		o.map.countries.selectAll("polygon, path").attr({
+			fill: "#ffffff",
+			stroke: "#ccc",
+			strokeWidth: 0.25
+		});
 
-		//don't append map for mobile devices
-		if (o.w.w > 500) {
-			
-			o.map.countries = d.select(".countries");
-			o.s.append(o.map.countries);
-			o.map.countries.attr({
-				opacity: 0
-			});
-			o.map.countries.selectAll("polygon, path").attr({
-				fill: "#ffffff",
-				stroke: "#ccc",
-				strokeWidth: 0.25
-			});
-
-			o.europe = o.s.select("#europe-countries");
-
-		}
-
-		o.logo = d.select("#whole-logo");
-		o.logoText = d.select("#logo-text");
-		o.s.append(o.logo);
+		o.europe = o.s.select("#europe-countries");
 
 		o.map.place();
-		o.map.showOnScroll();
 
 		//add rectangle behind map, so it can be draggable also on empty spaces
 		o.map.bg = o.s.rect(0, 700, 2560, 1440);
@@ -77,6 +60,7 @@ o.map.loadCountriesWithProjects = function(url) {
       bothComplete++;
       if (bothComplete == 2) {
       	o.countries.initHoverAndClick();
+      	o.map.show();
       }
     }
   });
@@ -91,29 +75,10 @@ o.map.loadCountriesWithProjects = function(url) {
       bothComplete++;
       if (bothComplete == 2) {
       	o.countries.initHoverAndClick();
+      	o.map.show();
       }
     }
   });
-
-}
-o.map.showOnScroll = function () {
-
-	//if there is hash tag map, show it right away
-	if (window.location.hash == "#map") {
-		var t = window.setTimeout(o.map.show, 1000);
-		return;
-	}
-
-	$("body").on("mousewheel", o.map.show);
-
-	$(".main-content").hammer().on("touch", function(){
-		o.map.show();
-	});
-
-	//prevent default "fullpage" scroll behaviour on iOS
-	document.ontouchmove = function(e) {
-		e.preventDefault();
-	}
 
 }
 o.map.highlightCountriesWithProject = function () {
@@ -128,12 +93,9 @@ o.map.highlightCountriesWithProject = function () {
 		o.countries.withProject.push( o.countriesJson[i].country.safe_name );
 
 		o.s.selectAll("#" + o.countries.withProject[i] + " polygon").attr({
-			fill: o.patternInactive
+			fill: o.patternInactive,
+			stroke: "#aaa"
 		});
-
-		//highlight capitals of cities with project in logo
-		var id = o.countries.withProject[i] + '_pixel';
-		o.s.select("#" + id + " rect").attr({fill: "#000"});
 
 	}
 
@@ -145,16 +107,10 @@ o.map.place = function () {
 }
 o.map.show = function () {
 
-	$("body").off("mousewheel", o.map.show);
-
-	//add hash tag
-	window.location = "#map";
 	$("body").addClass("map-shown");
 
 	//show it
-	o.map.hidden = false;
 	o.map.countries.animate({opacity: 1}, 600);
-	o.logo.animate({opacity: 0}, 100);
 
 }
 // END map
@@ -193,7 +149,16 @@ o.countries.hoverIn = function (e) {
 			isActive = $("#" + id).hasClass("has-project");
 
 	if ( isActive ) return;
-	o.s.selectAll("#" + id + " path").attr({fill: o.patternActive});
+
+	o.s.selectAll("#" + id + " polygon").attr({
+		fill: o.patternActive,
+		stroke: "#f00"
+	});
+
+	if ( o.activeCountry )
+		o.s.select("#" + id).insertBefore( o.activeCountry );
+	else
+		o.s.select("#" + id).appendTo( o.europe );
 
 }
 
@@ -204,8 +169,14 @@ o.countries.hoverOut = function (e) {
 
 	if ( isActive ) return;
 
-	var fillCol = ( $("#" + id).attr("data-active") ) ? o.patternActive : o.patternInactive;
-	o.s.selectAll("#" + id + " path").attr({fill: fillCol});	
+	var dataActive = $("#" + id).attr("data-active"); 
+	var fillCol = ( dataActive ) ? o.patternActive : o.patternInactive;
+	var strokeCol = ( dataActive ) ? "#f00" : "#aaa";
+
+	o.s.selectAll("#" + id + " polygon").attr({
+		fill: fillCol,
+		stroke: strokeCol
+	});
 
 }
 o.countries.click = function (e, that) {
@@ -214,13 +185,16 @@ o.countries.click = function (e, that) {
 			$clicked = $("#" + id),
 			isActive = $clicked.attr("data-active");
 
+	//save reference to active one for later use
+	o.selectedCountry = that;
+
 	//activate or deactivate country
 	if ( isActive ) {
 
 		$clicked.removeAttr("data-active");
 		that.selectAll("polygon").attr({
 			fill: o.patternInactive,
-			stroke: "#ccc"
+			stroke: "#aaa"
 		});
 		o.$countryInfo.removeClass("active");
 		
@@ -230,7 +204,7 @@ o.countries.click = function (e, that) {
 			o.$activeCountry.removeAttr("data-active");
 			o.activeCountry.selectAll("polygon").attr({
 				fill: o.patternInactive,
-				stroke: "#ccc"
+				stroke: "#aaa"
 			});
 		}
 		//activate new one
