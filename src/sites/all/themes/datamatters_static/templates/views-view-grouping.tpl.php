@@ -15,10 +15,13 @@
  * - $rows: The rows contained in this grouping.
  * - $title: The title of this grouping.
  * - $content: The processed content output that will normally be used.
- */ print_r($grouping_level);
+ */  
+ 	global $group_index;
+ 	if($grouping_level == 0) $group_index++;
+ 	
 ?>
-<div class="view-grouping">
-  <div class="view-grouping-header"><?php print $title; ?></div>
+<div class="view-grouping grouping<?=$group_index?>">
+  <? if($grouping_level == 0): ?><h4><?php print $title; ?></h4><? endif;?>
   <div class="view-grouping-content">
     <?php print $content; ?>
   </div>

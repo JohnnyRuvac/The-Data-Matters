@@ -380,6 +380,7 @@ header .content.affix {
   color: #000;
   border-bottom: 1px solid #ccc;
   text-decoration: none;
+  width: 273px;
 }
 #slideout-menu li a:hover,
 #slideout-menu li a:active,
@@ -1099,6 +1100,46 @@ header .content.affix {
 
 /* END of Interactive Map */
 
+/* Organisations // UPRACEM ZAJTRA!!! */
+
+.view-organisations {padding:0px 15px ; font-size: 14px}
+
+.view-organisations h3 {margin: 0px; font-size: 14px;}
+.view-organisations h4 {margin: 0px; font-size: 14px; color: #ff0000; margin-bottom: 5px; font-weight: normal}
+.view-organisations .view-grouping .view-grouping {margin-bottom: 20px}
+
+
+
+.node-21 {display: none}
+
+@media (min-width: 492px) {
+	.view-organisations .view-grouping {float: left; width: 50%}
+	.view-organisations .view-grouping .view-grouping {display: block; float: none}  
+	.view-organisations .grouping3,
+	.view-organisations .grouping5,
+	.view-organisations .grouping7,
+	.view-organisations .grouping9,
+	.view-organisations .grouping11 {clear: left}  
+}
+
+@media (min-width: 769px) {
+	.view-organisations .view-grouping {float: left; width: 33%; max-width: 250px}
+	.view-organisations .view-grouping .view-grouping {float: none; width: auto}
+    .view-organisations {margin-left: 130px}
+    .view-organisations .grouping7,
+	.view-organisations .grouping4 {clear: left}
+	
+	.view-organisations .grouping3,
+	.view-organisations .grouping5,
+
+	.view-organisations .grouping9,
+	.view-organisations .grouping11 {clear: none}
+}
+
+/* END of Organisations */
+
+
+
 /* Icon Font */
 
 
@@ -1208,6 +1249,7 @@ header .content.affix {
 	left: 28px;
 	top: 19px;
 	font-size: 8px;
+	
 }
 
 @media (min-width: 769px){
@@ -1327,6 +1369,7 @@ header .content.affix {
 	-webkit-transform: scale(0);
 	transform: scale(0);
 	display: block;
+	opacity: 0;
 }
 
 .filter-button .clear-filter.active {
@@ -1334,6 +1377,7 @@ header .content.affix {
 	-webkit-transform: scale(1);
 	transform: scale(1);
 	display: block;
+	opacity: 1;
 }
 
 .logo a:hover,
