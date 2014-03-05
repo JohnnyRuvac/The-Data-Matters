@@ -41,7 +41,6 @@ o.map.init = function () {
 		o.logoText = d.select("#logo-text");
 		o.s.append(o.logo);
 
-		o.findBorderCities("#logo-pixels");
 		o.map.place();
 		o.map.showOnScroll();
 
@@ -141,43 +140,7 @@ o.map.highlightCountriesWithProject = function () {
 }
 o.map.place = function () {
 
-	//adjust container height
-	var headerHeight = o.$mainContent.offset().top,
-			height = window.innerHeight - headerHeight;
-
-	o.$mainContent.height( height );
-
-	var textBBox = o.logoText.node.getBoundingClientRect(),
-			logoBBox = o.logo.getBBox(),
-			shift = {},
-			w = { //window
-				cx: o.ww / 2,
-				t: o.wh * 0.11111 //top of the logo should be at 11.111% of screen height
-			};
-
-	//calculate difference between center of screen
-	var logoCX = (textBBox.left + textBBox.right) / 2;
-	shift.x = w.cx - logoCX;
-	shift.y = w.t - o.logo.node.getBoundingClientRect().top;
-
-	//apply transform
-	if ( !o.logo.matrix ) {
-		var m = new Snap.Matrix();	
-	} else {
-		var m = o.logo.matrix;
-	}
 	
-	m.translate(shift.x, shift.y);
-	o.map.countries.transform(m);
-	o.logo.transform(m);
-
-	//place vertically slogan
-	var textTop = $("#logo-text").offset().top,
-			textBottom = textTop + textBBox.height,
-			headerHeight = o.$headerContent.height(),
-			sloganTop = textBottom + 48 - headerHeight;
-
-	$("#homepage-slogan").css("top", sloganTop);
 
 }
 o.map.show = function () {
@@ -377,37 +340,6 @@ o.countries.showInfo = function (that) {
 
 }
 // END Countries
-
-//find cities on the border of logo container, so we can zoom to fit
-o.findBorderCities = function (where) {
-
-	var topMost 		= 999999,
-			rightMost 	= 0,
-			bottomMost 	= 0,
-			leftMost 		= 999999;
-
-	$(where).find("rect").each(function(){
-
-		x = $(this).attr("x"),
-		y = $(this).attr("y");
-
-		//check for topMost
-		if ( y < topMost ) 		topMost 		= y;
-		if ( y > bottomMost)	bottomMost 	= y;
-		if ( x < leftMost )		leftMost		= x;
-		if ( x > rightMost )	rightMost 	= x;
-
-	});
-
-	o.borderCities = {
-		top: topMost,
-		bottom: bottomMost,
-		left: leftMost,
-		right: rightMost
-	}
-
-}
-
 
 // DOM ready
 $(function(){

@@ -20,7 +20,7 @@ function datamatters_static_js_alter(&$js, &$vars){
 	
 
 
-	if($path == "home" || $path == "map") drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
+	if($path == "map") drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
   
 
 }
