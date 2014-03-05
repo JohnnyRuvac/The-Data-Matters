@@ -380,7 +380,6 @@ header .content.affix {
   color: #000;
   border-bottom: 1px solid #ccc;
   text-decoration: none;
-  width: 273px;
 }
 #slideout-menu li a:hover,
 #slideout-menu li a:active,
@@ -1332,7 +1331,6 @@ header .content.affix {
 #project-preview .field a,
 .project .field a,
 #project-preview .link a,
-.logo a,
 #project-preview .ngo a{
 	-webkit-transition: color 0.5s; /* For Safari 3.1 to 6.0 */
 	-moz-transition: color 0.5s;
@@ -1380,7 +1378,6 @@ header .content.affix {
 	opacity: 1;
 }
 
-.logo a:hover,
 .projects .project a:hover,
 #project-preview .country a:hover:before,
 .project .country a:hover:before,
