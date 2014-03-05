@@ -26,11 +26,11 @@
 							<div class="content">
 								<h2><a href="<?=$node_url?>" title="<?=$node->title?>"><?=truncate_utf8($node->title, 45, TRUE, TRUE)?></a></h2>
 								<p class="country">
-									<span class="short"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->field_short_name['und'][0]['value']?></a></span>
-									<span class="long"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->name?></a></span>
+									<span class="short"><a class="icon" href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->field_short_name['und'][0]['value']?></a></span>
+									<span class="long"><a class="icon" href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->name?></a></span>
 									
 								</p>
-								<p class="field"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$field->tid)?>"><?=$field->name?></a></p>
+								<p class="field "><a class="icon" href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$field->tid)?>"><?=$field->name?></a></p>
 							</div>
 						</a>
 					</li>
@@ -47,22 +47,23 @@
 			  		<img src="<?=file_create_url($node->field_image['und'][0]['uri'])?>" alt="">
 				  	<h2><?=$node->title?></h2>
 				  	<div class="info clearfix">
-				  		<p class="country"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->name?></a> <span class="field"><a href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$field->tid)?>"><?=$field->name?></a></span></p>
+				  		<p class="country"><a class="icon" href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->name?></a></p>
+				  		<p class="field"><a class="icon" href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$field->tid)?>"><?=$field->name?></a></p>
 						<?php if(isset($node->field_link['und'][0]['url'])): ?>
 					  		<p class="link">
-					  			<a href="<?=$node->field_link['und'][0]['url']?>" target="_blank">Website</a>
+					  			<a class="icon" href="<?=$node->field_link['und'][0]['url']?>" target="_blank">Website</a>
 					  		</p>
 				  		<?php endif; ?>
 
-				  		<span class="ngo"><?=$ngo->name?></span>
+				  		<p class="ngo icon"><?=$ngo->name?></p>
 
 				  		<? if(isset($ngo->field_email['und'][0]['safe_value']) || isset($ngo->field_phone['und'][0]['safe_value'])):?>
-					  		<p class="contacts">
+					  		<p class="contacts icon">
 						  		<? if(isset($ngo->field_email['und'][0]['safe_value'])) print $ngo->field_email['und'][0]['safe_value'];?>
 						  		<? if(isset($ngo->field_phone['und'][0]['safe_value'])) print $ngo->field_phone['und'][0]['safe_value'];?>
 					  		</p>
 					  	<? else:?>
-					  		<p class="contacts">
+					  		<p class="contacts icon">
 						  		No contact detail provided.
 					  		</p>					  		
 				  		<? endif;?>
