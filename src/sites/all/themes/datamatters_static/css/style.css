@@ -985,6 +985,15 @@ header .content.affix {
 .page-node-22 .right .filter-button {
   display: none;
 }
+@media (orientation:landscape) {
+  html.ipad.ios7 .page-node-19,
+  html.ipad.ios7 .page-node-22 {
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    height: 672px !important;
+  }
+}
 /* END home + interactive map pages */
 
 /* Home page */
