@@ -1475,6 +1475,21 @@ body.show_filter .right .filter-button {
 
 /* END of Text page */
 
+
+/* 404 page */
+
+body.page-node-23 .node-page {
+  margin: 0 auto; 
+  text-align: center;
+  color: #cccccc;
+  background: url(../img/404.png) no-repeat center top;
+  padding-top: 75px;
+  margin-top: 10%;
+}
+
+
+/* END of 404 page */
+
 /* Retina images */
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
 only screen and (-moz-min-device-pixel-ratio: 1.5),
@@ -1557,6 +1572,12 @@ only screen and (min-device-pixel-ratio: 1.5) {
     background-image: url(../img/continue-arrow@2x.png);
     -webkit-background-size: contain;
     background-size: contain;
+  }
+  
+  body.page-node-23 .node-page {
+    background: url(../img/404.png) no-repeat center top;
+    -webkit-background-size: 49px 65px;
+    background-size: 49px 65px;
   }
 
 }

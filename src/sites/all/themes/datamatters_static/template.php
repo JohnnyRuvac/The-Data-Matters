@@ -22,6 +22,10 @@ function datamatters_static_js_alter(&$js, &$vars){
 
 
 function datamatters_static_preprocess_html(&$vars){
+
+  if($vars['head_title_array']['title'] == "Page not found"){
+    $vars['page']['content']['system_main']['main']['#markup'] = "404 - The page not found";
+  }
   
   $node = menu_get_object();
   if(isset($node)){
