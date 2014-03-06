@@ -231,7 +231,7 @@ header .content.affix {
   position: absolute;
   top: 33px;
   left: -1px;
-  width: 181px;
+  width: 325px;
   padding-left: 0;
   z-index: 1001;
   border-bottom: 1px solid #ccc;
@@ -240,9 +240,11 @@ header .content.affix {
   display: block;
 }
 .main-nav .search-results li {
-  width: 181px;
+  width: 100%;
   background: #fff;
   border-top: 1px dotted #ccc;
+  height: 32px;
+  
 }
 .main-nav .search-results li:first-child {
   border-top: none;
@@ -253,6 +255,10 @@ header .content.affix {
   text-indent: 0;
   color: #727272;
   background: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 11px;
 }
 .main-nav .search-results li a:hover,
 .main-nav .search-results li a:active {
@@ -460,7 +466,7 @@ header .content.affix {
 
 .project .field {
   float: left;
-  width: 34.8%;
+  width: 36.8%;
   left: 63.2%;
   background: url(../img/field-icon.png) no-repeat 7px center;
   white-space: nowrap;
@@ -1171,13 +1177,27 @@ body.show_filter .right .filter-button {
 /* Icon Font */
 
 
+.svg .logo:before,
+.svg .icon:before{
+  font-family: 'tdm';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1.2;
+  position: absolute;
+}
 
 .logo a {text-indent: -3999px; display: block}
-.logo:before{
+.svg .logo:before{
   text-indent: 0px;
   content: "\e60f";
   font-size: 74px;
   position: relative;
+  height: 70px;
+  width: 75px;
+  display: block;
   top: -6px
 }
 
@@ -1324,19 +1344,6 @@ body.show_filter .right .filter-button {
 .project .country {position: absolute}
 
 
-.svg .logo:before,
-.svg .icon:before{
-  font-family: 'tdm';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1.2;
-  position: absolute;
-}
-
-
 /* END of Icon Font */
 
 /* Transitions */
@@ -1370,10 +1377,26 @@ body.show_filter .right .filter-button {
 .filter-button .clear-filter,
 #project-preview .contacts.show,
 #project-preview .contacts{
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.main-nav .menu-search input,
+.main-nav .menu-search{
+  -webkit-transition: width 0.5s ease;
+  -moz-transition: width 0.5s ease;
+  -o-transition: width 0.5s ease;
+  transition: width 0.5s ease;
+}
+
+.main-nav .menu-search.focus {
+  width: 324px;
+}
+
+.main-nav .menu-search.focus input{
+  width: 288px;
 }
 
 #project-preview .contacts.show:before,

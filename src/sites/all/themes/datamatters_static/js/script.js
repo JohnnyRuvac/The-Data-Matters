@@ -16,6 +16,7 @@ o.initVars = function() {
 	o.$outerWrapper = $("#outer-wrapper");
 	o.$slideoutMenu = $("#slideout-menu");
 	o.$filterContents = $(".filter-content");
+	o.$mainSearch = $(".main-nav .menu-search");
 
 	o.isTouch = o.$html.hasClass("touch");
 	o.svgSupport = o.$html.hasClass("svg");
@@ -446,5 +447,8 @@ $(window).resize(function(){
 	//o.fixProjectPreviewHeight();
 	o.trimLongTexts();
   o.sortNGO();
+  
+  //neviem kam s tymto
+  if(o.$mainSearch.hasClass("focus")) o.$mainSearch.find("input").trigger("focusout").blur();
 });
 // END window resize

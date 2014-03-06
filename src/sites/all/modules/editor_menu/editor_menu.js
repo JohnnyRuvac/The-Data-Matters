@@ -53,6 +53,28 @@ var nameArray = [];
 				.html(searchArray(str, nameArray));
 				if(!$(this).hasClass("search-input")) $(".menu-search .search-results").parent().addClass("active");
 	
+			}).focusin(function(){
+  			if(!$(this).hasClass("search-input")){
+    			 $(this).parent().addClass("focus");
+    			 
+    			 var leftSpace = $(window).width() - $(this).offset().left;
+    			 if(leftSpace < 324){
+      			 $(".main-nav .menu-search").css({maxWidth: leftSpace})
+      			 .find("input").css({maxWidth: leftSpace - 36});
+      			 $(".main-nav .search-results").css({maxWidth: leftSpace + 1});
+    			 }else if(leftSpace >= 324 && $(".main-nav .menu-search").css("max-width") != "auto"){
+      			 $(".main-nav .menu-search").css({maxWidth: "auto"})
+      			 .find("input").css({maxWidth: "auto"});
+      			 $(".main-nav .search-results").css({maxWidth: "auto"});
+      			 
+    			 }
+    			 
+    			 console.log(leftSpace);
+        }
+			}).focusout(function(){
+  			if(!$(this).hasClass("search-input")){
+    			$(this).parent().removeClass("focus");  			
+  			} 
 			})
 			
 		})
@@ -63,9 +85,10 @@ var nameArray = [];
 
 function searchArray(str, arr){
 	var items = [];
-		
+  var count = 0;
 	$.each(arr, function(key, val){
-		if(val.low.search(str.toLowerCase()) >= 0) items.push("<li><a href='"+val.link+"'>"+val.name+"</a></li>");
+	  count++;
+		if(val.low.search(str.toLowerCase()) >= 0 && count <= 10) items.push("<li><a href='"+val.link+"'>"+val.name+"</a></li>");
 	})
 
 	return items.join("");
