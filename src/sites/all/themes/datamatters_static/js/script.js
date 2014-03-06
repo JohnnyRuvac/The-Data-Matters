@@ -384,6 +384,34 @@ o.showNGO = function () {
 }
 //END project detail, show NGO contact
 
+//organisations page, rearange DOM
+o.sortNGO = function(){
+  if($(".view-organisations").length > 0){
+    var colViewNew;
+    var colViewOld = $(".view-organisations").attr("class").split(" ")[1];
+  
+    if(o.ww > 0 && o.ww <= 492) colViewNew = "col-view1";
+    else if(o.ww > 492 && o.ww <= 769) colViewNew = "col-view2";
+    else colViewNew = "col-view3";
+    
+    if(colViewOld != colViewNew){
+      $(".view-organisations").removeClass(colViewOld).addClass(colViewNew);
+      
+      var modulo = parseFloat(colViewNew.replace("col-view", ""));
+      
+      $(".view-organisations .grouping-level0").each(function(i, e){
+        
+        var e = $(".view-organisations .grouping-level0.grouping" + (i+1));
+        e.appendTo(".view-organisations .col-" + (i%modulo + 1));
+        
+      })
+    }
+  }
+  
+}
+
+//END organisations page, rearange DOM
+
 // DOM ready
 $(function(){
 
@@ -397,7 +425,7 @@ $(function(){
 	o.activateSearch();
 	o.projectsFiltering();
 	o.showNGO();
-
+  o.sortNGO();
 });
 // END DOM ready
 
@@ -417,6 +445,6 @@ $(window).resize(function(){
 	o.fixFilters();
 	//o.fixProjectPreviewHeight();
 	o.trimLongTexts();
-
+  o.sortNGO();
 });
 // END window resize

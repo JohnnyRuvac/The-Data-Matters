@@ -27,6 +27,9 @@
  * @ingroup views_templates
  */
 ?>
-<div class="view-organisations">
+<div class="view-organisations col-view1">
 	<?php print $rows; ?>
+	<div class="col-1"></div>
+	<div class="col-2"></div>
+	<div class="col-3"></div>
 </div>

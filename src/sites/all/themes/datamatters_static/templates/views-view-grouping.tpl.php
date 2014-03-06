@@ -20,7 +20,7 @@
  	if($grouping_level == 0) $group_index++;
  	
 ?>
-<div class="view-grouping grouping<?=$group_index?>">
+<div class="view-grouping grouping-level<?=$grouping_level?> grouping<?=$group_index?>">
   <? if($grouping_level == 0): ?><h4><?php print $title; ?></h4><? endif;?>
   <div class="view-grouping-content">
     <?php print $content; ?>

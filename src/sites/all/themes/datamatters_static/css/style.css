@@ -1116,38 +1116,52 @@ body.show_filter .right .filter-button {
 
 /* Organisations // UPRACEM ZAJTRA!!! */
 
-.view-organisations {padding:0px 15px ; font-size: 14px}
+.view-organisations {
+  padding:0px 15px; 
+  font-size: 14px;
+}
 
-.view-organisations h3 {margin: 0px; font-size: 14px;}
-.view-organisations h4 {margin: 0px; font-size: 14px; color: #ff0000; margin-bottom: 5px; font-weight: normal}
-.view-organisations .view-grouping .view-grouping {margin-bottom: 20px}
+.view-organisations h3 {
+  margin: 0px; 
+  font-size: 14px;
+}
 
+.view-organisations h4 {
+  margin: 0px;
+  font-size: 14px;
+  color: #ff0000;
+  margin-bottom: 5px;
+  font-weight: normal;
+}
 
+.view-organisations .view-grouping .view-grouping {
+  margin-bottom: 20px;
+}
+
+.col1,
+.col2,
+.col3 {
+  width: 100%;
+}
 
 .node-21 {display: none}
 
 @media (min-width: 492px) {
-	.view-organisations .view-grouping {float: left; width: 50%}
-	.view-organisations .view-grouping .view-grouping {display: block; float: none}  
-	.view-organisations .grouping3,
-	.view-organisations .grouping5,
-	.view-organisations .grouping7,
-	.view-organisations .grouping9,
-	.view-organisations .grouping11 {clear: left}  
+  .col-1,
+  .col-2 {
+    float: left; width: 50%;
+  }
 }
 
 @media (min-width: 769px) {
-	.view-organisations .view-grouping {float: left; width: 33%; max-width: 250px}
-	.view-organisations .view-grouping .view-grouping {float: none; width: auto}
-    .view-organisations {margin-left: 130px}
-    .view-organisations .grouping7,
-	.view-organisations .grouping4 {clear: left}
-	
-	.view-organisations .grouping3,
-	.view-organisations .grouping5,
-
-	.view-organisations .grouping9,
-	.view-organisations .grouping11 {clear: none}
+  .view-organisations {margin-left: 130px}
+  
+  .col-1,
+  .col-2,
+  .col-3 {
+    float: left; width: 33%;
+    max-width: 250px;  
+  }
 }
 
 /* END of Organisations */
