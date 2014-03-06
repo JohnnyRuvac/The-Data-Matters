@@ -34,6 +34,20 @@ function datamatters_static_preprocess_html(&$vars){
   
 }
 
+
+function datamatters_static_form_alter(&$form, &$form_state, $form_id){
+  if($form['#form_id'] == "user_login"){
+    $form['name']['#attributes'] = array('placeholder' => t('Username'));
+    $form['pass']['#attributes'] = array('placeholder' => t('Password'));
+    $form['#suffix'] = "<a href='/user/password' class='forgot_button'>Forgot password?</a>";
+  }
+  
+  if($form['#form_id'] == "user_pass"){
+    $form['name']['#attributes'] = array('placeholder' => t('User or e-mail'));
+  }
+  
+}
+
  //
  // Implementation of preprocess_page().
  //

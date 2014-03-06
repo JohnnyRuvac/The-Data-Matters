@@ -1487,8 +1487,76 @@ body.page-node-23 .node-page {
   margin-top: 10%;
 }
 
-
 /* END of 404 page */
+
+/* User stuff */
+
+#user-pass,
+#user-login {
+  width: 147px;
+  margin: 0 auto;
+  margin-top: 10%;
+}
+
+#user-pass label,
+#user-login label{
+  display: none;
+}
+
+#user-login .description {
+  display: none;
+}
+
+.forgot_button,
+#user-pass input,
+#user-login input {
+
+  width: 147px;
+  margin: 0px; padding: 0px;
+  border: 0px; border-radius: 0px;
+  font-family: "simplon";
+  height: 32px; line-height: 32px;
+
+  color: black;
+  border: 1px solid #cccccc;
+  padding-left: 10px;
+  text-align: left;
+  background: white;
+  display: block;
+  margin: 0 auto;
+}
+
+
+#user-login input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+.forgot_button{
+  color: #cccccc;  
+}
+
+.forgot_button:hover {
+  color: #F00;
+}
+
+#user-login #edit-name{
+  border-bottom: 0px;
+}
+
+#user-pass #edit-submit,
+#user-login #edit-submit{
+  border-color: #F00;
+  color: #F00;
+  background: white;
+  margin-top: 10px; margin-bottom: 10px;
+}
+
+.not-logged-in .action-links {
+  display: none;
+}
+
+/* END of User stuff */
+
 
 /* Retina images */
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
