@@ -3,8 +3,6 @@
 function datamatters_static_js_alter(&$js, &$vars){
 	$path = drupal_get_path_alias();
 	
-	
-	
 	$js['sites/all/modules/jquery_update/replace/jquery/1.8/jquery.min.js']['weight'] = -300;
 	$js['sites/all/modules/jquery_update/replace/jquery/1.8/jquery.min.js']['data'] = 'sites/all/themes/datamatters_static/js/jquery.js';
 	
@@ -16,18 +14,20 @@ function datamatters_static_js_alter(&$js, &$vars){
 	drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
 	drupal_add_js( path_to_theme().'/js/mousewheel.js');
 	drupal_add_js( path_to_theme().'/js/script.js');
-	if($path == "home") drupal_add_js( path_to_theme().'/js/home.js');
 	
-
-
+	if($path == "home") drupal_add_js( path_to_theme().'/js/home.js');
 	if($path == "map") drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
   
-
 }
 
 
-function datamatters_static_preprocess_html($vars){
-	
+function datamatters_static_preprocess_html(&$vars){
+  
+  $node = menu_get_object();
+  if(isset($node)){
+      if($node->type == "project" || $node->title == "Projects") $vars['classes_array'][] = "show_filter";
+  }
+  
 }
 
  //

@@ -339,7 +339,7 @@ o.countries.showInfo = function (that) {
 
 			html += '<li>';
 			html += '<a href="' + path + '" class="project-name">' + title + '</a>';
-			html += '<a href="' + path + '" class="field">' + field + '</a>';
+			html += '<a href="' + path + '" class="field icon">' + field + '</a>';
 			html += '</li>';
 
 		}
