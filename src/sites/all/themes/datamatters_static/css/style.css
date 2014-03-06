@@ -32,17 +32,13 @@
 }
 
 [class$="-tdm"], [class*="-tdm "] {
-	font-family: 'tdm';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  font-family: 'tdm';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 }
 
 /* END fonts */
@@ -237,7 +233,7 @@ header .content.affix {
   left: -1px;
   width: 181px;
   padding-left: 0;
-  z-index: 10;
+  z-index: 1001;
   border-bottom: 1px solid #ccc;
 }
 .main-nav .active .search-results {
@@ -506,10 +502,10 @@ header .content.affix {
     background-position: 10px center;
   }
   .project .country .short{
-	  display: none;
+    display: none;
   }
   .project .country .long{
-	  display: inline;
+    display: inline;
   }
 
 }
@@ -565,9 +561,9 @@ header .content.affix {
 }
 
 #project-preview .info {
-	border-bottom: 1px solid #ccc;
-	background: #efefef;
-	line-height: 0px;
+  border-bottom: 1px solid #ccc;
+  background: #efefef;
+  line-height: 0px;
 }
 
 #project-preview .country {
@@ -615,7 +611,7 @@ header .content.affix {
 }
 
 #project-preview .link{
-	display: inline-block;
+  display: inline-block;
 }
 
 #project-preview .ngo {
@@ -625,8 +621,8 @@ header .content.affix {
 }
 
 #project-preview .ngo.active {
-	color: #FF0000;
-	background: url(../img/ngo-icon.png) no-repeat 14px -23px;
+  color: #FF0000;
+  background: url(../img/ngo-icon.png) no-repeat 14px -23px;
 }
 
 .svg #project-preview .field,
@@ -651,9 +647,9 @@ header .content.affix {
 }
 
 #project-preview .contacts.show {
-	height: 33px;
-	border-top: 1px dotted #ccc;
-	
+  height: 33px;
+  border-top: 1px dotted #ccc;
+  
 }
 
 #project-preview .content {
@@ -724,25 +720,25 @@ header .content.affix {
     background: white
   }
   #project-preview .country {
-	  margin-right: 0px;
-	  height: 32px;
+    margin-right: 0px;
+    height: 32px;
   }
   
   #project-preview .field {
-	  float: left;
-	  border-bottom: 0px;
-	  height: 32px;
+    float: left;
+    border-bottom: 0px;
+    height: 32px;
   }
   #project-preview .ngo {
-	  clear: left;
-	  width: 100%;
-	  border-top: 1px dotted #ccc;
-	  height: 34px;
+    clear: left;
+    width: 100%;
+    border-top: 1px dotted #ccc;
+    height: 34px;
   }
   
   #project-preview .link{
-	  
-	  display: block;  
+    
+    display: block;  
   }
     
   
@@ -983,6 +979,7 @@ header .content.affix {
 .page-node-19 .main-content,
 .page-node-22 .main-content {
   margin-top: -16px;
+  overflow: hidden;
 }
 .page-node-19 .right .filter-button,
 .page-node-22 .right .filter-button {
@@ -1037,20 +1034,20 @@ header .content.affix {
 #country-info {
   width: 220px;
   position: absolute;
-  top: -700px;
-  right: 20px;
+  top: 16px;
+  right: -300px;
   z-index: 1000;
   border: 1px solid #ccc;
   background: #fff;
 
-  -webkit-transition: top 0.3s;
-  -moz-transition: top 0.3s;
-  -ms-transition: top 0.3s;
-  -o-transition: top 0.3s;
-  transition: top 0.3s;
+  -webkit-transition: right 0.3s;
+  -moz-transition: right 0.3s;
+  -ms-transition: right 0.3s;
+  -o-transition: right 0.3s;
+  transition: right 0.3s;
 }
 #country-info.active {
-  top: 16px;
+  right: 20px;
 }
 #country-info .country {
   display: block;
@@ -1145,95 +1142,95 @@ header .content.affix {
 .logo {overflow: hidden;}
 .logo a {text-decoration: none; color: black;}
 .logo a:before{
-	content: "\e60f";
-	left: 12px;
-	top: 11px;
-	font-size: 75px;
-	text-indent: 0px;	
-	position: static !important;
+  content: "\e60f";
+  left: 12px;
+  top: 11px;
+  font-size: 75px;
+  text-indent: 0px; 
+  position: static !important;
 }
 
-.main-nav .menu-search a.submit:before{
-	content: "\e601";
-	left: 12px;
-	top: 11px;
-	font-size: 10px;
-	text-indent: 0px;
+.main-nav .menu-search a:before{
+  content: "\e601";
+  left: 12px;
+  top: 11px;
+  font-size: 10px;
+  text-indent: 0px;
 }
 
 #project-preview .country a:before {
-	content: "\e602"; 
-	left: -14px;
-	top: 0px;
-	color: #646464;
+  content: "\e602"; 
+  left: -14px;
+  top: 0px;
+  color: #646464;
 }
 
 
 .project .country a:before{
-	content: "\e602"; 
-	left: -11px;
-	top: 0px;
-	color: #646565;
+  content: "\e602"; 
+  left: -11px;
+  top: 0px;
+  color: #646565;
 }
 
 
 
 #project-preview .field a:before {
-	content: "\e604"; 
-	left: -18px;
-	top: 0px;
-	color: #646464;
+  content: "\e604"; 
+  left: -18px;
+  top: 0px;
+  color: #646464;
 }
 
 .project .field a:before {
-	content: "\e604"; 
-	left: -17px;
-	top: 0px;
-	color: #646565;
+  content: "\e604"; 
+  left: -17px;
+  top: 0px;
+  color: #646565;
 }
 
 @media (min-width: 492px){
-	.project .field a:before{
-		left: -14px;
-	}
+  .project .field a:before{
+    left: -14px;
+  }
 }
 
 #project-preview .link a:before {
-	content: "\e606"; 
-	left: -18px;
-	top: 1px;
+  content: "\e606"; 
+  left: -18px;
+  top: 1px;
 }
 
 
 #project-preview .ngo:before {
-	content: "\e607"; 
-	left: 14px;
-	top: 10px;
+  content: "\e607"; 
+  left: 14px;
+  top: 10px;
 }
 
 #project-preview .contacts:before {
-	content: "\e608"; 
-	left: 14px;
-	top: 13px;
-	font-size: 8px;
+  content: "\e608"; 
+  left: 14px;
+  top: 13px;
+  font-size: 8px;
 }
 
 .filter-button .label:before{
-	content: "\e605";
-	right: 10px;
-	top: 18px;
-	font-size: 10px;
+  content: "\e605";
+  right: 10px;
+  top: 18px;
+  font-size: 10px;
 }
 
 @media (min-width: 769px){
-	.filter-button .label:before{
-		top: 10px;
-	}	
+  .filter-button .label:before{
+    top: 10px;
+  } 
 }
 
 .filter-button .label.active:before{
 
-	right: -10px;
+  right: -10px;
 }
 
 .filter-button.menu-tablet .label.active:before{
@@ -1242,49 +1239,48 @@ header .content.affix {
 }
 
 .filter-button .clear-filter:before{
-	text-indent: 0px;
-  	content: "\e60a";
-  	color: #F00;
-	left: 28px;
-	top: 19px;
-	font-size: 8px;
-	
+  text-indent: 0px;
+    content: "\e60a";
+    color: #F00;
+  left: 28px;
+  top: 19px;
+  font-size: 8px;
 }
 
 @media (min-width: 769px){
-	.filter-button .clear-filter:before{
-		top: 12px;
-		left: 15px;
-		font-size: 7px;
-	}	
+  .filter-button .clear-filter:before{
+    top: 12px;
+    left: 15px;
+    font-size: 7px;
+  } 
 }
 
 .project-preview .main-nav .close-full-preview:before{
-	text-indent: 0px;
-  	content: "\e60b";
-  	color: #767777;
-	left: 19px;
-	top: 19px;
-	font-size: 10px;
+  text-indent: 0px;
+    content: "\e60b";
+    color: #767777;
+  left: 19px;
+  top: 19px;
+  font-size: 10px;
 }
 
 
 
 .main-nav .menu-icon a:before{
-	text-indent: 0px;
-  	content: "\e603";
-  	color: #636363;
-	left: 15px;
-	top: 18px;
-	font-size: 10px;
+  text-indent: 0px;
+    content: "\e603";
+    color: #636363;
+  left: 15px;
+  top: 18px;
+  font-size: 10px;
 }
 
 
 
 .svg .logo a,
 .svg .icon {
-	background-image: none !important; 
-	position: relative;
+  background-image: none !important; 
+  position: relative;
 }
 
 .project-preview .main-nav .close-full-preview,
@@ -1295,19 +1291,14 @@ header .content.affix {
 
 .svg .logo a:before,
 .svg .icon:before{
-	font-family: 'tdm';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	position: absolute;
-	
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  font-family: 'tdm';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  position: absolute;
 }
 
 
@@ -1332,11 +1323,11 @@ header .content.affix {
 .project .field a,
 #project-preview .link a,
 #project-preview .ngo a{
-	-webkit-transition: color 0.5s; /* For Safari 3.1 to 6.0 */
-	-moz-transition: color 0.5s;
-	-o-transition: color 0.5s; 
-	transition: color 0.5s;
-	
+  -webkit-transition: color 0.5s; /* For Safari 3.1 to 6.0 */
+  -moz-transition: color 0.5s;
+  -o-transition: color 0.5s; 
+  transition: color 0.5s;
+  
   transition-delay: 0s;
   -moz-transition-delay: 0s;
   -webkit-transition-delay: 0s;
@@ -1359,15 +1350,14 @@ header .content.affix {
 #project-preview .contacts.show:before,
 .project-preview .main-nav .close-full-preview:hover:before,
 .slideout-menu-opened .main-nav .menu-icon a:before {
-	color: #FF0000;
+  color: #FF0000;
 }
 
 .filter-button .clear-filter {
-	-ms-transform: scale(0);
-	-webkit-transform: scale(0);
-	transform: scale(0);
-	display: block;
-	opacity: 0;
+  -ms-transform: scale(0);
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  display: block;
 }
 
 .filter-button .clear-filter.active {
@@ -1510,7 +1500,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
     background-size: 7px 7px;
   }
   
-  .page-node-19 .continue-arrow {
+  .page-node-22 .continue-arrow {
     background-image: url(../img/continue-arrow@2x.png);
     -webkit-background-size: contain;
     background-size: contain;
