@@ -16,6 +16,19 @@ o.hp.setContainerHeight = function() {
 
 }
 
+o.hp.fixIpad = function () {
+
+	// fix ios7 ipad landscape height bug
+	if (navigator.userAgent.match(/iPad;.*CPU.*OS 7_\d/i)) {
+    o.$html.addClass('ipad ios7');
+	}
+
+	document.ontouchmove = function(e) {
+		e.preventDefault();
+	}
+
+}
+
 // Init homepage interactivity
 o.hp.init = function() {
 
@@ -128,6 +141,7 @@ $(function(){
 
 	o.hp.initVars();
 	o.hp.setContainerHeight();
+	o.hp.fixIpad();
 	o.hp.init();
 
 });

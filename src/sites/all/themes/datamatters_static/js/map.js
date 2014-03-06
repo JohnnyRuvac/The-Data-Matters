@@ -115,10 +115,20 @@ o.map.setContainerHeight = function () {
 			height = window.innerHeight - headerHeight;
 
 	o.$mainContent.height( height );
-	o.$body.height( window.innerHeight );
-	$("html").height( window.innerHeight );
 
 }
+o.map.fixIpad = function () {
+
+	// fix ios7 ipad landscape height bug
+	if (navigator.userAgent.match(/iPad;.*CPU.*OS 7_\d/i)) {
+    o.$html.addClass('ipad ios7');
+	}
+
+	document.ontouchmove = function(e) {
+		e.preventDefault();
+	}
+}
+
 o.map.show = function () {
 
 	$("body").addClass("map-shown");
@@ -141,14 +151,18 @@ o.countries.initHoverAndClick = function() {
 		var country = o.s.select("#" + withProject[i]);
 
 		country.attr({"class": "has-project"});
-		country.hover(
-			function(e){
-				o.countries.hoverIn(e);
-			},
-			function(e){
-				o.countries.hoverOut(e);
-			}
-		);
+		
+		//don't apply hovers for touch devices
+		if ( !o.isTouch ) {
+			country.hover(
+				function(e){
+					o.countries.hoverIn(e);
+				},
+				function(e){
+					o.countries.hoverOut(e);
+				}
+			);
+		}
 
 		country.click(function(e){
 			o.countries.click(e, this);
@@ -250,11 +264,9 @@ o.countries.click = function (e, that) {
 o.countries.unzoomPatterns = function () {
 
 	var m = o.patternActive.matrix;
-	console.log(m.a);
 	m.scale( 1 / m.a * 1.5);
 	o.patternActive.transform(m);
 	o.patternInactive.transform(m);
-	console.log(m.a);
 
 }
 o.countries.zoomToActive = function(that, scale){
@@ -383,10 +395,12 @@ $(function(){
 		cx: $(window).width() / 2,
 		xy: $(window).height() / 2
 	};
+	o.isTouch = o.$html.hasClass("touch");
 	o.isIE = $("html").hasClass("ie") || !!navigator.userAgent.match(/Trident.*rv\:11\./) || !!navigator.userAgent.match(/Trident\/7\./);
 	o.$mainContent = $(".main-content");
 	o.s = Snap("#map-container");
 
+	o.map.fixIpad();
 	o.map.init();
 
 });
