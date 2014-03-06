@@ -436,15 +436,15 @@ header .content.affix {
   height: 32px;
   bottom: 0;
   margin: 0;
-  padding: 8px 0 0 24px;
+  padding: 8px 0 0 25px;
   font-size: 12px;
   border-top: 1px dotted #ccc;
 }
 .project .country {
   float: left;
   left: 45.5%;
-  width: 15.7%;
-  padding-left: 20px;
+  width: 17.7%;
+  padding-left: 25px;
   border-right: 1px dotted #ccc;
   background: url(../img/country-pin.png) no-repeat 9px center;
   color: #646464;
@@ -460,8 +460,8 @@ header .content.affix {
 
 .project .field {
   float: left;
-  width: 38.8%;
-  left: 61.2%;
+  width: 34.8%;
+  left: 63.2%;
   background: url(../img/field-icon.png) no-repeat 7px center;
   white-space: nowrap;
   overflow: hidden;
@@ -1157,18 +1157,17 @@ body.show_filter .right .filter-button {
 /* Icon Font */
 
 
-.logo {overflow: hidden;}
-.logo a {text-decoration: none; color: black;}
-.logo a:before{
+
+.logo a {text-indent: -3999px; display: block}
+.logo:before{
+  text-indent: 0px;
   content: "\e60f";
-  left: 12px;
-  top: 11px;
-  font-size: 75px;
-  text-indent: 0px; 
-  position: static !important;
+  font-size: 74px;
+  position: relative;
+  top: -6px
 }
 
-.main-nav .menu-search a:before{
+.main-nav .menu-search a.submit:before{
   content: "\e601";
   left: 12px;
   top: 11px;
@@ -1179,51 +1178,55 @@ body.show_filter .right .filter-button {
 #project-preview .country a:before {
   content: "\e602"; 
   left: -14px;
-  top: 0px;
+  top: -1px;
   color: #646464;
 }
 
 
 .project .country a:before{
   content: "\e602"; 
-  left: -11px;
-  top: 0px;
+  left: -14px;
+  top: -1px;
   color: #646565;
 }
 
 
-
+#country-info .field:before,
 #project-preview .field a:before {
   content: "\e604"; 
   left: -18px;
-  top: 0px;
+  top: -1px;
   color: #646464;
+}
+#country-info .field:before {
+	left: 13px;
+	top: 9px;
 }
 
 .project .field a:before {
   content: "\e604"; 
   left: -17px;
-  top: 0px;
+  top: -1px;
   color: #646565;
 }
 
-@media (min-width: 492px){
+@media (min-width: 492px){ 
   .project .field a:before{
-    left: -14px;
+    left: -17px;
   }
 }
 
 #project-preview .link a:before {
   content: "\e606"; 
   left: -18px;
-  top: 1px;
+  top: -1px;
 }
 
 
 #project-preview .ngo:before {
   content: "\e607"; 
   left: 14px;
-  top: 10px;
+  top: 9px;
 }
 
 #project-preview .contacts:before {
@@ -1236,7 +1239,7 @@ body.show_filter .right .filter-button {
 .filter-button .label:before{
   content: "\e605";
   right: 10px;
-  top: 18px;
+  top: 17px;
   font-size: 10px;
 }
 
@@ -1307,7 +1310,7 @@ body.show_filter .right .filter-button {
 .project .country {position: absolute}
 
 
-.svg .logo a:before,
+.svg .logo:before,
 .svg .icon:before{
   font-family: 'tdm';
   speak: none;
@@ -1315,7 +1318,7 @@ body.show_filter .right .filter-button {
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  line-height: 1;
+  line-height: 1.2;
   position: absolute;
 }
 
@@ -1325,7 +1328,8 @@ body.show_filter .right .filter-button {
 /* Transitions */
 
 .svg .icon,
-.projects .project a,
+.svg .logo:before,
+.main-nav .menu-search a:before,
 .main-nav .menu-icon a:before,
 .project-preview .main-nav .close-full-preview:before,
 .filter-content li a,
@@ -1341,17 +1345,10 @@ body.show_filter .right .filter-button {
 .project .field a,
 #project-preview .link a,
 #project-preview .ngo a{
-  -webkit-transition: color 0.5s; /* For Safari 3.1 to 6.0 */
-  -moz-transition: color 0.5s;
-  -o-transition: color 0.5s; 
-  transition: color 0.5s;
-  
-  transition-delay: 0s;
-  -moz-transition-delay: 0s;
-  -webkit-transition-delay: 0s;
-  -o-transition-delay: 0s;
-	
-	-webkit-transform: translateZ(0);  
+  -webkit-transition: color 0.3s; /* For Safari 3.1 to 6.0 */
+  -moz-transition: color 0.3s;
+  -o-transition: color 0.3s; 
+  transition: color 0.3s;
   
 }
 
@@ -1386,7 +1383,8 @@ body.show_filter .right .filter-button {
 	opacity: 1;
 }
 
-.projects .project a:hover,
+.svg .logo:hover,
+.main-nav .menu-search a:hover:before,
 #project-preview .country a:hover:before,
 .project .country a:hover:before,
 #project-preview .field a:hover:before,
