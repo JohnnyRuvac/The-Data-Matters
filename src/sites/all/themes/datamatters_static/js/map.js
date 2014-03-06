@@ -35,14 +35,44 @@ o.map.init = function () {
 		o.map.countries.select("#other-countries").before( o.map.bg );
 
 		//make it dragable
-		if ( $("html").hasClass("no-touch") )
-			o.map.countries.drag();
+		o.map.activateDrag();
 
 		//countries with project hover
 		var url = $("#map-container").attr("data-json-url");
 		o.map.loadCountriesWithProjects(url);
 
 	});
+
+}
+o.map.activateDrag = function () {
+
+	if ( o.isTouch )
+		return;
+	
+	var move = function(dx,dy) {
+		
+		var bbox = this.getBBox(),
+				top = (bbox.x + dx) > 0,
+				left = (bbox.y + dy) > 0,
+				right = (-bbox.x - dx + o.ww) > 2560 * o.map.scale, //2560 is the initial width of svg map
+				bottom = (-bbox.y - dy + o.wh) > 1440 * o.map.scale; //1440 is the initial height of svg map
+
+		if ( top || left || right || bottom)
+			return;
+		
+		this.attr({
+	    transform: this.data('origTransform') + (this.data('origTransform') ? "T" : "t") + [dx, dy]
+	   });
+	
+	} 
+	var start = function() {
+		this.data('origTransform', this.transform().local );
+	}
+	var stop = function() {
+		
+	}
+
+	o.map.countries.drag(move, start, stop);
 
 }
 o.map.loadCountriesWithProjects = function(url) {
