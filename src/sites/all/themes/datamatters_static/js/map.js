@@ -90,7 +90,7 @@ o.map.loadCountriesWithProjects = function(url) {
       bothComplete++;
       if (bothComplete == 2) {
       	o.countries.initHoverAndClick();
-      	o.countries.zoomToActive(null, 2);
+      	o.countries.center();
       	o.map.show();
       }
     }
@@ -106,7 +106,7 @@ o.map.loadCountriesWithProjects = function(url) {
       bothComplete++;
       if (bothComplete == 2) {
       	o.countries.initHoverAndClick();
-      	o.countries.zoomToActive(null, 2);
+      	o.countries.center();
       	o.map.show();
       }
     }
@@ -286,7 +286,7 @@ o.countries.click = function (e, that) {
 		o.activeCountry = that;
 		o.$activeCountry = $clicked;
 
-		o.countries.zoomToActive(that, 3);
+		o.countries.zoomToActive(that);
 		o.countries.showInfo(that);
 	}
 
@@ -299,73 +299,83 @@ o.countries.unzoomPatterns = function () {
 	o.patternInactive.transform(m);
 
 }
-o.countries.zoomToActive = function(that, scale){
+o.countries.center = function () {
 
-	//hungary is default for zoom
-	if (!that) {
-		that = o.s.select("#hungary");
-	}
+	var hu = o.s.select("#hungary"),
+			bbox = hu.getBBox(),
+			x = ( bbox.cx - o.ww / 2 ) * -1,
+			y = ( bbox.cy - o.wh / 2 ) * -1;
 
-	//3 is default zoom
-	if (!scale) {
-		scale = o.map.scale;
-	}
-	
-	//firstly zoom it
-	var m = new Snap.Matrix();
-	m.scale(scale);
-	o.map.scale = scale;
-	o.map.countries.transform( m );
+	TweenLite.to(o.dummyObj, 0, {
+	  x: x,
+	  y: y,
+	  sx: bbox.cx,
+	  sy: bbox.cy,
+	  s: 1,
+	  ease: Power1.easeOut,
+	  onUpdate: o.applySnapTweens,
+	  onUpdateParams:["{self}", o.map.countries]
+	});
 
-	var bbox = that.node.getBoundingClientRect();
+}
+o.countries.zoomToActive = function(that){
+
+	var bbox = that.getBBox();
 	var win = {
 		w: $(window).width(),
 		h: $(window).height(),
 		cx: $(window).width() / 2,
 		cy: $(window).height() / 2
 	};
-
-	var country = {
-		w: bbox.width,
-		h: bbox.height
-	};
-
-	//at map load, we are zooming to hungary, so o.$activeCountry is not defined
-	if ( o.$activeCountry ) {
-		
-		country.x = o.$activeCountry.offset().left;
-		country.y = o.$activeCountry.offset().top;
-
-	} else {
-
-		var active = $("#" + that.node.id);
-		country.x = active.offset().left;
-		country.y = active.offset().top;
-
-	}
-	country.cx = country.x + country.w / 2;
-	country.cy = country.y + country.h / 2;
-
 	var shift = {
-		x: (win.cx - country.cx) / o.map.scale,
-		y: (win.cy - country.cy) / o.map.scale
-	}
+		x: ( bbox.cx - o.ww / 2 ) * -1,
+		y: ( bbox.cy - o.wh / 2 ) * -1
+	};
+	console.log(shift.x);
+	var time = 1 / ( shift.x / -100 );
+	console.log(time);
+	time = 0.3;
 
 	//update strokes in patterns
 	o.patternActive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058})
 	o.patternInactive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058})
 
-	//update matrix because of potentional drag
-	o.map.matrix = o.map.countries.matrix
-
-	//apply it
-	o.map.matrix.translate( shift.x, shift.y )
-	o.map.countries.transform( o.map.matrix );
+	TweenLite.to(o.dummyObj, time, {
+	  x: shift.x,
+	  y: shift.y,
+	  sx: bbox.cx,
+	  sy: bbox.cy,
+	  s: 3,
+	  ease: Power1.easeOut,
+	  onUpdate: o.applySnapTweens,
+	  onUpdateParams:["{self}", o.map.countries]
+	});
 
 	//unzoom patterns
 	o.countries.unzoomPatterns();
 
 }
+
+// Animating with Greensock!
+o.dummyObj = {
+	x: 0,
+	y: 0,
+	sx: 0,
+	sy: 0,
+	s: 0
+}
+o.applySnapTweens = function(tween, snapEl) {
+
+	var x = tween.target.x,
+			y = tween.target.y,
+			sx = tween.target.sx,
+			sy = tween.target.sy,
+			s = tween.target.s;
+
+	snapEl.transform("t" + x + "," + y + "s" + s + "," + s + "," + sx + "," + sy);
+
+}
+// END Animating with Greensock!
 o.countries.showInfo = function (that) {
 
 	var safe_country = that.node.id,
@@ -439,6 +449,6 @@ $(function(){
 // Window resize
 $(window).resize(function(){
 	o.map.setContainerHeight();
-	o.countries.zoomToActive( o.selectedCountry, o.map.scale );
+	//o.countries.zoomToActive( o.selectedCountry, o.map.scale );
 });
 // End Window resize

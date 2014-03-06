@@ -16,6 +16,7 @@ function datamatters_static_js_alter(&$js, &$vars){
 	drupal_add_js( path_to_theme().'/js/script.js');
 	
 	if($path == "home") drupal_add_js( path_to_theme().'/js/home.js');
+  if($path == "map") drupal_add_js( path_to_theme().'/js/TweenMax.min.js');
 	if($path == "map") drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
   
 }
