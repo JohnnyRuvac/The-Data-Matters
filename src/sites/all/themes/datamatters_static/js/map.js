@@ -151,14 +151,18 @@ o.countries.initHoverAndClick = function() {
 		var country = o.s.select("#" + withProject[i]);
 
 		country.attr({"class": "has-project"});
-		country.hover(
-			function(e){
-				o.countries.hoverIn(e);
-			},
-			function(e){
-				o.countries.hoverOut(e);
-			}
-		);
+		
+		//don't apply hovers for touch devices
+		if ( !o.isTouch ) {
+			country.hover(
+				function(e){
+					o.countries.hoverIn(e);
+				},
+				function(e){
+					o.countries.hoverOut(e);
+				}
+			);
+		}
 
 		country.click(function(e){
 			o.countries.click(e, this);
@@ -391,6 +395,7 @@ $(function(){
 		cx: $(window).width() / 2,
 		xy: $(window).height() / 2
 	};
+	o.isTouch = o.$html.hasClass("touch");
 	o.isIE = $("html").hasClass("ie") || !!navigator.userAgent.match(/Trident.*rv\:11\./) || !!navigator.userAgent.match(/Trident\/7\./);
 	o.$mainContent = $(".main-content");
 	o.s = Snap("#map-container");
