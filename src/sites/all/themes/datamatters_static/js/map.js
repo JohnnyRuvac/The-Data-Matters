@@ -85,9 +85,16 @@ o.map.loadCountriesWithProjects = function(url) {
 }
 o.map.highlightCountriesWithProject = function () {
 
+	//define patterns, scale them
 	o.patternInactive = Snap("#pattern-inactive");
 	o.patternActive = Snap("#pattern-active");
 
+	var m = new Snap.Matrix();
+	m.scale(1.5);
+	o.patternInactive.transform(m);
+	o.patternActive.transform(m);
+
+	//highlight countries
 	o.countries.withProject = [];
 	
 	for (var i = 0; i < o.countriesJson.length; i++) {
@@ -108,6 +115,8 @@ o.map.setContainerHeight = function () {
 			height = window.innerHeight - headerHeight;
 
 	o.$mainContent.height( height );
+	o.$body.height( window.innerHeight );
+	$("html").height( window.innerHeight );
 
 }
 o.map.show = function () {
@@ -238,6 +247,16 @@ o.countries.click = function (e, that) {
 	}
 
 }
+o.countries.unzoomPatterns = function () {
+
+	var m = o.patternActive.matrix;
+	console.log(m.a);
+	m.scale( 1 / m.a * 1.5);
+	o.patternActive.transform(m);
+	o.patternInactive.transform(m);
+	console.log(m.a);
+
+}
 o.countries.zoomToActive = function(that, scale){
 
 	//hungary is default for zoom
@@ -300,6 +319,9 @@ o.countries.zoomToActive = function(that, scale){
 	//apply it
 	o.map.matrix.translate( shift.x, shift.y )
 	o.map.countries.transform( o.map.matrix );
+
+	//unzoom patterns
+	o.countries.unzoomPatterns();
 
 }
 o.countries.showInfo = function (that) {
