@@ -48,6 +48,11 @@ o.map.activateDrag = function () {
 
 	if ( o.isTouch )
 		return;
+
+	o.drag = {
+		x: 0,
+		y: 0
+	};
 	
 	var move = function(dx,dy) {
 		
@@ -59,17 +64,35 @@ o.map.activateDrag = function () {
 
 		if ( top || left || right || bottom)
 			return;
+
+		var x = dx - o.drag.x;
+		var y = dy - o.drag.y;
 		
-		this.attr({
-	    transform: this.data('origTransform') + (this.data('origTransform') ? "T" : "t") + [dx, dy]
-	   });
+		this.transform("t" + x + "," + y + "...");
+		
+		o.drag.x = dx;
+		o.drag.y = dy;
 	
 	} 
 	var start = function() {
-		this.data('origTransform', this.transform().local );
+		
 	}
 	var stop = function() {
+		o.drag.x = 0;
+		o.drag.y = 0;
+
+		var m = this.matrix;
 		
+		TweenLite.to(o.dummyObj, 0, {
+		  x: m.e,
+		  y: m.f,
+		  sx: 0,
+		  sy: 0,
+		  s: m.a,
+		  ease: Power1.easeOut,
+		  onUpdate: o.applySnapTweens,
+		  onUpdateParams:["{self}", o.map.countries, m.a]
+		});
 	}
 
 	o.map.countries.drag(move, start, stop);
@@ -305,7 +328,7 @@ o.countries.center = function () {
 			bbox = hu.getBBox(),
 			x = ( bbox.cx - o.ww / 2 ) * -1,
 			y = ( bbox.cy - o.wh / 2 ) * -1;
-
+	
 	TweenLite.to(o.dummyObj, 0, {
 	  x: x,
 	  y: y,
@@ -314,7 +337,7 @@ o.countries.center = function () {
 	  s: 1,
 	  ease: Power1.easeOut,
 	  onUpdate: o.applySnapTweens,
-	  onUpdateParams:["{self}", o.map.countries]
+	  onUpdateParams:["{self}", o.map.countries, 1, bbox.cx]
 	});
 
 }
@@ -331,15 +354,13 @@ o.countries.zoomToActive = function(that){
 		x: ( bbox.cx - o.ww / 2 ) * -1,
 		y: ( bbox.cy - o.wh / 2 ) * -1
 	};
-	console.log(shift.x);
-	var time = 1 / ( shift.x / -100 );
-	console.log(time);
+
 	time = 0.3;
 
 	//update strokes in patterns
 	o.patternActive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058})
 	o.patternInactive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058})
-
+	
 	TweenLite.to(o.dummyObj, time, {
 	  x: shift.x,
 	  y: shift.y,
@@ -348,7 +369,7 @@ o.countries.zoomToActive = function(that){
 	  s: 3,
 	  ease: Power1.easeOut,
 	  onUpdate: o.applySnapTweens,
-	  onUpdateParams:["{self}", o.map.countries]
+	  onUpdateParams:["{self}", o.map.countries, 3, bbox.cx, bbox.cy]
 	});
 
 	//unzoom patterns
@@ -364,12 +385,15 @@ o.dummyObj = {
 	sy: 0,
 	s: 0
 }
-o.applySnapTweens = function(tween, snapEl) {
+o.applySnapTweens = function(tween, snapEl, s, sx, sy) {
 
-	var x = tween.target.x,
+	//if we are scaling the map, we need fixed scale control points, not animated
+
+	var scaleing = snapEl.matrix && snapEl.matrix.a != s; //check if we are scaleing
+			x = tween.target.x,
 			y = tween.target.y,
-			sx = tween.target.sx,
-			sy = tween.target.sy,
+			sx = (scaleing) ? sx : tween.target.sx,
+			sy = (scaleing) ? sy : tween.target.sy,
 			s = tween.target.s;
 
 	snapEl.transform("t" + x + "," + y + "s" + s + "," + s + "," + sx + "," + sy);
