@@ -13,7 +13,7 @@
   </div>
 
 
-	<?php if ($primary_local_tasks): ?><ul class='links clearfix action-links'><?php print render($primary_local_tasks) ?></ul><?php endif; ?>
+	  <?php if ($primary_local_tasks && $title != "User account"): ?><ul class='links clearfix action-links'><?php print render($primary_local_tasks) ?></ul><?php endif; ?>
     <?php if ($secondary_local_tasks): ?><ul class='links clearfix'><?php print render($secondary_local_tasks) ?></ul><?php endif; ?>
 
 <?php if ($page['help'] || ($show_messages && $messages)): ?>

@@ -23,6 +23,7 @@ function datamatters_static_js_alter(&$js, &$vars){
 
 
 function datamatters_static_preprocess_html(&$vars){
+  global $base_path;
 
   if($vars['head_title_array']['title'] == "Page not found"){
     $vars['page']['content']['system_main']['main']['#markup'] = "404 - The page not found";
@@ -33,6 +34,11 @@ function datamatters_static_preprocess_html(&$vars){
       if($node->type == "project" || $node->title == "Projects") $vars['classes_array'][] = "show_filter";
   }
   
+  if(isset($vars['page']['content']['system_main']['summary']['member_for'])){
+    header('Location: '.$base_path);
+    exit;
+  }
+  
 }
 
 
@@ -41,14 +47,22 @@ function datamatters_static_form_alter(&$form, &$form_state, $form_id){
     $form['name']['#attributes'] = array('placeholder' => t('Username'));
     $form['pass']['#attributes'] = array('placeholder' => t('Password'));
     $form['#suffix'] = "<a href='/user/password' class='forgot_button'>Forgot password?</a>";
+    array_push($form['#submit'], 'datamatters_static_userlogin_submit');
   }
-  
+
   if($form['#form_id'] == "user_pass"){
     $form['name']['#attributes'] = array('placeholder' => t('User or e-mail'));
   }
   
 }
 
+
+function datamatters_static_userlogin_submit(&$form, &$form_state){
+  $form_state['redirect'] = 'node/22';
+}
+
+  
+  
  //
  // Implementation of preprocess_page().
  //
@@ -121,8 +135,6 @@ function datamatters_static_preprocess_page(&$vars) {
   }
   	
   if(isset($vars['node']->field_country['und'][0])) $menu_country = taxonomy_term_load($vars['node']->field_country['und'][0]['tid']);
-  
-  
   
   // console
   // $vars['messages'] = print_r($vars['tax_url'], TRUE);
