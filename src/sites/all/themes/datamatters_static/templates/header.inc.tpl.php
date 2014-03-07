@@ -64,7 +64,7 @@
 						
 							<li class="menu-search hidden-xs clearfix">
 								<input type="text" placeholder="Search">
-								<a href="" class="submit icon">Search</a>
+								<a href="#" class="submit icon">Search</a>
 								<ul class="search-results">
 								</ul>
 							</li>

@@ -46,6 +46,14 @@ var nameArray = [];
 	
 			})
 			
+			
+			$(".menu-search .submit").click(function(e){
+  			e.preventDefault();
+  			
+  			$(".menu-search input").trigger("focusin").focus();
+  			
+			});
+			
 			$(".menu-search input, #slideout-menu .search-input").keyup(function(e){
 				var str = $(this).val().toLowerCase();
 				
@@ -58,18 +66,19 @@ var nameArray = [];
     			 $(this).parent().addClass("focus");
     			 
     			 var leftSpace = $(window).width() - $(this).offset().left;
-    			 if(leftSpace < 324){
-      			 $(".main-nav .menu-search").css({maxWidth: leftSpace})
-      			 .find("input").css({maxWidth: leftSpace - 36});
-      			 $(".main-nav .search-results").css({maxWidth: leftSpace + 1});
-    			 }else if(leftSpace >= 324 && $(".main-nav .menu-search").css("max-width") != "auto"){
-      			 $(".main-nav .menu-search").css({maxWidth: "auto"})
-      			 .find("input").css({maxWidth: "auto"});
-      			 $(".main-nav .search-results").css({maxWidth: "auto"});
-      			 
+    			 if($(window).width() < 1200){
+      			 if(leftSpace < 324){
+        			 $(".main-nav .menu-search").css({maxWidth: leftSpace})
+        			 .find("input").css({maxWidth: leftSpace - 36});
+        			 $(".main-nav .search-results").css({maxWidth: leftSpace + 1});
+      			 }else if(leftSpace >= 324 && $(".main-nav .menu-search").css("max-width") != "auto"){
+        			 $(".main-nav .menu-search").css({maxWidth: "auto"})
+        			 .find("input").css({maxWidth: "auto"});
+        			 $(".main-nav .search-results").css({maxWidth: "auto"});
+        			 
+      			 }
     			 }
-    			 
-    			 console.log(leftSpace);
+    			 //console.log(leftSpace);
         }
 			}).focusout(function(){
   			if(!$(this).hasClass("search-input")){
