@@ -46,9 +46,6 @@ o.map.init = function () {
 }
 o.map.activateDrag = function () {
 
-	if ( o.isTouch )
-		return;
-
 	o.drag = {
 		x: 0,
 		y: 0
@@ -217,9 +214,37 @@ o.countries.initHoverAndClick = function() {
 			);
 		}
 
-		country.click(function(e){
-			o.countries.click(e, this);
-		});
+		//bind touch/click event for countries
+		if ( !o.isTouch ) {
+			country.click(function(e){
+				o.countries.click(e, this);
+			});
+		} else {
+
+			//if touchstart position and touchend are same, perform click
+			o.lastTouch = {
+				x: null,
+				y: null
+			};
+
+			country.touchstart(function(e){
+				
+				o.lastTouch.x = e.pageX;
+				o.lastTouch.y = e.pageY;
+
+			});
+			country.touchend(function(e){
+				
+				var x = e.changedTouches[0].pageX,
+						y = e.changedTouches[0].pageY,
+						same = ( x == o.lastTouch.x && y == o.lastTouch.y );
+
+				if (same)
+					o.countries.click(e, this);
+
+			});
+
+		}
 
 	}
 
