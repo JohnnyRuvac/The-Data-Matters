@@ -1551,10 +1551,6 @@ body.page-node-23 .node-page {
   margin-top: 10px; margin-bottom: 10px;
 }
 
-.not-logged-in .action-links {
-  display: no ne;
-}
-
 /* END of User stuff */
 
 
@@ -1598,7 +1594,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
     -webkit-background-size: 11px 11px;
     background-size: 11px 11px;
   }
-  .logo {
+  .no-svg .logo {
     background-image: url(../img/logo@2x.png);
     -webkit-background-size: 70px 75px;
     background-size: 70px 75px;
