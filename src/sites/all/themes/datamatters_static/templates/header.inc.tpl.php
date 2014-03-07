@@ -70,7 +70,6 @@
 							</li>
 						</div>
 					</ul>
-					<a href="<?=$back?>" class="close-full-preview icon">Close</a>
 				</nav>
 				</div>
 			</header>

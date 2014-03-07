@@ -1,6 +1,3 @@
-
-	<!-- node--project.tpl.php -->
-	
 <?
 	
 	$country = taxonomy_term_load($node->field_country['und'][0]['tid']);
@@ -43,6 +40,7 @@
 
 ?>	
 				<div id="project-preview">
+					<a href="/projects" class="close-full-preview icon">Close</a>
 			  	<div class="preview-content">
 			  		<img src="<?=file_create_url($node->field_image['und'][0]['uri'])?>" alt="">
 				  	<h2><?=$node->title?></h2>

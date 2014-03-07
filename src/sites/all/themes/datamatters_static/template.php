@@ -12,7 +12,7 @@ function datamatters_static_js_alter(&$js, &$vars){
 	drupal_add_js( path_to_theme().'/js/hammer.min.js');
 	
 	drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
-	drupal_add_js( path_to_theme().'/js/mousewheel.js');
+	drupal_add_js( path_to_theme().'/js/mousewheel.js'); 
 	drupal_add_js( path_to_theme().'/js/script.js');
 	
 	if($path == "home") drupal_add_js( path_to_theme().'/js/home.js');
@@ -31,7 +31,7 @@ function datamatters_static_preprocess_html(&$vars){
   
   $node = menu_get_object();
   if(isset($node)){
-      if($node->type == "project" || $node->title == "Projects") $vars['classes_array'][] = "show_filter";
+      if($node->title == "Projects") $vars['classes_array'][] = "show_filter";
   }
   
   if(isset($vars['page']['content']['system_main']['summary']['member_for'])){
@@ -106,8 +106,8 @@ function datamatters_static_preprocess_page(&$vars) {
   
   // BACK referer
   $back = $_SERVER['HTTP_REFERER'];
-  if(strpos($back, "dev.datamatters")) $vars['back'] = $back;
-  else $vars['back'] = "";
+  if(strpos($back, "dev.datamatters")) $vars['back'] = "/projects";
+  else $vars['back'] = "/projects";
   
   // Template override
   $path = drupal_get_path_alias();

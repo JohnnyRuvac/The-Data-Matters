@@ -28,24 +28,26 @@ var nameArray = [];
 		}
 	
 	
-		$(window).load(function(){
-			$.getJSON("/json/countries", function(data){
+    	$.getJSON("/json/countries", function(data){
 				$.each(data, function(key, val){
 					nameArray.push({"name":val.country.name, "low":val.country.name.toLowerCase(), "link":val.country.link});
 				})
+				console.log("countries");
 			})
 			$.getJSON("/json/fields", function(data){
 				$.each(data, function(key, val){
 					nameArray.push({"name":val.field.name,"low":val.field.name.toLowerCase(), "link":val.field.link});
 				})
+				console.log("fields")
 			})
 			$.getJSON("/json/projects", function(data){
 				$.each(data, function(key, val){
 					nameArray.push({"name":val.node.title, "low":val.node.title.toLowerCase(), "link":val.node.path});
 				})
-	
+				console.log("projects")	
 			})
-			
+	
+		$(window).load(function(){
 			
 			$(".menu-search .submit").click(function(e){
   			e.preventDefault();
@@ -57,9 +59,12 @@ var nameArray = [];
 			$(".menu-search input, #slideout-menu .search-input").keyup(function(e){
 				var str = $(this).val().toLowerCase();
 				
-				$(".menu-search .search-results, #slideout-menu ul.clearfix")
-				.html(searchArray(str, nameArray));
-				if(!$(this).hasClass("search-input")) $(".menu-search .search-results").parent().addClass("active");
+				if(str.length > 0){
+  				$(".menu-search .search-results, #slideout-menu ul.clearfix").html(searchArray(str, nameArray));
+  				if(!$(this).hasClass("search-input")) $(".menu-search .search-results").parent().addClass("active");
+				}else{
+  				$(".menu-search .search-results").parent().removeClass("active");
+				}
 	
 			}).focusin(function(){
   			if(!$(this).hasClass("search-input")){
@@ -93,11 +98,12 @@ var nameArray = [];
 })(jQuery); 
 
 function searchArray(str, arr){
-	var items = [];
+  var items = [];
   var count = 0;
 	$.each(arr, function(key, val){
 	  count++;
-		if(val.low.search(str.toLowerCase()) >= 0 && count <= 10) items.push("<li><a href='"+val.link+"'>"+val.name+"</a></li>");
+		if(val.low.search(str.toLowerCase()) >= 0) items.push("<li><a href='"+val.link+"'>"+val.name+"</a></li>");
+		//if(count > 10) return false;
 	})
 
 	return items.join("");
