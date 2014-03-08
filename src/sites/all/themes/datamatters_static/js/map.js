@@ -471,6 +471,8 @@ o.countries.showInfo = function (that) {
 // DOM ready
 $(function(){
 
+	o.checkSVG();
+
 	//cache vars
 	o.w = {
 		h: 	$(window).height(),

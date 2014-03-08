@@ -16,7 +16,8 @@
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
   <!--[if lt IE 9]>
-	<script src="/<?=path_to_theme()?>js/html5shiv.js"></script>
+  <script src="/<?=path_to_theme()?>/js/html5shiv.js"></script>
+	<script src="/<?=path_to_theme()?>/js/respondjs-min.js"></script>
   <![endif]-->
   
 </head>

@@ -139,6 +139,8 @@ o.placeLogo = function () {
 // DOM ready
 $(function(){
 
+	o.checkSVG();
+
 	o.hp.initVars();
 	o.hp.setContainerHeight();
 	o.hp.fixIpad();

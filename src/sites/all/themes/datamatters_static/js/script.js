@@ -498,8 +498,17 @@ o.sortNGO = function(){
   }
   
 }
-
 //END organisations page, rearange DOM
+
+// Check SVG support
+o.checkSVG = function () {
+
+	if ( !o.svgSupport ) {
+		window.location = "/projects";
+	}
+
+}
+// END check SVG support
 
 // DOM ready
 $(function(){
