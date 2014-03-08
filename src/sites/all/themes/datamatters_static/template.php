@@ -77,7 +77,7 @@ function datamatters_static_preprocess_page(&$vars) {
   foreach($countries as $key => $value):
     $vars['countries'][$key]['name'] = $value->name;
 	  $vars['countries'][$key]['tid'] = $value->tid;
-	  $vars['countries'][$key]['url'] = drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid);
+	  $vars['countries'][$key]['url'] = "projects#country=".explode("/", drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid))[1];
 	  $vars['tax_names'][$value->tid] = $value->name;
 	  
   endforeach;
@@ -87,7 +87,7 @@ function datamatters_static_preprocess_page(&$vars) {
 
 	  $vars['field'][$key]['name'] = $value->name;
 	  $vars['field'][$key]['tid'] = $value->tid;
-	  $vars['field'][$key]['url'] = drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid);
+	  $vars['field'][$key]['url'] = "projects#field=".explode("/", drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid))[1];
 	  $vars['tax_names'][$value->tid] = $value->name;
 	  
   endforeach;

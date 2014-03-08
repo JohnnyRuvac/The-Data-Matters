@@ -16,7 +16,12 @@ foreach($rows as $key => $value):
 	foreach($value as $keyy => $valuee):
 		if($keyy == "field" || $keyy == "country") $rows[$key][$keyy]['link'] = url('taxonomy/term/'.$value[$keyy]['tid']);
 		if($keyy == "country") $rows[$key][$keyy]['safe_name'] = transliteration_clean_filename($rows[$key][$keyy]['name']);
+		if($keyy == "country") {
+		  $link = explode("/", $rows[$key][$keyy]['link']);
+  		$rows[$key][$keyy]['link'] = "/projects#country=".$link[2];
+		}
 		if($keyy == "node") $rows[$key][$keyy]['safe_name_country'] = transliteration_clean_filename($rows[$key][$keyy]['country']);
+		if($keyy == "node") $rows[$key][$keyy]['safe_name_field'] = transliteration_clean_filename($rows[$key][$keyy]['field']);
 	endforeach;
 endforeach;
 

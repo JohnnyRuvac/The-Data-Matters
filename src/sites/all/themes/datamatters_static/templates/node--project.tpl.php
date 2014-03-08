@@ -3,6 +3,8 @@
 	$country = taxonomy_term_load($node->field_country['und'][0]['tid']);
 	$field = taxonomy_term_load($node->field_field['und'][0]['tid']);
 	$ngo = taxonomy_term_load($node->field_organisation['und'][0]['tid']);
+  $lCountry = "projects#country=".str_ireplace("-", "_", explode("/", drupal_lookup_path("alias", "taxonomy/term/".$country->tid))[1]);
+  $lField = "projects#country=".str_ireplace("-", "_", explode("/", drupal_lookup_path("alias", "taxonomy/term/".$field->tid))[1]);
 	
 	if(!isset($node->field_image['und'][0]['uri'])) $node->field_image['und'][0]['uri'] = "public://blank.jpg";
 	
@@ -14,7 +16,6 @@
 
 		$pField = transliteration_clean_filename($field->name);
 		$pCountry = transliteration_clean_filename($country->name);
-
 ?>
 					<li class="project mix <?=$pField?> <?=$pCountry?> clearfix">
 						<a href="<?=$node_url?>" title="<?=$node->title?>">
@@ -23,11 +24,11 @@
 							<div class="content">
 								<h2><a href="<?=$node_url?>" title="<?=$node->title?>"><?=truncate_utf8($node->title, 45, TRUE, TRUE)?></a></h2>
 								<p class="country">
-									<span class="short"><a class="icon" href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->field_short_name['und'][0]['value']?></a></span>
-									<span class="long"><a class="icon" href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->name?></a></span>
+									<span class="short"><a class="icon" href="/<?=$lCountry?>"><?=$country->field_short_name['und'][0]['value']?></a></span>
+									<span class="long"><a class="icon" href="/<?=$lCountry?>"><?=$country->name?></a></span>
 									
 								</p>
-								<p class="field "><a class="icon" href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$field->tid)?>"><?=$field->name?></a></p>
+								<p class="field "><a class="icon" href="/<?=$lField?>"><?=$field->name?></a></p>
 							</div>
 						</a>
 					</li>
@@ -45,8 +46,8 @@
 			  		<img src="<?=file_create_url($node->field_image['und'][0]['uri'])?>" alt="">
 				  	<h2><?=$node->title?></h2>
 				  	<div class="info clearfix">
-				  		<p class="country"><a class="icon" href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$country->tid)?>"><?=$country->name?></a></p>
-				  		<p class="field"><a class="icon" href="/<?=drupal_lookup_path("alias", "taxonomy/term/".$field->tid)?>"><?=$field->name?></a></p>
+				  		<p class="country"><a class="icon" href="/<?=$lCountry?>"><?=$country->name?></a></p>
+				  		<p class="field"><a class="icon" href="/<?=$lField?>"><?=$field->name?></a></p>
 						<?php if(isset($node->field_link['und'][0]['url'])): ?>
 					  		<p class="link">
 					  			<a class="icon" href="<?=$node->field_link['und'][0]['url']?>" target="_blank">Website</a>

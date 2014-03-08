@@ -430,11 +430,12 @@ o.countries.showInfo = function (that) {
 			
 			var title = o.projectsJson[i].node.title,
 					field = o.projectsJson[i].node.field,
+					field_safe_name = o.projectsJson[i].node.safe_name_field,
 					path =  o.projectsJson[i].node.path;
 
 			html += '<li>';
 			html += '<a href="' + path + '" class="project-name">' + title + '</a>';
-			html += '<a href="' + path + '" class="field icon">' + field + '</a>';
+			html += '<a href="/projects#field=' + field_safe_name + '" class="field icon">' + field + '</a>';
 			html += '</li>';
 
 		}
