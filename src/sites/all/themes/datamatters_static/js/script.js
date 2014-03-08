@@ -311,6 +311,15 @@ o.activateSearch = function () {
 // Projects sorting
 o.projectsFiltering = function () {
 
+	//init mixitup
+	$("#grid").mixitup({
+		multiFilter: true,
+		filterLogic: 'and'
+	});
+
+	//update filters according to hash tag
+	o.filterProjectsByHash();
+
 	// save active filter for later use
 	$(".project-filter a").click(function(e){
 		
@@ -324,11 +333,6 @@ o.projectsFiltering = function () {
 
 		o.filterProjectsByString();
 
-	});
-
-	$("#grid").mixitup({
-		multiFilter: true,
-		filterLogic: 'and'
 	});
 
 	//clear filter
@@ -358,19 +362,93 @@ o.filterProjectsByString = function () {
 
 	var filterString = '';
 	//only field
-	if ( o.activeFieldFilter )
+	if ( o.activeFieldFilter ) {
 		filterString = o.activeFieldFilter;
+		window.location.hash = "field=" + o.activeFieldFilter;
+	}
 	//only country
-	if ( o.activeCountryFilter )
+	if ( o.activeCountryFilter ) {
 		filterString = o.activeCountryFilter;
+		window.location.hash = "country=" + o.activeCountryFilter;
+	}
 	//both
-	if ( o.activeFieldFilter && o.activeCountryFilter )
+	if ( o.activeFieldFilter && o.activeCountryFilter ) {
 		filterString = o.activeFieldFilter + ' ' + o.activeCountryFilter;
+		window.location.hash = "field=" + o.activeFieldFilter + "/country=" + o.activeCountryFilter;	
+	}
 	//none of them
-	if ( !filterString )
+	if ( !filterString ) {
 		filterString = 'all';
+		window.location.hash = "";
+	}
 
+	console.log("filterString: " + filterString);
 	$("#grid").mixitup("filter", filterString);
+
+}
+o.searchStringInArray = function(str, strArray) {
+
+  for (var j=0; j<strArray.length; j++) {
+    if (strArray[j].match(str)) 
+    	return strArray[j].replace(str, "");
+  }
+  return false;
+
+}
+o.filterProjectsByHash = function () {
+
+	//check hash tag for activeFieldFilter, activeCountryFilter, and update those variables
+	var s = window.location.hash;
+
+	//return on no hash
+	if (!s)
+		return;
+
+	s = s.replace("#","");
+	s = s.split("/");
+	o.activeFieldFilter = o.searchStringInArray( "field=", s );
+	o.activeCountryFilter = o.searchStringInArray( "country=", s );
+
+	console.log( o.activeFieldFilter );
+	console.log( o.activeCountryFilter );
+
+	//activate Field Filter
+	if ( o.activeFieldFilter ) {
+
+		var $filterLi = $('.project-filter[data-filter="' + o.activeFieldFilter + '"]'),
+				$filterButton = $filterLi.closest(".filter-button"),
+				text = $filterLi.text();
+
+		$filterButton
+			.find(".label")
+			.text( text )
+			.addClass("active");
+
+		//show clear filter icon
+		$filterButton.find(".clear-filter").addClass("active");
+
+	}
+
+	//activate Country Filter
+	if ( o.activeCountryFilter ) {
+
+		var $filterLi = $('.project-filter[data-filter="' + o.activeCountryFilter + '"]'),
+				$filterButton = $filterLi.closest(".filter-button"),
+				text = $filterLi.text();
+
+		$filterButton
+			.find(".label")
+			.text( text )
+			.addClass("active");
+
+		//show clear filter icon
+		$filterButton.find(".clear-filter").addClass("active");
+
+	}
+
+
+	//filter projects
+	o.filterProjectsByString();
 
 }
 // END projects sorting
@@ -427,6 +505,7 @@ $(function(){
 	o.projectsFiltering();
 	o.showNGO();
   o.sortNGO();
+
 });
 // END DOM ready
 
