@@ -1112,6 +1112,23 @@ body.loaded.show_filter .right .filter-button{
   margin-left: -7px;
   background: url(../img/continue-arrow.png);
 }
+
+#homepage-slogan.active {
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+#homepage-slogan {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
 /* END home page */
 
 /* Interactive Map */

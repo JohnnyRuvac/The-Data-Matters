@@ -4,6 +4,8 @@ o.hp.initVars = function () {
 
 	o.$mainContent = $(".main-content");
 	o.$hpContainer = $("#hp-container");
+	o.$hpSlogan = $("#homepage-slogan");
+	o.centerLogo = null; //determines if logo should be vertically centered
 
 }
 
@@ -21,10 +23,6 @@ o.hp.fixIpad = function () {
 	// fix ios7 ipad landscape height bug
 	if (navigator.userAgent.match(/iPad;.*CPU.*OS 7_\d/i)) {
     o.$html.addClass('ipad ios7');
-	}
-
-	document.ontouchmove = function(e) {
-		e.preventDefault();
 	}
 
 }
@@ -48,6 +46,7 @@ o.hp.init = function() {
 	      o.countriesJson = data;
 	      o.appendCountriesWithProject( d );
 	      o.placeLogo();
+	      o.initStoryTelling();
 	    }
 	  });
 
@@ -102,12 +101,13 @@ o.placeLogo = function () {
 
 	o.hp.setContainerHeight();
 
-	var textBBox = o.logoText.node.getBoundingClientRect(),
+	var top = ( o.centerLogo ) ? o.centerLogo : o.wh * 0.1111 //top of the logo should be at 11.111% of screen height, or center
+			textBBox = o.logoText.node.getBoundingClientRect(),
 			logoBBox = o.logo.getBBox(),
 			shift = {},
 			w = { //window
 				cx: o.ww / 2,
-				t: o.wh * 0.11111 //top of the logo should be at 11.111% of screen height
+				t: top
 			};
 
 	//calculate difference between center of screen
@@ -132,9 +132,167 @@ o.placeLogo = function () {
 			headerHeight = o.$headerContent.height(),
 			sloganTop = textBottom + 48 - headerHeight;
 
-	$("#homepage-slogan").css("top", sloganTop);
+	o.$hpSlogan.css("top", sloganTop);
 
 }
+
+// Storytelling
+o.showFirstScreen = function () {
+
+	//place again logo
+	o.centerLogo = null;
+	o.placeLogo();
+
+	o.$hpSlogan.addClass("active");
+	o.logoText.attr({
+		opacity: 1
+	});
+
+}
+o.hideFirstScreen = function () {
+
+	o.$hpSlogan.removeClass("active");
+
+}
+o.showCountries = function () {
+
+	o.countries.attr({
+		opacity: 1
+	});
+
+	o.logoText.attr({
+		opacity: 0
+	});
+
+	//center logo vertically
+	var bbox = o.logo.getBBox(),
+			svgHeight = o.$hpContainer.height(),
+			logoHeight = bbox.y + bbox.h,
+			top = ( svgHeight - logoHeight ) / 2;
+
+	//if its not already centered
+	if ( !o.centerLogo ) {
+		o.centerLogo = top;
+		o.placeLogo();
+	}
+
+}
+o.hideCountries = function () {
+
+	o.countries.attr({
+		opacity: 0
+	});
+
+}
+o.exitCurrentSlide = function () {
+
+	switch ( o.currentSlide ) {
+		case 0:
+			o.hideFirstScreen();
+			break;
+		case 1:
+			o.hideCountries();
+			break;
+		default:
+			break;
+	}
+
+}
+o.anotherSlide = function (direction) {
+
+	//do needed stuff on current slide exit
+	o.exitCurrentSlide();
+	
+	//update current slide index
+	if ( direction == "next" )
+		o.currentSlide++;
+	else
+		o.currentSlide--;
+
+	if ( o.currentSlide < 0 )
+		o.currentSlide = 0;
+	if ( o.currentSlide > 10 )
+		o.currentSlide = 10;
+
+	//based on slide index, do needed stuff
+	switch ( o.currentSlide ) {
+		case 0:
+			o.showFirstScreen();
+			break;
+		case 1:
+			o.showCountries();
+			break;
+		default:
+			console.log("some other slide: " + o.currentSlide);
+			break;
+	}
+
+}
+o.initSlideScrolling = function () {
+
+	//init vars
+	o.scrolled = false;
+	o.lastY = null;
+	o.swipeDisabled = false;
+	o.currentSlide = 0;
+
+	//touch devices
+	document.ontouchmove = function(e) {
+		
+		e.preventDefault();
+
+		if ( o.lastY && !o.swipeDisabled ) {
+
+			//update slides
+			if ( o.lastY < e.pageY )
+				o.anotherSlide("prev");
+			else
+				o.anotherSlide("next");
+
+			o.swipeDisabled = true;
+
+		}
+		o.lastY = e.pageY;
+
+	}
+
+	document.ontouchend = function (e) {
+
+		o.lastY = null;
+		o.swipeDisabled = false;
+
+	}
+	//end of touch devices
+
+	//no-touch devices
+	o.$hpContainer.on("mousewheel", function(e){
+		
+		var up = ( e.deltaY < 0 );
+		if ( !o.scrolled ) {
+
+			o.scrolled = true;
+			if (up)
+				o.anotherSlide("next");
+			else
+				o.anotherSlide("prev");
+
+			//timeout because of momentum scroll on Apple devices
+			window.setTimeout(function(){
+				o.scrolled = false;
+			}, 700);
+
+		}
+
+	});
+	//end of no-touch devices	
+
+}
+o.initStoryTelling = function () {
+
+	o.initSlideScrolling();
+
+}
+// END Storytelling
 
 // DOM ready
 $(function(){
