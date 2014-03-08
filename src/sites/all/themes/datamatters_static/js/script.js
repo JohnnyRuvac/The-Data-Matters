@@ -311,11 +311,11 @@ o.activateSearch = function () {
 // Projects sorting
 o.projectsFiltering = function () {
 
-	//init mixitup
-	$("#grid").mixitup({
-		multiFilter: true,
-		filterLogic: 'and'
-	});
+	//init mixitup if there is no hash tag, otherwise init it in o.filterProjectsByString();
+	o.hashOnLoad = window.location.hash;
+
+	if (!o.hashOnLoad)
+		$("#grid").mixItUp();
 
 	//update filters according to hash tag
 	o.filterProjectsByHash();
@@ -363,17 +363,17 @@ o.filterProjectsByString = function () {
 	var filterString = '';
 	//only field
 	if ( o.activeFieldFilter ) {
-		filterString = o.activeFieldFilter;
+		filterString = "." + o.activeFieldFilter;
 		window.location.hash = "field=" + o.activeFieldFilter;
 	}
 	//only country
 	if ( o.activeCountryFilter ) {
-		filterString = o.activeCountryFilter;
+		filterString = "." + o.activeCountryFilter;
 		window.location.hash = "country=" + o.activeCountryFilter;
 	}
 	//both
 	if ( o.activeFieldFilter && o.activeCountryFilter ) {
-		filterString = o.activeFieldFilter + ' ' + o.activeCountryFilter;
+		filterString = "." + o.activeFieldFilter + '.' + o.activeCountryFilter;
 		window.location.hash = "field=" + o.activeFieldFilter + "/country=" + o.activeCountryFilter;	
 	}
 	//none of them
@@ -381,9 +381,22 @@ o.filterProjectsByString = function () {
 		filterString = 'all';
 		window.location.hash = "";
 	}
+	
+	//if there is hash, init mixit up with this filter string, otherwise just filter it
+	if ( o.hashOnLoad ) {
 
-	console.log("filterString: " + filterString);
-	$("#grid").mixitup("filter", filterString);
+		$("#grid").mixItUp({
+			load: {
+				filter: filterString
+			}
+		});
+		o.hashOnLoad = false;
+
+	} else {
+		
+		$("#grid").mixItUp("filter", filterString);
+
+	}
 
 }
 o.searchStringInArray = function(str, strArray) {
@@ -408,9 +421,6 @@ o.filterProjectsByHash = function () {
 	s = s.split("/");
 	o.activeFieldFilter = o.searchStringInArray( "field=", s );
 	o.activeCountryFilter = o.searchStringInArray( "country=", s );
-
-	console.log( o.activeFieldFilter );
-	console.log( o.activeCountryFilter );
 
 	//activate Field Filter
 	if ( o.activeFieldFilter ) {
