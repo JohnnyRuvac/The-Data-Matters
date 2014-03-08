@@ -369,12 +369,6 @@ o.countries.center = function () {
 o.countries.zoomToActive = function(that){
 
 	var bbox = that.getBBox();
-	var win = {
-		w: $(window).width(),
-		h: $(window).height(),
-		cx: $(window).width() / 2,
-		cy: $(window).height() / 2
-	};
 	var shift = {
 		x: ( bbox.cx - o.ww / 2 ) * -1,
 		y: ( bbox.cy - o.wh / 2 ) * -1
@@ -383,8 +377,8 @@ o.countries.zoomToActive = function(that){
 	time = 0.3;
 
 	//update strokes in patterns
-	o.patternActive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058})
-	o.patternInactive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058})
+	o.patternActive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058});
+	o.patternInactive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058});
 	
 	TweenLite.to(o.dummyObj, time, {
 	  x: shift.x,
