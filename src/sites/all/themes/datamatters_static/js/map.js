@@ -72,7 +72,7 @@ o.map.activateDrag = function () {
 	
 	} 
 	var start = function() {
-		
+		o.isDraggingMap = true;
 	}
 	var stop = function() {
 		o.drag.x = 0;
@@ -90,6 +90,8 @@ o.map.activateDrag = function () {
 		  onUpdate: o.applySnapTweens,
 		  onUpdateParams:["{self}", o.map.countries, m.a]
 		});
+
+		o.isDraggingMap = false;	
 	}
 
 	o.map.countries.drag(move, start, stop);
@@ -206,10 +208,12 @@ o.countries.initHoverAndClick = function() {
 		if ( !o.isTouch ) {
 			country.hover(
 				function(e){
-					o.countries.hoverIn(e);
+					if ( !o.isDraggingMap )
+						o.countries.hoverIn(e);
 				},
 				function(e){
-					o.countries.hoverOut(e);
+					if ( !o.isDraggingMap )
+						o.countries.hoverOut(e);
 				}
 			);
 		}
