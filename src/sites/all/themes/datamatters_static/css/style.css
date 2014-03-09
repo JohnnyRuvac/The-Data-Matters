@@ -1054,6 +1054,17 @@ header .content.affix {
   margin-top: -16px;
   overflow: hidden;
 }
+/* hide logo for tablets/mobile max 768px */
+@media (max-width: 768px) {
+  header {
+    height: 48px;
+    padding-top: 0;
+    margin-top: -2px;
+  }
+  h1.logo {
+    display: none;
+  }
+}
 
 
 .right .filter-button,
