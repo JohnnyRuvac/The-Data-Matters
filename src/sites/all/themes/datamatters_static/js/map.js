@@ -221,23 +221,15 @@ o.countries.initHoverAndClick = function() {
 			});
 		} else {
 
-			//if touchstart position and touchend are same, perform click
-			o.lastTouch = {
-				x: null,
-				y: null
-			};
-
 			country.touchstart(function(e){
 				
-				o.lastTouch.x = e.pageX;
-				o.lastTouch.y = e.pageY;
+				o.lastParentId = e.target.parentNode.id;
 
 			});
 			country.touchend(function(e){
 				
-				var x = e.changedTouches[0].pageX,
-						y = e.changedTouches[0].pageY,
-						same = ( x == o.lastTouch.x && y == o.lastTouch.y );
+				var curParentId = e.target.parentNode.id,
+					same = ( o.lastParentId == curParentId );
 
 				if (same)
 					o.countries.click(e, this);
