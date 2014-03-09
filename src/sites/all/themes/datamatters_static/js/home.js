@@ -45,6 +45,8 @@ o.hp.init = function() {
 	    'success': function (data) {
 	      o.countriesJson = data;
 	      o.appendCountriesWithProject( d );
+	      o.appendFieldsRelationships( d );
+	      o.appendFieldsInfo( d );
 	      o.placeLogo();
 	      o.initStoryTelling();
 	    }
@@ -54,13 +56,72 @@ o.hp.init = function() {
 
 }
 // END Init homepage interactivity
+o.appendFieldsRelationships = function (d) {
 
+	o.fieldsRels = d.select("#fields-relationships");
+	o.fieldsRels.attr({
+		opacity: 0
+	});
+	o.s.append( o.fieldsRels );
+
+	//prepare vars for placement, we are using estonia logo pixel as control point
+	o.estonia = o.s.select("#estonia_pixel rect");
+	o.estoniaCP = o.s.select("#estonia-control-pixel");
+
+}
+o.placeFieldsRels = function () {
+
+	var offset = $("#estonia_pixel rect").offset(),
+			offsetCP = $("#estonia-control-pixel").offset(),
+			shift = {
+				x: offset.left - offsetCP.left,
+				y: offset.top - offsetCP.top
+			};
+
+	console.log("e: " + offset.left + " " + offset.top);
+	console.log("eCP: " + offsetCP.left + " " + offsetCP.top);
+	console.log("x: " + shift.x + " y: " + shift.y);
+
+	o.fieldsRels.transform("t" + shift.x + "," + shift.y + "...");
+
+}
+o.appendFieldsInfo = function (d) {
+
+	o.fieldsInfo = d.select("#fieldsInfo");
+	o.fieldsInfo.attr({
+		opacity: 0
+	});
+	o.s.append( o.fieldsInfo );
+
+	//place it
+	o.placeFieldsInfo();
+
+}
+o.placeFieldsInfo = function () {
+
+	var bbox = o.fieldsInfo.getBBox(),
+			w = {
+				cx: o.ww / 2,
+				cy: o.wh / 2
+			},
+			shift = {
+				x: w.cx - bbox.cx,
+				y: w.cy - bbox.cy
+			};
+
+	shift.x -= 256; //in design, it is offset by 256px to the left
+	shift.y -= 38; //offset to the top because of red arrow in the bottom
+	
+	o.fieldsInfo.transform("t" + shift.x + "," + shift.y + "...");
+
+}
 o.appendCountriesWithProject = function ( d ) {
 
 	//firstly create group for countries, logo and logo pixels
 	o.countries = o.s.g();
 	o.countries.attr({
 		"class": "countries",
+		"stroke": "#ccc",
 		opacity: 0
 	});
 	o.logo = o.s.g();
@@ -148,6 +209,10 @@ o.showFirstScreen = function () {
 		opacity: 1
 	});
 
+	o.logoPixels.selectAll("rect").attr({
+		fill: "#000"
+	});
+
 }
 o.hideFirstScreen = function () {
 
@@ -164,6 +229,10 @@ o.showCountries = function () {
 		opacity: 0
 	});
 
+	o.logoPixels.selectAll("rect").attr({
+		fill: "#f00"
+	});
+
 	//center logo vertically
 	var bbox = o.logo.getBBox(),
 			svgHeight = o.$hpContainer.height(),
@@ -174,12 +243,87 @@ o.showCountries = function () {
 	if ( !o.centerLogo ) {
 		o.centerLogo = top;
 		o.placeLogo();
+		o.placeFieldsRels();
 	}
 
 }
 o.hideCountries = function () {
 
 	o.countries.attr({
+		opacity: 0
+	});
+
+}
+o.showFieldsRelationships = function () {
+
+	o.logo.attr({
+		opacity: 1
+	});
+
+	o.fieldsInfo.attr({
+		opacity: 0
+	});
+
+	o.fieldsRels.attr({
+		opacity: 1
+	});
+
+}
+o.hideFieldsRelationships = function () {
+
+	o.fieldsRels.attr({
+		opacity: 0
+	});
+
+}
+o.showFieldsInfo = function () {
+
+	o.logo.attr({
+		opacity: 0
+	});
+
+	o.fieldsInfo.attr({
+		opacity: 1
+	});
+
+	//show first one
+	o.currentFieldInfo = 1;
+	o.showFieldInfoNum();
+
+}
+o.showFieldInfoNum = function () {
+
+	var num = o.currentFieldInfo;
+
+	//active is red
+	o.fieldsInfo.select(".fieldInfo" + num).attr({
+		stroke: "#f00",
+		strokeDasharray: 0
+	});
+
+	//already seen is black solid
+	var seen = o.fieldsInfo.select(".fieldInfo" + (num - 1));
+	if (seen) {
+		seen.attr({
+			stroke: "#000",
+			strokeDasharray: 0
+		});
+	}
+
+}
+o.hideFieldInfoNum = function () {
+
+	var num = o.currentFieldInfo;
+
+	o.fieldsInfo.select(".fieldInfo" + num).attr({
+		stroke: "#ccc",
+		strokeDasharray: 1
+	});
+
+}
+o.hideFieldsInfo = function () {
+
+	o.fieldsInfo.attr({
 		opacity: 0
 	});
 
@@ -192,6 +336,33 @@ o.exitCurrentSlide = function () {
 			break;
 		case 1:
 			o.hideCountries();
+			break;
+		case 2:
+			o.hideFieldsRelationships();
+			break;
+		case 3:
+			o.hideFieldInfoNum();
+			break;
+		case 4:
+			o.hideFieldInfoNum();
+			break;
+		case 5:
+			o.hideFieldInfoNum();
+			break;
+		case 6:
+			o.hideFieldInfoNum();
+			break;
+		case 7:
+			o.hideFieldInfoNum();
+			break;
+		case 8:
+			o.hideFieldInfoNum();
+			break;
+		case 9:
+			o.hideFieldInfoNum();
+			break;
+		case 10:
+			o.hideFieldsInfo();
 			break;
 		default:
 			break;
@@ -221,6 +392,36 @@ o.anotherSlide = function (direction) {
 			break;
 		case 1:
 			o.showCountries();
+			break;
+		case 2:
+			o.showFieldsRelationships();
+			break;
+		case 3:
+			o.showFieldsInfo();
+			break;
+		case 4:
+			o.currentFieldInfo = 2;
+			o.showFieldInfoNum();
+			break;
+		case 5:
+			o.currentFieldInfo = 3;
+			o.showFieldInfoNum();
+			break;
+		case 6:
+			o.currentFieldInfo = 4;
+			o.showFieldInfoNum();
+			break;
+		case 7:
+			o.currentFieldInfo = 5;
+			o.showFieldInfoNum();
+			break;
+		case 8:
+			o.currentFieldInfo = 6;
+			o.showFieldInfoNum();
+			break;
+		case 9:
+			o.currentFieldInfo = 7;
+			o.showFieldInfoNum();
 			break;
 		default:
 			console.log("some other slide: " + o.currentSlide);
@@ -291,7 +492,21 @@ o.initStoryTelling = function () {
 
 	o.initSlideScrolling();
 
+	// arrow click
+	$(".continue-arrow").click(function(e){
+		e.preventDefault();
+		o.anotherSlide("next");
+	});
+
 }
+// o.applyTweens = function(tween, snapEl) {
+
+// 	var x = tween.target.x,
+// 			y = tween.target.y;
+
+// 	snapEl.transform("t" + x + "," + y);
+
+// }
 // END Storytelling
 
 // DOM ready
@@ -311,6 +526,8 @@ $(function(){
 $(window).resize(function(){
 
 	o.placeLogo();
+	o.placeFieldsInfo();
+	o.placeFieldsRels();
 
 });
 // END Window resize
