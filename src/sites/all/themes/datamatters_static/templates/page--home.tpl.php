@@ -3,9 +3,12 @@
 			<? include("header.inc.tpl.php"); ?>
 			<div class="main-content">
 				
-				<svg id="hp-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
-				<p id="homepage-slogan" class="slogan active">The Data-driven Policy Research projects from Central and Eastern Europe.<br />Using numbers and context to make the difference.</p>
-				<a href="" class="continue-arrow"></a>
+				<div class="content">
+					<svg id="hp-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
+					<p id="homepage-slogan" class="slogan active">The Data-driven Policy Research projects from Central and Eastern Europe.<br />Using numbers and context to make the difference.</p>
+					<a href="" class="continue-arrow"></a>
+				</div>
+				<div class="preload"></div>
 
 			</div>
 

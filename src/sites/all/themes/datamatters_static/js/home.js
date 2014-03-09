@@ -48,7 +48,6 @@ o.hp.init = function() {
 	      o.appendFieldsRelationships( d );
 	      o.appendFieldsInfo( d );
 	      o.placeLogo();
-	      o.initStoryTelling();
 	    }
 	  });
 
@@ -491,6 +490,8 @@ o.initStoryTelling = function () {
 		o.anotherSlide("next");
 	});
 
+	//hide preload here
+
 }
 // o.applyTweens = function(tween, snapEl) {
 
@@ -525,6 +526,17 @@ $(window).resize(function(){
 });
 // END Window resize
 
+//Window load
+$(window).load(function(e){
+
+	//hide preload init story telling
+	o.$body.addClass("all-loaded");
+	o.initStoryTelling();
+
+});
+//END Window load
+
+// Add swipedown, and up to jquery mobile
 (function() {
     var supportTouch = $.support.touch,
             scrollEvent = "touchmove scroll",
