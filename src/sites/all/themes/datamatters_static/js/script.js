@@ -46,21 +46,20 @@ o.swipeToOpenMenu = function () {
 
 	//return if it's not touch device
 	if ( !o.isTouch ) return;
-	var wrapper = document.getElementById("outer-wrapper");
 	
-	var hammerTime = Hammer(wrapper)
-				.on("swipeleft", function() {
-					//close it
-					if (o.ww > 768) return;
-					o.slideoutMenuHeight();
-					o.$body.toggleClass("slideout-menu-opened");
-				})
-				.on("swiperight", function() {
-					//open it
-					if (o.ww > 768) return;
-					o.slideoutMenuHeight();
-					o.$body.toggleClass("slideout-menu-opened");
-				});
+	o.$wrapper
+		.on("swipeleft", function() {
+			//close it
+			if (o.ww > 768) return;
+			o.slideoutMenuHeight();
+			o.$body.toggleClass("slideout-menu-opened");
+		})
+		.on("swiperight", function() {
+			//open it
+			if (o.ww > 768) return;
+			o.slideoutMenuHeight();
+			o.$body.toggleClass("slideout-menu-opened");
+		});
 	
 }
 // END slideout menu

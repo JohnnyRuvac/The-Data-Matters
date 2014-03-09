@@ -433,58 +433,51 @@ o.initSlideScrolling = function () {
 
 	//init vars
 	o.scrolled = false;
-	o.lastY = null;
-	o.swipeDisabled = false;
 	o.currentSlide = 0;
 
 	//touch devices
-	document.ontouchmove = function(e) {
-		
-		e.preventDefault();
+	if ( o.isTouch ) {
 
-		if ( o.lastY && !o.swipeDisabled ) {
-
-			//update slides
-			if ( o.lastY < e.pageY )
-				o.anotherSlide("prev");
-			else
-				o.anotherSlide("next");
-
-			o.swipeDisabled = true;
-
+		document.ontouchmove = function (e) {
+			e.preventDefault();
 		}
-		o.lastY = e.pageY;
 
-	}
-
-	document.ontouchend = function (e) {
-
-		o.lastY = null;
-		o.swipeDisabled = false;
+		$(document)
+			.on("swipeup", function(e){
+				o.anotherSlide("next");
+			})
+			.on("swipedown", function(e){
+				e.preventDefault();
+				o.anotherSlide("prev");
+			});
 
 	}
 	//end of touch devices
 
 	//no-touch devices
-	o.$hpContainer.on("mousewheel", function(e){
+	if ( !o.isTouch ) {
+
+		o.$hpContainer.on("mousewheel", function(e){
 		
-		var up = ( e.deltaY < 0 );
-		if ( !o.scrolled ) {
+			var up = ( e.deltaY < 0 );
+			if ( !o.scrolled ) {
 
-			o.scrolled = true;
-			if (up)
-				o.anotherSlide("next");
-			else
-				o.anotherSlide("prev");
+				o.scrolled = true;
+				if (up)
+					o.anotherSlide("next");
+				else
+					o.anotherSlide("prev");
 
-			//timeout because of momentum scroll on Apple devices
-			window.setTimeout(function(){
-				o.scrolled = false;
-			}, 700);
+				//timeout because of momentum scroll on Apple devices
+				window.setTimeout(function(){
+					o.scrolled = false;
+				}, 700);
 
-		}
+			}
 
-	});
+		});
+
+	}
 	//end of no-touch devices	
 
 }
@@ -531,4 +524,73 @@ $(window).resize(function(){
 
 });
 // END Window resize
+
+(function() {
+    var supportTouch = $.support.touch,
+            scrollEvent = "touchmove scroll",
+            touchStartEvent = supportTouch ? "touchstart" : "mousedown",
+            touchStopEvent = supportTouch ? "touchend" : "mouseup",
+            touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
+    $.event.special.swipeupdown = {
+        setup: function() {
+            var thisObject = this;
+            var $this = $(thisObject);
+            $this.bind(touchStartEvent, function(event) {
+                var data = event.originalEvent.touches ?
+                        event.originalEvent.touches[ 0 ] :
+                        event,
+                        start = {
+                            time: (new Date).getTime(),
+                            coords: [ data.pageX, data.pageY ],
+                            origin: $(event.target)
+                        },
+                        stop;
+
+                function moveHandler(event) {
+                    if (!start) {
+                        return;
+                    }
+                    var data = event.originalEvent.touches ?
+                            event.originalEvent.touches[ 0 ] :
+                            event;
+                    stop = {
+                        time: (new Date).getTime(),
+                        coords: [ data.pageX, data.pageY ]
+                    };
+
+                    // prevent scrolling
+                    if (Math.abs(start.coords[1] - stop.coords[1]) > 10) {
+                        event.preventDefault();
+                    }
+                }
+                $this
+                        .bind(touchMoveEvent, moveHandler)
+                        .one(touchStopEvent, function(event) {
+                    $this.unbind(touchMoveEvent, moveHandler);
+                    if (start && stop) {
+                        if (stop.time - start.time < 1000 &&
+                                Math.abs(start.coords[1] - stop.coords[1]) > 30 &&
+                                Math.abs(start.coords[0] - stop.coords[0]) < 75) {
+                            start.origin
+                                    .trigger("swipeupdown")
+                                    .trigger(start.coords[1] > stop.coords[1] ? "swipeup" : "swipedown");
+                        }
+                    }
+                    start = stop = undefined;
+                });
+            });
+        }
+    };
+    $.each({
+        swipedown: "swipeupdown",
+        swipeup: "swipeupdown"
+    }, function(event, sourceEvent){
+        $.event.special[event] = {
+            setup: function(){
+                $(this).bind(sourceEvent, $.noop);
+            }
+        };
+    });
+
+})();
 
