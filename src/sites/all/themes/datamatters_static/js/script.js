@@ -44,8 +44,10 @@ o.slideoutMenuHeight = function () {
 }
 o.swipeToOpenMenu = function () {
 
-	//return if it's not touch device
-	if ( !o.isTouch ) return;
+	//return if it's not touch device, or interactive map
+	var isMap = o.$body.hasClass("page-node-19");
+
+	if ( !o.isTouch || isMap ) return;
 	
 	o.$wrapper
 		.on("swipeleft", function() {
