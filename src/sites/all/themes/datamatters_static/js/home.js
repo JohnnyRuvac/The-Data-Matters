@@ -491,6 +491,9 @@ o.initStoryTelling = function () {
 	});
 
 	//hide preload here
+	window.setTimeout(function(){
+		o.$body.addClass("all-loaded");
+	}, 50);
 
 }
 // o.applyTweens = function(tween, snapEl) {
@@ -529,8 +532,6 @@ $(window).resize(function(){
 //Window load
 $(window).load(function(e){
 
-	//hide preload init story telling
-	o.$body.addClass("all-loaded");
 	o.initStoryTelling();
 
 });

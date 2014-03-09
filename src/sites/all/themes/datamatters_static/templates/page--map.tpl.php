@@ -3,15 +3,17 @@
 			<? include("header.inc.tpl.php"); ?>
 			<div class="main-content">
 				
-				<div id="country-info">
-					<a href="" class="country"></a>
-					<p class="type"></p>
-					<p class="population">Population: <span></span></p>
-					<p class="gdp">GDP (PPP): <span></span></p>
-					<ul></ul>
+				<div class="content">
+					<div id="country-info">
+						<a href="" class="country"></a>
+						<p class="type"></p>
+						<p class="population">Population: <span></span></p>
+						<p class="gdp">GDP (PPP): <span></span></p>
+						<ul></ul>
+					</div>
+					<svg id="map-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
 				</div>
-				
-				<svg id="map-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
+				<div class="preload"></div>
 
 			</div>
 

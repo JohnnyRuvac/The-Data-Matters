@@ -181,7 +181,7 @@ o.map.fixIpad = function () {
 
 o.map.show = function () {
 
-	$("body").addClass("map-shown");
+	o.$body.addClass("map-shown");
 
 	//show it
 	o.map.countries.animate({opacity: 1}, 600);
