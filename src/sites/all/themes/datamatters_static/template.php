@@ -50,7 +50,9 @@ function datamatters_static_form_alter(&$form, &$form_state, $form_id){
     array_push($form['#submit'], 'datamatters_static_userlogin_submit');
   }
 
+  
   if($form['#form_id'] == "user_pass"){
+    $form['actions']['submit']['#value'] = "Send new password";
     $form['name']['#attributes'] = array('placeholder' => t('User or e-mail'));
   }
   

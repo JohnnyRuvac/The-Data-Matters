@@ -20,6 +20,11 @@ foreach($rows as $key => $value):
 		  $link = explode("/", $rows[$key][$keyy]['link']);
   		$rows[$key][$keyy]['link'] = "/projects#country=".$link[2];
 		}
+		if($keyy == "field"){
+		  $link = explode("/", $rows[$key][$keyy]['link']);
+  		$rows[$key][$keyy]['link'] = "/projects#field=".$link[2];
+  		
+		}
 		if($keyy == "node") $rows[$key][$keyy]['safe_name_country'] = transliteration_clean_filename($rows[$key][$keyy]['country']);
 		if($keyy == "node") $rows[$key][$keyy]['safe_name_field'] = transliteration_clean_filename($rows[$key][$keyy]['field']);
 	endforeach;

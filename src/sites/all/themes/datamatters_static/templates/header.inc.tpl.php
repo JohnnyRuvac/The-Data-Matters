@@ -1,15 +1,15 @@
 			<header>
 				<div class="content">
 					<?php if ($site_name): ?><h1 class="logo"><?php print $site_name ?></h1><?php endif; ?>
-					<nav class="main-nav">
+					<nav class="main-nav"> <div id="mob_title"><?=$node->title;?></div>
 					<ul class="clearfix">
 						<li class="menu-icon visible-xs"><a href="" class="icon">Menu icon</a></li>
 						<li class="filter-button menu-tablet hidden-xs">
 							<a class="label icon active" href=""><?=$active_menu?></a>
 							<div class="filter-content">
 								<ul class="clearfix">
-									<li><a class="home <?php if($active_menu == "Home") print "active";?>" href="<?=base_path()?>">Home</a></li>
-									<li><a class="<?php if($active_menu == "Interactive Map") print "active";?>" href="<?=base_path()?>map">Interactive Map</a></li>
+									<li class="svg-fix"><a class="home <?php if($active_menu == "Home") print "active";?>" href="<?=base_path()?>">Home</a></li>
+									<li class="svg-fix"><a class="<?php if($active_menu == "Interactive Map") print "active";?>" href="<?=base_path()?>map">Interactive Map</a></li>
 									<li><a class="<?php if($active_menu == "Projects") print "active";?>" href="<?=base_path()?>projects">Projects</a></li>
 									<li><a class="<?php if($active_menu == "Organizations") print "active";?>" href="<?=base_path()?>organizations">Organizations</a></li>
 									<li><a class="<?php if($active_menu == "About") print "active";?>" href="<?=base_path()?>about">About</a></li>

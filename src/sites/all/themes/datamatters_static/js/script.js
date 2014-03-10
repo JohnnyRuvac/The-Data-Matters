@@ -180,6 +180,12 @@ o.activateProjectPreview = function() {
 
 	if($("body").hasClass("node-type-project")) $("body").addClass("project-preview");
 
+  o.hashOnLoad = window.location.hash;
+
+  if(o.hashOnLoad){
+    $(".close-full-preview").attr("href", $(".close-full-preview").attr("href") + window.location.hash);
+  }
+
 	$(".project").click(function(e){
 		
 		// e.preventDefault();
@@ -283,7 +289,7 @@ o.activateSearch = function () {
 	// in slideout menu
 	$(".slideout-search").click(function(e){
 		
-		e.preventDefault();
+		//e.preventDefault();
 		var $filterContent = $(this).parent().find(".filter-content");
 		o.$currentOpenedFilter = $filterContent;
 
@@ -296,6 +302,11 @@ o.activateSearch = function () {
 		$(this).parent().find(".search-input").focus();
 
 	});
+
+  $(".search-results a").click(function(){
+    var link = $(this).attr("href");
+    console.log(link);
+  })
 
 	//in header
 	$(".menu-search input").focus(function(){
@@ -314,14 +325,22 @@ o.projectsFiltering = function () {
 	//init mixitup if there is no hash tag, otherwise init it in o.filterProjectsByString();
 	o.hashOnLoad = window.location.hash;
 
+  o.emptyString = function(){
+    console.log("empty");
+  }
+
 	if (!o.hashOnLoad)
-		$("#grid").mixItUp();
+		$("#grid").mixItUp({
+  		callbacks: {
+        //onMixFail: o.emptyString()
+        }
+    });
 
 	//update filters according to hash tag
 	o.filterProjectsByHash();
 
 	// save active filter for later use
-	$(".project-filter a").click(function(e){
+	$(".project-filter a, .project .country a, .project .field a").click(function(e){
 		
 		e.preventDefault();
 		var group = $(this).parent().attr("data-group");
@@ -353,6 +372,12 @@ o.projectsFiltering = function () {
 		else 
 			o.activeFieldFilter = undefined;
 
+       window.location.hash = "";
+		$(".project a").each(function(){
+		  var link = $(this).attr("href").split("#");
+		  $(this).attr("href", link[0]  );
+		});
+
 		o.filterProjectsByString();
 
 	});
@@ -365,16 +390,28 @@ o.filterProjectsByString = function () {
 	if ( o.activeFieldFilter ) {
 		filterString = "." + o.activeFieldFilter;
 		window.location.hash = "field=" + o.activeFieldFilter;
+		$(".project a").each(function(){
+		  var link = $(this).attr("href").split("#");
+		  $(this).attr("href", link[0]  + window.location.hash);
+		});
 	}
 	//only country
 	if ( o.activeCountryFilter ) {
 		filterString = "." + o.activeCountryFilter;
 		window.location.hash = "country=" + o.activeCountryFilter;
+		$(".project a").each(function(){
+		  var link = $(this).attr("href").split("#");
+		  $(this).attr("href", link[0]  + window.location.hash);
+		});
 	}
 	//both
 	if ( o.activeFieldFilter && o.activeCountryFilter ) {
 		filterString = "." + o.activeFieldFilter + '.' + o.activeCountryFilter;
 		window.location.hash = "field=" + o.activeFieldFilter + "/country=" + o.activeCountryFilter;	
+		$(".project a").each(function(){
+		  var link = $(this).attr("href").split("#");
+		  $(this).attr("href", link[0]  + window.location.hash);
+		});
 	}
 	//none of them
 	if ( !filterString ) {
@@ -500,6 +537,16 @@ o.sortNGO = function(){
 }
 //END organisations page, rearange DOM
 
+// Page load
+
+o.welcome = function(){
+  $(window).load(function(){
+    o.$body.addClass("loaded");
+  })
+}
+
+//END Page load
+
 // Check SVG support
 o.checkSVG = function () {
 
@@ -518,13 +565,13 @@ $(function(){
 	o.swipeToOpenMenu();
 	o.activateProjectFilters();
 	o.activateProjectPreview();
-	o.trimLongTexts();
+	//o.trimLongTexts();
 	o.affixNavi();
 	o.activateSearch();
 	o.projectsFiltering();
 	o.showNGO();
   o.sortNGO();
-
+  o.welcome();
 });
 // END DOM ready
 

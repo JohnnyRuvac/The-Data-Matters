@@ -32,19 +32,16 @@ var nameArray = [];
 				$.each(data, function(key, val){
 					nameArray.push({"name":val.country.name, "low":val.country.name.toLowerCase(), "link":val.country.link});
 				})
-				console.log("countries");
 			})
 			$.getJSON("/json/fields", function(data){
 				$.each(data, function(key, val){
 					nameArray.push({"name":val.field.name,"low":val.field.name.toLowerCase(), "link":val.field.link});
 				})
-				console.log("fields")
 			})
 			$.getJSON("/json/projects", function(data){
 				$.each(data, function(key, val){
 					nameArray.push({"name":val.node.title, "low":val.node.title.toLowerCase(), "link":val.node.path});
 				})
-				console.log("projects")	
 			})
 	
 		$(window).load(function(){
@@ -75,7 +72,7 @@ var nameArray = [];
       			 if(leftSpace < 324){
         			 $(".main-nav .menu-search").css({maxWidth: leftSpace})
         			 .find("input").css({maxWidth: leftSpace - 36});
-        			 $(".main-nav .search-results").css({maxWidth: leftSpace + 1});
+        			 $(".main-nav .search-results").css({maxWidth: leftSpace  - 36 + 2});
       			 }else if(leftSpace >= 324 && $(".main-nav .menu-search").css("max-width") != "auto"){
         			 $(".main-nav .menu-search").css({maxWidth: "auto"})
         			 .find("input").css({maxWidth: "auto"});

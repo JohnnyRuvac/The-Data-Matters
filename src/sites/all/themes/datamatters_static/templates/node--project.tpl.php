@@ -3,8 +3,13 @@
 	$country = taxonomy_term_load($node->field_country['und'][0]['tid']);
 	$field = taxonomy_term_load($node->field_field['und'][0]['tid']);
 	$ngo = taxonomy_term_load($node->field_organisation['und'][0]['tid']);
-  $lCountry = "projects#country=".str_ireplace("-", "_", explode("/", drupal_lookup_path("alias", "taxonomy/term/".$country->tid))[1]);
-  $lField = "projects#country=".str_ireplace("-", "_", explode("/", drupal_lookup_path("alias", "taxonomy/term/".$field->tid))[1]);
+	
+	
+	$lCountry = explode("/", drupal_lookup_path("alias", "taxonomy/term/".$country->tid));
+  $lCountry = "projects#country=".str_ireplace("-", "_", $lCountry[1]);
+  
+  $lField = explode("/", drupal_lookup_path("alias", "taxonomy/term/".$field->tid));
+  $lField = "projects#field=".str_ireplace("-", "_", $lField[1]);
 	
 	if(!isset($node->field_image['und'][0]['uri'])) $node->field_image['und'][0]['uri'] = "public://blank.jpg";
 	
@@ -24,11 +29,11 @@
 							<div class="content">
 								<h2><a href="<?=$node_url?>" title="<?=$node->title?>"><?=truncate_utf8($node->title, 45, TRUE, TRUE)?></a></h2>
 								<p class="country">
-									<span class="short"><a class="icon" href="/<?=$lCountry?>"><?=$country->field_short_name['und'][0]['value']?></a></span>
-									<span class="long"><a class="icon" href="/<?=$lCountry?>"><?=$country->name?></a></span>
+									<span class="short" data-group="countries"  data-filter="<?=transliteration_clean_filename($country->name)?>" ><a class="icon" href="/<?=$lCountry?>"><?=$country->field_short_name['und'][0]['value']?></a></span>
+									<span class="long" data-group="countries" data-filter="<?=transliteration_clean_filename($country->name)?>" ><a class="icon" href="/<?=$lCountry?>"><?=$country->name?></a></span>
 									
 								</p>
-								<p class="field "><a class="icon" href="/<?=$lField?>"><?=$field->name?></a></p>
+								<p class="field "  data-group="field" data-filter="<?=transliteration_clean_filename($field->name)?>"><a class="icon" href="/<?=$lField?>"><?=$field->name?></a></p>
 							</div>
 						</a>
 					</li>

@@ -15,6 +15,9 @@
   <?php //print $head; ?>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
+  <!--[if IE 8]>
+	  <link type="text/css" rel="stylesheet" href="/sites/all/themes/datamatters_static/css/ie8.css" media="screen" />
+  <![endif]-->
   <!--[if lt IE 9]>
   <script src="/<?=path_to_theme()?>/js/html5shiv.js"></script>
 	<script src="/<?=path_to_theme()?>/js/respondjs-min.js"></script>

@@ -136,15 +136,40 @@ header .content.affix {
   width: 70px;
   height: 75px;
   text-indent: -9999px;
-  background: url(../img/logo.png) no-repeat center center;
+  background: url(../img/logo.png) no-repeat top center;
 }
+.logo a:hover {
+  background: url(../img/logo.png) no-repeat bottom center;
+}
+
 .main-nav {
   position: relative;
   width: 100%;
   height: 48px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+  background: white;
 }
+
+
+#mob_title {
+  float: left;
+  font-size: 16px;
+  line-height: 46px;
+  height: 46px;
+  color: #000;
+  margin-left: 62px;
+  position: relative;
+  z-index: 10;
+  color: #F00;
+}
+
+.show_filter #mob_title {display: none}
+
+@media (min-width: 769px) {
+  #mob_title {display: none}
+}
+
 .main-nav ul {
   position: relative;
   width: 100%;
@@ -231,7 +256,7 @@ header .content.affix {
   position: absolute;
   top: 33px;
   left: -1px;
-  width: 325px;
+  width: 290px;
   padding-left: 0;
   z-index: 1001;
   border-bottom: 1px solid #ccc;
@@ -476,6 +501,20 @@ header .content.affix {
   color: #646464;
 }
 
+#grid.fail:before {
+  content: "Your search did not return any projects";
+  color: #cccccc;
+  margin: 0 auto;
+  background: url(../img/empty.png) no-repeat center top;
+  padding-top: 75px;
+  margin-top: 20%;
+  opacity: 1;
+}
+
+#grid:before{
+  opacity: 0;
+}
+
 @media (min-width: 492px) {
   .projects {
     width: 488px;
@@ -709,7 +748,13 @@ header .content.affix {
     margin-bottom: 16px;
     padding: 16px;
     background: #efefef;
+    opacity: 0;
   }
+  
+  .loaded #project-preview{
+    opacity: 1;
+  }
+  
   #project-preview .preview-content {
     width: 460px;
     border: 1px solid #ccc;
@@ -769,7 +814,7 @@ header .content.affix {
     right: auto;
     left: 542px;
     top: 17px;
-    z-index: 100;
+    z-index: 10;
   }
   #project-preview .preview-content {
     margin-left: 114px;
@@ -795,8 +840,20 @@ header .content.affix {
 .filter-button .label {
   background: #efefef url(../img/dropdown-arrows.png);
   background-repeat: no-repeat;
-  background-position: top 0px right 10px;
+  background-position: 92% 0px;
+  padding-right: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+@media (min-width: 769px) {
+	.filter-button .label{
+		background-position: 92% -8px;			
+	}
+}
+
+
 .filter-button .label.active {
   color: #f00;
   background-image: none;
@@ -1007,6 +1064,12 @@ header .content.affix {
 body.show_filter .right .filter-button,
 body.show_filter .right .filter-button {
   display: block;
+  opacity: 0;
+}
+
+body.loaded.show_filter .right .filter-button,
+body.loaded.show_filter .right .filter-button{
+  opacity: 1;
 }
 
 @media (orientation:landscape) {
@@ -1118,6 +1181,11 @@ body.show_filter .right .filter-button {
   color: #303030;
   font-weight: bold;
 }
+
+#country-info .project-name:hover {
+  text-decoration: underline;
+}
+
 #country-info .field {
   padding-left: 25px;
   height: 33px;
@@ -1129,11 +1197,16 @@ body.show_filter .right .filter-button {
 
 /* END of Interactive Map */
 
-/* Organisations // UPRACEM ZAJTRA!!! */
+/* Organisations */
 
 .view-organisations {
   padding:0px 15px; 
   font-size: 14px;
+  opacity: 0;
+}
+
+.loaded .view-organisations {
+  opacity: 1;
 }
 
 .view-organisations h3 {
@@ -1169,7 +1242,7 @@ body.show_filter .right .filter-button {
 }
 
 @media (min-width: 769px) {
-  .view-organisations {margin-left: 130px}
+  .view-organisations {margin-left: 115px}
   
   .col-1,
   .col-2,
@@ -1186,7 +1259,7 @@ body.show_filter .right .filter-button {
 /* Icon Font */
 
 
-.svg .logo:before,
+
 .svg .icon:before{
   font-family: 'tdm';
   speak: none;
@@ -1199,18 +1272,9 @@ body.show_filter .right .filter-button {
 }
 
 .logo a {text-indent: -3999px; display: block}
-.svg .logo:before{
-  text-indent: 0px;
-  content: "\e60f";
-  font-size: 74px;
-  position: relative;
-  height: 70px;
-  width: 75px;
-  display: block;
-  top: -6px
-}
 
-.main-nav .menu-search a.submit:before{
+
+.svg .main-nav .menu-search a.submit:before{
   content: "\e601";
   left: 12px;
   top: 11px;
@@ -1218,7 +1282,7 @@ body.show_filter .right .filter-button {
   text-indent: 0px;
 }
 
-#project-preview .country a:before {
+.svg #project-preview .country a:before {
   content: "\e602"; 
   left: -14px;
   top: -1px;
@@ -1226,7 +1290,7 @@ body.show_filter .right .filter-button {
 }
 
 
-.project .country a:before{
+.svg .project .country a:before{
   content: "\e602"; 
   left: -14px;
   top: -1px;
@@ -1234,8 +1298,8 @@ body.show_filter .right .filter-button {
 }
 
 
-#country-info .field:before,
-#project-preview .field a:before {
+.svg #country-info .field:before,
+.svg #project-preview .field a:before {
   content: "\e604"; 
   left: -18px;
   top: -1px;
@@ -1246,7 +1310,7 @@ body.show_filter .right .filter-button {
 	top: 9px;
 }
 
-.project .field a:before {
+.svg .project .field a:before {
   content: "\e604"; 
   left: -17px;
   top: -1px;
@@ -1259,27 +1323,27 @@ body.show_filter .right .filter-button {
   }
 }
 
-#project-preview .link a:before {
+.svg #project-preview .link a:before {
   content: "\e606"; 
   left: -18px;
   top: -1px;
 }
 
 
-#project-preview .ngo:before {
+.svg #project-preview .ngo:before {
   content: "\e607"; 
   left: 14px;
   top: 9px;
 }
 
-#project-preview .contacts:before {
+.svg #project-preview .contacts:before {
   content: "\e608"; 
   left: 14px;
   top: 13px;
   font-size: 8px;
 }
 
-.filter-button .label:before{
+.svg .filter-button .label:before{
   content: "\e605";
   right: 10px;
   top: 17px;
@@ -1287,42 +1351,38 @@ body.show_filter .right .filter-button {
 }
 
 @media (min-width: 769px){
-  .filter-button .label:before{
+  .svg .filter-button .label:before{
     top: 10px;
   } 
 }
 
-.filter-button .label.active:before{
 
-  right: -10px;
-}
-
-.filter-button.menu-tablet .label.active:before{
+.svg .filter-button.menu-tablet .label.active:before{
 
 	right: 10px;
 }
 
-.filter-button .clear-filter:before{
+.svg .filter-button .clear-filter:before{
   text-indent: 0px;
-    content: "\e60a";
-    color: #F00;
+  content: "\e60a";
+  color: #F00;
   left: 28px;
   top: 19px;
   font-size: 8px;
 }
 
 @media (min-width: 769px){
-  .filter-button .clear-filter:before{
+  .svg .filter-button .clear-filter:before{
     top: 12px;
     left: 15px;
     font-size: 7px;
   } 
 }
 
-.close-full-preview:before{
+.svg .close-full-preview:before{
   text-indent: 0px;
-    content: "\e60b";
-    color: #767777;
+  content: "\e60b";
+  color: #767777;
   left: 20px;
   top: 16px;
   font-size: 10px;
@@ -1330,10 +1390,10 @@ body.show_filter .right .filter-button {
 
 
 
-.main-nav .menu-icon a:before{
+.svg .main-nav .menu-icon a:before{
   text-indent: 0px;
-    content: "\e603";
-    color: #636363;
+  content: "\e603";
+  color: #636363;
   left: 15px;
   top: 18px;
   font-size: 10px;
@@ -1341,11 +1401,12 @@ body.show_filter .right .filter-button {
 
 
 
-.svg .logo a,
+
 .svg .icon {
   background-image: none !important; 
   position: relative;
 }
+
 
 .close-full-preview,
 .filter-button .clear-filter,
@@ -1385,6 +1446,18 @@ body.show_filter .right .filter-button {
   
 }
 
+.main-content,
+#grid:before,
+#project-preview,
+body.loaded.show_filter .right .filter-button,
+body.loaded.show_filter .right .filter-button,
+.loaded .main-content .node-page,
+.loaded .view-organisations{
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
 
 #project-preview .contacts.show,
 #project-preview .contacts{
@@ -1445,6 +1518,11 @@ body.show_filter .right .filter-button {
 
 .main-content .node-page {
   margin: 0px 15px;
+  opacity: 0;
+}
+
+.loaded .main-content .node-page{
+  opacity: 1;
 }
 
 .main-content .node-page .field-name-body p{
@@ -1484,19 +1562,40 @@ body.page-node-23 .node-page {
   color: #cccccc;
   background: url(../img/404.png) no-repeat center top;
   padding-top: 75px;
-  margin-top: 10%;
+  margin-top: 20%;
 }
 
 /* END of 404 page */
 
 /* User stuff */
 
+.page-node .action-links a {color: #F00}
+
+#console {
+  color: #cccccc;
+  font-size: 14px;
+  font-family: "simplon";
+}
+
+#console .status h2{
+  color: #6fc282;
+}
+
+#console a,
+#console .error h2{
+  color: #F00;
+}
+
 #user-pass,
 #user-login {
   width: 147px;
   margin: 0 auto;
-  margin-top: 10%;
+  margin-top: 20%;
+  
 }
+
+.main-content {opacity: 0}
+.loaded .main-content {opacity: 1}
 
 #user-pass label,
 #user-login label{
@@ -1524,6 +1623,7 @@ body.page-node-23 .node-page {
   background: white;
   display: block;
   margin: 0 auto;
+  outline: none;
 }
 
 
@@ -1531,8 +1631,18 @@ body.page-node-23 .node-page {
     -webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
+#edit-pass  {
+  font-size: 12px;
+  letter-spacing: -4px;
+}
+
 .forgot_button{
   color: #cccccc;  
+}
+
+.forgot_button:hover {
+  border-color: #F00;
+  text-decoration: none;
 }
 
 .forgot_button:hover {

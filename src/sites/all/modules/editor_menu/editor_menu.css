@@ -26,15 +26,15 @@ only screen and (min-device-pixel-ratio: 1.5) {
 #editormenu .last {margin-bottom: 5px; margin-top: 15px}
 #editormenu .first {margin-bottom: 10px}
 
-.page-node .action-links {position: fixed; bottom: 10px; right: 20px; z-index: 100}
-.page-node .action-links li {float: left; margin-right: 10px;}
-.page-node .action-links li.active {display: none}
+.action-links {position: fixed; bottom: 10px; right: 20px; z-index: 100}
+.action-links li {float: left; margin-right: 10px;}
+.action-links li.active {display: none}
 
 #user-login {width: 500px; margin: 0 auto;}
 
-.page-node #console {position: fixed; bottom: 0px; left: 0px; right: 0px; background: rgba(255,255,255,0.3); padding: 10px; font-size: 12px}
+#console {position: fixed; bottom: 0px; left: 0px; right: 0px; background: rgba(255,255,255,0.3); padding: 10px; font-size: 12px}
 
-.page-node #console pre {font-size: 10px}
+ #console pre {font-size: 10px}
 
 html.overlay-open #overlay-disable-message {overflow: hidden; height: 0px}
 
