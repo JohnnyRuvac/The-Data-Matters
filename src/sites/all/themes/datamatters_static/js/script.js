@@ -551,7 +551,9 @@ o.welcome = function(){
 // Check SVG support
 o.checkSVG = function () {
 
-	if ( !o.svgSupport ) {
+	var mobile = o.ww < 768;
+
+	if ( !o.svgSupport || mobile) {
 		window.location = "/projects";
 	}
 
