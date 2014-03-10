@@ -1125,12 +1125,14 @@ header .content.affix {
 }
 /* hide logo for tablets/mobile max 768px */
 @media (max-width: 768px) {
-  header {
+  .page-node-19 header,
+  .page-node-22 header {
     height: 48px;
     padding-top: 0;
     margin-top: -2px;
   }
-  h1.logo {
+  .page-node-19 h1.logo,
+  .page-node-22 h1.logo {
     display: none;
   }
 }
