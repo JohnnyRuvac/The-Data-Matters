@@ -77,10 +77,6 @@ o.placeFieldsRels = function () {
 				y: offset.top - offsetCP.top
 			};
 
-	console.log("e: " + offset.left + " " + offset.top);
-	console.log("eCP: " + offsetCP.left + " " + offsetCP.top);
-	console.log("x: " + shift.x + " y: " + shift.y);
-
 	o.fieldsRels.transform("t" + shift.x + "," + shift.y + "...");
 
 }
@@ -112,6 +108,18 @@ o.placeFieldsInfo = function () {
 	shift.y -= 38; //offset to the top because of red arrow in the bottom
 	
 	o.fieldsInfo.transform("t" + shift.x + "," + shift.y + "...");
+
+	//shift fields names and text
+	bbox = o.fieldsInfo.getBBox();
+
+	var width = bbox.w,
+			top = bbox.y + 13,
+			left = bbox.x + width;
+
+	o.$fieldsDesc.css({
+		"top": top,
+		"left": left
+	});
 
 }
 o.appendCountriesWithProject = function ( d ) {
@@ -212,6 +220,10 @@ o.showFirstScreen = function () {
 		fill: "#000"
 	});
 
+	o.logo.attr({
+		opacity: 1
+	});
+
 }
 o.hideFirstScreen = function () {
 
@@ -226,6 +238,10 @@ o.showCountries = function () {
 
 	o.logoText.attr({
 		opacity: 0
+	});
+
+	o.logo.attr({
+		opacity: 1
 	});
 
 	o.logoPixels.selectAll("rect").attr({
@@ -251,13 +267,12 @@ o.hideCountries = function () {
 	o.countries.attr({
 		opacity: 0
 	});
+	o.logo.attr({
+		opacity: 0
+	});
 
 }
 o.showFieldsRelationships = function () {
-
-	o.logo.attr({
-		opacity: 1
-	});
 
 	o.fieldsInfo.attr({
 		opacity: 0
@@ -266,6 +281,8 @@ o.showFieldsRelationships = function () {
 	o.fieldsRels.attr({
 		opacity: 1
 	});
+
+	o.$fieldsDesc.hide();
 
 }
 o.hideFieldsRelationships = function () {
@@ -285,6 +302,8 @@ o.showFieldsInfo = function () {
 		opacity: 1
 	});
 
+	o.$fieldsDesc.show();
+
 	//show first one
 	o.currentFieldInfo = 1;
 	o.showFieldInfoNum();
@@ -299,6 +318,25 @@ o.showFieldInfoNum = function () {
 		stroke: "#f00",
 		strokeDasharray: 0
 	});
+	
+	o.$fieldsDesc
+		.find("li:nth-child(" + num + ")")
+		.removeClass("seen")
+		.addClass("active");
+
+	o.$fieldsDesc
+		.find("#fdp" + (num - 1))
+		.removeClass("active")
+		.addClass("seen");
+
+	o.$fieldsDesc
+		.find("#fdp" + num)
+		.removeClass("seen")
+		.addClass("active");
+
+	o.$fieldsDesc
+		.find("#fdp" + (num + 1))
+		.removeClass("active seen");
 
 	//already seen is black solid
 	var seen = o.fieldsInfo.select(".fieldInfo" + (num - 1));
@@ -308,6 +346,14 @@ o.showFieldInfoNum = function () {
 			strokeDasharray: 0
 		});
 	}
+	o.$fieldsDesc
+		.find("li:nth-child(" + (num - 1) + ")")
+		.removeClass("active")
+		.addClass("seen");
+
+	o.$fieldsDesc
+		.find("li:nth-child(" + (num + 1) + ")")
+		.removeClass("active seen");
 
 }
 o.hideFieldInfoNum = function () {
@@ -325,6 +371,8 @@ o.hideFieldsInfo = function () {
 	o.fieldsInfo.attr({
 		opacity: 0
 	});
+
+	o.$fieldsDesc.hide();
 
 }
 o.exitCurrentSlide = function () {
@@ -361,6 +409,9 @@ o.exitCurrentSlide = function () {
 			o.hideFieldInfoNum();
 			break;
 		case 10:
+			o.hideFieldInfoNum();
+			break;
+		case 11:
 			o.hideFieldsInfo();
 			break;
 		default:
@@ -422,6 +473,10 @@ o.anotherSlide = function (direction) {
 			o.currentFieldInfo = 7;
 			o.showFieldInfoNum();
 			break;
+		case 10:
+			o.currentFieldInfo = 8;
+			o.showFieldInfoNum();
+			break;
 		default:
 			console.log("some other slide: " + o.currentSlide);
 			break;
@@ -433,6 +488,7 @@ o.initSlideScrolling = function () {
 	//init vars
 	o.scrolled = false;
 	o.currentSlide = 0;
+	o.$fieldsDesc = $(".fields-descriptions");
 
 	//touch devices
 	if ( o.isTouch ) {

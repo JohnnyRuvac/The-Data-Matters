@@ -611,19 +611,20 @@
 </g>
 
 <g id="fieldsInfo">
-	<polygon class="fieldInfo7" fill="#FFFFFF" stroke="#CCCCCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,192.463 48.32,214.428 
+	<polygon class="fieldInfo8" fill="#FFFFFF" stroke="#CCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,192.463 48.32,214.428 
 	0,192.463 48.32,166.108 "/>
-	<polygon class="fieldInfo6" fill="#FFFFFF" stroke="#CCCCCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,168.734 48.32,190.699 
+	<polygon class="fieldInfo7" fill="#FFFFFF" stroke="#CCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,168.734 48.32,190.699 
 		0,168.734 48.32,142.378 "/>
-	<polygon class="fieldInfo5" fill="#FFFFFF" stroke="#CCCCCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,145.004 48.32,166.968 
+	<polygon class="fieldInfo6" fill="#FFFFFF" stroke="#CCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,145.004 48.32,166.968 
 		0,145.004 48.32,118.648 "/>
-	<polygon class="fieldInfo4" fill="#FFFFFF" stroke="#CCCCCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,121.275 48.32,143.24 
+	<polygon class="fieldInfo5" fill="#FFFFFF" stroke="#CCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,121.275 48.32,143.24 
 		0,121.275 48.32,94.918 "/>
-	<polygon class="fieldInfo3" fill="#FFFFFF" stroke="#CCCCCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,97.545 48.32,119.509 
+	<polygon class="fieldInfo4" fill="#FFFFFF" stroke="#CCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,97.545 48.32,119.509 
 		0,97.545 48.32,71.188 "/>
-	<polygon class="fieldInfo2" fill="#FFFFFF" stroke="#CCCCCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,73.815 48.32,95.78 0,73.815 
+	<polygon class="fieldInfo3" fill="#FFFFFF" stroke="#CCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,73.815 48.32,95.78 0,73.815 
 		48.32,47.459 "/>
-	<polygon class="fieldInfo1" fill="#FFFFFF" stroke="#CCCCCC" stroke-miterlimit="10" stroke-dasharray="1" points="96.64,50.085 48.32,72.05 0,50.085 48.32,23.729 "/>
+	<polygon class="fieldInfo2" fill="#FFFFFF" stroke="#CCC" stroke-miterlimit="10" points="96.64,50.085 48.32,72.05 0,50.085 48.32,23.729 "/>
+	<polygon class="fieldInfo1" fill="#FFFFFF" stroke="#CCC" stroke-miterlimit="10" points="96.64,26.356 48.32,48.32 0,26.356 48.32,0 "/>
 </g>
 
 <g id="fields-relationships">
