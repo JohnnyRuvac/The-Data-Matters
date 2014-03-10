@@ -141,10 +141,8 @@ o.map.highlightCountriesWithProject = function () {
 	o.patternInactive = Snap("#pattern-inactive");
 	o.patternActive = Snap("#pattern-active");
 
-	var m = new Snap.Matrix();
-	m.scale(1.5);
-	o.patternInactive.transform(m);
-	o.patternActive.transform(m);
+	o.nm = new Snap.Matrix();
+	o.nm.scale(1);
 
 	//highlight countries
 	o.countries.withProject = [];
@@ -335,14 +333,6 @@ o.countries.click = function (e, that) {
 	}
 
 }
-o.countries.unzoomPatterns = function () {
-
-	var m = o.patternActive.matrix;
-	m.scale( 1 / m.a * 1.5);
-	o.patternActive.transform(m);
-	o.patternInactive.transform(m);
-
-}
 o.countries.center = function () {
 
 	var hu = o.s.select("#hungary"),
@@ -372,9 +362,11 @@ o.countries.zoomToActive = function(that){
 
 	time = 0.3;
 
-	//update strokes in patterns
-	o.patternActive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058});
-	o.patternInactive.selectAll("line").attr({strokeWidth: o.map.scale * 0.058});
+	window.setTimeout(function(){
+		//update strokes in patterns
+		o.patternActive.transform(o.nm);
+		o.patternInactive.transform(o.nm);
+	}, 300);
 	
 	TweenLite.to(o.dummyObj, time, {
 	  x: shift.x,
@@ -386,9 +378,6 @@ o.countries.zoomToActive = function(that){
 	  onUpdate: o.applySnapTweens,
 	  onUpdateParams:["{self}", o.map.countries, 3, bbox.cx, bbox.cy]
 	});
-
-	//unzoom patterns
-	o.countries.unzoomPatterns();
 
 }
 
