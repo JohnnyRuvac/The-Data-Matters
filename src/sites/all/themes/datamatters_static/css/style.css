@@ -227,10 +227,16 @@ header .content.affix {
   line-height: 46px;
   height: 46px;
   color: #000;
-  margin-left: 62px;
+  padding-left: 62px;
   position: relative;
   z-index: 10;
   color: #F00;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 11px;
+  padding-right: 45px;
 }
 
 .show_filter #mob_title {display: none}
