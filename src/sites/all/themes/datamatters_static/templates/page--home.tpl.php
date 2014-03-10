@@ -35,6 +35,11 @@
 						<p id="fdp8">8 Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.
 </p>
 					</div>
+					<div class="last-page">
+						<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit.</p>
+						<a href="/map" class="int-map-link">Interactive map</a>
+						<a href="/projects" class="projects-link">View projects</a>
+					</div>
 				</div>
 				<div class="preload"></div>
 

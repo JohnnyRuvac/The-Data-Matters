@@ -128,7 +128,6 @@ o.appendCountriesWithProject = function ( d ) {
 	o.countries = o.s.g();
 	o.countries.attr({
 		"class": "countries",
-		"stroke": "#ccc",
 		opacity: 0
 	});
 	o.logo = o.s.g();
@@ -161,6 +160,10 @@ o.appendCountriesWithProject = function ( d ) {
 	//show cities/logo pixels
 	o.logoPixels.selectAll("rect").attr({
 		fill: "#000"
+	});
+
+	o.countries.selectAll("polygon").attr({
+		"stroke": "#ccc"
 	});
 
 }
@@ -304,6 +307,9 @@ o.showFieldsInfo = function () {
 
 	o.$fieldsDesc.show();
 
+	if ( o.dir == "prev")
+		return;
+
 	//show first one
 	o.currentFieldInfo = 1;
 	o.showFieldInfoNum();
@@ -368,11 +374,25 @@ o.hideFieldInfoNum = function () {
 }
 o.hideFieldsInfo = function () {
 
+	if (o.dir == "prev")
+		return;
+
 	o.fieldsInfo.attr({
 		opacity: 0
 	});
 
 	o.$fieldsDesc.hide();
+
+}
+o.showLastPage = function () {
+
+	o.$lastPage.show();
+
+}
+o.hideLastPage = function () {
+
+	o.$lastPage.hide();
+	o.showFieldsInfo();
 
 }
 o.exitCurrentSlide = function () {
@@ -409,10 +429,10 @@ o.exitCurrentSlide = function () {
 			o.hideFieldInfoNum();
 			break;
 		case 10:
-			o.hideFieldInfoNum();
+			o.hideFieldsInfo();
 			break;
 		case 11:
-			o.hideFieldsInfo();
+			o.hideLastPage();
 			break;
 		default:
 			break;
@@ -420,6 +440,16 @@ o.exitCurrentSlide = function () {
 
 }
 o.anotherSlide = function (direction) {
+
+	//there's a limit to your love tam da daa daaaaaa
+	if ( direction == "prev" && o.currentSlide == 0)
+		return;
+	if ( direction == "next" && o.currentSlide == 11)
+		return;
+	if ( direction == "prev" && o.currentSlide == 11)
+		return;
+
+	o.dir = direction;
 
 	//do needed stuff on current slide exit
 	o.exitCurrentSlide();
@@ -429,11 +459,6 @@ o.anotherSlide = function (direction) {
 		o.currentSlide++;
 	else
 		o.currentSlide--;
-
-	if ( o.currentSlide < 0 )
-		o.currentSlide = 0;
-	if ( o.currentSlide > 10 )
-		o.currentSlide = 10;
 
 	//based on slide index, do needed stuff
 	switch ( o.currentSlide ) {
@@ -477,8 +502,10 @@ o.anotherSlide = function (direction) {
 			o.currentFieldInfo = 8;
 			o.showFieldInfoNum();
 			break;
+		case 11:
+			o.showLastPage();
+			break;
 		default:
-			console.log("some other slide: " + o.currentSlide);
 			break;
 	}
 
@@ -489,6 +516,7 @@ o.initSlideScrolling = function () {
 	o.scrolled = false;
 	o.currentSlide = 0;
 	o.$fieldsDesc = $(".fields-descriptions");
+	o.$lastPage = $(".last-page");
 
 	//touch devices
 	if ( o.isTouch ) {
@@ -499,11 +527,14 @@ o.initSlideScrolling = function () {
 
 		$(document)
 			.on("swipeup", function(e){
-				o.anotherSlide("next");
+
+				o.fadeSlide("next");
+
 			})
 			.on("swipedown", function(e){
-				e.preventDefault();
-				o.anotherSlide("prev");
+				
+				o.fadeSlide("prev");
+
 			});
 
 	}
@@ -519,9 +550,9 @@ o.initSlideScrolling = function () {
 
 				o.scrolled = true;
 				if (up)
-					o.anotherSlide("next");
-				else
-					o.anotherSlide("prev");
+					o.fadeSlide("next");
+				else 
+					o.fadeSlide("prev");
 
 				//timeout because of momentum scroll on Apple devices
 				window.setTimeout(function(){
@@ -534,6 +565,24 @@ o.initSlideScrolling = function () {
 
 	}
 	//end of no-touch devices	
+
+}
+o.fadeSlide = function(dir) {
+
+	if ( o.currentSlide >= 3 && o.currentSlide <= 9 ) {
+
+		o.anotherSlide(dir);
+
+	} else {
+
+		o.$mainContent.addClass("fade");
+		o.scrolled = true;
+		window.setTimeout(function(){
+			o.anotherSlide(dir);
+			o.$mainContent.removeClass("fade");
+		}, 600);
+
+	}
 
 }
 o.initStoryTelling = function () {
