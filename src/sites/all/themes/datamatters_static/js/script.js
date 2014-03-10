@@ -243,35 +243,6 @@ o.fixProjectPreviewHeight = function () {
 }
 // END project preview
 
-// Trim long texts
-o.trimLongTexts = function () {
-
-	//project names
-	if (o.ww < 340) {
-		if (o.projectTrimmed) return;
-		$(".project h2").each(function() {
-			if ( $(this).text().length > 36 ) {
-				var text = $(this).text();
-				$(this).addClass("trimmed")
-							 .attr("data-text", text);
-				$(this).text( text.slice(0, 32) + "..." );
-			}
-		});
-		o.projectTrimmed = true;
-
-	} else {
-
-		if (!o.projectTrimmed) return;
-		$(".project .trimmed").each(function(){
-			$(this).text( $(this).attr("data-text") );
-		});
-		o.projectTrimmed = false;
-	}
-	//END project names
-
-}
-// END Trim long texts
-
 // Affix navi
 o.affixNavi = function() {
 
@@ -568,7 +539,6 @@ $(function(){
 	o.swipeToOpenMenu();
 	o.activateProjectFilters();
 	o.activateProjectPreview();
-	//o.trimLongTexts();
 	o.affixNavi();
 	o.activateSearch();
 	o.projectsFiltering();
@@ -593,7 +563,6 @@ $(window).resize(function(){
 	o.wh = o.$window.height();
 	o.fixFilters();
 	//o.fixProjectPreviewHeight();
-	o.trimLongTexts();
   o.sortNGO();
   
   //neviem kam s tymto
