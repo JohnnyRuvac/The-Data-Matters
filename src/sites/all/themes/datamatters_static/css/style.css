@@ -1,4 +1,4 @@
-/* preload */
+#country-info .field:before/* preload */
 .page-node-19 .main-content .content {
   height: 100%;
   opacity: 0;
@@ -927,10 +927,15 @@ header .content.affix {
   color: #f00;
   background-image: none;
 }
+
 .filter-button.menu-tablet .label.active {
   background-color: #fff;
   background-image: url(../img/dropdown-arrows.png);
 }
+.filter-button .label.active:before {
+	display: none;
+}
+
 .filter-button .label:hover {
   color: #f00;
   background-position: top -46px right 10px; 
@@ -1492,16 +1497,17 @@ body.loaded.show_filter .right .filter-button{
 }
 
 
-.svg #country-info .field:before,
-.svg #project-preview .field a:before {
+html.svg #country-info .field:before,
+html.svg #project-preview .field a:before {
   content: "\e604"; 
   left: -18px;
   top: -1px;
   color: #646464;
 }
-#country-info .field:before {
-  left: 8px;
-  top: 9px;
+
+html.svg #country-info .field:before {
+  left: 8px ;
+  top: 9px ;
 }
 
 .svg .project .field a:before {
@@ -1512,7 +1518,7 @@ body.loaded.show_filter .right .filter-button{
 }
 
 @media (min-width: 492px){ 
-  .project .field a:before{
+  .svg .project .field a:before{
     left: -17px;
   }
 }
@@ -1686,8 +1692,8 @@ body.loaded.show_filter .right .filter-button,
 
 
 .svg .logo:hover,
-#country-info .field:hover:before,
-#country-info .field:hover,
+.svg #country-info .field:hover:before,
+.svg #country-info .field:hover,
 .main-nav .menu-search a:hover:before,
 #project-preview .country a:hover:before,
 .project .country a:hover:before,
@@ -1828,6 +1834,24 @@ body.page-node-23 .node-page {
 #edit-pass  {
   font-size: 12px;
   letter-spacing: -4px;
+}
+
+
+#edit-pass::-webkit-input-placeholder { /* WebKit browsers */
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+#edit-pass:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+#edit-pass::-moz-placeholder { /* Mozilla Firefox 19+ */
+  letter-spacing: 0px;
+  font-size: 14px;
+}
+#edit-pass:-ms-input-placeholder { /* Internet Explorer 10+ */
+  letter-spacing: 0px;
+  font-size: 14px;
 }
 
 .forgot_button{

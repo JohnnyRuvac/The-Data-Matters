@@ -1,7 +1,7 @@
 			<header>
 				<div class="content">
 					<?php if ($site_name): ?><h1 class="logo"><?php print $site_name ?></h1><?php endif; ?>
-					<nav class="main-nav"> <div id="mob_title"><?=$node->title;?></div>
+					<nav class="main-nav"> <div id="mob_title"><? if(isset($node->title)) print $node->title ?></div>
 					<ul class="clearfix">
 						<li class="menu-icon visible-xs"><a href="" class="icon">Menu icon</a></li>
 						<li class="filter-button menu-tablet hidden-xs">
