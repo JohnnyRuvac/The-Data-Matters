@@ -367,12 +367,6 @@ o.countries.zoomToActive = function(that){
 	};
 
 	time = 0.3;
-
-	window.setTimeout(function(){
-		//update strokes in patterns
-		o.patternActive.transform(o.nm);
-		o.patternInactive.transform(o.nm);
-	}, 300);
 	
 	TweenLite.to(o.dummyObj, time, {
 	  x: shift.x,
