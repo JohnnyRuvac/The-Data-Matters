@@ -257,14 +257,6 @@ o.affixNavi = function() {
 			top: function(){return (o.ww < 769) ? 140 : 0}
 		}
 	});
-	
-	o.$headerContent.on('affix.bs.affix', function () {
-    console.log('Fired!1');
-  });
-  
-  o.$headerContent.on('affixed.bs.affix', function () {
-    console.log('Fired!2');
-  });
 
 }
 // END Affix navi
@@ -310,16 +302,16 @@ o.projectsFiltering = function () {
 	//init mixitup if there is no hash tag, otherwise init it in o.filterProjectsByString();
 	o.hashOnLoad = window.location.hash;
 
-  o.emptyString = function(){
 
-  }
-
-	if (!o.hashOnLoad)
+	if (!o.hashOnLoad) {
 		$("#grid").mixItUp({
-  		callbacks: {
-        //onMixFail: o.emptyString()
-        }
-    });
+			animation: {
+				duration: 300,
+				effects: 'fade stagger(20ms) scale(0.40)',
+				easing: 'cubic-bezier(0.47, 0, 0.745, 0.715)'
+			}
+		});
+	}
 
 	//update filters according to hash tag
 	o.filterProjectsByHash();
@@ -410,6 +402,11 @@ o.filterProjectsByString = function () {
 		$("#grid").mixItUp({
 			load: {
 				filter: filterString
+			},
+			animation: {
+				duration: 300,
+				effects: 'fade stagger(20ms) scale(0.40)',
+				easing: 'cubic-bezier(0.47, 0, 0.745, 0.715)'
 			}
 		});
 		o.hashOnLoad = false;
