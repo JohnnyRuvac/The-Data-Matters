@@ -1331,6 +1331,9 @@ body.loaded.show_filter .right .filter-button{
   height: 100%;
   z-index: 5;
 }
+#map-container .has-project {
+  cursor: pointer;
+}
 
 #country-info {
   width: 220px;

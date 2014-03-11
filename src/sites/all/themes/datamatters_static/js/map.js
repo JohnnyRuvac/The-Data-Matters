@@ -3,7 +3,9 @@ o.map = {};
 
 o.map.init = function () {
 
-	var url = $("#map-container").attr("data-url");
+	o.$mapContainer = $("#map-container");
+
+	var url = o.$mapContainer.attr("data-url");
 	Snap.load( url + "map_logo.svg", function(d) {
 
 		o.map.setContainerHeight();
@@ -38,7 +40,7 @@ o.map.init = function () {
 		o.map.activateDrag();
 
 		//countries with project hover
-		var url = $("#map-container").attr("data-json-url");
+		var url = o.$mapContainer.attr("data-json-url");
 		o.map.loadCountriesWithProjects(url);
 
 	});
@@ -73,8 +75,12 @@ o.map.activateDrag = function () {
 	} 
 	var start = function() {
 		o.isDraggingMap = true;
+		o.$mapContainer.css("cursor", "move");
 	}
 	var stop = function() {
+
+		o.$mapContainer.css("cursor", "auto");
+
 		o.drag.x = 0;
 		o.drag.y = 0;
 
