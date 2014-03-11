@@ -331,45 +331,55 @@ o.showFieldInfoNum = function () {
 		.addClass("active");
 
 	o.$fieldsDesc
-		.find("#fdp" + (num - 1))
-		.removeClass("active")
-		.addClass("seen");
-
-	o.$fieldsDesc
 		.find("#fdp" + num)
 		.removeClass("seen")
 		.addClass("active");
 
-	o.$fieldsDesc
-		.find("#fdp" + (num + 1))
-		.removeClass("active seen");
-
-	//already seen is black solid
-	var seen = o.fieldsInfo.select(".fieldInfo" + (num - 1));
-	if (seen) {
-		seen.attr({
-			stroke: "#000",
-			strokeDasharray: 0
-		});
-	}
-	o.$fieldsDesc
-		.find("li:nth-child(" + (num - 1) + ")")
-		.removeClass("active")
-		.addClass("seen");
-
-	o.$fieldsDesc
-		.find("li:nth-child(" + (num + 1) + ")")
-		.removeClass("active seen");
 
 }
 o.hideFieldInfoNum = function () {
 
 	var num = o.currentFieldInfo;
+	
+	if ( o.dir == "next" ) {
+		
+		//mark field names
+		o.$fieldsDesc
+			.find("li:nth-child(" + num + ")")
+			.removeClass("active")
+			.addClass("seen");
 
-	o.fieldsInfo.select(".fieldInfo" + num).attr({
-		stroke: "#ccc",
-		strokeDasharray: 1
-	});
+		//paragraphs
+		o.$fieldsDesc
+			.find("#fdp" + num)
+			.removeClass("active")
+			.addClass("seen");
+
+		//field symbols as seen
+		var seen = o.fieldsInfo.select(".fieldInfo" + num);
+		if (seen) {
+			seen.attr({
+				stroke: "#000",
+				strokeDasharray: 0
+			});
+		}
+
+	} else {
+
+		o.fieldsInfo.select(".fieldInfo" + num).attr({
+			stroke: "#ccc",
+			strokeDasharray: 1
+		});
+
+		o.$fieldsDesc
+			.find("li:nth-child(" + num + ")")
+			.removeClass("active seen");
+
+		o.$fieldsDesc
+			.find("#fdp" + num)
+			.removeClass("active seen");
+
+	}
 
 }
 o.hideFieldsInfo = function () {
@@ -429,6 +439,8 @@ o.exitCurrentSlide = function () {
 			o.hideFieldInfoNum();
 			break;
 		case 10:
+			if (o.dir == "prev")
+				o.hideFieldInfoNum();
 			o.hideFieldsInfo();
 			break;
 		case 11:
@@ -445,8 +457,6 @@ o.anotherSlide = function (direction) {
 	if ( direction == "prev" && o.currentSlide == 0)
 		return;
 	if ( direction == "next" && o.currentSlide == 11)
-		return;
-	if ( direction == "prev" && o.currentSlide == 11)
 		return;
 
 	o.dir = direction;
@@ -557,7 +567,7 @@ o.initSlideScrolling = function () {
 				//timeout because of momentum scroll on Apple devices
 				window.setTimeout(function(){
 					o.scrolled = false;
-				}, 700);
+				}, 1200);
 
 			}
 
@@ -624,14 +634,6 @@ o.initStoryTelling = function () {
 	}, 50);
 
 }
-// o.applyTweens = function(tween, snapEl) {
-
-// 	var x = tween.target.x,
-// 			y = tween.target.y;
-
-// 	snapEl.transform("t" + x + "," + y);
-
-// }
 // END Storytelling
 
 // DOM ready
