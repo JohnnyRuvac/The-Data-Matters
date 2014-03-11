@@ -345,10 +345,10 @@ o.countries.center = function () {
 	  y: y,
 	  sx: bbox.cx,
 	  sy: bbox.cy,
-	  s: 1,
+	  s: 2,
 	  ease: Power1.easeOut,
 	  onUpdate: o.applySnapTweens,
-	  onUpdateParams:["{self}", o.map.countries, 1, bbox.cx]
+	  onUpdateParams:["{self}", o.map.countries, 2, bbox.cx]
 	});
 
 }
@@ -373,10 +373,10 @@ o.countries.zoomToActive = function(that){
 	  y: shift.y,
 	  sx: bbox.cx,
 	  sy: bbox.cy,
-	  s: 3,
+	  s: 2,
 	  ease: Power1.easeOut,
 	  onUpdate: o.applySnapTweens,
-	  onUpdateParams:["{self}", o.map.countries, 3, bbox.cx, bbox.cy]
+	  onUpdateParams:["{self}", o.map.countries, 2, bbox.cx, bbox.cy]
 	});
 
 }
