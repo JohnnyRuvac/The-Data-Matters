@@ -8,10 +8,26 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1" media="(device-height: 568px)">
+
   <meta name="description" content="">
   <meta name="author" content="">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-title" content="Data Matters" />
+  <link rel="shortcut icon" sizes="196x196" href="/sites/all/themes/datamatters_static/icons/icon196.png">
+  <link rel="shortcut icon" sizes="128x128" href="/sites/all/themes/datamatters_static/icons/icon128.png">
+
+  <meta name="apple-mobile-web-app-title" content="Data Matters" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sites/all/themes/datamatters_static/icons/icon144.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/sites/all/themes/datamatters_static/icons/icon114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/sites/all/themes/datamatters_static/icons/icon72.png">
+  <link rel="apple-touch-icon-precomposed" href="/sites/all/themes/datamatters_static/icons/icon57.png">
+  
   <link rel="shortcut icon" href="/misc/favicon.ico">
+
   <?php //print $head; ?>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
