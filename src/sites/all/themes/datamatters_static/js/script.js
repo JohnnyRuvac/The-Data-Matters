@@ -156,6 +156,8 @@ o.activateProjectFilters = function () {
 }
 o.fixFilters = function() {
 
+	o.$body.removeClass("slideout-menu-opened");
+
 	//if there is no opened filter, return, we don't need to check this on every window resize
 	if ( !o.$currentOpenedFilter ) return;
 
@@ -301,7 +303,6 @@ o.projectsFiltering = function () {
 
 	//init mixitup if there is no hash tag, otherwise init it in o.filterProjectsByString();
 	o.hashOnLoad = window.location.hash;
-
 
 	if (!o.hashOnLoad) {
 		$("#grid").mixItUp({
@@ -591,7 +592,7 @@ $(function(){
 // Window Load
 $(window).load(function(){
 
-	  o.trimTitles();
+	o.trimTitles();
 
 });
 // END of Window Load
