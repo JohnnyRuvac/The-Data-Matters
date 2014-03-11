@@ -441,7 +441,8 @@ o.exitCurrentSlide = function () {
 		case 10:
 			if (o.dir == "prev")
 				o.hideFieldInfoNum();
-			o.hideFieldsInfo();
+			else
+				o.hideFieldsInfo();
 			break;
 		case 11:
 			o.hideLastPage();
@@ -483,6 +484,8 @@ o.anotherSlide = function (direction) {
 			break;
 		case 3:
 			o.showFieldsInfo();
+			o.currentFieldInfo = 1;
+			o.showFieldInfoNum();
 			break;
 		case 4:
 			o.currentFieldInfo = 2;
@@ -579,7 +582,7 @@ o.initSlideScrolling = function () {
 }
 o.fadeSlide = function(dir) {
 
-	if ( o.currentSlide >= 3 && o.currentSlide <= 9 ) {
+	if ( o.currentSlide >= 3 && o.currentSlide <= 10 ) {
 
 		o.anotherSlide(dir);
 
@@ -611,16 +614,16 @@ o.initStoryTelling = function () {
 		var code = e.keyCode || e.which;
 		switch (code) {
 			case 38:
-				o.anotherSlide("prev");
+				o.fadeSlide("prev");
 				break;
 			case 37:
-				o.anotherSlide("prev");
+				o.fadeSlide("prev");
 				break;
 			case 39:
-				o.anotherSlide("next");
+				o.fadeSlide("next");
 				break;
 			case 40:
-				o.anotherSlide("next");
+				o.fadeSlide("next");
 				break;
 			default:
 				break;

@@ -992,9 +992,9 @@ header .content.affix-top .logo {
 }
 
 @media (min-width: 769px) {
-	.filter-button .label{
-		background-position: 92% -8px;			
-	}
+  .filter-button .label{
+    background-position: 92% -8px;      
+  }
 }
 
 
@@ -1008,7 +1008,7 @@ header .content.affix-top .logo {
   background-image: url(../img/dropdown-arrows.png);
 }
 .filter-button .label.active:before {
-	display: none;
+  display: none;
 }
 
 .filter-button .label:hover {
@@ -1296,19 +1296,9 @@ body.loaded.show_filter .right .filter-button{
 
 #homepage-slogan.active {
   opacity: 1;
-  /*-webkit-transition: opacity 0.3s;
-  -moz-transition: opacity 0.3s;
-  -ms-transition: opacity 0.3s;
-  -o-transition: opacity 0.3s;
-  transition: opacity 0.3s;*/
 }
 #homepage-slogan {
   opacity: 0;
-  /*-webkit-transition: opacity 0.3s;
-  -moz-transition: opacity 0.3s;
-  -ms-transition: opacity 0.3s;
-  -o-transition: opacity 0.3s;
-  transition: opacity 0.3s;*/
 }
 
 .fields-descriptions {
@@ -1321,7 +1311,7 @@ body.loaded.show_filter .right .filter-button{
 }
 .fields-descriptions p {
   float: left;
-  width: 350px;
+  width: 282px;
   position: absolute;
   top: -800px;
   left: 230px;
@@ -1401,6 +1391,10 @@ body.loaded.show_filter .right .filter-button{
   color: #f00;
   border-color: #f00;
   text-decoration: none;
+}
+.page-node-22 .last-page .projects-link {
+  color: #333;
+  border-color: #333;
 }
 /* END home page */
 
