@@ -31,6 +31,9 @@ o.slideoutMenu = function () {
 		e.preventDefault();
 		o.slideoutMenuHeight();
 		o.$body.toggleClass("slideout-menu-opened");
+		
+		// Jump tp top to see menu
+		o.$window.scrollTop(0);
 	});
 
 }
@@ -81,11 +84,14 @@ o.activateProjectFilters = function () {
 		//close slideoutmenu
 		o.$body.removeClass("slideout-menu-opened");
 
-		//change color of body to grey for mobiles
-		if (o.ww < 769) o.$body.addClass("grey");
-
 		//add active class to filter button to remove position relative
 		$(this).closest(".filter-button").addClass("active");
+
+		//change color of body to grey for mobiles and jump to top
+		if (o.ww < 769) {
+		  o.$body.addClass("grey");
+		  $(window).scrollTop(0);
+	  }
 
 		//close other filters if they are open
 		var isActive;
@@ -122,7 +128,7 @@ o.activateProjectFilters = function () {
 
 		//check if the name should be shorten
 		var text = $(this).text();
-		if ( text.length > 15 ) text = text.slice(0, 15) + "...";
+		//if ( text.length > 15 ) text = text.slice(0, 15) + "...";
 
 		var $filterButton = $(this).closest(".filter-button");
 		$filterButton
@@ -251,6 +257,14 @@ o.affixNavi = function() {
 			top: function(){return (o.ww < 769) ? 140 : 0}
 		}
 	});
+	
+	o.$headerContent.on('affix.bs.affix', function () {
+    console.log('Fired!1');
+  });
+  
+  o.$headerContent.on('affixed.bs.affix', function () {
+    console.log('Fired!2');
+  });
 
 }
 // END Affix navi
@@ -277,7 +291,6 @@ o.activateSearch = function () {
 
   $(".search-results a").click(function(){
     var link = $(this).attr("href");
-    console.log(link);
   })
 
 	//in header
@@ -285,7 +298,7 @@ o.activateSearch = function () {
 		//$(this).parent().addClass("active");
 	});
 	$(".menu-search input").blur(function(){
-		$(this).parent().removeClass("active");
+		//$(this).parent().removeClass("active");
 	});	
 
 }
@@ -298,7 +311,7 @@ o.projectsFiltering = function () {
 	o.hashOnLoad = window.location.hash;
 
   o.emptyString = function(){
-    console.log("empty");
+
   }
 
 	if (!o.hashOnLoad)
@@ -531,6 +544,25 @@ o.checkSVG = function () {
 }
 // END check SVG support
 
+// Check SVG support
+o.trimTitles = function () {
+
+	var miniMobile = o.ww < 400;
+
+	if ( miniMobile) {
+		$(".project h2").each(function(){
+  		var lines = $(this).height() / 17;
+  		var text = $(this).find("a").html();
+  		if(text.length > 34){
+  		  text = text.slice(0, 35) + "...";
+  		  $(this).find("a").html(text);
+  		}
+		})
+	}
+
+}
+// END check SVG support
+
 // DOM ready
 $(function(){
 
@@ -545,13 +577,14 @@ $(function(){
 	o.showNGO();
   o.sortNGO();
   o.welcome();
+
 });
 // END DOM ready
 
 // Window Load
 $(window).load(function(){
 
-	
+	  o.trimTitles();
 
 });
 // END of Window Load
@@ -564,6 +597,8 @@ $(window).resize(function(){
 	o.fixFilters();
 	//o.fixProjectPreviewHeight();
   o.sortNGO();
+  
+  o.trimTitles();
   
   //neviem kam s tymto
   if(o.$mainSearch.hasClass("focus")) o.$mainSearch.find("input").trigger("focusout").blur();

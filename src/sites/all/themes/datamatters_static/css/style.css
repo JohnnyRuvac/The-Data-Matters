@@ -192,13 +192,42 @@ header {
 }
 header .content.affix {
   width: 100%;
-  top: -108px;
   z-index: 50;
+  top: 0px;
 }
+
+header .content.affix-top{
+  top: 0px;
+}
+
+header .content.affix .logo {
+  margin: 0px;
+  margin-left: 20px;
+  height: 0px;
+}
+
+header .content.affix .logo a {height: 0px}
+
+header .content.affix-top .logo {
+  margin: 0 0 32 20px;
+  height: 75px;
+}
+
+@media (max-width: 760px) {
+  header .content.affix .logo,
+  header .content.affix-top .logo{
+    -webkit-transition: height, margin 0.2s ease;
+    -moz-transition: height, margin 0.2s ease;
+    -o-transition: height, margin 0.2s ease;
+    transition: height, margin 0.2s ease;
+  }
+}
+
 .logo {
   width: 70px;
   height: 75px;
   margin: 0 0 32px 20px;
+  overflow: hidden;
 }
 .logo a {
   position: absolute;
@@ -239,6 +268,7 @@ header .content.affix {
   padding-right: 45px;
 }
 
+.project-preview #mob_title,
 .show_filter #mob_title {display: none}
 
 @media (min-width: 769px) {
@@ -287,9 +317,11 @@ header .content.affix {
   display: block;
   text-indent: -9999px;
   background: url(../img/menu-icon.png) no-repeat center 18px;
+  position: relative; z-index: 10;
 }
 .slideout-menu-opened .main-nav .menu-icon a {
   background-position: center -32px;
+
 }
 .main-nav .menu-tablet {
   margin-left: 82px;
@@ -331,7 +363,7 @@ header .content.affix {
   position: absolute;
   top: 33px;
   left: -1px;
-  width: 290px;
+  width: 280px;
   padding-left: 0;
   z-index: 1001;
   border-bottom: 1px solid #ccc;
@@ -397,12 +429,20 @@ header .content.affix {
   .main-nav .menu-icon {
     height: 32px;
   }
-  .logo {
+  header .content.affix .logo,
+  header .content.affix-top .logo {
     position: absolute;
     top: 50px;
     left: 30px;
     margin: 0;
     z-index: 10;
+    width: 70px;
+    height: 75px;
+    margin-left: 0px;
+  }
+  header .content.affix .logo a {
+    display: block;
+    height: 75px;
   }
   .logged-in .logo {
     top: 79px;
@@ -531,12 +571,17 @@ header .content.affix {
 }
 .project h2 {
   font-size: 12px;
+  line-height: 17px;
 }
 @media (min-width: 400px) {
   .project h2 {
     font-size: 14px;
+    line-height: 20px;
   }
 }
+
+
+
 .project .country,
 .project .field {
   position: absolute;
@@ -1097,19 +1142,34 @@ header .content.affix {
   width: 100%;
   padding-left: 34px;
   height: 36px;
-  line-height: 1;
+  line-height: 36px;
+  padding-top: 1px;
+  padding-bottom: 0px;
   outline: none;
   border-top: none;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
-  border-bottom: 1px dotted #ccc;
+  border-bottom: 1px solid #ccc;
   -webkit-appearance: none;
   border-radius: 0;
-  background: white url(../img/search-icon.png) no-repeat 15px 14px;
+  background: white url(../img/search-icon.png) no-repeat 13px 13px;
 }
 #slideout-menu .search-input:focus {
-  background-position: 15px -11px;
+  background-position: 13px -12px;
 }
+
+#slideout-menu .filter-content.populated{
+  border-bottom: 1px dotted #ccc;  
+}
+
+#slideout-menu .filter-content .clearfix {
+  display: none;
+}
+
+#slideout-menu .filter-content.populated .clearfix{
+  display: block;
+}
+
 /* END Slideout Search */
 
 /* Home + interactive map pages */
@@ -1553,7 +1613,7 @@ html.svg #country-info .field:before {
 }
 
 .svg .filter-button .label:before{
-  
+  content: "\e605";
   right: 10px;
   top: 17px;
   font-size: 10px;
@@ -1642,7 +1702,7 @@ html.svg #country-info .field:before {
 #country-info .field:before,
 #country-info .field,
 .close-full-preview:before,
-.filter-content li a,
+.loaded .filter-content li a,
 #project-preview .country a:before,
 .project .country a:before,
 #project-preview .field a:before,
@@ -1691,12 +1751,14 @@ body.loaded.show_filter .right .filter-button,
   transition: width 0.5s ease;
 }
 
+
+
 .main-nav .menu-search.focus {
-  width: 324px;
+  width: 314px;
 }
 
 .main-nav .menu-search.focus input{
-  width: 288px;
+  width: 278px;
 }
 
 #project-preview .contacts.show:before,
@@ -1712,11 +1774,13 @@ body.loaded.show_filter .right .filter-button,
 .svg #country-info .field:hover,
 .main-nav .menu-search a:hover:before,
 #project-preview .country a:hover:before,
+html.svg #project-preview .field a:hover:before,
 .project .country a:hover:before,
 #project-preview .field a:hover:before,
 .project .field a:hover:before,
 #project-preview .link a:hover:before,
 #project-preview .ngo:hover:before,
+#project-preview .ngo:hover,
 #project-preview .country a:hover,
 .project .country a:hover,
 #project-preview .field a:hover,
@@ -1897,6 +1961,21 @@ body.page-node-23 .node-page {
 
 /* END of User stuff */
 
+/* iOS fix */
+
+@media (max-width: 492px) {
+  #slideout-menu .svg-fix{
+    display: none !important;    
+  }
+}
+
+a[href^=tel] {
+  text-decoration: none;
+  border-bottom: #646464 1px dotted;
+  color: #646464;
+}
+
+/* END of iOS fix */
 
 /* Retina images */
 @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
@@ -1938,11 +2017,7 @@ only screen and (min-device-pixel-ratio: 1.5) {
     -webkit-background-size: 11px 11px;
     background-size: 11px 11px;
   }
-  .no-svg .logo {
-    background-image: url(../img/logo@2x.png);
-    -webkit-background-size: 70px 75px;
-    background-size: 70px 75px;
-  }
+
   .main-nav .menu-icon a {
     background-image: url(../img/menu-icon@2x.png);
     -webkit-background-size: 18px 100px;
@@ -1951,8 +2026,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
   .main-nav .menu-search a,
   #slideout-menu .search-input {
     background-image: url(../img/search-icon@2x.png);
-    -webkit-background-size: 9px 9px;
-    background-size: 9px 9px;
+    -webkit-background-size: 9px 34px;
+    background-size: 9px 34px;
   }
 
   #project-preview .country {
@@ -1986,6 +2061,17 @@ only screen and (min-device-pixel-ratio: 1.5) {
     background: url(../img/404.png) no-repeat center top;
     -webkit-background-size: 49px 65px;
     background-size: 49px 65px;
+  }
+  
+  .logo a {
+    background: url(../img/logo@2x.png) no-repeat top center;
+    -webkit-background-size: 70px 150px;
+    background-size: 70px 150px;
+  }
+  .logo a:hover {
+    background: url(../img/logo@2x.png) no-repeat bottom center;
+    -webkit-background-size: 70px 150px;
+    background-size: 70px 150px;
   }
 
 }

@@ -619,7 +619,7 @@ $(function(){
 	o.hp.initVars();
 	o.hp.setContainerHeight();
 	o.hp.fixIpad();
-	o.hp.init();
+	
 
 });
 // END DOM ready
@@ -637,7 +637,9 @@ $(window).resize(function(){
 //Window load
 $(window).load(function(e){
 
+  o.hp.init();
 	o.initStoryTelling();
+
 
 });
 //END Window load
