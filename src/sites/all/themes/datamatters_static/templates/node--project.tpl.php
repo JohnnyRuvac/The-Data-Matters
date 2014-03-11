@@ -48,7 +48,12 @@
 				<div id="project-preview">
 					<a href="/projects" class="close-full-preview icon">Close</a>
 			  	<div class="preview-content">
-			  		<img src="<?=file_create_url($node->field_image['und'][0]['uri'])?>" alt="">
+			  	  <div class="image-container<? if(isset($node->field_image_description['und'][0]['safe_value'])) print " has-description"?>">
+  			  		<img src="<?=file_create_url($node->field_image['und'][0]['uri'])?>" alt="">
+  			  		<? if(isset($node->field_image_description['und'][0]['safe_value'])):?>
+  			  		  <div class="image-description"><?=$node->field_image_description['und'][0]['safe_value']?></div>
+  			  		<? endif;?>
+			  	  </div>
 				  	<h2><?=$node->title?></h2>
 				  	<div class="info clearfix">
 				  		<p class="country"><a class="icon" href="/<?=$lCountry?>"><?=$country->name?></a></p>
@@ -63,8 +68,16 @@
 
 				  		<? if(isset($ngo->field_email['und'][0]['safe_value']) || isset($ngo->field_phone['und'][0]['safe_value'])):?>
 					  		<p class="contacts icon">
-						  		<? if(isset($ngo->field_email['und'][0]['safe_value'])) print $ngo->field_email['und'][0]['safe_value'];?>
-						  		<? if(isset($ngo->field_phone['und'][0]['safe_value'])) print $ngo->field_phone['und'][0]['safe_value'];?>
+						  		<? if(isset($ngo->field_email['und'][0]['safe_value'])): ?>
+                    <?php if(strpos($ngo->field_email['und'][0]['safe_value'],'@') !== false): ?>
+                      <a href="mailto:<?=$ngo->field_email['und'][0]['safe_value']?>"><?=$ngo->field_email['und'][0]['safe_value']?></a>
+                    <? else: ?>
+                      <a href="http://<?=$ngo->field_email['und'][0]['safe_value']?>"><?=$ngo->field_email['und'][0]['safe_value']?></a>
+                    <? endif;?>
+						  		<? endif; ?>
+						  		<? if(isset($ngo->field_phone['und'][0]['safe_value'])): ?> 
+						  		  <a href="tel:<?php print str_ireplace(" ", "", str_ireplace("+", "00", $ngo->field_phone['und'][0]['safe_value'])); ?>"><?=$ngo->field_phone['und'][0]['safe_value']?></a>
+					  		  <? endif; ?>
 					  		</p>
 					  	<? else:?>
 					  		<p class="contacts icon">

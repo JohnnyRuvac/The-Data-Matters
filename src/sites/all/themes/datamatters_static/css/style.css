@@ -710,6 +710,28 @@ header .content.affix-top .logo {
 .project-preview #project-preview {
   display: block;
 }
+.project-preview .image-container{
+  position: relative;
+}
+
+.project-preview .image-description{
+  position: absolute; bottom: 0px; 
+  left: 0px; right: 0px;
+  background: rgba(255,255,255,0.80);
+  padding:  15px;
+  font-size: 12px;
+  line-height: 20px;
+  opacity: 0;
+}
+
+.project-preview .open .image-description{
+  opacity: 1;
+}
+
+.project-preview .has-description{
+  cursor: pointer;
+}
+
 #project-preview img {
   width: 100%;
 }
@@ -747,6 +769,7 @@ header .content.affix-top .logo {
 }
 #project-preview .country a {
   color: #646464;
+  border-bottom: 0px;
 }
 #project-preview .field {
   display: block;
@@ -762,6 +785,7 @@ header .content.affix-top .logo {
 
 #project-preview .field a {
   color: #646464;
+  border-bottom: 0px;
 }
 #project-preview .link,
 #project-preview .ngo {
@@ -1735,6 +1759,7 @@ body.loaded.show_filter .right .filter-button,
   transition: opacity 0.5s ease;
 }
 
+.project-preview .image-description,
 #project-preview .contacts.show,
 #project-preview .contacts{
   -webkit-transition: all 0.5s ease;
@@ -1789,6 +1814,7 @@ html.svg #project-preview .field a:hover:before,
 #project-preview .ngo a:hover {
   color: #F00;
   text-decoration: none;
+  border-bottom: 0px;
 }
 
 /* END of Transitions */
@@ -1969,10 +1995,18 @@ body.page-node-23 .node-page {
   }
 }
 
+#project-preview  .contacts a, 
+.view-organisations a,  
 a[href^=tel] {
   text-decoration: none;
   border-bottom: #646464 1px dotted;
   color: #646464;
+}
+
+a[href^=tel]:hover,
+#project-preview  .contacts a:hover,
+  .view-organisations a:hover {
+  border-bottom: #F00 1px dotted;
 }
 
 /* END of iOS fix */

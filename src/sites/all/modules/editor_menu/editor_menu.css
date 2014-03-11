@@ -26,6 +26,8 @@ only screen and (min-device-pixel-ratio: 1.5) {
 #editormenu .last {margin-bottom: 5px; margin-top: 15px}
 #editormenu .first {margin-bottom: 10px}
 
+
+
 .action-links {position: fixed; bottom: 10px; right: 20px; z-index: 100}
 .action-links li {float: left; margin-right: 10px;}
 .action-links li.active {display: none}
@@ -41,6 +43,7 @@ html.overlay-open #overlay-disable-message {overflow: hidden; height: 0px}
 #edit-filters .form-item {position: relative; height: 39px; }
 #edit-filters select {float: left; clear: none; position: absolute; top: 15px; left: 130px;}
 
+
 #edit-field-country,
 #edit-field-field,
 #edit-field-year {float: left; width: 33%;}
@@ -51,11 +54,13 @@ html.overlay-open #overlay-disable-message {overflow: hidden; height: 0px}
 #edit-field-issue,
 #edit-field-country {clear: left}
 
+#edit-field-image-description,
 #edit-field-issue,
 #edit-field-solution,
 #edit-field-message,
 #edit-field-impact {margin-bottom: 40px}
 
+#edit-field-image-description,
 #edit-field-issue,
 #edit-field-solution,
 #edit-field-message,
@@ -66,13 +71,29 @@ html.overlay-open #overlay-disable-message {overflow: hidden; height: 0px}
 .node-form .form-item-title,
 #edit-field-image {width: 50%; float: left; margin: 0px; padding: 0px}
 
-.image-widget-data .file {width: 100px; overflow: hidden; 
-	display: inline-block
+#edit-field-image-description {margin-bottom: 40px;}
+
+#edit-field-image {float: right; width: 50%}
+
+h1#overlay-title { white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;}
+
+.image-widget-data .file {width: 230px; 	line-height: 27px; display: block;
+	  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .image-widget-data .file-icon {display: none}
 
+.node-form .form-item{padding: 0px;}
+
+.node-form .form-item-title {width: 50%}
+
 .node-form .form-select,
 .node-form .form-text {width: 90%; -moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+
+.form-textarea-wrapper {width:  95%}
 
 .filter-wrapper {display: none}
 

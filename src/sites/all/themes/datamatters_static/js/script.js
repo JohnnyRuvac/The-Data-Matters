@@ -563,6 +563,15 @@ o.trimTitles = function () {
 }
 // END check SVG support
 
+o.toggleImageDescription = function () {
+
+	$(".has-description").click(function(){
+  	$(this).toggleClass("open");
+	})
+
+}
+// END check SVG support
+
 // DOM ready
 $(function(){
 
@@ -577,6 +586,7 @@ $(function(){
 	o.showNGO();
   o.sortNGO();
   o.welcome();
+  o.toggleImageDescription();
 
 });
 // END DOM ready
