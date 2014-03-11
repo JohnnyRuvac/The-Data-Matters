@@ -595,6 +595,29 @@ o.initStoryTelling = function () {
 		o.anotherSlide("next");
 	});
 
+	//keyboard
+	$(window).keyup(function(e){
+		
+		var code = e.keyCode || e.which;
+		switch (code) {
+			case 38:
+				o.anotherSlide("prev");
+				break;
+			case 37:
+				o.anotherSlide("prev");
+				break;
+			case 39:
+				o.anotherSlide("next");
+				break;
+			case 40:
+				o.anotherSlide("next");
+				break;
+			default:
+				break;
+		}
+
+	});
+
 	//hide preload here
 	window.setTimeout(function(){
 		o.$body.addClass("all-loaded");
