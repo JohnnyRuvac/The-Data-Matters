@@ -214,7 +214,7 @@ header .content.affix-top .logo {
 }
 
 @media (max-width: 760px) {
-  header .content.affix .logo,
+
   header .content.affix-top .logo{
     -webkit-transition: height, margin 0.2s ease;
     -moz-transition: height, margin 0.2s ease;
