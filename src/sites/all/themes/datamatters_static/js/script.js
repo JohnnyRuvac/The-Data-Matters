@@ -313,12 +313,13 @@ o.projectsFiltering = function () {
 		e.preventDefault();
 		var group = $(this).parent().attr("data-group");
 
-		if (group == "country")
+		if (group == "country" || group == "countries")
 			o.activeCountryFilter = $(this).parent().attr("data-filter");
 		else
 			o.activeFieldFilter = $(this).parent().attr("data-filter");
 
 		o.filterProjectsByString();
+		o.checkProjectFilters();
 
 	});
 
@@ -410,28 +411,7 @@ o.filterProjectsByString = function () {
 	}
 
 }
-o.searchStringInArray = function(str, strArray) {
-
-  for (var j=0; j<strArray.length; j++) {
-    if (strArray[j].match(str)) 
-    	return strArray[j].replace(str, "");
-  }
-  return false;
-
-}
-o.filterProjectsByHash = function () {
-
-	//check hash tag for activeFieldFilter, activeCountryFilter, and update those variables
-	var s = window.location.hash;
-
-	//return on no hash
-	if (!s)
-		return;
-
-	s = s.replace("#","");
-	s = s.split("/");
-	o.activeFieldFilter = o.searchStringInArray( "field=", s );
-	o.activeCountryFilter = o.searchStringInArray( "country=", s );
+o.checkProjectFilters = function () {
 
 	//activate Field Filter
 	if ( o.activeFieldFilter ) {
@@ -467,9 +447,33 @@ o.filterProjectsByHash = function () {
 
 	}
 
+}
+o.searchStringInArray = function(str, strArray) {
+
+  for (var j=0; j<strArray.length; j++) {
+    if (strArray[j].match(str)) 
+    	return strArray[j].replace(str, "");
+  }
+  return false;
+
+}
+o.filterProjectsByHash = function () {
+
+	//check hash tag for activeFieldFilter, activeCountryFilter, and update those variables
+	var s = window.location.hash;
+
+	//return on no hash
+	if (!s)
+		return;
+
+	s = s.replace("#","");
+	s = s.split("/");
+	o.activeFieldFilter = o.searchStringInArray( "field=", s );
+	o.activeCountryFilter = o.searchStringInArray( "country=", s );
 
 	//filter projects
 	o.filterProjectsByString();
+	o.checkProjectFilters();
 
 }
 // END projects sorting
