@@ -580,6 +580,7 @@ body.slideout-menu-opened{
 .project img {
   float: left;
   width: 45.5%;
+  border-bottom: 1px solid #ccc;
 }
 .project .content {
   float: left;
@@ -735,7 +736,7 @@ body.slideout-menu-opened{
   position: absolute; bottom: 0px; 
   left: 0px; right: 0px;
   background: rgba(255,255,255,0.80);
-  padding:  15px;
+  padding: 9px 15px;
   font-size: 12px;
   line-height: 20px;
   opacity: 0;
