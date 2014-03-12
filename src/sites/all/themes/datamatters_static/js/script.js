@@ -283,18 +283,6 @@ o.activateSearch = function () {
 
 	});
 
-  $(".search-results a").click(function(){
-    var link = $(this).attr("href");
-  })
-
-	//in header
-	$(".menu-search input").focus(function(){
-		//$(this).parent().addClass("active");
-	});
-	$(".menu-search input").blur(function(){
-		//$(this).parent().removeClass("active");
-	});	
-
 }
 // END Search
 
@@ -350,7 +338,8 @@ o.projectsFiltering = function () {
 		else 
 			o.activeFieldFilter = undefined;
 
-       window.location.hash = "";
+    window.location.hash = "";
+
 		$(".project a").each(function(){
 		  var link = $(this).attr("href").split("#");
 		  $(this).attr("href", link[0]  );
