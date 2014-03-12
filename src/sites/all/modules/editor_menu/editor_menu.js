@@ -157,7 +157,7 @@ function searchArray(str, arr){
 		  items.push("<li><a href='"+val.link+"'>"+val.name+"</a></li>");
 		  $("#slideout-menu .filter-content").addClass("populated");
 		}else{
-		  $("#slideout-menu .filter-content").removeClass("populated");  		
+		  //$("#slideout-menu .filter-content").removeClass("populated");  		
 		}
 		//if(count > 10) return false;
 	})
