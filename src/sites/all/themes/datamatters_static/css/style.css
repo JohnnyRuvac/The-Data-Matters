@@ -193,7 +193,7 @@ header {
 header .content.affix {
   width: 100%;
   z-index: 50;
-  top: 0px;
+  top: -80px;
 }
 
 header .content.affix-top{
@@ -501,6 +501,8 @@ header .content.affix-top .logo {
 /* end of header */
 
 /* Slideout menu */
+
+
 #slideout-menu {
   float: left;
   width: 0;
@@ -519,6 +521,11 @@ header .content.affix-top .logo {
   width: 273px;
   margin-left: 0;
 }
+
+body.slideout-menu-opened{
+  overflow: hidden;
+}
+
 .slideout-menu-opened #wrapper {
   margin-right: -273px;
 }
