@@ -639,6 +639,10 @@ body.slideout-menu-opened{
   color: #646464;
 }
 
+.project .content a{
+  text-decoration: none !important;
+}
+
 #grid.fail:before {
   content: "Your search did not return any projects";
   color: #cccccc;

@@ -358,7 +358,12 @@ o.projectsFiltering = function () {
 
 		o.filterProjectsByString();
 		o.checkProjectFilters();
-
+    
+    if(o.ww < 769){
+      o.$window.scrollTop(0);
+    }
+    
+    
 	});
 
 	//clear filter
@@ -632,7 +637,6 @@ o.loadSearchJSON = function(){
 // search in array function
 
 o.searchArray = function(str, arr){
-  o.clickSearch = false;
   var items = [];
   var count = 0;
 	$.each(arr, function(key, val){
@@ -722,6 +726,7 @@ o.searchFunction = function(){
 	.focusin(function(){
 		if(!$(this).hasClass("search-input")){
 			 $(this).parent().addClass("focus");
+			 o.clickSearch = false;
 			 
 			 // checking if there enough space for focus expansion
 			 var leftSpace = $(window).width() - $(this).offset().left;
