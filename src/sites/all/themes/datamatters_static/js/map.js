@@ -55,11 +55,17 @@ o.map.activateDrag = function () {
 	
 	var move = function(dx,dy) {
 		
-		var bbox = this.getBBox(),
-				top = (bbox.x + dx) > 0,
-				left = (bbox.y + dy) > 0,
-				right = (-bbox.x - dx + o.ww) > 2560 * o.map.scale, //2560 is the initial width of svg map
-				bottom = (-bbox.y - dy + o.wh) > 1440 * o.map.scale; //1440 is the initial height of svg map
+		// var bbox = this.getBBox(),
+		// 		top = (bbox.x + dx) > 0,
+		// 		left = (bbox.y + dy) > 0,
+		// 		right = (-bbox.x - dx + o.ww) > 2560 * o.map.scale, //2560 is the initial width of svg map
+		// 		bottom = (-bbox.y - dy + o.wh) > 1440 * o.map.scale; //1440 is the initial height of svg map
+
+		var m = o.map.countries.matrix,
+				top = ( m.f + dy ) > - 1700,
+				left = ( m.e + dx ) > - 700,
+				right = ( m.e + dx ) < - 2150,
+				bottom = ( m.f + dy ) < - 2800;
 
 		if ( top || left || right || bottom)
 			return;
