@@ -24,7 +24,7 @@
 ?>
 					<li class="project mix <?=$pField?> <?=$pCountry?> clearfix">
 						<a href="<?=$node_url?>" title="<?=$node->title?>">
-							<img src="<?=image_style_url("large", $node->field_image['und'][0]['uri'])?>" alt="project image">
+							<img data-src="<?=image_style_url("preview", $node->field_image['und'][0]['uri'])?>" alt="project image">
 						</a>
 							<div class="content">
 								<h2><a href="<?=$node_url?>" title="<?=$node->title?>"><?=truncate_utf8($node->title, 45, TRUE, TRUE)?></a></h2>

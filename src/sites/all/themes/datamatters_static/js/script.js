@@ -17,7 +17,7 @@ o.initVars = function() {
 	o.$slideoutMenu = $("#slideout-menu");
 	o.$filterContents = $(".filter-content");
 	o.$mainSearch = $(".main-nav .menu-search");
-
+  o.isRetina = window.devicePixelRatio > 1;
 	o.isTouch = o.$html.hasClass("touch");
 	o.svgSupport = o.$html.hasClass("svg");
 
@@ -198,6 +198,20 @@ o.activateProjectPreview = function() {
     $(".close-full-preview").attr("href", $(".close-full-preview").attr("href") + window.location.hash);
   }
 
+  
+  $(".projects .project img").each(function(i){
+    var img = $(this).attr("data-src");
+      
+    if(o.isRetina)
+      img = img.replace("/preview/", "/preview_2x/");
+    
+    
+    $(this).attr("src", img);
+    $(this).removeAttr("data-src");
+      
+    console.log(img, i);
+  })
+  
 	$(".project").click(function(e){
 		
 		// e.preventDefault();
