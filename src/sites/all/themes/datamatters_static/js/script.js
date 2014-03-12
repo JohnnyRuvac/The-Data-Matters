@@ -21,6 +21,8 @@ o.initVars = function() {
 	o.isTouch = o.$html.hasClass("touch");
 	o.svgSupport = o.$html.hasClass("svg");
 
+  o.nameArray = [];
+
 }
 // END Init variables
 
@@ -550,6 +552,9 @@ o.trimTitles = function () {
 }
 // END check SVG support
 
+
+// Toggle image description
+
 o.toggleImageDescription = function () {
 
 	$(".has-description").click(function(){
@@ -557,7 +562,159 @@ o.toggleImageDescription = function () {
 	})
 
 }
-// END check SVG support
+// END Toggle image description
+
+
+// Load JSON for search use
+
+o.loadSearchJSON = function(){
+  $.getJSON("/json/countries", function(data){
+		$.each(data, function(key, val){
+			o.nameArray.push({"name":val.country.name, "low":val.country.name.toLowerCase(), "link":val.country.link});
+		})
+	})
+	$.getJSON("/json/fields", function(data){
+		$.each(data, function(key, val){
+			o.nameArray.push({"name":val.field.name,"low":val.field.name.toLowerCase(), "link":val.field.link});
+		})
+	})
+	$.getJSON("/json/projects", function(data){
+		$.each(data, function(key, val){
+			o.nameArray.push({"name":val.node.title, "low":val.node.title.toLowerCase(), "link":val.node.path});
+		})
+	})
+}
+
+// END Load JSON for search use
+
+// search in array function
+
+o.searchArray = function(str, arr){
+  o.clickSearch = false;
+  var items = [];
+  var count = 0;
+	$.each(arr, function(key, val){
+	  count++;
+		if(val.low.search(str.toLowerCase()) >= 0){
+		  items.push("<li><a href='"+val.link+"'>"+val.name+"</a></li>");
+		  $("#slideout-menu .filter-content").addClass("populated");
+		}else{
+		  //$("#slideout-menu .filter-content").removeClass("populated");  		
+		}
+		//if(count > 10) return false;
+	})
+
+	return items.join("");
+}
+
+// END search in array function
+
+// Search input function
+
+o.searchFunction = function(){
+
+  // Focus on search icon click
+  $(".menu-search .submit").click(function(e){
+		e.preventDefault();
+		$(".menu-search input").trigger("focusin").focus();
+	});
+	
+	
+	// click on result item
+	$("#slideout-menu .filter-content li a, .main-nav .search-results li a").live("click", function(e){
+		
+	  o.clickSearch = true;
+		
+		var windowLink = window.location.pathname;
+		var newLink = $(this).attr("href");
+		
+		// if we are on projects page
+		if(windowLink == "/projects" && !newLink.indexOf("/projects")){
+		  e.preventDefault();
+		  var filter = newLink.split("#")[1].split("=")[1];
+			var group = newLink.split("#")[1].split("=")[0];
+			
+			// in case of mobile device search
+			if($(window).width() <= 768){
+			  window.location.hash = "#" + group + "=" + filter;
+        window.location.reload(true);
+		  }
+			
+			// set search filter
+			var $filterLi = $('.project-filter[data-filter="' + filter + '"]'),
+  				$filterButton = $filterLi.closest(".filter-button"),
+  				text = $filterLi.text();
+  
+  		$filterButton
+  			.find(".label")
+  			.text( text )
+  			.addClass("active");
+  
+  		//show clear filter icon
+  		$filterButton.find(".clear-filter").addClass("active");
+			
+			if (group == "country")
+  			o.activeCountryFilter = filter;
+  		else
+  			o.activeFieldFilter = filter;
+      
+      $(".menu-search input").val("");
+      $(".menu-search").removeClass("focus").removeClass("active");
+  		o.filterProjectsByString();
+			
+		}
+	});
+	
+	// keyboard input in search field
+	
+	$(".menu-search input, #slideout-menu .search-input").keyup(function(e){
+		var str = $(this).val().toLowerCase();
+		
+		// adding active class for search results
+		if(str.length > 0){
+			$(".menu-search .search-results, #slideout-menu ul.clearfix").html(o.searchArray(str, o.nameArray));
+			if(!$(this).hasClass("search-input")) $(".menu-search .search-results").parent().addClass("active");
+		}
+
+	})
+	.focusin(function(){
+		if(!$(this).hasClass("search-input")){
+			 $(this).parent().addClass("focus");
+			 
+			 // checking if there enough space for focus expansion
+			 var leftSpace = $(window).width() - $(this).offset().left;
+			 if($(window).width() < 1200){
+  			 if(leftSpace < 314){
+    			 $(".main-nav .menu-search").css({maxWidth: leftSpace})
+    			 .find("input").css({maxWidth: leftSpace - 36});
+    			 $(".main-nav .search-results").css({maxWidth: leftSpace  - 36 + 2});
+  			 }else if(leftSpace >= 314 && $(".main-nav .menu-search").css("max-width") != "auto"){
+    			 $(".main-nav .menu-search").css({maxWidth: "auto"})
+    			 .find("input").css({maxWidth: "auto"});
+    			 $(".main-nav .search-results").css({maxWidth: "auto"});
+    			 
+  			 }
+			 }
+    }
+	})
+	.focusout(function(){
+		if(!$(this).hasClass("search-input")){
+			var search = $(this);
+
+      // waiting after click with focus
+			setTimeout(function(e){
+  			if(!o.clickSearch) {
+    			search.parent().removeClass("focus").removeClass("active");
+  			} 
+			}, 200);
+		} 
+	});
+	
+	
+	
+}
+
+// END Search input function
 
 // DOM ready
 $(function(){
@@ -574,6 +731,7 @@ $(function(){
   o.sortNGO();
   o.welcome();
   o.toggleImageDescription();
+  o.searchFunction();
 
 });
 // END DOM ready
@@ -582,6 +740,7 @@ $(function(){
 $(window).load(function(){
 
 	o.trimTitles();
+	o.loadSearchJSON();
 
 });
 // END of Window Load
