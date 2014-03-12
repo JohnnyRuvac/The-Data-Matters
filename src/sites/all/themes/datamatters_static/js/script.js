@@ -36,6 +36,7 @@ o.slideoutMenu = function () {
 		
 		// Jump tp top to see menu
 		o.$window.scrollTop(0);
+		
 	});
 
 }
@@ -261,6 +262,29 @@ o.affixNavi = function() {
 			top: function(){return (o.ww < 769) ? 140 : 0}
 		}
 	});
+	
+	// affix-top event
+	o.$headerContent.on("affix-top.bs.affix", function(){
+  	if(o.ww < 769){
+    	o.$headerContent.removeAttr("style");
+    	o.$headerContent.removeClass("animate");
+
+  	}
+	})
+	
+ 
+	// affix event
+	o.$headerContent.on("affix.bs.affix", function(){
+  	if(o.ww < 769){
+  	  o.$headerContent.css({top: "-100px"});
+  	  setTimeout(function(){
+  	    o.$headerContent.addClass("animate");
+    	  o.$headerContent.css({top: "0px"});
+  	  }, 10)
+
+  	}
+ 
+	})
 
 }
 // END Affix navi

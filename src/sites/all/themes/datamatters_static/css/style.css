@@ -221,6 +221,16 @@ header .content.affix-top .logo {
     -o-transition: height, margin 0.2s ease;
     transition: height, margin 0.2s ease;
   }
+  
+  header .content.affix-top,
+  header .content.affix.animate{
+    -webkit-transition: top 0.2s ease;
+    -moz-transition: top 0.2s ease;
+    -o-transition: top 0.2s ease;
+    transition: top 0.2s ease;
+    
+  }
+ 
 }
 
 .logo {
