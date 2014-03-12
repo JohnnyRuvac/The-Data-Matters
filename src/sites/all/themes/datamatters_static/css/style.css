@@ -1362,6 +1362,7 @@ body.loaded.show_filter .right .filter-button{
   transition: all 0.6s;
 }
 .fields-descriptions ul {
+  list-style: none;
   float: left;
   width: 230px;
   padding-left: 30px;
