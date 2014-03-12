@@ -321,7 +321,7 @@ o.projectsFiltering = function () {
 	if (!o.hashOnLoad) {
 		$("#grid").mixItUp({
 			animation: {
-				duration: 300,
+				duration: 400,
 				effects: 'fade stagger(20ms) scale(0.40)',
 				easing: 'cubic-bezier(0.47, 0, 0.745, 0.715)'
 			}
