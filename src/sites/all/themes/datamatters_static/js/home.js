@@ -396,11 +396,13 @@ o.hideFieldsInfo = function () {
 }
 o.showLastPage = function () {
 
+	o.$continueArrow.hide();
 	o.$lastPage.show();
 
 }
 o.hideLastPage = function () {
 
+	o.$continueArrow.show();
 	o.$lastPage.hide();
 	o.showFieldsInfo();
 
@@ -529,6 +531,7 @@ o.initSlideScrolling = function () {
 	o.currentSlide = 0;
 	o.$fieldsDesc = $(".fields-descriptions");
 	o.$lastPage = $(".last-page");
+	o.$continueArrow = $(".continue-arrow");
 
 	//touch devices
 	if ( o.isTouch ) {
