@@ -1333,7 +1333,7 @@ body.loaded.show_filter .right .filter-button{
 }
 .fields-descriptions p {
   float: left;
-  width: 282px;
+  width: 286px;
   position: absolute;
   top: -800px;
   left: 230px;
@@ -1384,6 +1384,30 @@ body.loaded.show_filter .right .filter-button{
   color: #000;
 }
 
+.page-node-22 #countries-text,
+.page-node-22 #relationships-text {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  margin: 0;
+}
+.page-node-22 #countries-text {
+  width: 286px;
+  left: 50%;
+  top: 50%;
+  margin-left: 50px;
+  margin-top: -210px;
+  
+}
+.page-node-22 #relationships-text {
+  width: 300px;
+  left: 50%;
+  top: 50%;
+  margin-left: 45px;
+  margin-top: -300px;
+}
 .page-node-22 .last-page {
   display: none;
   width: 350px;

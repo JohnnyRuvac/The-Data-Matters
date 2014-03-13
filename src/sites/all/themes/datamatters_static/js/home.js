@@ -251,6 +251,8 @@ o.showCountries = function () {
 		fill: "#f00"
 	});
 
+	$("#countries-text").show();
+
 	//center logo vertically
 	var bbox = o.logo.getBBox(),
 			svgHeight = o.$hpContainer.height(),
@@ -274,6 +276,8 @@ o.hideCountries = function () {
 		opacity: 0
 	});
 
+	$("#countries-text").hide();
+
 }
 o.showFieldsRelationships = function () {
 
@@ -285,6 +289,8 @@ o.showFieldsRelationships = function () {
 		opacity: 1
 	});
 
+	$("#relationships-text").show();
+
 	o.$fieldsDesc.hide();
 
 }
@@ -293,6 +299,8 @@ o.hideFieldsRelationships = function () {
 	o.fieldsRels.attr({
 		opacity: 0
 	});
+
+	$("#relationships-text").hide();
 
 }
 o.showFieldsInfo = function () {
