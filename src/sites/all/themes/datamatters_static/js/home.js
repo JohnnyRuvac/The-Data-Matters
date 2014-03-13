@@ -169,7 +169,7 @@ o.appendCountriesWithProject = function ( d ) {
 
 }
 
-o.getNewSnapElCenterPos = function (snapEl, newX, newY) {
+o.getLogoCenterPos = function (snapEl, newX, newY) {
 
 	//calculates shift that is needed to position logo center to new x&y
 
@@ -186,6 +186,9 @@ o.getNewSnapElCenterPos = function (snapEl, newX, newY) {
 		y: newY - bbox.cy
 	};
 	//console.log("shift x,y: " + shift.x + ", " + shift.y);
+
+	//save y shift for animation of slogan
+	o.logoYShiftToCenter = shift.y;
 
 	//get its current position regarded to svg element
 	var m = o.logo.matrix;
@@ -244,13 +247,13 @@ o.dummyObj = {
 	x: 0,
 	y: 0
 };
-o.setSnapEl = function (snapEl) {
+o.setSnapEl = function (snapEl, isReversed) {
 
 	//set current animated snapsvg element
 	o.snapEl = snapEl;
 
 	//update dummyObj vars to current snapEl vars
-	if ( snapEl.matrix ) {
+	if ( snapEl && snapEl.matrix && !isReversed ) {
 		o.dummyObj.x = snapEl.matrix.e;
 		o.dummyObj.y = snapEl.matrix.f;
 	}
@@ -266,10 +269,13 @@ o.prepareAnims = function () {
 
 	//calculate logo position in center of screen and tween to it later
 	//don't forget to recalc its position on window resize
-	o.logoCenterPos = o.getNewSnapElCenterPos( o.logo, o.ww / 2, o.wh / 2 );
+	o.logoCenterPos = o.getLogoCenterPos( o.logo, o.ww / 2, o.wh / 2 );
 
-	o.tl.call(o.setSnapEl, [o.logo])
-			.to( o.dummyObj, 1, {x: o.logoCenterPos.x, y: o.logoCenterPos.y});
+	o.tl.call(o.setSnapEl, [o.logo, false])
+			.to( o.dummyObj, 0.6, {y: o.logoCenterPos.y})
+			.call(o.setSnapEl, [o.logo, true])
+			.call(o.setSnapEl, [null])
+			.to( o.$hpSlogan, 0.6, {y: o.logoYShiftToCenter} );
 
 	o.tl.pause();
 
@@ -279,12 +285,18 @@ o.applyTween = function (tween) {
 	if (!tween.getActive()[0])
 		return;
 
+	//if we are not tweening snap element, return
+	if (!o.snapEl)
+		return;
+
 	var target = tween.getActive()[0].target;
+
+	console.log(tween.getActive());
 
 	var x = target.x,
 			y = target.y;
 
-	//console.log(x + ", " + y);
+	console.log(x + ", " + y);
 	o.snapEl.transform("t" + x + "," + y);
 
 }
