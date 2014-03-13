@@ -526,7 +526,6 @@ o.anotherSlide = function (direction) {
 o.initSlideScrolling = function () {
 
 	//init vars
-	o.scrolled = false;
 	o.currentSlide = 0;
 	o.$fieldsDesc = $(".fields-descriptions");
 	o.$lastPage = $(".last-page");
@@ -556,40 +555,55 @@ o.initSlideScrolling = function () {
 	//no-touch devices
 	if ( !o.isTouch ) {
 
-		o.$hpContainer.on("mousewheel", function(e){
-		
-			var up = ( e.deltaY < 0 );
-			if ( !o.scrolled ) {
+		//scroll functionality based on One Page Scroll by Pete R.
+		//https://github.com/peachananr/onepage-scroll
+		o.lastAnimation = 0;
+		o.quietPeriod = 500;
+		o.animationTime = 1000;
 
-				o.scrolled = true;
-				if (up)
-					o.fadeSlide("next");
-				else 
-					o.fadeSlide("prev");
-
-				//timeout because of momentum scroll on Apple devices
-				window.setTimeout(function(){
-					o.scrolled = false;
-				}, 1200);
-
-			}
-
-		});
+		$(document).bind('mousewheel DOMMouseScroll MozMousePixelScroll', function(event) {
+      event.preventDefault();
+      var delta = event.originalEvent.wheelDelta || -event.originalEvent.detail;
+      o.init_scroll(event, delta);
+    });
 
 	}
 	//end of no-touch devices	
 
 }
+o.init_scroll = function (event, delta) {
+
+	var deltaOfInterest = delta,
+      timeNow = new Date().getTime();
+  // Cancel scroll if currently animating or within quiet period
+  if(timeNow - o.lastAnimation < o.quietPeriod + o.animationTime) {
+    event.preventDefault();
+    return;
+  }
+
+  if (deltaOfInterest < 0) {
+    o.fadeSlide("next");
+  } else {
+    o.fadeSlide("prev");
+  }
+  o.lastAnimation = timeNow;
+
+}
 o.fadeSlide = function(dir) {
 
-	if ( o.currentSlide >= 3 && o.currentSlide <= 10 ) {
+	//return on first slide when scrolling to prev, and last slide scrolling to next
+	if ((o.currentSlide == 0 && dir == "prev") ||
+			(o.currentSlide == 11 && dir == "next")) {
+		return;
+	}
+
+	if ( o.currentSlide >= 3 && o.currentSlide < 10 ) {
 
 		o.anotherSlide(dir);
 
 	} else {
 
 		o.$mainContent.addClass("fade");
-		o.scrolled = true;
 		window.setTimeout(function(){
 			o.anotherSlide(dir);
 			o.$mainContent.removeClass("fade");
