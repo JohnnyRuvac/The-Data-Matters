@@ -1313,6 +1313,7 @@ body.loaded.show_filter .right .filter-button{
   top: 600px;
   left: 0;
   margin: 0;
+  z-index: 50;
   font-size: 12px;
   line-height: 18px;
   color: #ccc;
