@@ -48,6 +48,7 @@ o.hp.init = function() {
 	      o.appendFieldsRelationships( d );
 	      o.appendFieldsInfo( d );
 	      o.placeLogo();
+	      o.prepareAnims();
 	    }
 	  });
 
@@ -168,12 +169,12 @@ o.appendCountriesWithProject = function ( d ) {
 
 }
 
-o.calculateLogoPos = function (newX, newY) {
+o.getNewSnapElCenterPos = function (snapEl, newX, newY) {
 
 	//calculates shift that is needed to position logo center to new x&y
 
 	//get its position regarded to window
-	var bbox = o.logo.node.getBoundingClientRect();
+	var bbox = snapEl.node.getBoundingClientRect();
 	//calculate its center x,y
 	bbox.cx = bbox.left + bbox.width / 2;
 	bbox.cy = bbox.top + bbox.height / 2;
@@ -202,8 +203,6 @@ o.calculateLogoPos = function (newX, newY) {
 }
 
 o.placeLogo = function () {
-
-	o.hp.setContainerHeight();
 
 	var top = ( o.centerLogo ) ? o.centerLogo : o.wh * 0.1111 //top of the logo should be at 11.111% of screen height, or center
 			textBBox = o.logoText.node.getBoundingClientRect(),
@@ -258,7 +257,7 @@ o.setSnapEl = function (snapEl) {
 
 }
 
-o.anim = function () {
+o.prepareAnims = function () {
 
 	o.tl = new TimelineMax({
 		onUpdate: o.applyTween,
@@ -267,15 +266,17 @@ o.anim = function () {
 
 	//calculate logo position in center of screen and tween to it later
 	//don't forget to recalc its position on window resize
-	o.logoCenterPos = o.calculateLogoPos( o.ww / 2, o.wh / 2 );
+	o.logoCenterPos = o.getNewSnapElCenterPos( o.logo, o.ww / 2, o.wh / 2 );
 
 	o.tl.call(o.setSnapEl, [o.logo])
 			.to( o.dummyObj, 1, {x: o.logoCenterPos.x, y: o.logoCenterPos.y});
 
+	o.tl.pause();
+
 }
 o.applyTween = function (tween) {
 
-	if (!tween)
+	if (!tween.getActive()[0])
 		return;
 
 	var target = tween.getActive()[0].target;
@@ -283,7 +284,7 @@ o.applyTween = function (tween) {
 	var x = target.x,
 			y = target.y;
 
-	console.log(x + ", " + y);
+	//console.log(x + ", " + y);
 	o.snapEl.transform("t" + x + "," + y);
 
 }
@@ -307,12 +308,12 @@ o.initSlideScrolling = function () {
 		$(document)
 			.on("swipeup", function(e){
 
-				console.log("go to next");
+				o.tl.play();
 
 			})
 			.on("swipedown", function(e){
 				
-				console.log("go to prev");
+				o.tl.reverse();
 
 			});
 
@@ -350,9 +351,9 @@ o.init_scroll = function (event, delta) {
   }
 
   if (deltaOfInterest < 0) {
-    o.fadeSlide("next");
+    o.tl.play();
   } else {
-    o.fadeSlide("prev");
+    o.tl.reverse();
   }
   o.lastAnimation = timeNow;
 
@@ -364,7 +365,7 @@ o.initStoryTelling = function () {
 	// arrow click
 	$(".continue-arrow").click(function(e){
 		e.preventDefault();
-		console.log("go to next");
+		o.tl.play();
 	});
 
 	//keyboard
@@ -373,16 +374,16 @@ o.initStoryTelling = function () {
 		var code = e.keyCode || e.which;
 		switch (code) {
 			case 38:
-				console.log("go to prev");
+				o.tl.reverse();
 				break;
 			case 37:
-				console.log("go to prev");
+				o.tl.reverse();
 				break;
 			case 39:
-				console.log("go to next");
+				o.tl.play();
 				break;
 			case 40:
-				console.log("go to next");
+				o.tl.play();
 				break;
 			default:
 				break;
@@ -413,6 +414,7 @@ $(function(){
 // Window resize
 $(window).resize(function(){
 
+	o.hp.setContainerHeight();
 	o.placeLogo();
 	o.placeFieldsInfo();
 	o.placeFieldsRels();
