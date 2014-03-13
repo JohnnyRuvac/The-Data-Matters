@@ -289,332 +289,6 @@ o.applyTween = function (tween) {
 }
 // END GSAP anim
 
-// Storytelling
-o.showFirstScreen = function () {
-
-	//place again logo
-	o.centerLogo = null;
-	o.placeLogo();
-
-	o.$hpSlogan.addClass("active");
-	o.logoText.attr({
-		opacity: 1
-	});
-
-	o.logoPixels.selectAll("rect").attr({
-		fill: "#000"
-	});
-
-	o.logo.attr({
-		opacity: 1
-	});
-
-}
-o.hideFirstScreen = function () {
-
-	o.$hpSlogan.removeClass("active");
-
-}
-o.showCountries = function () {
-
-	o.countries.attr({
-		opacity: 1
-	});
-
-	o.logoText.attr({
-		opacity: 0
-	});
-
-	o.logo.attr({
-		opacity: 1
-	});
-
-	o.logoPixels.selectAll("rect").attr({
-		fill: "#f00"
-	});
-
-	$("#countries-text").show();
-
-	//center logo vertically
-	var bbox = o.logo.getBBox(),
-			svgHeight = o.$hpContainer.height(),
-			logoHeight = bbox.y + bbox.h,
-			top = ( svgHeight - logoHeight ) / 2;
-
-	//if its not already centered
-	if ( !o.centerLogo ) {
-		o.centerLogo = top;
-		o.placeLogo();
-		o.placeFieldsRels();
-	}
-
-}
-o.hideCountries = function () {
-
-	o.countries.attr({
-		opacity: 0
-	});
-	o.logo.attr({
-		opacity: 0
-	});
-
-	$("#countries-text").hide();
-
-}
-o.showFieldsRelationships = function () {
-
-	o.fieldsInfo.attr({
-		opacity: 0
-	});
-
-	o.fieldsRels.attr({
-		opacity: 1
-	});
-
-	$("#relationships-text").show();
-
-	o.$fieldsDesc.hide();
-
-}
-o.hideFieldsRelationships = function () {
-
-	o.fieldsRels.attr({
-		opacity: 0
-	});
-
-	$("#relationships-text").hide();
-
-}
-o.showFieldsInfo = function () {
-
-	o.logo.attr({
-		opacity: 0
-	});
-
-	o.fieldsInfo.attr({
-		opacity: 1
-	});
-
-	o.$fieldsDesc.show();
-
-	if ( o.dir == "prev")
-		return;
-
-	//show first one
-	o.currentFieldInfo = 1;
-	o.showFieldInfoNum();
-
-}
-o.showFieldInfoNum = function () {
-
-	var num = o.currentFieldInfo;
-
-	//active is red
-	o.fieldsInfo.select(".fieldInfo" + num).attr({
-		stroke: "#f00",
-		strokeDasharray: 0
-	});
-	
-	o.$fieldsDesc
-		.find("li:nth-child(" + num + ")")
-		.removeClass("seen")
-		.addClass("active");
-
-	o.$fieldsDesc
-		.find("#fdp" + num)
-		.removeClass("seen")
-		.addClass("active");
-
-
-}
-o.hideFieldInfoNum = function () {
-
-	var num = o.currentFieldInfo;
-	
-	if ( o.dir == "next" ) {
-		
-		//mark field names
-		o.$fieldsDesc
-			.find("li:nth-child(" + num + ")")
-			.removeClass("active")
-			.addClass("seen");
-
-		//paragraphs
-		o.$fieldsDesc
-			.find("#fdp" + num)
-			.removeClass("active")
-			.addClass("seen");
-
-		//field symbols as seen
-		var seen = o.fieldsInfo.select(".fieldInfo" + num);
-		if (seen) {
-			seen.attr({
-				stroke: "#000",
-				strokeDasharray: 0
-			});
-		}
-
-	} else {
-
-		o.fieldsInfo.select(".fieldInfo" + num).attr({
-			stroke: "#ccc",
-			strokeDasharray: 1
-		});
-
-		o.$fieldsDesc
-			.find("li:nth-child(" + num + ")")
-			.removeClass("active seen");
-
-		o.$fieldsDesc
-			.find("#fdp" + num)
-			.removeClass("active seen");
-
-	}
-
-}
-o.hideFieldsInfo = function () {
-
-	if (o.dir == "prev")
-		return;
-
-	o.fieldsInfo.attr({
-		opacity: 0
-	});
-
-	o.$fieldsDesc.hide();
-
-}
-o.showLastPage = function () {
-
-	o.$continueArrow.hide();
-	o.$lastPage.show();
-
-}
-o.hideLastPage = function () {
-
-	o.$continueArrow.show();
-	o.$lastPage.hide();
-	o.showFieldsInfo();
-
-}
-o.exitCurrentSlide = function () {
-
-	switch ( o.currentSlide ) {
-		case 0:
-			o.hideFirstScreen();
-			break;
-		case 1:
-			o.hideCountries();
-			break;
-		case 2:
-			o.hideFieldsRelationships();
-			break;
-		case 3:
-			o.hideFieldInfoNum();
-			break;
-		case 4:
-			o.hideFieldInfoNum();
-			break;
-		case 5:
-			o.hideFieldInfoNum();
-			break;
-		case 6:
-			o.hideFieldInfoNum();
-			break;
-		case 7:
-			o.hideFieldInfoNum();
-			break;
-		case 8:
-			o.hideFieldInfoNum();
-			break;
-		case 9:
-			o.hideFieldInfoNum();
-			break;
-		case 10:
-			if (o.dir == "prev")
-				o.hideFieldInfoNum();
-			else
-				o.hideFieldsInfo();
-			break;
-		case 11:
-			o.hideLastPage();
-			break;
-		default:
-			break;
-	}
-
-}
-o.anotherSlide = function (direction) {
-
-	//there's a limit to your love tam da daa daaaaaa
-	if ( direction == "prev" && o.currentSlide == 0)
-		return;
-	if ( direction == "next" && o.currentSlide == 11)
-		return;
-
-	o.dir = direction;
-
-	//do needed stuff on current slide exit
-	o.exitCurrentSlide();
-	
-	//update current slide index
-	if ( direction == "next" )
-		o.currentSlide++;
-	else
-		o.currentSlide--;
-
-	//based on slide index, do needed stuff
-	switch ( o.currentSlide ) {
-		case 0:
-			o.showFirstScreen();
-			break;
-		case 1:
-			o.showCountries();
-			break;
-		case 2:
-			o.showFieldsRelationships();
-			break;
-		case 3:
-			o.showFieldsInfo();
-			o.currentFieldInfo = 1;
-			o.showFieldInfoNum();
-			break;
-		case 4:
-			o.currentFieldInfo = 2;
-			o.showFieldInfoNum();
-			break;
-		case 5:
-			o.currentFieldInfo = 3;
-			o.showFieldInfoNum();
-			break;
-		case 6:
-			o.currentFieldInfo = 4;
-			o.showFieldInfoNum();
-			break;
-		case 7:
-			o.currentFieldInfo = 5;
-			o.showFieldInfoNum();
-			break;
-		case 8:
-			o.currentFieldInfo = 6;
-			o.showFieldInfoNum();
-			break;
-		case 9:
-			o.currentFieldInfo = 7;
-			o.showFieldInfoNum();
-			break;
-		case 10:
-			o.currentFieldInfo = 8;
-			o.showFieldInfoNum();
-			break;
-		case 11:
-			o.showLastPage();
-			break;
-		default:
-			break;
-	}
-
-}
 o.initSlideScrolling = function () {
 
 	//init vars
@@ -633,12 +307,12 @@ o.initSlideScrolling = function () {
 		$(document)
 			.on("swipeup", function(e){
 
-				o.fadeSlide("next");
+				console.log("go to next");
 
 			})
 			.on("swipedown", function(e){
 				
-				o.fadeSlide("prev");
+				console.log("go to prev");
 
 			});
 
@@ -683,29 +357,6 @@ o.init_scroll = function (event, delta) {
   o.lastAnimation = timeNow;
 
 }
-o.fadeSlide = function(dir) {
-
-	//return on first slide when scrolling to prev, and last slide scrolling to next
-	if ((o.currentSlide == 0 && dir == "prev") ||
-			(o.currentSlide == 11 && dir == "next")) {
-		return;
-	}
-
-	if ( o.currentSlide >= 3 && o.currentSlide < 10 ) {
-
-		o.anotherSlide(dir);
-
-	} else {
-
-		o.$mainContent.addClass("fade");
-		window.setTimeout(function(){
-			o.anotherSlide(dir);
-			o.$mainContent.removeClass("fade");
-		}, 600);
-
-	}
-
-}
 o.initStoryTelling = function () {
 
 	o.initSlideScrolling();
@@ -713,7 +364,7 @@ o.initStoryTelling = function () {
 	// arrow click
 	$(".continue-arrow").click(function(e){
 		e.preventDefault();
-		o.anotherSlide("next");
+		console.log("go to next");
 	});
 
 	//keyboard
@@ -722,16 +373,16 @@ o.initStoryTelling = function () {
 		var code = e.keyCode || e.which;
 		switch (code) {
 			case 38:
-				o.fadeSlide("prev");
+				console.log("go to prev");
 				break;
 			case 37:
-				o.fadeSlide("prev");
+				console.log("go to prev");
 				break;
 			case 39:
-				o.fadeSlide("next");
+				console.log("go to next");
 				break;
 			case 40:
-				o.fadeSlide("next");
+				console.log("go to next");
 				break;
 			default:
 				break;
@@ -745,7 +396,6 @@ o.initStoryTelling = function () {
 	}, 50);
 
 }
-// END Storytelling
 
 // DOM ready
 $(function(){
