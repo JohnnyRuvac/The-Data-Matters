@@ -168,6 +168,39 @@ o.appendCountriesWithProject = function ( d ) {
 
 }
 
+o.calculateLogoPos = function (newX, newY) {
+
+	//calculates shift that is needed to position logo center to new x&y
+
+	//get its position regarded to window
+	var bbox = o.logo.node.getBoundingClientRect();
+	//calculate its center x,y
+	bbox.cx = bbox.left + bbox.width / 2;
+	bbox.cy = bbox.top + bbox.height / 2;
+	//console.log("cur pos in window x,y: " + bbox.cx + ", " + bbox.cy);
+
+	//now get the difference between it's current x,y and new x,y
+	var shift = {
+		x: newX - bbox.cx,
+		y: newY - bbox.cy
+	};
+	//console.log("shift x,y: " + shift.x + ", " + shift.y);
+
+	//get its current position regarded to svg element
+	var m = o.logo.matrix;
+	//console.log("matrix x,y: " + m.e + ", " + m.f);
+
+	//now return it's new position regarded to svg element
+	var newPos = {
+		x: m.e + shift.x,
+		y: m.f + shift.y
+	};
+	//console.log("newPos x,y: " + newPos.x + ", " + newPos.y);
+
+	return newPos;
+
+}
+
 o.placeLogo = function () {
 
 	o.hp.setContainerHeight();
@@ -206,6 +239,55 @@ o.placeLogo = function () {
 	o.$hpSlogan.css("top", sloganTop);
 
 }
+
+// GSAP anim
+o.dummyObj = {
+	x: 0,
+	y: 0
+};
+o.setSnapEl = function (snapEl) {
+
+	//set current animated snapsvg element
+	o.snapEl = snapEl;
+
+	//update dummyObj vars to current snapEl vars
+	if ( snapEl.matrix ) {
+		o.dummyObj.x = snapEl.matrix.e;
+		o.dummyObj.y = snapEl.matrix.f;
+	}
+
+}
+
+o.anim = function () {
+
+	o.tl = new TimelineMax({
+		onUpdate: o.applyTween,
+		onUpdateParams: ["{self}"]
+	});
+
+	//calculate logo position in center of screen and tween to it later
+	//don't forget to recalc its position on window resize
+	o.logoCenterPos = o.calculateLogoPos( o.ww / 2, o.wh / 2 );
+
+	o.tl.call(o.setSnapEl, [o.logo])
+			.to( o.dummyObj, 1, {x: o.logoCenterPos.x, y: o.logoCenterPos.y});
+
+}
+o.applyTween = function (tween) {
+
+	if (!tween)
+		return;
+
+	var target = tween.getActive()[0].target;
+
+	var x = target.x,
+			y = target.y;
+
+	console.log(x + ", " + y);
+	o.snapEl.transform("t" + x + "," + y);
+
+}
+// END GSAP anim
 
 // Storytelling
 o.showFirstScreen = function () {
@@ -582,6 +664,7 @@ o.initSlideScrolling = function () {
 	//end of no-touch devices	
 
 }
+
 o.init_scroll = function (event, delta) {
 
 	var deltaOfInterest = delta,
@@ -692,7 +775,6 @@ $(window).load(function(e){
 
   o.hp.init();
 	o.initStoryTelling();
-
 
 });
 //END Window load
