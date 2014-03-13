@@ -49,7 +49,11 @@
 					<a href="/projects" class="close-full-preview icon">Close</a>
 			  	<div class="preview-content">
 			  	  <div class="image-container<? if(isset($node->field_image_description['und'][0]['safe_value'])) print " has-description"?>">
-  			  		<img src="<?=file_create_url($node->field_image['und'][1]['uri'])?>" alt="">
+  			  		<? if(isset($node->field_image['und'][1]['uri'])):?>
+    			  		<img src="<?=file_create_url($node->field_image['und'][1]['uri'])?>" alt="">
+    			  	<? else: ?>
+    			  		<img src="<?=file_create_url($node->field_image['und'][0]['uri'])?>" alt="">
+    			  	<? endif;?>
   			  		<? if(isset($node->field_image_description['und'][0]['safe_value'])):?>
   			  		  <div class="image-description"><?=$node->field_image_description['und'][0]['safe_value']?></div>
   			  		<? endif;?>
