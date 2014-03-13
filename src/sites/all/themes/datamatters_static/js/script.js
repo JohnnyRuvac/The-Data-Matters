@@ -55,6 +55,7 @@ o.swipeToOpenMenu = function () {
 
 	if ( !o.isTouch || isMap ) return;
 	
+	
 	o.$wrapper
 		.on("swipeleft", function() {
 			//close it
@@ -67,6 +68,8 @@ o.swipeToOpenMenu = function () {
 			if (o.ww > 768) return;
 			o.slideoutMenuHeight();
 			o.$body.toggleClass("slideout-menu-opened");
+    	//jump up to see menu content
+    	o.$window.scrollTop(0);
 		});
 	
 }
@@ -282,8 +285,10 @@ o.affixNavi = function() {
   	if(o.ww < 769){
     	o.$headerContent.removeAttr("style");
     	o.$headerContent.removeClass("animate");
-
-  	}
+      o.$body.removeClass("affixed-mobile");
+  	}else{
+      o.$body.removeClass("affixed");
+    }
 	})
 	
  
@@ -294,8 +299,10 @@ o.affixNavi = function() {
   	  setTimeout(function(){
   	    o.$headerContent.addClass("animate");
     	  o.$headerContent.css({top: "0px"});
-  	  }, 10)
-
+  	  }, 10);
+  	  o.$body.addClass("affixed-mobile");
+  	} else {
+    	o.$body.addClass("affixed");
   	}
  
 	})

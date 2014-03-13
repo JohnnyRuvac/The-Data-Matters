@@ -33,6 +33,11 @@ function datamatters_static_preprocess_html(&$vars){
       if($node->title == "Projects") $vars['classes_array'][] = "show_filter";
   }
   
+    if( strpos($vars['head_title'], "Access denied") !== false) {
+      $vars['classes_array'][] = "access-denied";  
+    }
+    
+  
   if(isset($vars['page']['content']['system_main']['summary']['member_for'])){
     header('Location: '.$base_path);
     exit;
@@ -107,10 +112,6 @@ function datamatters_static_preprocess_page(&$vars) {
 	  
   endforeach;
   
-  // BACK referer
-  $back = $_SERVER['HTTP_REFERER'];
-  if(strpos($back, "dev.datamatters")) $vars['back'] = "/projects";
-  else $vars['back'] = "/projects";
   
   // Template override
   $path = drupal_get_path_alias();
@@ -139,8 +140,6 @@ function datamatters_static_preprocess_page(&$vars) {
   	
   if(isset($vars['node']->field_country['und'][0])) $menu_country = taxonomy_term_load($vars['node']->field_country['und'][0]['tid']);
   
-  // console
-  // $vars['messages'] = print_r($vars['tax_url'], TRUE);
 }
 
 

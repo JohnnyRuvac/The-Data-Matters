@@ -40,7 +40,7 @@
   <![endif]-->
   
 </head>
-<body class="<?php print $classes; ?>" <?php print $attributes;?>>
+<body class="<?php print $classes; ?>" <?php print $attributes;?>><img src="/sites/all/themes/datamatters_static/img/loading.gif" title="loading..." alt="loading..." style="display:none">
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
