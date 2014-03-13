@@ -1933,6 +1933,9 @@ body.page-node-23 .node-page {
 
 .page-node .action-links a {color: #F00}
 
+
+
+
 #console {
   color: #cccccc;
   font-size: 14px;
@@ -2051,6 +2054,37 @@ body.access-denied .main-content{
   margin-top: 20%;
 }
 
+
+.action-links {
+  position: fixed; 
+  bottom: 10px; 
+  right: 20px; 
+  z-index: 100
+}
+.action-links li {
+  float: left; 
+  margin-right: 10px;
+}
+.action-links li.active {
+  display: none
+}
+.page-node .action-links .edit { 
+  display: block; 
+  background: url(images/edit.png) no-repeat left -1px; 
+  height: 20px; 
+  line-height: 20px; 
+  padding-left: 22px;
+}
+
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
+only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min-device-pixel-ratio: 1.5) {
+	.page-node .action-links .edit {
+		-webkit-background-size: 20px 20px;
+    background-size: 20px 20px;
+	}
+}
 
 /* END of User stuff */
 

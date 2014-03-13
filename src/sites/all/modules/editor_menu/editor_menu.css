@@ -26,11 +26,10 @@ only screen and (min-device-pixel-ratio: 1.5) {
 #editormenu .last {margin-bottom: 5px; margin-top: 15px}
 #editormenu .first {margin-bottom: 10px}
 
+.ckeditor_links {display: none !important}
 
 
-.action-links {position: fixed; bottom: 10px; right: 20px; z-index: 100}
-.action-links li {float: left; margin-right: 10px;}
-.action-links li.active {display: none}
+
 
 #user-login {width: 500px; margin: 0 auto;}
 
@@ -44,10 +43,14 @@ html.overlay-open #overlay-disable-message {overflow: hidden; height: 0px}
 #edit-filters select {float: left; clear: none; position: absolute; top: 15px; left: 130px;}
 
 
+#edit-field-link,
 #edit-field-country,
 #edit-field-field,
-#edit-field-year {float: left; width: 33%;}
+#edit-field-year {float: left; width: 50%;}
 
+#edit-actions,
+#edit-field-country,
+#edit-field-field,
 .vertical-tabs,
 #edit-field-organisation,
 #edit-field-message,
@@ -71,9 +74,11 @@ html.overlay-open #overlay-disable-message {overflow: hidden; height: 0px}
 .node-form .form-item-title,
 #edit-field-image {width: 50%; float: left; margin: 0px; padding: 0px}
 
-#edit-field-image-description {margin-bottom: 40px;}
+#edit-field-image-description {margin-bottom: 0px;}
 
 #edit-field-image {float: right; width: 50%}
+
+#edit-actions {padding-top: 40px;}
 
 h1#overlay-title { white-space: nowrap;
   overflow: hidden;
@@ -96,15 +101,5 @@ h1#overlay-title { white-space: nowrap;
 .form-textarea-wrapper {width:  95%}
 
 .filter-wrapper {display: none}
+.node-form .vertical-tabs {display: none}
 
-.page-node .action-links .edit { display: block; background: url(images/edit.png) no-repeat left -1px; height: 20px; line-height: 20px; padding-left: 22px;}
-
-@media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
-only screen and (-moz-min-device-pixel-ratio: 1.5),
-only screen and (-o-min-device-pixel-ratio: 3/2),
-only screen and (min-device-pixel-ratio: 1.5) {
-	.page-node .action-links .edit {
-		-webkit-background-size: 20px 20px;
-	    background-size: 20px 20px;
-	}
-}
