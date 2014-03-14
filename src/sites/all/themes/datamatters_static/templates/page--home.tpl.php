@@ -29,12 +29,13 @@
 						<p id="fdp7">There is a lot of prejudices about vulnerable groups and also many difficulties to help them. The project in Hungary shows how to use online and offline tools to make a difference.</p>
 						<p id="fdp8">The water accessibility is a big issue in different regions across the world. The project OpenTaps creates the area for discussion, open data and finding the solutions.</p>
 					</div>
-					<div class="last-page">
-						<p>The Data-driven Policy Research projects from Central and Eastern Europe. Using numbers and context to make the difference.</p>
-						<a href="/map" class="int-map-link">Interactive map</a>
-						<a href="/projects" class="projects-link">View projects</a>
-					</div>
 				</div>
+				<div class="last-page">
+					<p>The Data-driven Policy Research projects from Central and Eastern Europe. Using numbers and context to make the difference.</p>
+					<a href="/map" class="int-map-link">Interactive map</a>
+					<a href="/projects" class="projects-link">View projects</a>
+				</div>
+				<a class="osf-logo" href="//www.opensocietyfoundations.org/" target="_blank">Open Society Foundations</a>
 				<div class="preload"></div>
 
 			</div>

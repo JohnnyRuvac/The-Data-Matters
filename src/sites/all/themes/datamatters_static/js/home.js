@@ -6,6 +6,9 @@ o.hp.initVars = function () {
 	o.$hpContainer = $("#hp-container");
 	o.$hpSlogan = $("#homepage-slogan");
 	o.centerLogo = null; //determines if logo should be vertically centered
+	o.$fieldsDesc = $(".fields-descriptions");
+	o.$lastPage = $(".last-page");
+	o.$continueArrow = $(".continue-arrow");
 
 }
 
@@ -48,6 +51,8 @@ o.hp.init = function() {
 	      o.appendFieldsRelationships( d );
 	      o.appendFieldsInfo( d );
 	      o.placeLogo();
+	      o.placeFieldsRels();
+	      o.placeFieldsInfo();
 	      o.prepareAnims();
 	    }
 	  });
@@ -59,11 +64,10 @@ o.hp.init = function() {
 o.appendFieldsRelationships = function (d) {
 
 	o.fieldsRels = d.select("#fields-relationships");
+	o.s.append( o.fieldsRels );
 	o.fieldsRels.attr({
 		opacity: 0
 	});
-	o.s.append( o.fieldsRels );
-
 	//prepare vars for placement, we are using estonia logo pixel as control point
 	o.estonia = o.s.select("#estonia_pixel rect");
 	o.estoniaCP = o.s.select("#estonia-control-pixel");
@@ -84,9 +88,6 @@ o.placeFieldsRels = function () {
 o.appendFieldsInfo = function (d) {
 
 	o.fieldsInfo = d.select("#fieldsInfo");
-	o.fieldsInfo.attr({
-		opacity: 0
-	});
 	o.s.append( o.fieldsInfo );
 
 	//place it
@@ -98,15 +99,14 @@ o.placeFieldsInfo = function () {
 	var bbox = o.fieldsInfo.getBBox(),
 			w = {
 				cx: o.ww / 2,
-				cy: o.wh / 2
+				y: o.wh * 0.11111
 			},
 			shift = {
 				x: w.cx - bbox.cx,
-				y: w.cy - bbox.cy
+				y: w.y - bbox.y
 			};
 
 	shift.x -= 256; //in design, it is offset by 256px to the left
-	shift.y -= 38; //offset to the top because of red arrow in the bottom
 	
 	o.fieldsInfo.transform("t" + shift.x + "," + shift.y + "...");
 
@@ -128,8 +128,7 @@ o.appendCountriesWithProject = function ( d ) {
 	//firstly create group for countries, logo and logo pixels
 	o.countries = o.s.g();
 	o.countries.attr({
-		"class": "countries",
-		opacity: 0
+		"class": "countries"
 	});
 	o.logo = o.s.g();
 	o.logo.attr({
@@ -262,20 +261,164 @@ o.setSnapEl = function (snapEl, isReversed) {
 
 o.prepareAnims = function () {
 
-	o.tl = new TimelineMax({
-		onUpdate: o.applyTween,
-		onUpdateParams: ["{self}"]
-	});
+	o.tl = new TimelineMax();
+
+	//prepare vars
+	o.$allCities = $(".logo-pixels rect");
+	o.$allCountries = $("g.countries");
+	o.$countriesText = $("#countries-text");
+	o.$relsText = $("#relationships-text");
+	o.$fieldsDescPoly = $("#fieldsInfo polygon");
+	o.$fieldsDescUl = $(".fields-descriptions ul");
+	o.polyArray = [];
+	o.polyLiArray = [];
+	o.polyPsArray = [];
+	o.$fieldsDescPs = $(".fields-descriptions p");
+	o.$lastP = $(".last-page p");
+	o.$intMapLink = $(".int-map-link");
+	o.$projLink = $(".projects-link");
+	o.$osfLogo = $(".osf-logo");
+
+	for (var i = 1; i <= o.$fieldsDescPoly.length; i++)
+		o.polyArray.push( $("#fieldsInfo").find(".fieldInfo" + i) );
+
+	for (var i = 1; i <= o.$fieldsDescPoly.length; i++)
+		o.polyLiArray.push( o.$fieldsDescUl.find("li:nth-child(" + i + ")") );
+
+	for (var i = 1; i <= o.$fieldsDescPoly.length; i++)
+		o.polyPsArray.push( $("#fdp" + i) );
+
+	//time variable
+	var tmark = 0.5;
 
 	//calculate logo position in center of screen and tween to it later
 	//don't forget to recalc its position on window resize
 	o.logoCenterPos = o.getLogoCenterPos( o.logo, o.ww / 2, o.wh / 2 );
 
-	o.tl.call(o.setSnapEl, [o.logo, false])
-			.to( o.dummyObj, 0.6, {y: o.logoCenterPos.y})
-			.call(o.setSnapEl, [o.logo, true])
-			.call(o.setSnapEl, [null])
-			.to( o.$hpSlogan, 0.6, {y: o.logoYShiftToCenter} );
+	o.tl.to( o.$hpSlogan, 0.6, {opacity: 0}, "hideSloganAndLogoText" )
+			.to( o.logoText.node, 0.4, {opacity: 0}, "hideSloganAndLogoText" )
+			.to( o.$hpContainer, 0.8, {y: o.logoYShiftToCenter})
+			.to( o.$fieldsDescUl, 0, {y: o.logoYShiftToCenter})
+			.to( o.$fieldsDescPs, 0, {y: o.logoYShiftToCenter})
+			//slide 2
+			.to( o.$allCities, 0, {fill: "#f00"} )
+			.to( o.$allCountries, 0.8, {opacity: 1}, "+=0.4" )
+			.to( o.$countriesText, 1, {opacity: 1} )
+			//exit slide 2
+			.to( o.$countriesText, 2, {top: -1000, opacity: 0} )
+			.to( o.$allCountries, 0.8, {opacity: 0} )
+			.to( o.fieldsRels.node, 0.8, {opacity: 1} )
+			.to( o.$relsText, 1, {opacity: 1}, "+=0.4" )
+			//exit slide 3
+			.to( o.$relsText, 2, {top: -1000, opacity: 0} )
+			.to( o.fieldsRels.node, 0.8, {opacity: 0} )
+			.to( o.$allCities, 0.4, {opacity: 0} )
+			//fields info show
+			.to( o.polyArray[7], 0.5, {opacity: 1}, "polyLabel1" )
+			.to( o.polyArray[6], 0.5, {opacity: 1}, "polyLabel2" )
+			.to( o.polyArray[5], 0.5, {opacity: 1}, "polyLabel3" )
+			.to( o.polyArray[4], 0.5, {opacity: 1}, "polyLabel4" )
+			.to( o.polyArray[3], 0.5, {opacity: 1}, "polyLabel5" )
+			.to( o.polyArray[2], 0.5, {opacity: 1}, "polyLabel6" )
+			.to( o.polyArray[1], 0.5, {opacity: 1}, "polyLabel7" )
+			.to( o.polyArray[0], 0.5, {opacity: 1}, "polyLabel8" )
+			//lis
+			.to( o.polyLiArray[7], 0.5, {opacity: 1}, "polyLabel1" )
+			.to( o.polyLiArray[6], 0.5, {opacity: 1}, "polyLabel2" )
+			.to( o.polyLiArray[5], 0.5, {opacity: 1}, "polyLabel3" )
+			.to( o.polyLiArray[4], 0.5, {opacity: 1}, "polyLabel4" )
+			.to( o.polyLiArray[3], 0.5, {opacity: 1}, "polyLabel5" )
+			.to( o.polyLiArray[2], 0.5, {opacity: 1}, "polyLabel6" )
+			.to( o.polyLiArray[1], 0.5, {opacity: 1}, "polyLabel7" )
+			.to( o.polyLiArray[0], 0.5, {opacity: 1}, "polyLabel8" )
+			//mark it
+			.to( o.polyArray[0], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel8" )
+			.to( o.polyLiArray[0], tmark, {color: "#f00"}, "markPolyLabel8" )
+			.to( o.polyPsArray[0], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			//unmark it
+			.to( o.polyArray[0], tmark, {stroke: "#000"}, "unmarkPolyLabel8" )
+			.to( o.polyLiArray[0], tmark, {color: "#000"}, "unmarkPolyLabel8" )
+			.to( o.polyPsArray[0], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			//mark it
+			.to( o.polyArray[1], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel7" )
+			.to( o.polyLiArray[1], tmark, {color: "#f00"}, "markPolyLabel7" )
+			.to( o.polyPsArray[1], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			//unmark it
+			.to( o.polyArray[1], tmark, {stroke: "#000"}, "unmarkPolyLabel7" )
+			.to( o.polyLiArray[1], tmark, {color: "#000"}, "unmarkPolyLabel7" )
+			.to( o.polyPsArray[1], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			//mark it
+			.to( o.polyArray[2], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel6" )
+			.to( o.polyLiArray[2], tmark, {color: "#f00"}, "markPolyLabel6" )
+			.to( o.polyPsArray[2], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			//unmark it
+			.to( o.polyArray[2], tmark, {stroke: "#000"}, "unmarkPolyLabel6" )
+			.to( o.polyLiArray[2], tmark, {color: "#000"}, "unmarkPolyLabel6" )
+			.to( o.polyPsArray[2], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			//mark it
+			.to( o.polyArray[3], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel5" )
+			.to( o.polyLiArray[3], tmark, {color: "#f00"}, "markPolyLabel5" )
+			.to( o.polyPsArray[3], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			//unmark it
+			.to( o.polyArray[3], tmark, {stroke: "#000"}, "unmarkPolyLabel5" )
+			.to( o.polyLiArray[3], tmark, {color: "#000"}, "unmarkPolyLabel5" )
+			.to( o.polyPsArray[3], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			//mark it
+			.to( o.polyArray[4], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel4" )
+			.to( o.polyLiArray[4], tmark, {color: "#f00"}, "markPolyLabel4" )
+			.to( o.polyPsArray[4], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			//unmark it
+			.to( o.polyArray[4], tmark, {stroke: "#000"}, "unmarkPolyLabel4" )
+			.to( o.polyLiArray[4], tmark, {color: "#000"}, "unmarkPolyLabel4" )
+			.to( o.polyPsArray[4], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			//mark it
+			.to( o.polyArray[5], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel3" )
+			.to( o.polyLiArray[5], tmark, {color: "#f00"}, "markPolyLabel3" )
+			.to( o.polyPsArray[5], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			//unmark it
+			.to( o.polyArray[5], tmark, {stroke: "#000"}, "unmarkPolyLabel3" )
+			.to( o.polyLiArray[5], tmark, {color: "#000"}, "unmarkPolyLabel3" )
+			.to( o.polyPsArray[5], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			//mark it
+			.to( o.polyArray[6], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel2" )
+			.to( o.polyLiArray[6], tmark, {color: "#f00"}, "markPolyLabel2" )
+			.to( o.polyPsArray[6], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			//unmark it
+			.to( o.polyArray[6], tmark, {stroke: "#000"}, "unmarkPolyLabel2" )
+			.to( o.polyLiArray[6], tmark, {color: "#000"}, "unmarkPolyLabel2" )
+			.to( o.polyPsArray[6], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			//mark it
+			.to( o.polyArray[7], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel1" )
+			.to( o.polyLiArray[7], tmark, {color: "#f00"}, "markPolyLabel1" )
+			.to( o.polyPsArray[7], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			//unmark it
+			.to( o.polyArray[7], tmark, {stroke: "#000"}, "unmarkPolyLabel1" )
+			.to( o.polyLiArray[7], tmark, {color: "#000"}, "unmarkPolyLabel1" )
+			.to( o.polyPsArray[7], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			//hide fields descs
+			.to( o.polyArray[0], 0.2, {opacity: 0}, "hidePolyLabel1" )
+			.to( o.polyArray[1], 0.2, {opacity: 0}, "hidePolyLabel2" )
+			.to( o.polyArray[2], 0.2, {opacity: 0}, "hidePolyLabel3" )
+			.to( o.polyArray[3], 0.2, {opacity: 0}, "hidePolyLabel4" )
+			.to( o.polyArray[4], 0.2, {opacity: 0}, "hidePolyLabel5" )
+			.to( o.polyArray[5], 0.2, {opacity: 0}, "hidePolyLabel6" )
+			.to( o.polyArray[6], 0.2, {opacity: 0}, "hidePolyLabel7" )
+			.to( o.polyArray[7], 0.2, {opacity: 0}, "hidePolyLabel8" )
+			//and lis
+			.to( o.polyLiArray[0], 0.5, {opacity: 0}, "hidePolyLabel1" )
+			.to( o.polyLiArray[1], 0.5, {opacity: 0}, "hidePolyLabel2" )
+			.to( o.polyLiArray[2], 0.5, {opacity: 0}, "hidePolyLabel3" )
+			.to( o.polyLiArray[3], 0.5, {opacity: 0}, "hidePolyLabel4" )
+			.to( o.polyLiArray[4], 0.5, {opacity: 0}, "hidePolyLabel5" )
+			.to( o.polyLiArray[5], 0.5, {opacity: 0}, "hidePolyLabel6" )
+			.to( o.polyLiArray[6], 0.5, {opacity: 0}, "hidePolyLabel7" )
+			.to( o.polyLiArray[7], 0.5, {opacity: 0}, "hidePolyLabel8" )
+			//show last page
+			.to( o.$continueArrow, 0, {opacity: 0} )
+			.to( o.$osfLogo, 0.5, {opacity: 1} )
+			.to( o.$lastP, 0.5, {opacity: 1, top: 0} )
+			.to( o.$intMapLink, 0.5, {opacity: 1} )
+			.to( o.$projLink, 0.5, {opacity: 1} );
 
 	o.tl.pause();
 
@@ -303,12 +446,6 @@ o.applyTween = function (tween) {
 // END GSAP anim
 
 o.initSlideScrolling = function () {
-
-	//init vars
-	o.currentSlide = 0;
-	o.$fieldsDesc = $(".fields-descriptions");
-	o.$lastPage = $(".last-page");
-	o.$continueArrow = $(".continue-arrow");
 
 	//touch devices
 	if ( o.isTouch ) {
