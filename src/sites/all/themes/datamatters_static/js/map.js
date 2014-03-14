@@ -23,7 +23,7 @@ o.map.init = function () {
 		});	
 		o.map.countries.selectAll("polygon, path").attr({
 			fill: "#ffffff",
-			stroke: "#ccc",
+			stroke: "#bababa",
 			strokeWidth: 0.25
 		});
 
@@ -32,7 +32,7 @@ o.map.init = function () {
 		//add rectangle behind map, so it can be draggable also on empty spaces
 		o.map.bg = o.s.rect(0, 700, 2560, 1440);
 		o.map.bg.attr({
-			fill: "#efefef"
+			fill: "#e8e8e8"
 		});
 		o.map.countries.select("#other-countries").before( o.map.bg );
 
@@ -165,7 +165,7 @@ o.map.highlightCountriesWithProject = function () {
 
 		o.s.selectAll("#" + o.countries.withProject[i] + " polygon").attr({
 			fill: o.patternInactive,
-			stroke: "#aaa"
+			stroke: "#b3b3b3"
 		});
 
 	}
@@ -291,7 +291,7 @@ o.countries.hoverOut = function (e) {
 
 	var dataActive = $("#" + id).attr("data-active"); 
 	var fillCol = ( dataActive ) ? o.patternActive : o.patternInactive;
-	var strokeCol = ( dataActive ) ? "#f00" : "#aaa";
+	var strokeCol = ( dataActive ) ? "#f00" : "#b3b3b3";
 
 	o.s.selectAll("#" + id + " polygon").attr({
 		fill: fillCol,
@@ -314,7 +314,7 @@ o.countries.click = function (e, that) {
 		$clicked.removeAttr("data-active");
 		that.selectAll("polygon").attr({
 			fill: o.patternInactive,
-			stroke: "#aaa"
+			stroke: "#b3b3b3"
 		});
 		o.$countryInfo.removeClass("active");
 		o.selectedCountry = null;
@@ -325,7 +325,7 @@ o.countries.click = function (e, that) {
 			o.$activeCountry.removeAttr("data-active");
 			o.activeCountry.selectAll("polygon").attr({
 				fill: o.patternInactive,
-				stroke: "#aaa"
+				stroke: "#b3b3b3"
 			});
 		}
 		//activate new one
