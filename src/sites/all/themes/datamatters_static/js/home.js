@@ -295,7 +295,9 @@ o.prepareAnims = function () {
 		o.polyPsArray.push( $("#fdp" + i) );
 
 	//time variable
-	var tmark = 0.5;
+	var tmark = 0.5,
+			tShowPoly = 0.25,
+			tP = 0.3;
 
 	//calculate logo position in center of screen and tween to it later
 	//don't forget to recalc its position on window resize
@@ -312,105 +314,105 @@ o.prepareAnims = function () {
 			.to( o.$countriesText, 1, {opacity: 1} )
 			.call( o.pauseAnim )
 			//exit slide 1
-			.to( o.$countriesText, 2, {top: -1000, opacity: 0} )
-			.to( o.$allCountries, 0.8, {opacity: 0} )
+			.to( o.$countriesText, 2, {top: -600, opacity: 0} )
+			.to( o.$allCountries, 0.8, {opacity: 0}, "-=1")
 			.to( o.fieldsRels.node, 0.8, {opacity: 1} )
-			.to( o.$relsText, 1, {opacity: 1}, "+=0.4" )
+			.to( o.$relsText, 1, {opacity: 1}, "+=0.2" )
 			.call( o.pauseAnim )
 			//exit slide 2
-			.to( o.$relsText, 2, {top: -1000, opacity: 0} )
-			.to( o.fieldsRels.node, 0.8, {opacity: 0} )
-			.to( o.$allCities, 0.4, {opacity: 0} )
+			.to( o.$relsText, 2, {top: -600, opacity: 0} )
+			.to( o.fieldsRels.node, 0.8, {opacity: 0}, "-=1")
+			.to( o.$allCities, 0.4, {opacity: 0}, "+=1" )
 			//fields info show
-			.to( o.polyArray[7], 0.5, {opacity: 1}, "polyLabel1" )
-			.to( o.polyArray[6], 0.5, {opacity: 1}, "polyLabel2" )
-			.to( o.polyArray[5], 0.5, {opacity: 1}, "polyLabel3" )
-			.to( o.polyArray[4], 0.5, {opacity: 1}, "polyLabel4" )
-			.to( o.polyArray[3], 0.5, {opacity: 1}, "polyLabel5" )
-			.to( o.polyArray[2], 0.5, {opacity: 1}, "polyLabel6" )
-			.to( o.polyArray[1], 0.5, {opacity: 1}, "polyLabel7" )
-			.to( o.polyArray[0], 0.5, {opacity: 1}, "polyLabel8" )
+			.to( o.polyArray[7], tShowPoly, {opacity: 1}, "polyLabel1" )
+			.to( o.polyArray[6], tShowPoly, {opacity: 1}, "polyLabel2" )
+			.to( o.polyArray[5], tShowPoly, {opacity: 1}, "polyLabel3" )
+			.to( o.polyArray[4], tShowPoly, {opacity: 1}, "polyLabel4" )
+			.to( o.polyArray[3], tShowPoly, {opacity: 1}, "polyLabel5" )
+			.to( o.polyArray[2], tShowPoly, {opacity: 1}, "polyLabel6" )
+			.to( o.polyArray[1], tShowPoly, {opacity: 1}, "polyLabel7" )
+			.to( o.polyArray[0], tShowPoly, {opacity: 1}, "polyLabel8" )
 			//lis
-			.to( o.polyLiArray[7], 0.5, {opacity: 1}, "polyLabel1" )
-			.to( o.polyLiArray[6], 0.5, {opacity: 1}, "polyLabel2" )
-			.to( o.polyLiArray[5], 0.5, {opacity: 1}, "polyLabel3" )
-			.to( o.polyLiArray[4], 0.5, {opacity: 1}, "polyLabel4" )
-			.to( o.polyLiArray[3], 0.5, {opacity: 1}, "polyLabel5" )
-			.to( o.polyLiArray[2], 0.5, {opacity: 1}, "polyLabel6" )
-			.to( o.polyLiArray[1], 0.5, {opacity: 1}, "polyLabel7" )
-			.to( o.polyLiArray[0], 0.5, {opacity: 1}, "polyLabel8" )
+			.to( o.polyLiArray[7], tShowPoly, {opacity: 1}, "polyLabel1" )
+			.to( o.polyLiArray[6], tShowPoly, {opacity: 1}, "polyLabel2" )
+			.to( o.polyLiArray[5], tShowPoly, {opacity: 1}, "polyLabel3" )
+			.to( o.polyLiArray[4], tShowPoly, {opacity: 1}, "polyLabel4" )
+			.to( o.polyLiArray[3], tShowPoly, {opacity: 1}, "polyLabel5" )
+			.to( o.polyLiArray[2], tShowPoly, {opacity: 1}, "polyLabel6" )
+			.to( o.polyLiArray[1], tShowPoly, {opacity: 1}, "polyLabel7" )
+			.to( o.polyLiArray[0], tShowPoly, {opacity: 1}, "polyLabel8" )
 			//mark it
 			.to( o.polyArray[0], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel8" )
 			.to( o.polyLiArray[0], tmark, {color: "#f00"}, "markPolyLabel8" )
-			.to( o.polyPsArray[0], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.to( o.polyPsArray[0], tmark + tP, {top: 0, opacity: 1}, "-=" + tmark )
 			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[0], tmark, {stroke: "#000"}, "unmarkPolyLabel8" )
 			.to( o.polyLiArray[0], tmark, {color: "#000"}, "unmarkPolyLabel8" )
-			.to( o.polyPsArray[0], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			.to( o.polyPsArray[0], tmark + tP, {opacity: 0}, "-=" + tmark )
 			//mark it
 			.to( o.polyArray[1], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel7" )
 			.to( o.polyLiArray[1], tmark, {color: "#f00"}, "markPolyLabel7" )
-			.to( o.polyPsArray[1], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.to( o.polyPsArray[1], tmark + tP, {top: 0, opacity: 1}, "-=" + tmark )
 			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[1], tmark, {stroke: "#000"}, "unmarkPolyLabel7" )
 			.to( o.polyLiArray[1], tmark, {color: "#000"}, "unmarkPolyLabel7" )
-			.to( o.polyPsArray[1], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			.to( o.polyPsArray[1], tmark + tP, {opacity: 0}, "-=" + tmark )
 			//mark it
 			.to( o.polyArray[2], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel6" )
 			.to( o.polyLiArray[2], tmark, {color: "#f00"}, "markPolyLabel6" )
-			.to( o.polyPsArray[2], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.to( o.polyPsArray[2], tmark + tP, {top: 0, opacity: 1}, "-=" + tmark )
 			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[2], tmark, {stroke: "#000"}, "unmarkPolyLabel6" )
 			.to( o.polyLiArray[2], tmark, {color: "#000"}, "unmarkPolyLabel6" )
-			.to( o.polyPsArray[2], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			.to( o.polyPsArray[2], tmark + tP, {opacity: 0}, "-=" + tmark )
 			//mark it
 			.to( o.polyArray[3], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel5" )
 			.to( o.polyLiArray[3], tmark, {color: "#f00"}, "markPolyLabel5" )
-			.to( o.polyPsArray[3], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.to( o.polyPsArray[3], tmark + tP, {top: 0, opacity: 1}, "-=" + tmark )
 			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[3], tmark, {stroke: "#000"}, "unmarkPolyLabel5" )
 			.to( o.polyLiArray[3], tmark, {color: "#000"}, "unmarkPolyLabel5" )
-			.to( o.polyPsArray[3], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			.to( o.polyPsArray[3], tmark + tP, {opacity: 0}, "-=" + tmark )
 			//mark it
 			.to( o.polyArray[4], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel4" )
 			.to( o.polyLiArray[4], tmark, {color: "#f00"}, "markPolyLabel4" )
-			.to( o.polyPsArray[4], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.to( o.polyPsArray[4], tmark + tP, {top: 0, opacity: 1}, "-=" + tmark )
 			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[4], tmark, {stroke: "#000"}, "unmarkPolyLabel4" )
 			.to( o.polyLiArray[4], tmark, {color: "#000"}, "unmarkPolyLabel4" )
-			.to( o.polyPsArray[4], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			.to( o.polyPsArray[4], tmark + tP, {opacity: 0}, "-=" + tmark )
 			//mark it
 			.to( o.polyArray[5], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel3" )
 			.to( o.polyLiArray[5], tmark, {color: "#f00"}, "markPolyLabel3" )
-			.to( o.polyPsArray[5], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.to( o.polyPsArray[5], tmark + tP, {top: 0, opacity: 1}, "-=" + tmark )
 			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[5], tmark, {stroke: "#000"}, "unmarkPolyLabel3" )
 			.to( o.polyLiArray[5], tmark, {color: "#000"}, "unmarkPolyLabel3" )
-			.to( o.polyPsArray[5], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			.to( o.polyPsArray[5], tmark + tP, {opacity: 0}, "-=" + tmark )
 			//mark it
 			.to( o.polyArray[6], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel2" )
 			.to( o.polyLiArray[6], tmark, {color: "#f00"}, "markPolyLabel2" )
-			.to( o.polyPsArray[6], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.to( o.polyPsArray[6], tmark + tP, {top: 0, opacity: 1}, "-=" + tmark )
 			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[6], tmark, {stroke: "#000"}, "unmarkPolyLabel2" )
 			.to( o.polyLiArray[6], tmark, {color: "#000"}, "unmarkPolyLabel2" )
-			.to( o.polyPsArray[6], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			.to( o.polyPsArray[6], tmark + tP, {opacity: 0}, "-=" + tmark )
 			//mark it
 			.to( o.polyArray[7], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel1" )
 			.to( o.polyLiArray[7], tmark, {color: "#f00"}, "markPolyLabel1" )
-			.to( o.polyPsArray[7], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.to( o.polyPsArray[7], tmark + tP, {top: 0, opacity: 1}, "-=" + tmark )
 			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[7], tmark, {stroke: "#000"}, "unmarkPolyLabel1" )
 			.to( o.polyLiArray[7], tmark, {color: "#000"}, "unmarkPolyLabel1" )
-			.to( o.polyPsArray[7], tmark, {top: -800, opacity: 0}, "-=" + tmark )
+			.to( o.polyPsArray[7], tmark + tP, {opacity: 0}, "-=" + tmark )
 			//hide fields descs
 			.to( o.polyArray[0], 0.2, {opacity: 0}, "hidePolyLabel1" )
 			.to( o.polyArray[1], 0.2, {opacity: 0}, "hidePolyLabel2" )
@@ -436,8 +438,6 @@ o.prepareAnims = function () {
 			.to( o.$intMapLink, 0.5, {opacity: 1} )
 			.to( o.$projLink, 0.5, {opacity: 1} )
 			.call( o.pauseAnim );
-
-	o.tl.timeScale(4);
 
 }
 // END GSAP anim

@@ -1339,7 +1339,7 @@ body.loaded.show_filter .right .filter-button{
   float: left;
   width: 286px;
   position: absolute;
-  top: -800px;
+  top: -600px;
   left: 230px;
   margin: 0;
   font-size: 14px;
