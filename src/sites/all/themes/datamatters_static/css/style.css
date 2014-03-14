@@ -1406,6 +1406,7 @@ body.loaded.show_filter .right .filter-button{
   opacity: 0;
   display: block;
   width: 146px;
+  margin-left: 80px;
   margin-bottom: 12px;
   padding-left: 8px;
   font-size: 14px;
@@ -1420,9 +1421,16 @@ body.loaded.show_filter .right .filter-button{
   border-color: #f00;
   text-decoration: none;
 }
+.page-node-22 .last-page .int-map-link {
+  margin-top: -84px;
+  position: relative;
+  z-index: 100;
+}
 .page-node-22 .last-page .projects-link {
   color: #333;
   border-color: #333;
+  position: relative;
+  z-index: 100;
 }
 .osf-logo {
   opacity: 0;
@@ -1430,7 +1438,7 @@ body.loaded.show_filter .right .filter-button{
   width: 117px;
   height: 27px;
   position: absolute;
-  bottom: 60px;
+  bottom: 44px;
   left: 50%;
   margin-left: -68px;
   z-index: 50;

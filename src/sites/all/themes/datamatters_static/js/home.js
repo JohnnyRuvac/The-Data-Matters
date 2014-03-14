@@ -432,11 +432,13 @@ o.prepareAnims = function () {
 			.to( o.polyLiArray[6], 0.5, {opacity: 0}, "hidePolyLabel7" )
 			.to( o.polyLiArray[7], 0.5, {opacity: 0}, "hidePolyLabel8" )
 			//show last page
-			.to( o.$continueArrow, 0, {opacity: 0} )
-			.to( o.$osfLogo, 0.5, {opacity: 1} )
-			.to( o.$lastP, 0.5, {opacity: 1, top: 0} )
-			.to( o.$intMapLink, 0.5, {opacity: 1} )
-			.to( o.$projLink, 0.5, {opacity: 1} )
+			.to( o.$lastP, 0.8, {opacity: 1, top: 0}, "+=0.3" )
+			.call( o.pauseAnim )
+			.to( o.$continueArrow, 0.1, {opacity: 0}, "+=0.3" )
+			.to( o.$lastP, 0.8, {opacity: 0}, "+=0.3" )
+			.to( o.$osfLogo, 1.4, {opacity: 1}, "+=0.5" )
+			.to( o.$intMapLink, 1, {opacity: 1} )
+			.to( o.$projLink, 1.2, {opacity: 1} )
 			.call( o.pauseAnim );
 
 }
