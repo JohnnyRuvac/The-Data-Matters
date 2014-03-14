@@ -557,7 +557,8 @@ $(function(){
 // Window resize
 $(window).resize(function(){
 
-	window.location.href = window.location.href;
+	if ( !o.$body.hasClass("logged-in") )
+		window.location.href = window.location.href;
 
 });
 // END Window resize
