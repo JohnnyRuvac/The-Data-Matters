@@ -50,9 +50,9 @@ o.hp.init = function() {
 	      o.appendCountriesWithProject( d );
 	      o.appendFieldsRelationships( d );
 	      o.appendFieldsInfo( d );
-	      o.placeLogo();
 	      o.placeFieldsRels();
-	      o.placeFieldsInfo();
+	      o.placeLogo();
+	      //o.placeFieldsInfo();
 	      o.prepareAnims();
 	    }
 	  });
@@ -75,14 +75,11 @@ o.appendFieldsRelationships = function (d) {
 }
 o.placeFieldsRels = function () {
 
-	var offset = $("#estonia_pixel rect").offset(),
-			offsetCP = $("#estonia-control-pixel").offset(),
-			shift = {
-				x: offset.left - offsetCP.left,
-				y: offset.top - offsetCP.top
-			};
+	//manual transform before placement of logo, because of firefox
+	var x = 1006.172 - 184.806,
+			y = 1087.754 - 328.066;
 
-	o.fieldsRels.transform("t" + shift.x + "," + shift.y + "...");
+	o.fieldsRels.transform("t" + x + "," + y);
 
 }
 o.appendFieldsInfo = function (d) {
@@ -230,6 +227,8 @@ o.placeLogo = function () {
 	m.translate(shift.x, shift.y);
 	o.countries.transform(m);
 	o.logo.transform(m);
+
+	o.fieldsRels.transform("t" + shift.x + "," + shift.y + "...");
 
 	//place vertically slogan
 	var textTop = $("#logo-text").offset().top,
@@ -559,7 +558,6 @@ $(window).resize(function(){
 	o.hp.setContainerHeight();
 	o.placeLogo();
 	o.placeFieldsInfo();
-	o.placeFieldsRels();
 
 });
 // END Window resize
