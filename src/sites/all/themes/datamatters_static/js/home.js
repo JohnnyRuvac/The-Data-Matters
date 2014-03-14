@@ -244,14 +244,26 @@ o.placeLogo = function () {
 // GSAP anim
 o.pauseAnim = function () {
 
-	if (!o.isReversed) {
+	var dirChanged = ( o.dir != o.lastDir );
+	
+	if ( !dirChanged )
 		o.tl.pause();
-	} else {
-		o.isReversed = false;
-	}
+	else
+		o.lastDir = o.dir;
 
 }
+o.anotherSlide = function(dir) {
 
+	//save last direction because of play/pause issue
+	o.lastDir = o.dir;
+	o.dir = dir;
+
+	if ( dir == "next" )
+		o.tl.play();
+	else
+		o.tl.reverse();
+
+}
 o.prepareAnims = function () {
 
 	o.tl = new TimelineMax();
@@ -271,6 +283,8 @@ o.prepareAnims = function () {
 	o.$intMapLink = $(".int-map-link");
 	o.$projLink = $(".projects-link");
 	o.$osfLogo = $(".osf-logo");
+	o.lastDir = "next";
+	o.dir = "next";
 
 	for (var i = 1; i <= o.$fieldsDescPoly.length; i++)
 		o.polyArray.push( $("#fieldsInfo").find(".fieldInfo" + i) );
@@ -288,7 +302,8 @@ o.prepareAnims = function () {
 	//don't forget to recalc its position on window resize
 	o.logoCenterPos = o.getLogoCenterPos( o.logo, o.ww / 2, o.wh / 2 );
 
-	o.tl.to( o.$hpSlogan, 0.6, {opacity: 0}, "hideSloganAndLogoText" )
+	o.tl.call( o.pauseAnim )
+			.to( o.$hpSlogan, 0.6, {opacity: 0}, "hideSloganAndLogoText" )
 			.to( o.logoText.node, 0.4, {opacity: 0}, "hideSloganAndLogoText" )
 			.to( o.$hpContainer, 0.8, {y: o.logoYShiftToCenter})
 			.to( o.$fieldsDescUl, 0, {y: o.logoYShiftToCenter})
@@ -420,13 +435,13 @@ o.prepareAnims = function () {
 			.to( o.$osfLogo, 0.5, {opacity: 1} )
 			.to( o.$lastP, 0.5, {opacity: 1, top: 0} )
 			.to( o.$intMapLink, 0.5, {opacity: 1} )
-			.to( o.$projLink, 0.5, {opacity: 1} );
+			.to( o.$projLink, 0.5, {opacity: 1} )
+			.call( o.pauseAnim );
 
-	o.tl.pause();
+	o.tl.timeScale(4);
 
 }
 // END GSAP anim
-
 o.initSlideScrolling = function () {
 
 	//touch devices
@@ -438,15 +453,10 @@ o.initSlideScrolling = function () {
 
 		$(document)
 			.on("swipeup", function(e){
-
-				o.tl.play();
-
+				o.anotherSlide("next");
 			})
 			.on("swipedown", function(e){
-				
-				o.tl.reverse();
-				o.isReversed = true;
-
+				o.anotherSlide("prev");
 			});
 
 	}
@@ -483,10 +493,9 @@ o.init_scroll = function (event, delta) {
   }
 
   if (deltaOfInterest < 0) {
-    o.tl.play();
+    o.anotherSlide("next");
   } else {
-  	o.tl.reverse();
-  	o.isReversed = true;
+  	o.anotherSlide("prev");
   }
   o.lastAnimation = timeNow;
 
@@ -498,7 +507,7 @@ o.initStoryTelling = function () {
 	// arrow click
 	$(".continue-arrow").click(function(e){
 		e.preventDefault();
-		o.tl.play();
+		o.anotherSlide("next");
 	});
 
 	//keyboard
@@ -507,18 +516,16 @@ o.initStoryTelling = function () {
 		var code = e.keyCode || e.which;
 		switch (code) {
 			case 38:
-				o.tl.reverse();
-				o.isReversed = true;
+				o.anotherSlide("prev");
 				break;
 			case 37:
-				o.tl.reverse();
-				o.isReversed = true;
+				o.anotherSlide("prev");
 				break;
 			case 39:
-				o.tl.play();
+				o.anotherSlide("next");
 				break;
 			case 40:
-				o.tl.play();
+				o.anotherSlide("next");
 				break;
 			default:
 				break;
