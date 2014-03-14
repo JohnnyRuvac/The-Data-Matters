@@ -242,19 +242,12 @@ o.placeLogo = function () {
 }
 
 // GSAP anim
-o.dummyObj = {
-	x: 0,
-	y: 0
-};
-o.setSnapEl = function (snapEl, isReversed) {
+o.pauseAnim = function () {
 
-	//set current animated snapsvg element
-	o.snapEl = snapEl;
-
-	//update dummyObj vars to current snapEl vars
-	if ( snapEl && snapEl.matrix && !isReversed ) {
-		o.dummyObj.x = snapEl.matrix.e;
-		o.dummyObj.y = snapEl.matrix.f;
+	if (!o.isReversed) {
+		o.tl.pause();
+	} else {
+		o.isReversed = false;
 	}
 
 }
@@ -300,16 +293,17 @@ o.prepareAnims = function () {
 			.to( o.$hpContainer, 0.8, {y: o.logoYShiftToCenter})
 			.to( o.$fieldsDescUl, 0, {y: o.logoYShiftToCenter})
 			.to( o.$fieldsDescPs, 0, {y: o.logoYShiftToCenter})
-			//slide 2
 			.to( o.$allCities, 0, {fill: "#f00"} )
 			.to( o.$allCountries, 0.8, {opacity: 1}, "+=0.4" )
 			.to( o.$countriesText, 1, {opacity: 1} )
-			//exit slide 2
+			.call( o.pauseAnim )
+			//exit slide 1
 			.to( o.$countriesText, 2, {top: -1000, opacity: 0} )
 			.to( o.$allCountries, 0.8, {opacity: 0} )
 			.to( o.fieldsRels.node, 0.8, {opacity: 1} )
 			.to( o.$relsText, 1, {opacity: 1}, "+=0.4" )
-			//exit slide 3
+			.call( o.pauseAnim )
+			//exit slide 2
 			.to( o.$relsText, 2, {top: -1000, opacity: 0} )
 			.to( o.fieldsRels.node, 0.8, {opacity: 0} )
 			.to( o.$allCities, 0.4, {opacity: 0} )
@@ -335,6 +329,7 @@ o.prepareAnims = function () {
 			.to( o.polyArray[0], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel8" )
 			.to( o.polyLiArray[0], tmark, {color: "#f00"}, "markPolyLabel8" )
 			.to( o.polyPsArray[0], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[0], tmark, {stroke: "#000"}, "unmarkPolyLabel8" )
 			.to( o.polyLiArray[0], tmark, {color: "#000"}, "unmarkPolyLabel8" )
@@ -343,6 +338,7 @@ o.prepareAnims = function () {
 			.to( o.polyArray[1], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel7" )
 			.to( o.polyLiArray[1], tmark, {color: "#f00"}, "markPolyLabel7" )
 			.to( o.polyPsArray[1], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[1], tmark, {stroke: "#000"}, "unmarkPolyLabel7" )
 			.to( o.polyLiArray[1], tmark, {color: "#000"}, "unmarkPolyLabel7" )
@@ -351,6 +347,7 @@ o.prepareAnims = function () {
 			.to( o.polyArray[2], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel6" )
 			.to( o.polyLiArray[2], tmark, {color: "#f00"}, "markPolyLabel6" )
 			.to( o.polyPsArray[2], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[2], tmark, {stroke: "#000"}, "unmarkPolyLabel6" )
 			.to( o.polyLiArray[2], tmark, {color: "#000"}, "unmarkPolyLabel6" )
@@ -359,6 +356,7 @@ o.prepareAnims = function () {
 			.to( o.polyArray[3], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel5" )
 			.to( o.polyLiArray[3], tmark, {color: "#f00"}, "markPolyLabel5" )
 			.to( o.polyPsArray[3], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[3], tmark, {stroke: "#000"}, "unmarkPolyLabel5" )
 			.to( o.polyLiArray[3], tmark, {color: "#000"}, "unmarkPolyLabel5" )
@@ -367,6 +365,7 @@ o.prepareAnims = function () {
 			.to( o.polyArray[4], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel4" )
 			.to( o.polyLiArray[4], tmark, {color: "#f00"}, "markPolyLabel4" )
 			.to( o.polyPsArray[4], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[4], tmark, {stroke: "#000"}, "unmarkPolyLabel4" )
 			.to( o.polyLiArray[4], tmark, {color: "#000"}, "unmarkPolyLabel4" )
@@ -375,6 +374,7 @@ o.prepareAnims = function () {
 			.to( o.polyArray[5], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel3" )
 			.to( o.polyLiArray[5], tmark, {color: "#f00"}, "markPolyLabel3" )
 			.to( o.polyPsArray[5], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[5], tmark, {stroke: "#000"}, "unmarkPolyLabel3" )
 			.to( o.polyLiArray[5], tmark, {color: "#000"}, "unmarkPolyLabel3" )
@@ -383,6 +383,7 @@ o.prepareAnims = function () {
 			.to( o.polyArray[6], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel2" )
 			.to( o.polyLiArray[6], tmark, {color: "#f00"}, "markPolyLabel2" )
 			.to( o.polyPsArray[6], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[6], tmark, {stroke: "#000"}, "unmarkPolyLabel2" )
 			.to( o.polyLiArray[6], tmark, {color: "#000"}, "unmarkPolyLabel2" )
@@ -391,6 +392,7 @@ o.prepareAnims = function () {
 			.to( o.polyArray[7], tmark, {stroke: "#f00", strokeDasharray: 0}, "markPolyLabel1" )
 			.to( o.polyLiArray[7], tmark, {color: "#f00"}, "markPolyLabel1" )
 			.to( o.polyPsArray[7], tmark, {top: 0, opacity: 1}, "-=" + tmark )
+			.call( o.pauseAnim )
 			//unmark it
 			.to( o.polyArray[7], tmark, {stroke: "#000"}, "unmarkPolyLabel1" )
 			.to( o.polyLiArray[7], tmark, {color: "#000"}, "unmarkPolyLabel1" )
@@ -423,26 +425,6 @@ o.prepareAnims = function () {
 	o.tl.pause();
 
 }
-o.applyTween = function (tween) {
-
-	if (!tween.getActive()[0])
-		return;
-
-	//if we are not tweening snap element, return
-	if (!o.snapEl)
-		return;
-
-	var target = tween.getActive()[0].target;
-
-	console.log(tween.getActive());
-
-	var x = target.x,
-			y = target.y;
-
-	console.log(x + ", " + y);
-	o.snapEl.transform("t" + x + "," + y);
-
-}
 // END GSAP anim
 
 o.initSlideScrolling = function () {
@@ -463,6 +445,7 @@ o.initSlideScrolling = function () {
 			.on("swipedown", function(e){
 				
 				o.tl.reverse();
+				o.isReversed = true;
 
 			});
 
@@ -502,7 +485,8 @@ o.init_scroll = function (event, delta) {
   if (deltaOfInterest < 0) {
     o.tl.play();
   } else {
-    o.tl.reverse();
+  	o.tl.reverse();
+  	o.isReversed = true;
   }
   o.lastAnimation = timeNow;
 
@@ -524,9 +508,11 @@ o.initStoryTelling = function () {
 		switch (code) {
 			case 38:
 				o.tl.reverse();
+				o.isReversed = true;
 				break;
 			case 37:
 				o.tl.reverse();
+				o.isReversed = true;
 				break;
 			case 39:
 				o.tl.play();
