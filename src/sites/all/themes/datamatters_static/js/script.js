@@ -20,7 +20,7 @@ o.initVars = function() {
   o.isRetina = window.devicePixelRatio > 1;
 	o.isTouch = o.$html.hasClass("touch");
 	o.svgSupport = o.$html.hasClass("svg");
-
+  
   o.nameArray = [];
 
 }
@@ -208,11 +208,8 @@ o.activateProjectPreview = function() {
     if(o.isRetina)
       img = img.replace("/preview/", "/preview_2x/");
     
-    
     $(this).attr("src", img);
     $(this).removeAttr("data-src");
-      
-    console.log(img, i);
   })
   
 	$(".project").click(function(e){
@@ -619,6 +616,17 @@ o.toggleImageDescription = function () {
 // END Toggle image description
 
 
+// iPhone5 test
+
+o.iPhone5test = function () {
+  if((screen.availWidth == 320 && screen.availHeight == 548) || (screen.availWidth == 548 && screen.availHeight == 320)){
+    o.$body.addClass("iPhone5-mode");
+  };
+}
+// END iPhone5 test
+
+
+
 // Load JSON for search use
 
 o.loadSearchJSON = function(){
@@ -786,6 +794,7 @@ $(function(){
   o.welcome();
   o.toggleImageDescription();
   o.searchFunction();
+  o.iPhone5test();
 
 });
 // END DOM ready

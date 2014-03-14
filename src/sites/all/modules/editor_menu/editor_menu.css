@@ -26,9 +26,9 @@ only screen and (min-device-pixel-ratio: 1.5) {
 #editormenu .last {margin-bottom: 5px; margin-top: 15px}
 #editormenu .first {margin-bottom: 10px}
 
-.ckeditor_links {display: none !important}
+.ckeditor_links {display: no ne !important}
 
-
+.node-page-form #edit-body {clear: left}
 
 
 #user-login {width: 500px; margin: 0 auto;}

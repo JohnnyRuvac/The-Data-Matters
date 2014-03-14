@@ -1876,19 +1876,27 @@ html.svg #project-preview .field a:hover:before,
 /* END of Transitions */
 
 
-/* Text page */
+/* Text page & Contact block */
 
+.contact-block,
 .main-content .node-page {
   margin: 0px 15px;
   opacity: 0;
 }
 
+.loaded .contact-block,
 .loaded .main-content .node-page{
   opacity: 1;
 }
 
+.contact-block,
 .main-content .node-page .field-name-body p{
   margin-top: 0px; margin-bottom: 20px;
+}
+
+.contact-block {
+  border-top: 1px dotted #cccccc;
+  padding: 18px 0px;
 }
 
 .main-content .node-page strong {
@@ -1900,7 +1908,33 @@ html.svg #project-preview .field a:hover:before,
   border-bottom: 1px dotted #cccccc;
 }
 
+.contact-block {
+  line-height: 20px;
+}
+
+.node-page a,
+.contact-block a {
+  color: #646464;
+  border-bottom: #646464 1px dotted;
+}
+
+.node-page a:hover,
+.contact-block a:hover{
+  border-bottom: #F00 1px dotted;
+  text-decoration: none;
+}
+
+.main-content .node-page a.download {
+  color: #F00;
+  border-bottom-color: #F00;
+}
+
+.main-content .node-page a.download:hover{
+  border-bottom-style: solid;
+}
+
 @media (min-width: 492px) {
+  .contact-block,
   .main-content .node-page {
      width: 385px;
      margin: 0 auto;
@@ -1908,6 +1942,7 @@ html.svg #project-preview .field a:hover:before,
 }
 
 @media (min-width: 769px) {
+  .contact-block,
   .main-content .node-page {
     margin-left: 130px; 
   }
@@ -2070,7 +2105,7 @@ body.access-denied .main-content{
 }
 .page-node .action-links .edit { 
   display: block; 
-  background: url(images/edit.png) no-repeat left -1px; 
+  background: url(../img/edit.png) no-repeat left -1px; 
   height: 20px; 
   line-height: 20px; 
   padding-left: 22px;
@@ -2094,6 +2129,10 @@ only screen and (min-device-pixel-ratio: 1.5) {
   #slideout-menu .svg-fix{
     display: none !important;    
   }
+}
+
+.iPhone5-mode #slideout-menu .svg-fix{
+  display: none !important;    
 }
 
 #project-preview  .contacts a, 

@@ -48,6 +48,7 @@ var CKBUILDER_CONFIG = {
 		'toolbar' : 1,
 		'undo' : 1,
 		'wysiwygarea' : 1
+		'nbsp' : 1
 	},
 	languages : {
 		'en' : 1
