@@ -555,9 +555,7 @@ $(function(){
 // Window resize
 $(window).resize(function(){
 
-	o.hp.setContainerHeight();
-	o.placeLogo();
-	o.placeFieldsInfo();
+	window.location.href = window.location.href;
 
 });
 // END Window resize
