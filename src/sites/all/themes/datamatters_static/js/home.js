@@ -337,7 +337,7 @@ o.prepareAnims = function () {
 			.to( o.$allCities, 0, {fill: "#f00"} )
 			.to( o.$allCountries, 0.8, {opacity: 1}, "+=0.4" )
 			.to( o.$countriesText, 1, {opacity: 1} )
-			.set( o.$hpContainer, {zIndex: 1000} )
+			.set( o.$hpContainer, {zIndex: 400} )
 			.set( o.$hpContainer, {zIndex: 1} )
 			.call( o.pauseAnim )
 			//exit slide 1

@@ -1288,7 +1288,7 @@ body.loaded.show_filter .right .filter-button{
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 400;
 }
 .page-node-22 h1.logo {
   display: none;
