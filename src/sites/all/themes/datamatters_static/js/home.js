@@ -163,6 +163,18 @@ o.appendCountriesWithProject = function ( d ) {
 		"stroke": "#ccc"
 	});
 
+	//make logo bg, so it can be clickable
+	var bbox = o.logo.getBBox();
+	o.logoBg = o.s.rect(bbox.x, bbox.y, 341, 378);
+	o.logoBg.attr({
+		opacity: 0,
+		"cursor": "pointer"
+	});
+	o.logoBg.click(function(){
+		o.anotherSlide("next");
+	});
+	o.logo.add( o.logoBg );
+
 }
 
 o.getLogoCenterPos = function (snapEl, newX, newY) {
@@ -253,6 +265,14 @@ o.pauseAnim = function () {
 }
 o.anotherSlide = function(dir) {
 
+	//on first slide, stop bouncing arrow, remove rect behind logo
+	if (o.isArrowBouncing) {
+		o.isArrowBouncing = false;
+		TweenLite.killTweensOf( o.$continueArrow );
+		TweenLite.to( o.$continueArrow, 0.6, {bottom: 18} );
+		o.logoBg.remove();
+	}
+
 	//save last direction because of play/pause issue
 	o.lastDir = o.dir;
 	o.dir = dir;
@@ -285,16 +305,14 @@ o.prepareAnims = function () {
 	o.lastDir = "next";
 	o.dir = "next";
 
-	for (var i = 1; i <= o.$fieldsDescPoly.length; i++)
+	for (var i = 1; i <= o.$fieldsDescPoly.length; i++) {
 		o.polyArray.push( $("#fieldsInfo").find(".fieldInfo" + i) );
-
-	for (var i = 1; i <= o.$fieldsDescPoly.length; i++)
 		o.polyLiArray.push( o.$fieldsDescUl.find("li:nth-child(" + i + ")") );
-
-	for (var i = 1; i <= o.$fieldsDescPoly.length; i++)
 		o.polyPsArray.push( $("#fdp" + i) );
+	}
+		
 
-	//time variable
+	//time variables
 	var tmark = 0.5,
 			tShowPoly = 0.25,
 			tP = 0.3;
@@ -441,6 +459,10 @@ o.prepareAnims = function () {
 			.to( o.$projLink, 1.2, {opacity: 1} )
 			.call( o.pauseAnim );
 
+	//when everything is ready, animate arrow to indicate scrolling to next slide
+	o.isArrowBouncing = true;
+	TweenMax.from( o.$continueArrow, 0.8, {bottom: 36, repeat: 10, yoyo: true}, 3 );
+
 }
 // END GSAP anim
 o.initSlideScrolling = function () {
@@ -506,7 +528,7 @@ o.initStoryTelling = function () {
 	o.initSlideScrolling();
 
 	// arrow click
-	$(".continue-arrow").click(function(e){
+	o.$continueArrow.click(function(e){
 		e.preventDefault();
 		o.anotherSlide("next");
 	});
