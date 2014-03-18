@@ -271,8 +271,8 @@ o.anotherSlide = function(dir) {
 	//on first slide, stop bouncing arrow, remove rect behind logo
 	if (o.isArrowBouncing) {
 		o.isArrowBouncing = false;
-		TweenLite.killTweensOf( o.$continueArrow );
-		TweenLite.to( o.$continueArrow, 0.6, {bottom: 18} );
+		o.bounce.kill();
+		TweenMax.to( o.$continueArrow, 0.6, {bottom: 18} );
 		o.logoBg.remove();
 	}
 
@@ -468,7 +468,7 @@ o.prepareAnims = function () {
 
 	//when everything is ready, animate arrow to indicate scrolling to next slide
 	o.isArrowBouncing = true;
-	TweenMax.from( o.$continueArrow, 0.8, {bottom: 36, repeat: 10, yoyo: true}, 3 );
+	o.bounce = TweenMax.from( o.$continueArrow, 0.8, {bottom: 36, repeat: 10, yoyo: true}, 3 );
 
 }
 // END GSAP anim
