@@ -255,6 +255,9 @@ o.placeLogo = function () {
 // GSAP anim
 o.pauseAnim = function () {
 
+	//reset timeScale
+	o.tl.timeScale(1);
+
 	var dirChanged = ( o.dir != o.lastDir );
 	
 	if ( !dirChanged )
@@ -276,6 +279,10 @@ o.anotherSlide = function(dir) {
 	//save last direction because of play/pause issue
 	o.lastDir = o.dir;
 	o.dir = dir;
+
+	if ( !o.tl._paused ) {
+		o.tl.timeScale(8);
+	}
 
 	if ( dir == "next" )
 		o.tl.play();
