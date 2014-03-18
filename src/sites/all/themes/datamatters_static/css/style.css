@@ -333,6 +333,8 @@ header .content.affix-top .logo {
   border-left: 1px solid #ccc;
   color: #f00;
   background-color: #fff;
+  position: relative;
+  z-index: 401;
 }
 .main-nav .menu-tablet li {
   width: 145px;
