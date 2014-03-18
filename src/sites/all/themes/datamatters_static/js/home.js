@@ -47,10 +47,10 @@ o.hp.init = function() {
 	    'dataType': "json",
 	    'success': function (data) {
 	      o.countriesJson = data;
-	      o.appendCountriesWithProject( d );
 	      o.appendFieldsRelationships( d );
 	      o.appendFieldsInfo( d );
 	      o.placeFieldsRels();
+	      o.appendCountriesWithProject( d );
 	      o.placeLogo();
 	      //o.placeFieldsInfo();
 	      o.prepareAnims();
@@ -337,6 +337,8 @@ o.prepareAnims = function () {
 			.to( o.$allCities, 0, {fill: "#f00"} )
 			.to( o.$allCountries, 0.8, {opacity: 1}, "+=0.4" )
 			.to( o.$countriesText, 1, {opacity: 1} )
+			.set( o.$hpContainer, {zIndex: 1000} )
+			.set( o.$hpContainer, {zIndex: 1} )
 			.call( o.pauseAnim )
 			//exit slide 1
 			.to( o.$countriesText, 2, {top: -600, opacity: 0} )
@@ -459,6 +461,10 @@ o.prepareAnims = function () {
 			//show last page
 			.to( o.$lastP, 0.8, {opacity: 1, top: 0}, "+=0.3" )
 			.call( o.pauseAnim )
+			.set( o.$intMapLink, {display: "none"} )
+			.set( o.$projLink, {display: "none"} )
+			.set( o.$intMapLink, {display: "block"} )
+			.set( o.$projLink, {display: "block"} )
 			.to( o.$continueArrow, 0.1, {opacity: 0}, "+=0.3" )
 			.to( o.$lastP, 0.8, {opacity: 0}, "+=0.3" )
 			.to( o.$osfLogo, 1.4, {opacity: 1}, "+=0.5" )

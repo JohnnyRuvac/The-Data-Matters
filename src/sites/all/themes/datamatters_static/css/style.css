@@ -1288,7 +1288,7 @@ body.loaded.show_filter .right .filter-button{
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 1000;
 }
 .page-node-22 h1.logo {
   display: none;
@@ -1422,11 +1422,13 @@ body.loaded.show_filter .right .filter-button{
   text-decoration: none;
 }
 .page-node-22 .last-page .int-map-link {
+  display: none;
   margin-top: -84px;
   position: relative;
   z-index: 100;
 }
 .page-node-22 .last-page .projects-link {
+  display: none;
   color: #333;
   border-color: #333;
   position: relative;
