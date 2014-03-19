@@ -1314,7 +1314,7 @@ body.loaded.show_filter .right .filter-button{
   position: absolute;
   bottom: 18px;
   left: 50%;
-  z-index: 50;
+  z-index: 401;
   margin-left: -7px;
   background: url(../img/continue-arrow.png);
 }

@@ -474,7 +474,7 @@ o.prepareAnims = function () {
 
 	//when everything is ready, animate arrow to indicate scrolling to next slide
 	o.isArrowBouncing = true;
-	o.bounce = TweenMax.from( o.$continueArrow, 0.8, {bottom: 36, repeat: 10, yoyo: true}, 3 );
+	o.bounce = TweenMax.from( o.$continueArrow, 0.8, {bottom: 36, delay: 0.5, repeat: 2, yoyo: true});
 
 }
 // END GSAP anim
