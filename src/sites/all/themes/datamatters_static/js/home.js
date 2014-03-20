@@ -592,8 +592,10 @@ $(function(){
 // Window resize
 $(window).resize(function(){
 
-	if ( !o.$body.hasClass("logged-in") )
+	if ( !o.$body.hasClass("logged-in") ) {
+		o.$outerWrapper.css("opacity", 0);
 		window.location.href = window.location.href;
+	}
 
 });
 // END Window resize
