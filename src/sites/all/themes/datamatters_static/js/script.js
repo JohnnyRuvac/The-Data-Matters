@@ -575,9 +575,10 @@ o.welcome = function(){
 // Check SVG support
 o.checkSVG = function () {
 
-	var mobile = o.ww < 768;
+	var mobile = o.ww < 768 || o.wh < 700,
+			ie9 = o.$html.hasClass("ie9");
 
-	if ( !o.svgSupport || mobile) {
+	if ( !o.svgSupport || mobile || ie9 ) {
 		window.location = "/projects";
 	}
 
