@@ -13,7 +13,6 @@
 					</div>
 					<svg id="map-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
 				</div>
-				<div class="preload"></div>
 
 			</div>
 

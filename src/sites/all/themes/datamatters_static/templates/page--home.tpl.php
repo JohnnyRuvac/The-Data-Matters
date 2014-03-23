@@ -36,7 +36,6 @@
 					<a href="/projects" class="projects-link">View projects</a>
 				</div>
 				<a class="osf-logo" href="//www.opensocietyfoundations.org/" target="_blank">Open Society Foundations</a>
-				<div class="preload"></div>
 
 			</div>
 

@@ -574,8 +574,8 @@ o.welcome = function(){
 
 // Check SVG support
 o.checkSVG = function () {
-
-	var mobile = o.ww < 768 || o.wh < 700,
+	
+	var mobile = o.ww < 768 || o.wh < 630,
 			ie9 = o.$html.hasClass("ie9");
 
 	if ( !o.svgSupport || mobile || ie9 ) {
