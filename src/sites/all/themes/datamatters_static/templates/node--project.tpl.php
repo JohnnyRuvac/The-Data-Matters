@@ -80,7 +80,7 @@
                     <? endif;?>
 						  		<? endif; ?>
 						  		<? if(isset($ngo->field_phone['und'][0]['safe_value'])): ?> 
-						  		  <a href="tel:<?php print str_ireplace(" ", "", str_ireplace("+", "00", $ngo->field_phone['und'][0]['safe_value'])); ?>"><?=$ngo->field_phone['und'][0]['safe_value']?></a>
+						  		  &nbsp;<a href="<?php print $ngo->field_phone['und'][0]['safe_value']; ?>">Website</a>
 					  		  <? endif; ?>
 					  		</p>
 					  	<? else:?>
