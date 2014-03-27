@@ -15,11 +15,11 @@
   <meta name="author" content="">
 
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-title" content="Data Matters" />
+  <meta name="mobile-web-app-title" content="Visualizing Data" />
   <link rel="shortcut icon" sizes="196x196" href="/sites/all/themes/datamatters_static/icons/icon196.png">
   <link rel="shortcut icon" sizes="128x128" href="/sites/all/themes/datamatters_static/icons/icon128.png">
 
-  <meta name="apple-mobile-web-app-title" content="Data Matters" />
+  <meta name="apple-mobile-web-app-title" content="Visualizing Data" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sites/all/themes/datamatters_static/icons/icon144.png">
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/sites/all/themes/datamatters_static/icons/icon114.png">
