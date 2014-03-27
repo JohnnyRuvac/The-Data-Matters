@@ -205,7 +205,7 @@ header .content.affix .logo a {height: 0px}
 
 header .content.affix-top .logo {
   margin: 0 0 32 20px;
-  height: 75px;
+  height: 68px;
 }
 
 @media (max-width: 768px) {
@@ -229,15 +229,15 @@ header .content.affix-top .logo {
 }
 
 .logo {
-  width: 70px;
-  height: 75px;
+  width: 57px;
+  height: 68px;
   margin: 0 0 32px 20px;
   overflow: hidden;
 }
 .logo a {
   position: absolute;
-  width: 70px;
-  height: 75px;
+  width: 57px;
+  height: 68px;
   text-indent: -9999px;
   background: url(../img/logo.png) no-repeat top center;
 }
@@ -443,13 +443,13 @@ header .content.affix-top .logo {
     left: 30px;
     margin: 0;
     z-index: 10;
-    width: 70px;
-    height: 75px;
+    width: 57px;
+    height: 68px;
     margin-left: 0px;
   }
   header .content.affix .logo a {
     display: block;
-    height: 75px;
+    height: 68px;
   }
   .logged-in .logo {
     top: 79px;
@@ -2236,13 +2236,13 @@ only screen and (min-device-pixel-ratio: 1.5) {
   
   .logo a {
     background: url(../img/logo@2x.png) no-repeat top center;
-    -webkit-background-size: 70px 150px;
-    background-size: 70px 150px;
+    -webkit-background-size: 57px 136px;
+    background-size: 57px 136px;
   }
   .logo a:hover {
     background: url(../img/logo@2x.png) no-repeat bottom center;
-    -webkit-background-size: 70px 150px;
-    background-size: 70px 150px;
+    -webkit-background-size: 57px 136px;
+    background-size: 57px 136px;
   }
 
 }
