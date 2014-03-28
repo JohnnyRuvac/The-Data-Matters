@@ -5,7 +5,7 @@
 				
 				<div class="content">
 					<svg id="hp-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
-					<p id="homepage-slogan" class="slogan active">From Policy-Relevant Research to Evidence-Informed Policy<br>To read the story behind this portfolio please scroll down</p>
+					<p id="homepage-slogan" class="slogan active">From Policy-Relevant Research to Evidence-Informed Policy<br><br><span>To read the story behind this portfolio please scroll down.</span></p>
 					<p id="countries-text">Think Tank Fund has supported projects in&nbsp;9&nbsp;different countries across Central and Eastern Europe.</p>
 					<p id="relationships-text">The various projects have made clearer understanding and made difference in<br />8 different fields from budget through crime to&nbsp;municipalities issues.</p>
 					<a href="" class="continue-arrow"></a>
