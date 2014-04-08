@@ -11,9 +11,14 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1" media="(device-height: 568px)">
 
-  <meta name="description" content="">
-  <meta name="author" content="">
-
+  <meta name="copyright" content="Open Society Foundations © 2014">
+  <!-- 
+  
+    This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+    http://creativecommons.org/licenses/by-nc-nd/4.0/
+  
+  -->
+  
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-title" content="Visualizing Data" />
   <link rel="shortcut icon" sizes="196x196" href="/sites/all/themes/datamatters_static/icons/icon196.png">
@@ -46,5 +51,14 @@
   <?php print $page; ?>
   <?php print $page_bottom; ?>
   <?php print $scripts; ?>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+    ga('create', 'UA-2765806-36', 'acquia-sites.com');
+    ga('send', 'pageview');
+  </script>
 </body>
 </html>
