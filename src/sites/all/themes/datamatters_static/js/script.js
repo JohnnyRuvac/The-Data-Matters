@@ -804,7 +804,7 @@ $(function(){
 $(window).load(function(){
 
 	o.trimTitles();
-	o.loadSearchJSON();
+	setTimeout(o.loadSearchJSON, 100);
 
 });
 // END of Window Load
