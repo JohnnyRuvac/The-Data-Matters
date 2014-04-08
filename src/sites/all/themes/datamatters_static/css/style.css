@@ -1874,22 +1874,28 @@ html.svg #project-preview .field a:hover:before,
 
 /* Text page & Contact block */
 
+
+
+.about-license,
 .contact-block,
 .main-content .node-page {
   margin: 0px 15px;
   opacity: 0;
 }
 
+.loaded .about-license,
 .loaded .contact-block,
 .loaded .main-content .node-page{
   opacity: 1;
 }
 
+.about-license,
 .contact-block,
 .main-content .node-page .field-name-body p{
   margin-top: 0px; margin-bottom: 20px;
 }
 
+.about-license,
 .contact-block {
   border-top: 1px dotted #cccccc;
   padding: 18px 0px;
@@ -1904,17 +1910,20 @@ html.svg #project-preview .field a:hover:before,
   border-bottom: 1px dotted #cccccc;
 }
 
+.about-license,
 .contact-block {
   line-height: 20px;
 }
 
 .node-page a,
+.about-license a,
 .contact-block a {
   color: #646464;
   border-bottom: #646464 1px dotted;
 }
 
 .node-page a:hover,
+.about-license a:hover,
 .contact-block a:hover{
   border-bottom: #F00 1px dotted;
   text-decoration: none;
@@ -1931,6 +1940,7 @@ html.svg #project-preview .field a:hover:before,
 
 @media (min-width: 492px) {
   .contact-block,
+  .about-license,
   .main-content .node-page {
      width: 385px;
      margin: 0 auto;
@@ -1938,10 +1948,17 @@ html.svg #project-preview .field a:hover:before,
 }
 
 @media (min-width: 769px) {
+  .about-license,
   .contact-block,
   .main-content .node-page {
     margin-left: 130px; 
   }
+}
+
+.about-license a,
+.about-license {
+ 
+  font-size: 12px;
 }
 
 /* END of Text page */
