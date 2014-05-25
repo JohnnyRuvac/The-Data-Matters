@@ -205,7 +205,7 @@ header .content.affix .logo a {height: 0px}
 
 header .content.affix-top .logo {
   margin: 0 0 32 20px;
-  height: 81px;
+  height: 41px;
 }
 
 @media (max-width: 768px) {
@@ -1059,7 +1059,7 @@ body.slideout-menu-opened{
   display: none;
   opacity: 0;
   position: absolute;
-  top: -140px;
+  top: -93px;
   left: 0;
   z-index: 100;
   padding: 32px 16px;
@@ -1239,7 +1239,7 @@ body.slideout-menu-opened{
 }
 .page-node-19 .main-content,
 .page-node-22 .main-content {
-  margin-top: -16px;
+  margin-top: -24px;
   overflow: hidden;
 }
 /* hide logo for tablets/mobile max 768px */
@@ -2268,13 +2268,13 @@ only screen and (min-device-pixel-ratio: 1.5) {
   
   .logo a {
     background: url(../img/logo@2x.png) no-repeat top center;
-    -webkit-background-size: 82px 180px;
-    background-size: 82px 180px;
+    -webkit-background-size: 90px 82px;
+    background-size: 90px 82px;
   }
   .logo a:hover {
     background: url(../img/logo@2x.png) no-repeat bottom center;
-    -webkit-background-size: 82px 180px;
-    background-size: 81px 180px;
+    -webkit-background-size: 90px 82px;
+    background-size: 90px 82px;
   }
 
 }

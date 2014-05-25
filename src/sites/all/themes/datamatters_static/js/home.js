@@ -290,11 +290,6 @@ o.anotherSlide = function(dir) {
 		o.tl.reverse();
 
 }
-o.hidePlsScroll = function () {
-
-	$("#pls-scroll").hide();
-
-};
 o.prepareAnims = function () {
 
 	o.tl = new TimelineMax();
