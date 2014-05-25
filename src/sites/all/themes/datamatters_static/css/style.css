@@ -173,9 +173,9 @@ h3 {
 
 /* header */
 header {
-  height: 187px;
-  padding-top: 32px;
-  margin-bottom: 16px;
+  height: 140px;
+  padding-top: 24px;
+  margin-bottom: 24px;
 }
 header .content.affix {
   width: 100%;
@@ -205,7 +205,7 @@ header .content.affix .logo a {height: 0px}
 
 header .content.affix-top .logo {
   margin: 0 0 32 20px;
-  height: 68px;
+  height: 81px;
 }
 
 @media (max-width: 768px) {
@@ -229,15 +229,15 @@ header .content.affix-top .logo {
 }
 
 .logo {
-  width: 57px;
-  height: 68px;
-  margin: 0 0 32px 20px;
+  width: 90px;
+  height: 41px;
+  margin: 0 0 27px 20px;
   overflow: hidden;
 }
 .logo a {
   position: absolute;
-  width: 57px;
-  height: 68px;
+  width: 90px;
+  height: 41px;
   text-indent: -9999px;
   background: url(../img/logo.png) no-repeat top center;
 }
@@ -440,11 +440,11 @@ header .content.affix-top .logo {
   header .content.affix-top .logo {
     position: absolute;
     top: 50px;
-    left: 30px;
+    left: 18px;
     margin: 0;
     z-index: 10;
-    width: 57px;
-    height: 68px;
+    width: 90px;
+    height: 41px;
     margin-left: 0px;
   }
   header .content.affix .logo a {
@@ -1322,6 +1322,17 @@ body.loaded.show_filter .right .filter-button{
   margin-left: -7px;
   background: url(../img/continue-arrow.png);
 }
+.page-node-22 #pls-scroll {
+  width: 400px;
+  height: 20px;
+  position: absolute;
+  bottom: 54px;
+  left: 50%;
+  margin-left: -195px;
+  color: #ccc;
+  text-align: center;
+  font-size: 12px;
+}
 
 #homepage-slogan.active {
   opacity: 1;
@@ -2128,10 +2139,10 @@ body.access-denied .main-content{
 only screen and (-moz-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5) {
-	.page-node .action-links .edit {
-		-webkit-background-size: 20px 20px;
+  .page-node .action-links .edit {
+    -webkit-background-size: 20px 20px;
     background-size: 20px 20px;
-	}
+  }
 }
 
 /* END of User stuff */
@@ -2257,13 +2268,13 @@ only screen and (min-device-pixel-ratio: 1.5) {
   
   .logo a {
     background: url(../img/logo@2x.png) no-repeat top center;
-    -webkit-background-size: 57px 136px;
-    background-size: 57px 136px;
+    -webkit-background-size: 82px 180px;
+    background-size: 82px 180px;
   }
   .logo a:hover {
     background: url(../img/logo@2x.png) no-repeat bottom center;
-    -webkit-background-size: 57px 136px;
-    background-size: 57px 136px;
+    -webkit-background-size: 82px 180px;
+    background-size: 81px 180px;
   }
 
 }

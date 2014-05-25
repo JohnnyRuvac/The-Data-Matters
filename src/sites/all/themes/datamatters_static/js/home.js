@@ -290,6 +290,11 @@ o.anotherSlide = function(dir) {
 		o.tl.reverse();
 
 }
+o.hidePlsScroll = function () {
+
+	$("#pls-scroll").hide();
+
+};
 o.prepareAnims = function () {
 
 	o.tl = new TimelineMax();
@@ -306,6 +311,7 @@ o.prepareAnims = function () {
 	o.polyPsArray = [];
 	o.$fieldsDescPs = $(".fields-descriptions p");
 	o.$lastP = $(".last-page p");
+	o.$plsScroll = $("#pls-scroll");
 	o.$intMapLink = $(".int-map-link");
 	o.$projLink = $(".projects-link");
 	o.$osfLogo = $(".osf-logo");
@@ -329,6 +335,7 @@ o.prepareAnims = function () {
 	o.logoCenterPos = o.getLogoCenterPos( o.logo, o.ww / 2, o.wh / 2 );
 
 	o.tl.call( o.pauseAnim )
+			.to( o.$plsScroll, 0.6, {opacity: 0}, "hideSloganAndLogoText" )
 			.to( o.$hpSlogan, 0.6, {opacity: 0}, "hideSloganAndLogoText" )
 			.to( o.logoText.node, 0.4, {opacity: 0}, "hideSloganAndLogoText" )
 			.to( o.$hpContainer, 0.8, {y: o.logoYShiftToCenter})
