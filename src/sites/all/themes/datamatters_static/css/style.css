@@ -173,9 +173,9 @@ h3 {
 
 /* header */
 header {
-  height: 187px;
-  padding-top: 32px;
-  margin-bottom: 16px;
+  height: 140px;
+  padding-top: 24px;
+  margin-bottom: 24px;
 }
 header .content.affix {
   width: 100%;
@@ -205,7 +205,7 @@ header .content.affix .logo a {height: 0px}
 
 header .content.affix-top .logo {
   margin: 0 0 32 20px;
-  height: 75px;
+  height: 41px;
 }
 
 @media (max-width: 768px) {
@@ -229,15 +229,15 @@ header .content.affix-top .logo {
 }
 
 .logo {
-  width: 70px;
-  height: 75px;
-  margin: 0 0 32px 20px;
+  width: 90px;
+  height: 41px;
+  margin: 0 0 27px 20px;
   overflow: hidden;
 }
 .logo a {
   position: absolute;
-  width: 70px;
-  height: 75px;
+  width: 90px;
+  height: 41px;
   text-indent: -9999px;
   background: url(../img/logo.png) no-repeat top center;
 }
@@ -440,16 +440,16 @@ header .content.affix-top .logo {
   header .content.affix-top .logo {
     position: absolute;
     top: 50px;
-    left: 30px;
+    left: 18px;
     margin: 0;
     z-index: 10;
-    width: 70px;
-    height: 75px;
+    width: 90px;
+    height: 41px;
     margin-left: 0px;
   }
   header .content.affix .logo a {
     display: block;
-    height: 75px;
+    height: 68px;
   }
   .logged-in .logo {
     top: 79px;
@@ -1059,7 +1059,7 @@ body.slideout-menu-opened{
   display: none;
   opacity: 0;
   position: absolute;
-  top: -140px;
+  top: -93px;
   left: 0;
   z-index: 100;
   padding: 32px 16px;
@@ -1239,7 +1239,7 @@ body.slideout-menu-opened{
 }
 .page-node-19 .main-content,
 .page-node-22 .main-content {
-  margin-top: -16px;
+  margin-top: -24px;
   overflow: hidden;
 }
 /* hide logo for tablets/mobile max 768px */
@@ -1307,6 +1307,10 @@ body.loaded.show_filter .right .filter-button{
   color: #ccc;
   text-align: center;
 }
+.page-node-22 .slogan span {
+  color: #646464;
+}
+
 .page-node-22 .continue-arrow {
   display: block;
   width: 13px;
@@ -1317,6 +1321,17 @@ body.loaded.show_filter .right .filter-button{
   z-index: 401;
   margin-left: -7px;
   background: url(../img/continue-arrow.png);
+}
+.page-node-22 #pls-scroll {
+  width: 400px;
+  height: 20px;
+  position: absolute;
+  bottom: 54px;
+  left: 50%;
+  margin-left: -195px;
+  color: #ccc;
+  text-align: center;
+  font-size: 12px;
 }
 
 #homepage-slogan.active {
@@ -1870,22 +1885,28 @@ html.svg #project-preview .field a:hover:before,
 
 /* Text page & Contact block */
 
+
+
+.about-license,
 .contact-block,
 .main-content .node-page {
   margin: 0px 15px;
   opacity: 0;
 }
 
+.loaded .about-license,
 .loaded .contact-block,
 .loaded .main-content .node-page{
   opacity: 1;
 }
 
+.about-license,
 .contact-block,
 .main-content .node-page .field-name-body p{
   margin-top: 0px; margin-bottom: 20px;
 }
 
+.about-license,
 .contact-block {
   border-top: 1px dotted #cccccc;
   padding: 18px 0px;
@@ -1900,17 +1921,20 @@ html.svg #project-preview .field a:hover:before,
   border-bottom: 1px dotted #cccccc;
 }
 
+.about-license,
 .contact-block {
   line-height: 20px;
 }
 
 .node-page a,
+.about-license a,
 .contact-block a {
   color: #646464;
   border-bottom: #646464 1px dotted;
 }
 
 .node-page a:hover,
+.about-license a:hover,
 .contact-block a:hover{
   border-bottom: #F00 1px dotted;
   text-decoration: none;
@@ -1927,6 +1951,7 @@ html.svg #project-preview .field a:hover:before,
 
 @media (min-width: 492px) {
   .contact-block,
+  .about-license,
   .main-content .node-page {
      width: 385px;
      margin: 0 auto;
@@ -1934,10 +1959,17 @@ html.svg #project-preview .field a:hover:before,
 }
 
 @media (min-width: 769px) {
+  .about-license,
   .contact-block,
   .main-content .node-page {
     margin-left: 130px; 
   }
+}
+
+.about-license a,
+.about-license {
+ 
+  font-size: 12px;
 }
 
 /* END of Text page */
@@ -2107,10 +2139,10 @@ body.access-denied .main-content{
 only screen and (-moz-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5) {
-	.page-node .action-links .edit {
-		-webkit-background-size: 20px 20px;
+  .page-node .action-links .edit {
+    -webkit-background-size: 20px 20px;
     background-size: 20px 20px;
-	}
+  }
 }
 
 /* END of User stuff */
@@ -2236,13 +2268,13 @@ only screen and (min-device-pixel-ratio: 1.5) {
   
   .logo a {
     background: url(../img/logo@2x.png) no-repeat top center;
-    -webkit-background-size: 70px 150px;
-    background-size: 70px 150px;
+    -webkit-background-size: 90px 82px;
+    background-size: 90px 82px;
   }
   .logo a:hover {
     background: url(../img/logo@2x.png) no-repeat bottom center;
-    -webkit-background-size: 70px 150px;
-    background-size: 70px 150px;
+    -webkit-background-size: 90px 82px;
+    background-size: 90px 82px;
   }
 
 }

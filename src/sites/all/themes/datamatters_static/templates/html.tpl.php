@@ -11,15 +11,20 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1" media="(device-height: 568px)">
 
-  <meta name="description" content="">
-  <meta name="author" content="">
-
+  <meta name="copyright" content="Open Society Foundations © 2014">
+  <!-- 
+  
+    This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+    http://creativecommons.org/licenses/by-nc-nd/4.0/
+  
+  -->
+  
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-title" content="Data Matters" />
+  <meta name="mobile-web-app-title" content="Visualizing Data" />
   <link rel="shortcut icon" sizes="196x196" href="/sites/all/themes/datamatters_static/icons/icon196.png">
   <link rel="shortcut icon" sizes="128x128" href="/sites/all/themes/datamatters_static/icons/icon128.png">
 
-  <meta name="apple-mobile-web-app-title" content="Data Matters" />
+  <meta name="apple-mobile-web-app-title" content="Visualizing Data" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/sites/all/themes/datamatters_static/icons/icon144.png">
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/sites/all/themes/datamatters_static/icons/icon114.png">
@@ -38,13 +43,21 @@
   <script src="/<?=path_to_theme()?>/js/html5shiv.js"></script>
 	<script src="/<?=path_to_theme()?>/js/respondjs-min.js"></script>
   <![endif]-->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
   
+    ga('create', 'UA-2765806-36', 'auto');
+    ga('send', 'pageview');
+  </script> 
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <div class="preload"></div>
   <?php print $page_top; ?>
   <?php print $page; ?>
-  <?php print $page_bottom; ?>
+  <?php print $page_bottom ?>
   <?php print $scripts; ?>
 </body>
 </html>

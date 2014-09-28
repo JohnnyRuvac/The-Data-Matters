@@ -489,3 +489,10 @@ $(window).resize(function(){
 	//o.countries.zoomToActive( o.selectedCountry, o.map.scale );
 });
 // End Window resize
+
+$(window).load(function(){
+	//hide preload here
+	window.setTimeout(function(){
+		o.$body.addClass("all-loaded");
+	}, 50);
+});

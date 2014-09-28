@@ -79,37 +79,38 @@ function datamatters_static_preprocess_page(&$vars) {
   //
 
   $countries = taxonomy_get_tree(2);
-
   foreach($countries as $key => $value):
-    $vars['countries'][$key]['name'] = $value->name;
-	  $vars['countries'][$key]['tid'] = $value->tid;
-	  $vars['countries'][$key]['url']  = explode("/", drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid));
-	  $vars['countries'][$key]['url'] = "projects#country=".$vars['countries'][$key]['url'][1];
-	  $vars['tax_names'][$value->tid] = $value->name;
-	  
+    $term = taxonomy_term_load($value->tid);
+    if($term->field_status['und'][0]['value'] == 1){
+      $vars['countries'][$key]['name'] = $value->name;
+  	  $vars['countries'][$key]['tid'] = $value->tid;
+  	  $vars['countries'][$key]['url']  = explode("/", drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid));
+  	  $vars['countries'][$key]['url'] = "projects#country=".$vars['countries'][$key]['url'][1];
+  	  $vars['tax_names'][$value->tid] = $value->name;
+    }
   endforeach;
 
   $field = taxonomy_get_tree(3);
   foreach($field as $key => $value):
-
-	  $vars['field'][$key]['name'] = $value->name;
-	  $vars['field'][$key]['tid'] = $value->tid;
-    $vars['field'][$key]['url'] = explode("/", drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid));
-	  $vars['field'][$key]['url'] = "projects#field=".$vars['field'][$key]['url'][1];
-	  $vars['tax_names'][$value->tid] = $value->name;
-	  
+    $term = taxonomy_term_load($value->tid);
+    if($term->field_status['und'][0]['value'] == 1){
+  	  $vars['field'][$key]['name'] = $value->name;
+  	  $vars['field'][$key]['tid'] = $value->tid;
+      $vars['field'][$key]['url'] = explode("/", drupal_lookup_path('alias', 'taxonomy/term/'.$value->tid));
+  	  $vars['field'][$key]['url'] = "projects#field=".$vars['field'][$key]['url'][1];
+  	  $vars['tax_names'][$value->tid] = $value->name;
+	  }
   endforeach;
   
   $ngo = taxonomy_get_tree(4);
   foreach($ngo as $key => $value):
-  	
-	$term = taxonomy_term_load($value->tid);
-  		
-	$vars['ngo'][$key]['name'] = $value->name;
-	$vars['ngo'][$key]['tid'] = $value->tid;
-	if(isset($term->field_email['und'][0])) $vars['ngo'][$key]['mail'] = $term->field_email['und'][0]['safe_value'];
-	if(isset($term->field_phone['und'][0])) $vars['ngo'][$key]['phone'] = $term->field_phone['und'][0]['safe_value'];
-	  
+  	$term = taxonomy_term_load($value->tid);
+		if($term->field_status['und'][0]['value'] == 1){
+    	$vars['ngo'][$key]['name'] = $value->name;
+    	$vars['ngo'][$key]['tid'] = $value->tid;
+    	if(isset($term->field_email['und'][0])) $vars['ngo'][$key]['mail'] = $term->field_email['und'][0]['safe_value'];
+    	if(isset($term->field_phone['und'][0])) $vars['ngo'][$key]['phone'] = $term->field_phone['und'][0]['safe_value'];
+	  }
   endforeach;
   
   

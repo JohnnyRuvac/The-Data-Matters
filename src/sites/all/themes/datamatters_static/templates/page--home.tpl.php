@@ -5,9 +5,10 @@
 				
 				<div class="content">
 					<svg id="hp-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
-					<p id="homepage-slogan" class="slogan active">The Data-driven Policy Research projects from Central and Eastern Europe.<br />Using numbers and context to make the difference.</p>
+					<p id="homepage-slogan" class="slogan active">From Policy-Relevant Research to Evidence-Informed Policy</p>
 					<p id="countries-text">Think Tank Fund has supported projects in&nbsp;9&nbsp;different countries across Central and Eastern Europe.</p>
 					<p id="relationships-text">The various projects have made clearer understanding and made difference in<br />8 different fields from budget through crime to&nbsp;municipalities issues.</p>
+					<p id="pls-scroll">To read the story behind this portfolio <br/>please scroll down.</p>
 					<a href="" class="continue-arrow"></a>
 					<div class="fields-descriptions">
 						<ul>

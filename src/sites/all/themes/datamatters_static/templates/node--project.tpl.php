@@ -72,15 +72,8 @@
 
 				  		<? if(isset($ngo->field_email['und'][0]['safe_value']) || isset($ngo->field_phone['und'][0]['safe_value'])):?>
 					  		<p class="contacts icon">
-						  		<? if(isset($ngo->field_email['und'][0]['safe_value'])): ?>
-                    <?php if(strpos($ngo->field_email['und'][0]['safe_value'],'@') !== false): ?>
-                      <a href="mailto:<?=$ngo->field_email['und'][0]['safe_value']?>"><?=$ngo->field_email['und'][0]['safe_value']?></a>
-                    <? else: ?>
-                      <a href="http://<?=$ngo->field_email['und'][0]['safe_value']?>"><?=$ngo->field_email['und'][0]['safe_value']?></a>
-                    <? endif;?>
-						  		<? endif; ?>
 						  		<? if(isset($ngo->field_phone['und'][0]['safe_value'])): ?> 
-						  		  &nbsp;<a href="<?php print $ngo->field_phone['und'][0]['safe_value']; ?>">Website</a>
+						  		  <a href="<?php print $ngo->field_phone['und'][0]['safe_value']; ?>">Website</a>
 					  		  <? endif; ?>
 					  		</p>
 					  	<? else:?>
