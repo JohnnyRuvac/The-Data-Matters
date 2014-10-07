@@ -1,3 +1,7 @@
+#console {
+  display: none;
+}
+
 /* preload */
 .page-node-19 .main-content .content {
   height: 100%;
