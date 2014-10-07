@@ -6,38 +6,35 @@ o.map.init = function () {
 	o.$mapContainer = $("#map-container");
 
 	var url = o.$mapContainer.attr("data-url");
-	Snap.load( url + "map_logo.svg", function(d) {
+	Snap.load( url + "osf_map.svg", function(d) {
 
 		o.map.setContainerHeight();
 
 		//pattern
-		var pattern = d.select("#pattern-active");
-		var pattern2 = d.select("#pattern-inactive");
-		o.s.append(pattern);
-		o.s.append(pattern2);
+		// var pattern = d.select("#pattern-active");
+		// var pattern2 = d.select("#pattern-inactive");
+		// o.s.append(pattern);
+		// o.s.append(pattern2);
 	
-		o.map.countries = d.select(".countries");
-		o.s.append(o.map.countries);
-		o.map.countries.attr({
+		o.map.worldmap = d.select("#worldmap");
+		o.s.append(o.map.worldmap);
+		o.map.worldmap.attr({
 			opacity: 0
 		});	
-		o.map.countries.selectAll("polygon, path").attr({
+		o.map.worldmap.selectAll("path").attr({
 			fill: "#ffffff",
 			stroke: "#bababa",
 			strokeWidth: 0.25
 		});
 
-		o.europe = o.s.select("#europe-countries");
-
 		//add rectangle behind map, so it can be draggable also on empty spaces
-		o.map.bg = o.s.rect(0, 700, 2560, 1440);
-		o.map.bg.attr({
-			fill: "#e8e8e8"
-		});
-		o.map.countries.select("#other-countries").before( o.map.bg );
+		// o.map.bg = o.s.rect(0, 700, 2560, 1440);
+		// o.map.bg.attr({
+		// 	fill: "#e8e8e8"
+		// });
 
 		//make it dragable
-		o.map.activateDrag();
+		//o.map.activateDrag();
 
 		//countries with project hover
 		var url = o.$mapContainer.attr("data-json-url");
@@ -54,12 +51,6 @@ o.map.activateDrag = function () {
 	};
 	
 	var move = function(dx,dy) {
-		
-		// var bbox = this.getBBox(),
-		// 		top = (bbox.x + dx) > 0,
-		// 		left = (bbox.y + dy) > 0,
-		// 		right = (-bbox.x - dx + o.ww) > 2560 * o.map.scale, //2560 is the initial width of svg map
-		// 		bottom = (-bbox.y - dy + o.wh) > 1440 * o.map.scale; //1440 is the initial height of svg map
 
 		var m = o.map.countries.matrix,
 				top = ( m.f + dy ) > - 1700,
@@ -123,8 +114,8 @@ o.map.loadCountriesWithProjects = function(url) {
       o.map.highlightCountriesWithProject();
       bothComplete++;
       if (bothComplete == 2) {
-      	o.countries.initHoverAndClick();
-      	o.countries.center();
+      	//o.countries.initHoverAndClick();
+      	//o.countries.center();
       	o.map.show();
       }
     }
@@ -139,8 +130,8 @@ o.map.loadCountriesWithProjects = function(url) {
       o.projectsJson = data;
       bothComplete++;
       if (bothComplete == 2) {
-      	o.countries.initHoverAndClick();
-      	o.countries.center();
+      	//o.countries.initHoverAndClick();
+      	//o.countries.center();
       	o.map.show();
       }
     }
@@ -196,7 +187,7 @@ o.map.show = function () {
 	o.$body.addClass("map-shown");
 
 	//show it
-	o.map.countries.animate({opacity: 1}, 600);
+	o.map.worldmap.animate({opacity: 1}, 600);
 
 }
 // END map
