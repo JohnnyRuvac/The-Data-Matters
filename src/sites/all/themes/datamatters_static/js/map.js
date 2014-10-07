@@ -11,10 +11,10 @@ o.map.init = function () {
 		o.map.setContainerHeight();
 
 		//pattern
-		// var pattern = d.select("#pattern-active");
-		// var pattern2 = d.select("#pattern-inactive");
-		// o.s.append(pattern);
-		// o.s.append(pattern2);
+		var pattern = d.select("#pattern-active");
+		var pattern2 = d.select("#pattern-inactive");
+		o.s.append(pattern);
+		o.s.append(pattern2);
 	
 		o.map.worldmap = d.select("#worldmap");
 		o.s.append(o.map.worldmap);
