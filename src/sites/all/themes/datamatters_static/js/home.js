@@ -4,7 +4,7 @@ o.setHeight = function() {
 			height = window.innerHeight - headerHeight;
 	o.$mainContent.height( height );
 
-}
+};
 
 o.loadCountriesAndProjects = function() {
   
@@ -42,17 +42,25 @@ o.loadCountriesAndProjects = function() {
     }
   });
 
-}
+};
+
+o.loadMap = function () {
+	
+	L.mapbox.accessToken = 'pk.eyJ1Ijoib25kcmVqcm9ob24iLCJhIjoiVFVwWWtPOCJ9.tqWegHdwlqVYKPD-d2IFhQ';
+	var map = L.mapbox.map('map-container', 'ondrejrohon.z7tit3xr')
+  					 .setView([40, -74.50], 3);
+
+  map.on('click', function(e){
+  	console.log(e);
+  });
+
+};
 
 $(function(){
 
 	o.$mainContent = $(".main-content");
 	o.setHeight();
-
-	L.mapbox.accessToken = 'pk.eyJ1Ijoib25kcmVqcm9ob24iLCJhIjoiVFVwWWtPOCJ9.tqWegHdwlqVYKPD-d2IFhQ';
-	var map = L.mapbox.map('map-container', 'ondrejrohon.oeyfzuxr')
-  					 .setView([40, -74.50], 3);
-
+	o.loadMap();
   o.loadCountriesAndProjects();
 
 });
