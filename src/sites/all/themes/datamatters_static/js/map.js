@@ -45,7 +45,7 @@ o.map.init = function () {
 
 	});
 
-}
+};
 o.map.activateDrag = function () {
 
 	o.drag = {
@@ -108,7 +108,7 @@ o.map.activateDrag = function () {
 
 	o.map.countries.drag(move, start, stop);
 
-}
+};
 o.map.loadCountriesWithProjects = function(url) {
   
   var bothComplete = 0; //bothComplete has to be == 2, it means that we have loaded both jsons
@@ -148,7 +148,7 @@ o.map.loadCountriesWithProjects = function(url) {
     }
   });
 
-}
+};
 o.map.highlightCountriesWithProject = function () {
 
 	//define patterns, scale them
@@ -172,7 +172,7 @@ o.map.highlightCountriesWithProject = function () {
 
 	}
 
-}
+};
 o.map.setContainerHeight = function () {
 
 	var headerHeight = o.$mainContent.offset().top,
@@ -180,7 +180,7 @@ o.map.setContainerHeight = function () {
 
 	o.$mainContent.height( height );
 
-}
+};
 o.map.fixIpad = function () {
 
 	// fix ios7 ipad landscape height bug
@@ -191,7 +191,7 @@ o.map.fixIpad = function () {
 	document.ontouchmove = function(e) {
 		e.preventDefault();
 	}
-}
+};
 
 o.map.show = function () {
 
@@ -200,7 +200,8 @@ o.map.show = function () {
 	//show it
 	o.map.countries.animate({opacity: 1}, 600);
 
-}
+};
+
 // END map
 
 // Countries
@@ -256,7 +257,7 @@ o.countries.initHoverAndClick = function() {
 
 	}
 
-}
+};
 o.countries.hoverIn = function (e) {
 
 	var id = e.target.parentNode.id,
@@ -282,7 +283,7 @@ o.countries.hoverIn = function (e) {
 		o.s.select("#" + id).appendTo( o.europe );
 	}
 
-}
+};
 
 o.countries.hoverOut = function (e) {
 
@@ -300,7 +301,7 @@ o.countries.hoverOut = function (e) {
 		stroke: strokeCol
 	});
 
-}
+};
 o.countries.click = function (e, that) {
 
 	var id = that.attr("id"),
@@ -346,7 +347,7 @@ o.countries.click = function (e, that) {
 		o.countries.showInfo(that);
 	}
 
-}
+};
 o.countries.center = function () {
 
 	var hu = o.s.select("#hungary"),
@@ -365,7 +366,7 @@ o.countries.center = function () {
 	  onUpdateParams:["{self}", o.map.countries, 2, bbox.cx]
 	});
 
-}
+};
 o.countries.zoomToActive = function(that){
 
 	var bbox = that.getBBox();
@@ -387,7 +388,7 @@ o.countries.zoomToActive = function(that){
 	  onUpdateParams:["{self}", o.map.countries, 2, bbox.cx, bbox.cy]
 	});
 
-}
+};
 
 // Animating with Greensock!
 o.dummyObj = {
@@ -410,7 +411,7 @@ o.applySnapTweens = function(tween, snapEl, s, sx, sy) {
 
 	snapEl.transform("t" + x + "," + y + "s" + s + "," + s + "," + sx + "," + sy);
 
-}
+};
 // END Animating with Greensock!
 o.countries.showInfo = function (that) {
 
@@ -459,7 +460,7 @@ o.countries.showInfo = function (that) {
 
 	o.$countryInfo.addClass("active");
 
-}
+};
 // END Countries
 
 // DOM ready
