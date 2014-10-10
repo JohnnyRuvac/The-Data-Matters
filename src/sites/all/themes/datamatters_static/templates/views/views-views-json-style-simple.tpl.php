@@ -13,12 +13,17 @@
 
 $jsonp_prefix = $options['jsonp_prefix'];
 foreach($rows as $key => $value):
+
+
 	foreach($value as $keyy => $valuee):
 		if($keyy == "field" || $keyy == "country") $rows[$key][$keyy]['link'] = url('taxonomy/term/'.$value[$keyy]['tid']);
-		if($keyy == "country") $rows[$key][$keyy]['safe_name'] = transliteration_clean_filename($rows[$key][$keyy]['name']);
 		if($keyy == "country") {
 		  $link = explode("/", $rows[$key][$keyy]['link']);
   		$rows[$key][$keyy]['link'] = "/projects#country=".str_ireplace("-", "_", $link[2]);;
+  		$rows[$key][$keyy]['safe_name'] = $rows[$key][$keyy]['key'];
+  		$rows[$key][$keyy]['name'] = $rows[$key][$keyy]['alter'];
+  		unset($rows[$key][$keyy]['alter']);
+  		unset($rows[$key][$keyy]['key']);
 		}
 		if($keyy == "field"){
 		  $link = explode("/", $rows[$key][$keyy]['link']);
