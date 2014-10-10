@@ -11,7 +11,7 @@
 						<p class="gdp">GDP (PPP): <span></span></p>
 						<ul></ul>
 					</div>
-					<div id="map-container" data-json-url="<?php echo base_path();?>"></div>
+					<svg id="map-container" data-url="<?php echo base_path() . path_to_theme();?>/svg/" data-json-url="<?php echo base_path();?>"></svg>
 				</div>
 
 			</div>
