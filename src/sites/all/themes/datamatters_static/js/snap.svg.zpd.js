@@ -355,7 +355,6 @@
                 var g = zpdElement.element.node;
 
                 var p = _getEventPoint(event, zpdElement.data.svg);
-                console.log(p);
 
                 p = p.matrixTransform(g.getCTM().inverse());
 
