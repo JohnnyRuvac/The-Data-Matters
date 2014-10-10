@@ -6,7 +6,7 @@ o.map.init = function () {
 	o.$mapContainer = $("#map-container");
 
 	var url = o.$mapContainer.attr("data-url");
-	Snap.load( url + "map_logo.svg", function(d) {
+	Snap.load( url + "worldmap.svg", function(d) {
 
 		o.map.setContainerHeight();
 
@@ -16,7 +16,7 @@ o.map.init = function () {
 		o.s.append(pattern);
 		o.s.append(pattern2);
 	
-		o.map.countries = d.select(".countries");
+		o.map.countries = d.select("#worldmap");
 		o.s.append(o.map.countries);
 		o.map.countries.attr({
 			opacity: 0
@@ -26,15 +26,6 @@ o.map.init = function () {
 			stroke: "#bababa",
 			strokeWidth: 0.25
 		});
-
-		o.europe = o.s.select("#europe-countries");
-
-		//add rectangle behind map, so it can be draggable also on empty spaces
-		o.map.bg = o.s.rect(0, 700, 2560, 1440);
-		o.map.bg.attr({
-			fill: "#e8e8e8"
-		});
-		o.map.countries.select("#other-countries").before( o.map.bg );
 
 		//make it dragable
 		//o.map.activateDrag();
@@ -299,7 +290,7 @@ o.countries.hoverIn = function (e) {
 		o.s.select("#" + id).insertBefore( o.activeCountry );
 	}
 	else {
-		o.s.select("#" + id).appendTo( o.europe );
+		o.s.select("#" + id).appendTo( o.countries );
 	}
 
 };
@@ -357,7 +348,7 @@ o.countries.click = function (e, that) {
 			stroke: "#f00"
 		});
 
-		that.appendTo( o.europe );
+		that.appendTo( o.countries );
 
 		o.activeCountry = that;
 		o.$activeCountry = $clicked;
