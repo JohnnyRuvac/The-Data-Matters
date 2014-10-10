@@ -201,7 +201,21 @@ o.map.show = function () {
 	o.map.countries.animate({opacity: 1}, 600);
 
 };
+o.listenToGestures = function () {
 
+	var elem = $('#map-container')[0];
+	var hammertime = new Hammer(elem);
+	hammertime.get('pinch').set({enable: true});
+
+	hammertime.on('pinch', function(e){
+		var x1 = e.pointers[0].pageX;
+		var y1 = e.pointers[0].pageY;
+		var x2 = e.pointers[1].pageX;
+		var y2 = e.pointers[1].pageY;
+		console.log('x1: ' + x1 + ' y1: ' + y1 + ' x2: ' + x2 + ' y2: ' + y2 + ' scale: ' + e.scale);
+	});
+
+};
 // END map
 
 // Countries
@@ -482,6 +496,7 @@ $(function(){
 
 	o.map.fixIpad();
 	o.map.init();
+	o.listenToGestures();
 
 });
 // End DOM ready
