@@ -8,15 +8,15 @@ function datamatters_static_js_alter(&$js, &$vars){
 	
 	drupal_add_js( path_to_theme().'/js/bootstrap.min.js', array('weight' => -1000));
 	drupal_add_js( path_to_theme().'/js/modernizr.js');
-    if($path == "home" || $path == "map") drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
 	drupal_add_js( path_to_theme().'/js/jquery.mobile.custom.min.js');
 	
 	drupal_add_js( path_to_theme().'/js/jquery.mixitup.min.js');
 	drupal_add_js( path_to_theme().'/js/script.js');
 	
-  if($path == "home") drupal_add_js( path_to_theme().'/js/TweenMax.min.js');
+  if($path == "home") drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
   if($path == "home") drupal_add_js( path_to_theme().'/js/snap.svg.zpd.js');
 	if($path == "home") drupal_add_js( path_to_theme().'/js/hammer.min.js');
+  if($path == "home") drupal_add_js( path_to_theme().'/js/TweenLite.min.js');
 	if($path == "home") drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
   
 }
