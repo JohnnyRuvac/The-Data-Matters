@@ -212,7 +212,12 @@ o.listenToGestures = function () {
 		var y1 = e.pointers[0].pageY;
 		var x2 = e.pointers[1].pageX;
 		var y2 = e.pointers[1].pageY;
-		console.log('x1: ' + x1 + ' y1: ' + y1 + ' x2: ' + x2 + ' y2: ' + y2 + ' scale: ' + e.scale);
+		var cx = (x1 + x2) / 2;
+		var cy = (y1 + y2) / 2;
+		console.log('cx: ' + cx + ' cy: ' + cy + ' x1: ' + x1 + ' y1: ' + y1 + ' x2: ' + x2 + ' y2: ' + y2 + ' scale: ' + e.scale);
+
+		o.s.zoomToPoint(e.scale, cx, cy, 0);
+
 	});
 
 };

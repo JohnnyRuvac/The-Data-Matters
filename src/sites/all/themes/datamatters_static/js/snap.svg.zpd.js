@@ -548,6 +548,43 @@
 
         };
 
+        /**
+         * zoom element to a certain zoom factor with control point
+         */
+        var zoomToPoint = function (zoom, cx, cy, interval, ease, callbackFunction) {
+
+            var self = this;
+
+            // get a reference to the element
+            var zpdElement = snapsvgzpd.dataStore[self.id].element;
+            var currentScale = zpdElement.transform().localMatrix.split().scalex;
+            
+            //calculate new zoom according to new one and scale from pinch to zoom
+            zoom = currentScale + ( zoom - 1 );
+            console.log(zoom);
+
+            if (zoom < 0 || typeof zoom !== 'number') {
+                console.error('zoomTo(arg) should be a number and greater than 0');
+                return;
+            }
+
+            if (typeof interval !== 'number') {
+                interval = 3000;
+            }
+
+            // check if we have this element in our zpd data storage
+            if (snapsvgzpd.dataStore.hasOwnProperty(self.id)) {
+
+                // animate our element and call the callback afterwards
+                zpdElement.animate({ transform: new Snap.Matrix().scale(zoom, zoom, cx, cy) }, interval, ease || null, function () {
+                    if (callbackFunction) {
+                        callbackFunction(null, zpdElement);
+                    }
+                });
+            }
+
+        };
+
 
         /**
          * move the element to a certain position
@@ -581,6 +618,7 @@
 
         Paper.prototype.zpd = zpd;
         Paper.prototype.zoomTo = zoomTo;
+        Paper.prototype.zoomToPoint = zoomToPoint;
         Paper.prototype.panTo = panTo;
 
 
