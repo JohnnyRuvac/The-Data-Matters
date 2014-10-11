@@ -93,6 +93,16 @@ o.map.activateDrag = function () {
 o.map.loadCountriesWithProjects = function(url) {
   
   var bothComplete = 0; //bothComplete has to be == 2, it means that we have loaded both jsons
+  var prepareMap = function() {
+  	o.countries.initHoverAndClick();
+  	o.countries.center();
+  	o.s.zpd({
+  		drag: false,
+  		pan: false,
+  		zoomThreshold: [1, 4]
+  	});
+  	o.map.show();
+  };
 
   $.ajax({
     'async': false,
@@ -104,14 +114,7 @@ o.map.loadCountriesWithProjects = function(url) {
       o.map.highlightCountriesWithProject();
       bothComplete++;
       if (bothComplete == 2) {
-      	o.countries.initHoverAndClick();
-      	o.countries.center();
-      	o.s.zpd({
-      		drag: false,
-      		pan: false,
-      		zoomThreshold: [1, 4]
-      	});
-      	o.map.show();
+      	prepareMap();
       }
     }
   });
@@ -125,14 +128,7 @@ o.map.loadCountriesWithProjects = function(url) {
       o.projectsJson = data;
       bothComplete++;
       if (bothComplete == 2) {
-      	o.countries.initHoverAndClick();
-      	o.countries.center();
-      	o.s.zpd({
-      		drag: false,
-      		pan: false,
-      		zoomThreshold: [1, 4]
-      	});
-      	o.map.show();
+      	prepareMap();	
       }
     }
   });
@@ -158,9 +154,6 @@ o.map.highlightCountriesWithProject = function () {
 		"vector-effect": "non-scaling-stroke",
 		strokeWidth: 1
 	});
-
-	o.nm = new Snap.Matrix();
-	o.nm.scale(1);
 
 	//highlight countries
 	o.countries.withProject = [];
