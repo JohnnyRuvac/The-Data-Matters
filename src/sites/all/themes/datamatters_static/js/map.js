@@ -40,6 +40,10 @@ o.map.init = function () {
 };
 o.map.activateDrag = function () {
 
+	//add for map dragging also outside of the countries
+	o.map.bgRect = o.s.rect(0, 36, 1000, 650).attr({fill: '#e8e8e8'});
+	o.map.bgRect.prependTo( o.map.countries );
+
 	o.drag = {
 		x: 0,
 		y: 0
@@ -55,11 +59,11 @@ o.map.activateDrag = function () {
 		o.drag.x = dx;
 		o.drag.y = dy;
 	
-	} 
+	};
 	var start = function() {
 		o.isDraggingMap = true;
 		o.$mapContainer.css("cursor", "move");
-	}
+	};
 	var stop = function() {
 
 		o.$mapContainer.css("cursor", "auto");
@@ -81,7 +85,7 @@ o.map.activateDrag = function () {
 		});
 
 		o.isDraggingMap = false;	
-	}
+	};
 
 	o.map.countries.drag(move, start, stop);
 
@@ -104,7 +108,8 @@ o.map.loadCountriesWithProjects = function(url) {
       	o.countries.center();
       	o.s.zpd({
       		drag: false,
-      		pan: false
+      		pan: false,
+      		zoomThreshold: [1, 4]
       	});
       	o.map.show();
       }
@@ -124,7 +129,8 @@ o.map.loadCountriesWithProjects = function(url) {
       	o.countries.center();
       	o.s.zpd({
       		drag: false,
-      		pan: false
+      		pan: false,
+      		zoomThreshold: [1, 4]
       	});
       	o.map.show();
       }
