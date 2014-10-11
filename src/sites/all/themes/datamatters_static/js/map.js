@@ -50,6 +50,11 @@ o.map.activateDrag = function () {
 	};
 	
 	var move = function(dx,dy) {
+
+		//account for current zoom
+		var currentZoom = o.s.zpd('save').a;
+		dx /= currentZoom;
+		dy /= currentZoom;
 		
 		var x = dx - o.drag.x;
 		var y = dy - o.drag.y;
