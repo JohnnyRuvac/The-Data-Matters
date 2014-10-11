@@ -35,6 +35,9 @@
  * paper.panTo(0, 0); // original location
  * paper.panTo('+10', 0); // move right
  *
+ * // rotate
+ * paper.rotate(15); // rotate 15 deg
+ *
  *  Notice
  * ========
  * This usually use on present view only. Not for Storing, modifying the paper.
@@ -119,7 +122,15 @@
         /**
          * Sets the current transform matrix of an element.
          */
-        var _setCTM = function setCTM(element, matrix) {
+        var _setCTM = function setCTM(element, matrix, threshold) {
+            if (threshold && typeof threshold === 'object') { // array [0.5,2]
+                if (matrix.a <= threshold[0]) {
+                    return;
+                }
+                if (matrix.d >= threshold[1]) {
+                    return;
+                }
+            }
             var s = "matrix(" + matrix.a + "," + matrix.b + "," + matrix.c + "," + matrix.d + "," + matrix.e + "," + matrix.f + ")";
             element.setAttribute("transform", s);
         };
@@ -132,10 +143,9 @@
             return s;
         };
 
-
         /**
-             * Instance an SVGPoint object with given event coordinates.
-             */
+         * Instance an SVGPoint object with given event coordinates.
+         */
         var _getEventPoint = function getEventPoint(event, svgNode) {
 
             var p = svgNode.node.createSVGPoint();
@@ -144,9 +154,7 @@
             p.y = event.clientY;
 
             return p;
-
         };
-
 
         /**
          * add a new <g> element to the paper
@@ -191,7 +199,6 @@
                 // load <g> transform matrix
                 gElement.transform(matrixString);
 
-
             } else {
                 // initial set <g transform="matrix(1,0,0,1,0,0)">
                 gElement.transform('matrix');
@@ -218,9 +225,8 @@
                 state: 'none',
                 stateTarget: null,
                 stateOrigin: null,
-                stateTf: null,
+                stateTf: null
             };
-
 
             // create an element with all required properties
             var item = {
@@ -235,9 +241,7 @@
 
             // return our element
             return item;
-
         };
-
 
         /**
          * create some handler functions for our mouse actions
@@ -294,7 +298,6 @@
                     zpdElement.data.stateOrigin = _getEventPoint(event, zpdElement.data.svg).matrixTransform(zpdElement.data.stateTf);
 
                 }
-
             };
 
             var handleMouseMove = function handleMouseMove (event) {
@@ -361,14 +364,13 @@
                 // Compute new scale matrix in current mouse position
                 var k = zpdElement.data.root.createSVGMatrix().translate(p.x, p.y).scale(z).translate(-p.x, -p.y);
 
-                _setCTM(g, g.getCTM().multiply(k));
+                _setCTM(g, g.getCTM().multiply(k), zpdElement.options.zoomThreshold);
 
-                if (typeof(stateTf) == "undefined") {
+                if (typeof(stateTf) == 'undefined') {
                     zpdElement.data.stateTf = g.getCTM().inverse();
                 }
 
                 zpdElement.data.stateTf = zpdElement.data.stateTf.multiply(k.inverse());
-
             };
 
             return {
@@ -377,14 +379,13 @@
                 "mouseMove": handleMouseMove,
                 "mouseWheel": handleMouseWheel
             };
-
         };
 
 
         /**
-             * Register handlers
-             * desktop and mobile (?)
-             */
+         * Register handlers
+         * desktop and mobile (?)
+         */
         var _setupHandlers = function setupHandlers(svgElement, handlerFunctions) {
 
             // mobile
@@ -393,9 +394,10 @@
             // desktop
             if ('onmouseup' in document.documentElement) {
 
-                svgElement.onmouseup = handlerFunctions.mouseUp;
-                svgElement.onmousedown = handlerFunctions.mouseDown;
-                svgElement.onmousemove = handlerFunctions.mouseMove;
+                // IE < 9 would need to use the event onmouseup, but they do not support svg anyway..
+                svgElement.addEventListener('mouseup', handlerFunctions.mouseUp, false);
+                svgElement.addEventListener('mousedown', handlerFunctions.mouseDown, false);
+                svgElement.addEventListener('mousemove', handlerFunctions.mouseMove, false);
 
                 if (navigator.userAgent.toLowerCase().indexOf('webkit') >= 0) {
                     svgElement.addEventListener('mousewheel', handlerFunctions.mouseWheel, false); // Chrome/Safari
@@ -406,7 +408,6 @@
                 }
 
             }
-
         };
 
         /**
@@ -414,11 +415,9 @@
          */
         var _tearDownHandlers = function tearDownHandlers(svgElement, handlerFunctions) {
 
-            var noopFunc = function () {};
-
-            svgElement.onmouseup = noopFunc;
-            svgElement.onmousedown = noopFunc;
-            svgElement.onmousemove = noopFunc;
+            svgElement.removeEventListener('mouseup', handlerFunctions.mouseUp, false);
+            svgElement.removeEventListener('mousedown', handlerFunctions.mouseDown, false);
+            svgElement.removeEventListener('mousemove', handlerFunctions.mouseMove, false);
 
             if (navigator.userAgent.toLowerCase().indexOf('webkit') >= 0) {
                 svgElement.removeEventListener('mousewheel', handlerFunctions.mouseWheel, false);
@@ -426,7 +425,6 @@
             else {
                 svgElement.removeEventListener('DOMMouseScroll', handlerFunctions.mouseWheel, false);
             }
-
         };
 
         /* our global zpd function */
@@ -440,29 +438,58 @@
                 pan: true,          // enable or disable panning (default enabled)
                 zoom: true,         // enable or disable zooming (default enabled)
                 drag: false,        // enable or disable dragging (default disabled)
-                zoomScale: 0.2      // defien zoom sensitivity
+                zoomScale: 0.2,     // define zoom sensitivity
+                zoomThreshold: null // define zoom threshold
             };
+
+            // the situation event of zpd, may be init, reinit, destroy, save, origin
+            var situation,
+                situationState = {
+                    init: 'init',
+                    reinit: 'reinit',
+                    destroy: 'destroy',
+                    save: 'save',
+                    origin: 'origin',
+                    callback: 'callback'
+                };
+
+            var zpdElement = null;
 
             // it is also possible to only specify a callback function without any options
             if (typeof options === 'function') {
                 callbackFunc = options;
-
+                situation = situationState.callback;
             }
-            else if (typeof options === 'object') {
-                for (var prop in options) {
-                    zpdOptions[prop] = options[prop];
-                }
-            }
-
-            var zpdElement = null;
 
             // check if element was already initialized
             if (snapsvgzpd.dataStore.hasOwnProperty(self.id)) {
+
                 // return existing element
                 zpdElement =  snapsvgzpd.dataStore[self.id];
+
+                // adapt the stored options, with the options passed in
+                if (typeof options === 'object') {
+                    for (var prop in options) {
+                        zpdElement.options[prop] = options[prop];
+                    }
+                    situation = situationState.reinit;
+                } else if (typeof options === 'string') {
+                    situation = options;
+                }
             }
             else {
-                // initializel a new element and save it to our global storage
+
+                // adapt the default options
+                if (typeof options === 'object') {
+                    for (var prop2 in options) {
+                        zpdOptions[prop2] = options[prop2];
+                    }
+                    situation = situationState.init;
+                } else if (typeof options === 'string') {
+                    situation = options;
+                }
+
+                // initialize a new element and save it to our global storage
                 zpdElement = _initZpdElement(self, zpdOptions);
 
                 // setup the handlers for our svg-canvas
@@ -471,9 +498,20 @@
                 snapsvgzpd.dataStore[self.id] = zpdElement;
             }
 
-            switch (options) {
+            switch (situation) {
 
-                case'destroy':
+                case situationState.init:
+                case situationState.reinit:
+                case situationState.callback:
+
+                    // callback
+                    if (callbackFunc) {
+                        callbackFunc(null, zpdElement);
+                    }
+
+                    return;
+
+                case situationState.destroy:
 
                     // remove event handlers
                     _tearDownHandlers(self.node, zpdElement.handlerFunctions);
@@ -484,11 +522,16 @@
                     // remove the object from our internal storage
                     delete snapsvgzpd.dataStore[self.id];
 
+                    // callback
+                    if (callbackFunc) {
+                        callbackFunc(null, zpdElement);
+                    }
+
                     return; // exit all
 
-                case 'save':
+                case situationState.save:
 
-                    var g = document.getElementById(snapsvgzpd.preUniqueId + self.id);
+                    var g = document.getElementById(snapsvgzpd.uniqueIdPrefix + self.id);
 
                     var returnValue = g.getCTM();
 
@@ -499,14 +542,14 @@
 
                     return returnValue;
 
-                case 'origin':
+                case situationState.origin:
 
                     // back to origin location
                     self.zoomTo(1, 1000);
 
                     // callback
                     if (callbackFunc) {
-                        callbackFunc(null, returnValue);
+                        callbackFunc(null, zpdElement);
                     }
 
                     return;
@@ -544,44 +587,6 @@
                     }
                 });
             }
-
-        };
-
-        /**
-         * zoom element to a certain zoom factor with control point
-         */
-        var zoomToPoint = function (zoom, cx, cy, interval, ease, callbackFunction) {
-
-            var self = this;
-
-            // get a reference to the element
-            var zpdElement = snapsvgzpd.dataStore[self.id].element;
-            var currentScale = zpdElement.transform().localMatrix.split().scalex;
-            
-            //calculate new zoom according to new one and scale from pinch to zoom
-            zoom = currentScale + ( zoom - 1 );
-            console.log(zoom);
-
-            if (zoom < 0 || typeof zoom !== 'number') {
-                console.error('zoomTo(arg) should be a number and greater than 0');
-                return;
-            }
-
-            if (typeof interval !== 'number') {
-                interval = 3000;
-            }
-
-            // check if we have this element in our zpd data storage
-            if (snapsvgzpd.dataStore.hasOwnProperty(self.id)) {
-
-                // animate our element and call the callback afterwards
-                zpdElement.animate({ transform: new Snap.Matrix().scale(zoom, zoom, cx, cy) }, interval, ease || null, function () {
-                    if (callbackFunction) {
-                        callbackFunction(null, zpdElement);
-                    }
-                });
-            }
-
         };
 
 
@@ -611,24 +616,51 @@
                 });
 
             }
-
         };
 
+        /**
+         * rotate the element to a certain rotation
+         */
+        var rotate = function (a, x, y, interval, ease, cb) {
+            // get a reference to the current element
+            var self = this;
+
+            // check if we have this element in our zpd data storage
+            if (snapsvgzpd.dataStore.hasOwnProperty(self.id)) {
+
+                var zpdElement = snapsvgzpd.dataStore[self.id].element;
+
+                var gMatrix = zpdElement.node.getCTM(),
+                    matrixString = "matrix(" + gMatrix.a + "," + gMatrix.b + "," + gMatrix.c + "," + gMatrix.d + "," + gMatrix.e + "," + gMatrix.f + ")";
+
+                if (!x || typeof x !== 'number') {
+                    x = self.node.offsetWidth / 2;
+                }
+                if (!y || typeof y !== 'number') {
+                    y = self.node.offsetHeight / 2;
+                }
+
+                // dataStore[me.id].transform(matrixString); // load <g> transform matrix
+                zpdElement.animate({ transform: new Snap.Matrix(gMatrix).rotate(a, x, y) }, interval || 10, ease || null, function () {
+                    if (cb) {
+                        cb(null, zpdElement);
+                    }
+                });
+
+            }
+        };
 
         Paper.prototype.zpd = zpd;
         Paper.prototype.zoomTo = zoomTo;
-        Paper.prototype.zoomToPoint = zoomToPoint;
         Paper.prototype.panTo = panTo;
-
+        Paper.prototype.rotate = rotate;
 
         /** More Features to add (click event) help me if you can **/
         // Element.prototype.panToCenter = panToCenter; // arg (ease, interval, cb)
 
-        /** rotate => snap.svg.zpdr **/
 
         /** UI for zpdr **/
 
     });
 
 })(Snap);
-
