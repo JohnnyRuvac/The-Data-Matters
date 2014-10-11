@@ -21,7 +21,7 @@ o.map.init = function () {
 		o.map.countries.attr({
 			opacity: 0
 		});	
-		o.map.countries.selectAll("polygon, path").attr({
+		o.map.countries.selectAll("path").attr({
 			fill: "#ffffff",
 			stroke: "#bababa",
 			"vector-effect": "non-scaling-stroke",
@@ -146,6 +146,21 @@ o.map.highlightCountriesWithProject = function () {
 	//define patterns, scale them
 	o.patternInactive = Snap("#pattern-inactive");
 	o.patternActive = Snap("#pattern-active");
+	
+	// o.patternActive.attr({
+	// 	"vector-effect": "non-scaling-stroke"
+	// });
+	// o.patternInactive.attr({
+	// 	"vector-effect": "non-scaling-stroke"
+	// });
+	o.patternActive.selectAll('line').attr({
+		"vector-effect": "non-scaling-stroke",
+		strokeWidth: 1
+	});
+	o.patternInactive.selectAll('line').attr({
+		"vector-effect": "non-scaling-stroke",
+		strokeWidth: 1
+	});
 
 	o.nm = new Snap.Matrix();
 	o.nm.scale(1);
@@ -157,7 +172,7 @@ o.map.highlightCountriesWithProject = function () {
 		
 		o.countries.withProject.push( o.countriesJson[i].country.safe_name );
 
-		o.s.selectAll("#" + o.countries.withProject[i] + " polygon").attr({
+		o.s.selectAll("#" + o.countries.withProject[i] + " path").attr({
 			fill: o.patternInactive,
 			stroke: "#b3b3b3"
 		});
@@ -276,7 +291,7 @@ o.countries.hoverIn = function (e) {
 
 	if ( isActive ) return;
 
-	o.s.selectAll("#" + id + " polygon").attr({
+	o.s.selectAll("#" + id + " path").attr({
 		fill: o.patternActive,
 		stroke: "#f00"
 	});
@@ -291,7 +306,7 @@ o.countries.hoverIn = function (e) {
 		o.s.select("#" + id).insertBefore( o.activeCountry );
 	}
 	else {
-		o.s.select("#" + id).appendTo( o.countries );
+		o.s.select("#" + id).appendTo( o.map.countries );
 	}
 
 };
@@ -307,7 +322,7 @@ o.countries.hoverOut = function (e) {
 	var fillCol = ( dataActive ) ? o.patternActive : o.patternInactive;
 	var strokeCol = ( dataActive ) ? "#f00" : "#b3b3b3";
 
-	o.s.selectAll("#" + id + " polygon").attr({
+	o.s.selectAll("#" + id + " path").attr({
 		fill: fillCol,
 		stroke: strokeCol
 	});
@@ -326,7 +341,7 @@ o.countries.click = function (e, that) {
 	if ( isActive ) {
 
 		$clicked.removeAttr("data-active");
-		that.selectAll("polygon").attr({
+		that.selectAll("path").attr({
 			fill: o.patternInactive,
 			stroke: "#b3b3b3"
 		});
@@ -337,19 +352,19 @@ o.countries.click = function (e, that) {
 		//deactivate active one
 		if ( o.activeCountry ) {
 			o.$activeCountry.removeAttr("data-active");
-			o.activeCountry.selectAll("polygon").attr({
+			o.activeCountry.selectAll("path").attr({
 				fill: o.patternInactive,
 				stroke: "#b3b3b3"
 			});
 		}
 		//activate new one
 		$clicked.attr("data-active", "true");
-		that.selectAll("polygon").attr({
+		that.selectAll("path").attr({
 			fill: o.patternActive,
 			stroke: "#f00"
 		});
 
-		that.appendTo( o.countries );
+		that.appendTo( o.map.countries );
 
 		o.activeCountry = that;
 		o.$activeCountry = $clicked;
