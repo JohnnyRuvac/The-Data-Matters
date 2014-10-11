@@ -1421,6 +1421,7 @@ body.loaded.show_filter .right .filter-button{
   width: 100%;
   height: 100%;
   z-index: 5;
+  background: #e8e8e8;
 }
 #map-container .has-project {
   cursor: pointer;

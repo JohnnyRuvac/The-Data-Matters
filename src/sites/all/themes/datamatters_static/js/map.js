@@ -24,7 +24,8 @@ o.map.init = function () {
 		o.map.countries.selectAll("polygon, path").attr({
 			fill: "#ffffff",
 			stroke: "#bababa",
-			strokeWidth: 0.25
+			"vector-effect": "non-scaling-stroke",
+			strokeWidth: 1
 		});
 
 		//make it dragable
