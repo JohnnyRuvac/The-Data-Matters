@@ -39,6 +39,23 @@ o.map.init = function () {
 
 };
 
+o.saveStateToDummyObject = function () {
+
+	var m = o.mainG.transform().globalMatrix;
+		
+	TweenLite.to(o.dummyObj, 0, {
+	  x: m.e,
+	  y: m.f,
+	  sx: 0,
+	  sy: 0,
+	  s: m.a,
+	  ease: Power1.easeOut,
+	  onUpdate: o.applySnapTweens,
+	  onUpdateParams:["{self}", o.mainG, m.a, 0, 0]
+	});
+
+};
+
 o.convertToDragString = function (num) {
 
 	if ( num >= 0 ) {
@@ -80,6 +97,7 @@ o.map.activateDrag = function () {
 	
 	};
 	var start = function() {
+		o.saveStateToDummyObject();
 		o.isDraggingMap = true;
 		o.$mapContainer.css("cursor", "move");
 	};
@@ -90,18 +108,7 @@ o.map.activateDrag = function () {
 		o.drag.x = 0;
 		o.drag.y = 0;
 
-		var m = o.mainG.transform().globalMatrix;
-		
-		TweenLite.to(o.dummyObj, 0, {
-		  x: m.e,
-		  y: m.f,
-		  sx: 0,
-		  sy: 0,
-		  s: m.a,
-		  ease: Power1.easeOut,
-		  onUpdate: o.applySnapTweens,
-		  onUpdateParams:["{self}", o.mainG, m.a]
-		});
+		o.saveStateToDummyObject();
 
 		o.isDraggingMap = false;	
 	};
@@ -340,6 +347,8 @@ o.countries.hoverOut = function (e) {
 };
 o.countries.click = function (e, that) {
 
+	o.saveStateToDummyObject();
+
 	var id = that.attr("id"),
 			$clicked = $("#" + id),
 			isActive = $clicked.attr("data-active");
@@ -399,7 +408,7 @@ o.countries.center = function () {
 	  s: 2,
 	  ease: Power1.easeOut,
 	  onUpdate: o.applySnapTweens,
-	  onUpdateParams:["{self}", o.mainG, 2, bbox.cx]
+	  onUpdateParams:["{self}", o.mainG, 2, bbox.cx, bbox.cy]
 	});
 
 };
