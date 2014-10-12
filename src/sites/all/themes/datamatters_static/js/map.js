@@ -62,16 +62,6 @@ o.saveStateToDummyObject = function () {
 
 };
 
-o.convertToDragString = function (num) {
-
-	if ( num >= 0 ) {
-		return '+' + num.toString();
-	} else {
-		return num.toString();
-	}
-
-};
-
 o.map.activateDrag = function () {
 
 	//add for map dragging also outside of the countries
