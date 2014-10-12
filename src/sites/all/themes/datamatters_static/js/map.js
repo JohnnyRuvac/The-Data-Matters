@@ -1,5 +1,7 @@
 // Map
 o.map = {};
+o.minZoom = 2;
+o.maxZoom = 6;
 
 o.map.init = function () {
 
@@ -124,7 +126,7 @@ o.map.loadCountriesWithProjects = function(url) {
   	o.s.zpd({
   		drag: false,
   		pan: false,
-  		zoomThreshold: [2, 6]
+  		zoomThreshold: [o.minZoom, o.maxZoom]
   	});
   	o.mainG = o.s.select('g');
   	o.countries.center();
@@ -225,13 +227,32 @@ o.map.show = function () {
 	o.map.countries.animate({opacity: 1}, 600);
 
 };
+o.zoomToPoint = function (scale, x, y) {
+
+	var m = new Snap.Matrix().scale( scale, scale, x, y );
+	o.mainG.transform(m);
+
+};
+
 o.listenToGestures = function () {
 
 	var elem = $('#map-container')[0];
 	var hammertime = new Hammer(elem);
-	hammertime.get('pinch').set({enable: true});
+	hammertime.get('pinch').set({
+		enable: true,
+		threshold: 0
+	});
 
-	hammertime.on('pinch', function(e){
+	hammertime.on('pinchstart', function(e){
+		o.lastPinchVal = 0;
+	});
+
+	hammertime.on('pinchmove', function(e){
+
+		if ( e.pointers.length < 2 ) {
+			return;
+		}
+		
 		var x1 = e.pointers[0].pageX;
 		var y1 = e.pointers[0].pageY;
 		var x2 = e.pointers[1].pageX;
@@ -240,8 +261,23 @@ o.listenToGestures = function () {
 		var cy = (y1 + y2) / 2;
 		console.log('cx: ' + cx + ' cy: ' + cy + ' x1: ' + x1 + ' y1: ' + y1 + ' x2: ' + x2 + ' y2: ' + y2 + ' scale: ' + e.scale);
 
-		o.s.zoomToPoint(e.scale, cx, cy, 0);
+		var currentScale = o.mainG.transform().globalMatrix.a;
+		var isZoomingIn = ( e.scale > o.lastPinchVal );
+		var newScale =  (isZoomingIn) ? 
+											currentScale + --e.scale : 
+											currentScale - --currentScale;
 
+		console.log('newScale: ' + newScale);
+		o.lastPinchVal = e.scale;
+
+		if ( newScale > o.minZoom && newScale < o.maxZoom ) {
+			o.zoomToPoint(newScale, cx, cy);
+		}
+
+	});
+
+	hammertime.on('pinchend', function(){
+		o.saveStateToDummyObject();
 	});
 
 };
