@@ -29,6 +29,10 @@ o.map.init = function () {
 			"vector-effect": "non-scaling-stroke",
 			strokeWidth: 1
 		});
+		o.map.countries.selectAll('circle').attr({
+			strokeOpacity: 0,
+			fillOpacity: 0
+		});
 
 		//make it dragable
 		o.map.activateDrag();
@@ -450,10 +454,12 @@ o.countries.center = function () {
 };
 o.countries.zoomToActive = function(that){
 
-	var bbox = that.getBBox();
+	var city = o.s.select('#circ-' + that.node.id);
+	var cx = city.attr('cx');
+	var cy = city.attr('cy');
 	var shift = {
-		x: ( bbox.cx - o.ww / 2 ) * -1,
-		y: ( bbox.cy - o.wh / 2 ) * -1
+		x: ( cx - o.ww / 2 ) * -1,
+		y: ( cy - o.wh / 2 ) * -1
 	};
 
 	time = 0.3;
@@ -463,12 +469,12 @@ o.countries.zoomToActive = function(that){
 	TweenLite.to(o.dummyObj, time, {
 	  x: shift.x,
 	  y: shift.y,
-	  sx: bbox.cx,
-	  sy: bbox.cy,
+	  sx: cx,
+	  sy: cy,
 	  s: matrix.a,
 	  ease: Power1.easeOut,
 	  onUpdate: o.applySnapTweens,
-	  onUpdateParams:["{self}", o.mainG, matrix.a, bbox.cx, bbox.cy]
+	  onUpdateParams:["{self}", o.mainG, matrix.a, cx, cy]
 	});
 
 };
