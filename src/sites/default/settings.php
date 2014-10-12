@@ -207,7 +207,7 @@ $databases = array (
     array (
       'database' => 'datamatters',
       'username' => 'root',
-      'password' => 'root',
+      'password' => 'tarantula',
       'host' => '',
       'port' => '',
       'driver' => 'mysql',
