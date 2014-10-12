@@ -89,14 +89,17 @@ o.map.activateDrag = function () {
 			x: o.mainG.transform().globalMatrix.e,
 			y: o.mainG.transform().globalMatrix.f
 		};
-		
+
 		var x = dx - o.drag.x;
 		var y = dy - o.drag.y;
 		
-		x = o.convertToDragString(x);
-		y = o.convertToDragString(y);
-
-		o.s.panTo(x, y);
+		TweenLite.to(o.dummyObj, 0, {
+			x: x,
+			y: y,
+			ease: Power1.easeOut,
+			onUpdate: o.applyMoveTweens,
+			onUpdateParams:["{self}", o.mainG]
+		});
 		
 		o.drag.x = dx;
 		o.drag.y = dy;
@@ -499,6 +502,14 @@ o.applySnapTweens = function(tween, snapEl, s, sx, sy) {
 			s = tween.target.s;
 
 	snapEl.transform("t" + x + "," + y + "s" + s + "," + s + "," + sx + "," + sy);
+
+};
+o.applyMoveTweens = function(tween, snapEl) {
+
+	var x = tween.target.x,
+			y = tween.target.y;
+
+	snapEl.transform("t" + x + "," + y + '...');
 
 };
 // END Animating with Greensock!
