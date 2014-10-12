@@ -38,6 +38,17 @@ o.map.init = function () {
 	});
 
 };
+
+o.convertToDragString = function (num) {
+
+	if ( num >= 0 ) {
+		return '+' + num.toString();
+	} else {
+		return num.toString();
+	}
+
+};
+
 o.map.activateDrag = function () {
 
 	//add for map dragging also outside of the countries
@@ -51,15 +62,18 @@ o.map.activateDrag = function () {
 	
 	var move = function(dx,dy) {
 
-		//account for current zoom
-		var currentZoom = o.s.zpd('save').a;
-		dx /= currentZoom;
-		dy /= currentZoom;
+		var current = {
+			x: o.mainG.transform().globalMatrix.e,
+			y: o.mainG.transform().globalMatrix.f
+		};
 		
 		var x = dx - o.drag.x;
 		var y = dy - o.drag.y;
 		
-		this.transform("t" + x + "," + y + "...");
+		x = o.convertToDragString(x);
+		y = o.convertToDragString(y);
+
+		o.s.panTo(x, y);
 		
 		o.drag.x = dx;
 		o.drag.y = dy;
@@ -76,7 +90,7 @@ o.map.activateDrag = function () {
 		o.drag.x = 0;
 		o.drag.y = 0;
 
-		var m = this.matrix;
+		var m = o.mainG.transform().globalMatrix;
 		
 		TweenLite.to(o.dummyObj, 0, {
 		  x: m.e,
@@ -86,7 +100,7 @@ o.map.activateDrag = function () {
 		  s: m.a,
 		  ease: Power1.easeOut,
 		  onUpdate: o.applySnapTweens,
-		  onUpdateParams:["{self}", o.map.countries, m.a]
+		  onUpdateParams:["{self}", o.mainG, m.a]
 		});
 
 		o.isDraggingMap = false;	
@@ -100,12 +114,13 @@ o.map.loadCountriesWithProjects = function(url) {
   var bothComplete = 0; //bothComplete has to be == 2, it means that we have loaded both jsons
   var prepareMap = function() {
   	o.countries.initHoverAndClick();
-  	o.countries.center();
   	o.s.zpd({
   		drag: false,
   		pan: false,
   		zoomThreshold: [1, 4]
   	});
+  	o.mainG = o.s.select('g');
+  	o.countries.center();
   	o.map.show();
   };
 
@@ -384,7 +399,7 @@ o.countries.center = function () {
 	  s: 2,
 	  ease: Power1.easeOut,
 	  onUpdate: o.applySnapTweens,
-	  onUpdateParams:["{self}", o.map.countries, 2, bbox.cx]
+	  onUpdateParams:["{self}", o.mainG, 2, bbox.cx]
 	});
 
 };
@@ -397,16 +412,18 @@ o.countries.zoomToActive = function(that){
 	};
 
 	time = 0.3;
+
+	var matrix = o.mainG.transform().globalMatrix;
 	
 	TweenLite.to(o.dummyObj, time, {
 	  x: shift.x,
 	  y: shift.y,
 	  sx: bbox.cx,
 	  sy: bbox.cy,
-	  s: 2,
+	  s: matrix.a,
 	  ease: Power1.easeOut,
 	  onUpdate: o.applySnapTweens,
-	  onUpdateParams:["{self}", o.map.countries, 2, bbox.cx, bbox.cy]
+	  onUpdateParams:["{self}", o.mainG, matrix.a, bbox.cx, bbox.cy]
 	});
 
 };
