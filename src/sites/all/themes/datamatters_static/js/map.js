@@ -448,7 +448,7 @@ o.countries.center = function () {
 	  y: y,
 	  sx: bbox.cx,
 	  sy: bbox.cy,
-	  s: 2,
+	  s: 4,
 	  ease: Power1.easeOut,
 	  onUpdate: o.applySnapTweens,
 	  onUpdateParams:["{self}", o.mainG, 2, bbox.cx, bbox.cy]
