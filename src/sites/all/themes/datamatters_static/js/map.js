@@ -117,7 +117,7 @@ o.map.loadCountriesWithProjects = function(url) {
   	o.s.zpd({
   		drag: false,
   		pan: false,
-  		zoomThreshold: [1, 4]
+  		zoomThreshold: [2, 6]
   	});
   	o.mainG = o.s.select('g');
   	o.countries.center();
