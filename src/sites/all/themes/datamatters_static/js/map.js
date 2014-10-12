@@ -75,6 +75,10 @@ o.map.activateDrag = function () {
 	
 	var move = function(dx,dy) {
 
+		if (o.pinchActive) {
+			return;
+		}
+
 		var current = {
 			x: o.mainG.transform().globalMatrix.e,
 			y: o.mainG.transform().globalMatrix.f
@@ -242,6 +246,7 @@ o.listenToGestures = function () {
 
 	hammertime.on('pinchstart', function(e){
 		o.lastPinchVal = 0;
+		o.pinchActive = true;
 	});
 
 	hammertime.on('pinchmove', function(e){
@@ -275,6 +280,7 @@ o.listenToGestures = function () {
 
 	hammertime.on('pinchend', function(){
 		o.saveStateToDummyObject();
+		o.pinchActive = false;
 	});
 
 };
