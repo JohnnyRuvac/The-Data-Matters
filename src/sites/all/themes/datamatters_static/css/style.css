@@ -1304,8 +1304,8 @@ body.loaded.show_filter .right .filter-button{
   position: absolute;
   width: 30px;
   height: 60px;
-  top: 18px;
-  right: 18px;
+  bottom: 18px;
+  left: 20px;
   z-index: 100;
 }
 .map-zoom-btn {
