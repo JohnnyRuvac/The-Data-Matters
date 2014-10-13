@@ -321,17 +321,17 @@ o.countries.initHoverAndClick = function() {
 			});
 		} else {
 
-			country.touchstart(function(e){
-				
-				o.lastParentId = e.target.parentNode.id;
 
+			country.touchstart(function(e){
+				o.lastParentId = e.target.parentNode.id;
 			});
 			country.touchend(function(e){
-				
+				console.log('end: ' + o.drag.x + ', ' + o.drag.y);
 				var curParentId = e.target.parentNode.id,
-					same = ( o.lastParentId == curParentId );
+						same = ( o.lastParentId == curParentId ),
+						didDrag = ( (o.drag.x > 2) || (o.drag.y > 2) || (o.drag.x < -2) || (o.drag.y < -2) );
 
-				if (same)
+				if (same && !didDrag)
 					o.countries.click(e, this);
 
 			});
