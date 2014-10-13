@@ -230,12 +230,6 @@ o.map.show = function () {
 	o.map.countries.animate({opacity: 1}, 600);
 
 };
-o.zoomToPoint = function (scale, x, y) {
-
-	var m = new Snap.Matrix().scale( scale, scale, x, y );
-	o.mainG.transform(m);
-
-};
 
 o.listenToGestures = function () {
 
@@ -461,24 +455,28 @@ o.map.activateZoomBtns = function () {
 	$('#map-zoom-out').click(function(e){
 		
 		e.preventDefault();
-		var m = o.mainG.transform().globalMatrix
+		var m = o.mainG.transform().globalMatrix;
 		var currentScale = m.a;
 		var rounded = Math.round(currentScale);
-		var x = m.e + o.ww / 2;
-		var y = m.f + o.wh / 2;
-		console.log(currentScale + ' r: ' + rounded);
 		
 		if ( (rounded - 1) >= o.minZoom ) {
-			o.zoomToPoint( --rounded, x, y );
+			o.mainG.transform('s0.5,0.5...');
 		}
 
 	});
 
 	//in
 	$('#map-zoom-in').click(function(e){
+		
 		e.preventDefault();
-		console.log('in');
-		var currentScale = o.mainG.transform().globalMatrix.a;
+		var m = o.mainG.transform().globalMatrix;
+		var currentScale = m.a;
+		var rounded = Math.round(currentScale);
+		
+		if ( (rounded + 1) <= o.maxZoom ) {
+			o.mainG.transform('s2,2...');
+		}
+
 	});
 
 };
