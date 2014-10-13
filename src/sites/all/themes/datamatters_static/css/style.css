@@ -1300,6 +1300,25 @@ body.loaded.show_filter .right .filter-button{
   border-top: 1px dotted #ccc;
   background: url(../img/field-icon.png) no-repeat 14px center;
 }
+.map-zoom-container {
+  position: absolute;
+  width: 30px;
+  height: 60px;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+}
+.map-zoom-btn {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+#map-zoom-out {
+  background: url(../img/zoom_minus.png);
+}
+#map-zoom-in {
+  background: url(../img/zoom_plus.png);
+}
 
 /* END of Interactive Map */
 
@@ -2026,6 +2045,16 @@ only screen and (min-device-pixel-ratio: 1.5) {
     background: url(../img/logo@2x.png) no-repeat bottom center;
     -webkit-background-size: 90px 82px;
     background-size: 90px 82px;
+  }
+  #map-zoom-out {
+    background: url(../img/zoom_minus@2x.png);
+    -webkit-background-size: 30px 30px;
+    background-size: 30px 30px;
+  }
+  #map-zoom-in {
+    background: url(../img/zoom_plus@2x.png);
+    -webkit-background-size: 30px 30px;
+    background-size: 30px 30px;
   }
 
 }

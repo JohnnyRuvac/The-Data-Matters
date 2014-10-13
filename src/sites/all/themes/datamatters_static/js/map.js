@@ -37,6 +37,8 @@ o.map.init = function () {
 		//make it dragable
 		o.map.activateDrag();
 
+		o.map.activateZoomBtns();
+
 		//countries with project hover
 		var url = o.$mapContainer.attr("data-json-url");
 		o.map.loadCountriesWithProjects(url);
@@ -448,6 +450,35 @@ o.countries.center = function () {
 	  ease: Power1.easeOut,
 	  onUpdate: o.applySnapTweens,
 	  onUpdateParams:["{self}", o.mainG, 2, bbox.cx, bbox.cy]
+	});
+
+};
+o.map.activateZoomBtns = function () {
+
+	o.map.zoomLevels = [2, 3, 4, 5, 6];
+
+	//out
+	$('#map-zoom-out').click(function(e){
+		
+		e.preventDefault();
+		var m = o.mainG.transform().globalMatrix
+		var currentScale = m.a;
+		var rounded = Math.round(currentScale);
+		var x = m.e + o.ww / 2;
+		var y = m.f + o.wh / 2;
+		console.log(currentScale + ' r: ' + rounded);
+		
+		if ( (rounded - 1) >= o.minZoom ) {
+			o.zoomToPoint( --rounded, x, y );
+		}
+
+	});
+
+	//in
+	$('#map-zoom-in').click(function(e){
+		e.preventDefault();
+		console.log('in');
+		var currentScale = o.mainG.transform().globalMatrix.a;
 	});
 
 };
