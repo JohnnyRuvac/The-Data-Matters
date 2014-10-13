@@ -496,13 +496,16 @@ o.map.activateZoomBtns = function () {
 
 	o.map.zoomLevels = [2, 3, 4, 5, 6];
 
+	var ua = navigator.userAgent,
+    	evt = (ua.match(/iPad/i)) ? "touchstart" : "click";
+
 	//out
-	$('#map-zoom-out').click(function(e){
+	$('#map-zoom-out').on(evt, function(e){
 		o.map.zoomOut(e);
 	});
 
 	//in
-	$('#map-zoom-in').click(function(e){
+	$('#map-zoom-in').on(evt, function(e){
 		o.map.zoomIn(e);
 	});
 
