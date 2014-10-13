@@ -452,36 +452,46 @@ o.countries.center = function () {
 	});
 
 };
+o.map.zoomOut = function (e) {
+
+	if (e) {
+		e.preventDefault();
+	}
+	var m = o.mainG.transform().globalMatrix;
+	var currentScale = m.a;
+	var rounded = Math.round(currentScale);
+	
+	if ( (rounded - 1) >= o.minZoom ) {
+		o.mainG.transform('s0.5,0.5...');
+	}
+
+};
+o.map.zoomIn = function (e) {
+
+	if (e) {
+		e.preventDefault();
+	}
+	var m = o.mainG.transform().globalMatrix;
+	var currentScale = m.a;
+	var rounded = Math.round(currentScale);
+	
+	if ( (rounded + 1) <= o.maxZoom ) {
+		o.mainG.transform('s2,2...');
+	}
+
+};
 o.map.activateZoomBtns = function () {
 
 	o.map.zoomLevels = [2, 3, 4, 5, 6];
 
 	//out
 	$('#map-zoom-out').click(function(e){
-		
-		e.preventDefault();
-		var m = o.mainG.transform().globalMatrix;
-		var currentScale = m.a;
-		var rounded = Math.round(currentScale);
-		
-		if ( (rounded - 1) >= o.minZoom ) {
-			o.mainG.transform('s0.5,0.5...');
-		}
-
+		o.map.zoomOut(e);
 	});
 
 	//in
 	$('#map-zoom-in').click(function(e){
-		
-		e.preventDefault();
-		var m = o.mainG.transform().globalMatrix;
-		var currentScale = m.a;
-		var rounded = Math.round(currentScale);
-		
-		if ( (rounded + 1) <= o.maxZoom ) {
-			o.mainG.transform('s2,2...');
-		}
-
+		o.map.zoomIn(e);
 	});
 
 };
