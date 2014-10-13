@@ -1165,59 +1165,48 @@ body.slideout-menu-opened{
 /* END Slideout Search */
 
 /* Home + interactive map pages */
-.page-node-19,
 .page-node-22 {
   overflow: hidden;
 }
-.page-node-19 #outer-wrapper,
 .page-node-22 #outer-wrapper {
   overflow: visible;
 }
-.page-node-19 h1.logo,
 .page-node-22 h1.logo, {
   opacity: 0;
 }
-.page-node-19.map-shown h1.logo,
 .page-node-22.map-shown h1.logo, {
   opacity: 1;
 }
-.page-node-19 .main-content,
 .page-node-22 .main-content {
   margin-top: -24px;
   overflow: hidden;
 }
 /* hide logo for tablets/mobile max 768px */
 @media (max-width: 768px) {
-  .page-node-19 header,
   .page-node-22 header {
     height: 48px;
     padding-top: 0;
     margin-top: -2px;
   }
-  .page-node-19 h1.logo,
   .page-node-22 h1.logo {
     display: none;
   }
 }
 
-.right .filter-button,
 .right .filter-button {
   display: none;
 }
 
-body.show_filter .right .filter-button,
 body.show_filter .right .filter-button {
   display: block;
   opacity: 0;
 }
 
-body.loaded.show_filter .right .filter-button,
 body.loaded.show_filter .right .filter-button{
   opacity: 1;
 }
 
 @media (orientation:landscape) {
-  html.ipad.ios7 .page-node-19,
   html.ipad.ios7 .page-node-22 {
     position: fixed;
     bottom: 0;
@@ -1227,191 +1216,8 @@ body.loaded.show_filter .right .filter-button{
 }
 /* END home + interactive map pages */
 
-/* Home page */
-#hp-container {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 400;
-}
-.page-node-22 h1.logo {
-  display: none;
-}
-.page-node-22 .slogan {
-  width: 100%;
-  position: absolute;
-  top: 600px;
-  left: 0;
-  margin: 0;
-  z-index: 50;
-  font-size: 12px;
-  line-height: 18px;
-  color: #ccc;
-  text-align: center;
-}
-.page-node-22 .slogan span {
-  color: #646464;
-}
-
-.page-node-22 .continue-arrow {
-  display: block;
-  width: 13px;
-  height: 18px;
-  position: absolute;
-  bottom: 18px;
-  left: 50%;
-  z-index: 401;
-  margin-left: -7px;
-  background: url(../img/continue-arrow.png);
-}
-.page-node-22 #pls-scroll {
-  width: 400px;
-  height: 20px;
-  position: absolute;
-  bottom: 54px;
-  left: 50%;
-  margin-left: -195px;
-  color: #ccc;
-  text-align: center;
-  font-size: 12px;
-}
-
-#homepage-slogan.active {
-  opacity: 1;
-}
-#homepage-slogan {
-  opacity: 0;
-}
-
-.fields-descriptions {
-  width: 600px;
-  position: absolute;
-  top: 30%;
-  left: 40%;
-  z-index: 50;
-}
-.fields-descriptions li {
-  opacity: 0;
-}
-.fields-descriptions p {
-  opacity: 0;
-  float: left;
-  width: 286px;
-  position: absolute;
-  top: -600px;
-  left: 230px;
-  margin: 0;
-  font-size: 14px;
-  line-height: 20px;
-}
-.fields-descriptions ul {
-  list-style: none;
-  float: left;
-  width: 230px;
-  padding-left: 30px;
-  font-size: 16px;
-  line-height: 24px;
-}
-.fields-descriptions li {
-  color: #ccc;
-}
-.fields-descriptions li.active {
-  color: #f00;
-}
-.fields-descriptions li.seen {
-  color: #000;
-}
-
-.page-node-22 #countries-text,
-.page-node-22 #relationships-text {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 50;
-  margin: 0;
-}
-.page-node-22 #countries-text {
-  width: 286px;
-  left: 50%;
-  top: 50%;
-  margin-left: 50px;
-  margin-top: -210px;
-  
-}
-.page-node-22 #relationships-text {
-  width: 300px;
-  left: 50%;
-  top: 50%;
-  margin-left: 45px;
-  margin-top: -250px;
-}
-.page-node-22 .last-page {
-  width: 350px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 50;
-  margin-left: -184px;
-  padding-left: 24px;
-  margin-top: -98px;
-}
-.page-node-22 .last-page p {
-  opacity: 0;
-  top: -800px;
-  margin: 0 0 24px 0;
-}
-.page-node-22 .last-page a {
-  opacity: 0;
-  display: block;
-  width: 146px;
-  margin-left: 80px;
-  margin-bottom: 12px;
-  padding-left: 8px;
-  font-size: 14px;
-  line-height: 32px;
-  color: #999;
-  border: 1px solid #999;
-}
-.page-node-22 .last-page .int-map-link,
-.page-node-22 .last-page a:hover,
-.page-node-22 .last-page a:active {
-  color: #f00;
-  border-color: #f00;
-  text-decoration: none;
-}
-.page-node-22 .last-page .int-map-link {
-  display: none;
-  margin-top: -84px;
-  position: relative;
-  z-index: 100;
-}
-.page-node-22 .last-page .projects-link {
-  display: none;
-  color: #333;
-  border-color: #333;
-  position: relative;
-  z-index: 100;
-}
-.osf-logo {
-  opacity: 0;
-  display: block;
-  width: 117px;
-  height: 27px;
-  position: absolute;
-  bottom: 44px;
-  left: 50%;
-  margin-left: -68px;
-  z-index: 50;
-  text-indent: -9999px;
-  background: url(../img/osf-logo.png);
-}
-/* END home page */
-
 /* Interactive Map */
-.page-node-19.map-shown {
+.page-node-22.map-shown {
   background: #efefef;
 }
 #map-container {
