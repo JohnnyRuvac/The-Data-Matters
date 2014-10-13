@@ -5,6 +5,12 @@ o.maxZoom = 6;
 
 o.map.init = function () {
 
+	//redirect to projects for touch devices for now
+	if ( o.isTouch ) {
+		window.location = "/projects";
+		return;
+	}
+
 	o.$mapContainer = $("#map-container");
 
 	var url = o.$mapContainer.attr("data-url");
