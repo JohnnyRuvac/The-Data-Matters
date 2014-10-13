@@ -233,7 +233,7 @@ o.map.show = function () {
 
 o.listenToGestures = function () {
 
-	var elem = $('#map-container')[0];
+	var elem = $('.main-content')[0];
 	var hammertime = new Hammer(elem);
 	hammertime.get('pinch').set({
 		enable: true,
@@ -269,12 +269,17 @@ o.listenToGestures = function () {
 		o.lastPinchVal = e.scale;
 
 		if ( newScale > o.minZoom && newScale < o.maxZoom ) {
-			o.zoomToPoint(newScale, cx, cy);
+			o.s.zoomToPoint(newScale, cx, cy, 0);
 		}
 
 	});
 
 	hammertime.on('pinchend', function(){
+		o.saveStateToDummyObject();
+		o.pinchActive = false;
+	});
+
+	hammertime.on('pinchcancel', function(){
 		o.saveStateToDummyObject();
 		o.pinchActive = false;
 	});
