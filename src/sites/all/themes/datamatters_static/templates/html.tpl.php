@@ -33,13 +33,6 @@
   
   <link rel="shortcut icon" href="/misc/favicon.ico">
 
-  <?php
-    if (drupal_is_front_page()) {
-      echo "<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.js'></script>";
-      echo "<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.css' rel='stylesheet' />";
-    }
-  ?>
-
   <?php //print $head; ?>
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
