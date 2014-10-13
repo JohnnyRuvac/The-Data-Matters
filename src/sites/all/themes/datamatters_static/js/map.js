@@ -236,13 +236,14 @@ o.listenToGestures = function () {
 	var elem = $('.main-content')[0];
 	var hammertime = new Hammer(elem);
 	hammertime.get('pinch').set({
-		enable: true,
-		threshold: 0
+		enable: true
 	});
 
 	hammertime.on('pinchstart', function(e){
+		console.log('pinch recognized');
 		o.lastPinchVal = 0;
 		o.pinchActive = true;
+		o.pinchAlreadyZoomed = false;
 	});
 
 	hammertime.on('pinchmove', function(e){
@@ -250,38 +251,45 @@ o.listenToGestures = function () {
 		if ( e.pointers.length < 2 ) {
 			return;
 		}
+
+		if (o.pinchAlreadyZoomed) {
+			return;
+		}
 		
-		var x1 = e.pointers[0].pageX;
-		var y1 = e.pointers[0].pageY;
-		var x2 = e.pointers[1].pageX;
-		var y2 = e.pointers[1].pageY;
-		var cx = (x1 + x2) / 2;
-		var cy = (y1 + y2) / 2;
-		console.log('cx: ' + cx + ' cy: ' + cy + ' x1: ' + x1 + ' y1: ' + y1 + ' x2: ' + x2 + ' y2: ' + y2 + ' scale: ' + e.scale);
+		if ( !o.lastPinchVal) {
+			o.lastPinchVal = e.scale;
+			return;
+		}
 
-		var currentScale = o.mainG.transform().globalMatrix.a;
+		console.log( o.lastPinchVal );
 		var isZoomingIn = ( e.scale > o.lastPinchVal );
-		var newScale =  (isZoomingIn) ? 
-											currentScale + --e.scale : 
-											currentScale - --currentScale;
 
-		console.log('newScale: ' + newScale);
-		o.lastPinchVal = e.scale;
-
-		if ( newScale > o.minZoom && newScale < o.maxZoom ) {
-			o.s.zoomToPoint(newScale, cx, cy, 0);
+		if (isZoomingIn) {
+			//console.log('zoomin!');
+			o.pinchAlreadyZoomed = true;
+			o.map.zoomIn();
+		} else {
+			//console.log('zoomout!');
+			o.pinchAlreadyZoomed = true;
+			o.map.zoomOut();
 		}
 
 	});
 
 	hammertime.on('pinchend', function(){
 		o.saveStateToDummyObject();
-		o.pinchActive = false;
+		setTimeout(function(){
+			o.pinchActive = false;
+			o.pinchAlreadyZoomed = false;
+		}, 500);
 	});
 
 	hammertime.on('pinchcancel', function(){
 		o.saveStateToDummyObject();
-		o.pinchActive = false;
+		setTimeout(function(){
+			o.pinchActive = false;
+			o.pinchAlreadyZoomed = false;
+		}, 500);
 	});
 
 };
@@ -326,7 +334,11 @@ o.countries.initHoverAndClick = function() {
 				o.lastParentId = e.target.parentNode.id;
 			});
 			country.touchend(function(e){
-				console.log('end: ' + o.drag.x + ', ' + o.drag.y);
+				
+				if (o.pinchActive) {
+					return;
+				}
+
 				var curParentId = e.target.parentNode.id,
 						same = ( o.lastParentId == curParentId ),
 						didDrag = ( (o.drag.x > 2) || (o.drag.y > 2) || (o.drag.x < -2) || (o.drag.y < -2) );
