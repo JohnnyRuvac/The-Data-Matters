@@ -105,10 +105,6 @@ o.map.activateDrag = function () {
 	
 	var move = function(dx,dy) {
 
-		if (o.pinchActive) {
-			return;
-		}
-
 		var x = dx - o.drag.x;
 		var y = dy - o.drag.y;
 		console.log('x: ' + x + ' y: ' + y);
@@ -258,69 +254,6 @@ o.map.show = function () {
 	o.map.countries.animate({opacity: 1}, 600);
 
 };
-
-o.listenToGestures = function () {
-
-	var elem = $('.main-content')[0];
-	var hammertime = new Hammer(elem);
-	hammertime.get('pinch').set({
-		enable: true
-	});
-
-	hammertime.on('pinchstart', function(e){
-		console.log('pinch recognized');
-		o.lastPinchVal = 0;
-		o.pinchActive = true;
-		o.pinchAlreadyZoomed = false;
-	});
-
-	hammertime.on('pinchmove', function(e){
-
-		if ( e.pointers.length < 2 ) {
-			return;
-		}
-
-		if (o.pinchAlreadyZoomed) {
-			return;
-		}
-		
-		if ( !o.lastPinchVal) {
-			o.lastPinchVal = e.scale;
-			return;
-		}
-
-		console.log( o.lastPinchVal );
-		var isZoomingIn = ( e.scale > o.lastPinchVal );
-
-		if (isZoomingIn) {
-			//console.log('zoomin!');
-			o.pinchAlreadyZoomed = true;
-			o.map.zoomIn();
-		} else {
-			//console.log('zoomout!');
-			o.pinchAlreadyZoomed = true;
-			o.map.zoomOut();
-		}
-
-	});
-
-	hammertime.on('pinchend', function(){
-		o.saveStateToDummyObject();
-		setTimeout(function(){
-			o.pinchActive = false;
-			o.pinchAlreadyZoomed = false;
-		}, 500);
-	});
-
-	hammertime.on('pinchcancel', function(){
-		o.saveStateToDummyObject();
-		setTimeout(function(){
-			o.pinchActive = false;
-			o.pinchAlreadyZoomed = false;
-		}, 500);
-	});
-
-};
 // END map
 
 // Countries
@@ -362,10 +295,6 @@ o.countries.initHoverAndClick = function() {
 				o.lastParentId = e.target.parentNode.id;
 			});
 			country.touchend(function(e){
-				
-				if (o.pinchActive) {
-					return;
-				}
 
 				var curParentId = e.target.parentNode.id,
 						same = ( o.lastParentId == curParentId ),

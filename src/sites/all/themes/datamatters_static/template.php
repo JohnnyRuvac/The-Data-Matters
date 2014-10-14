@@ -15,7 +15,6 @@ function datamatters_static_js_alter(&$js, &$vars){
 	
   if($path == "home") drupal_add_js( path_to_theme().'/js/snap.svg-min.js');
   if($path == "home") drupal_add_js( path_to_theme().'/js/snap.svg.zpd.js');
-	if($path == "home") drupal_add_js( path_to_theme().'/js/hammer.min.js');
   if($path == "home") drupal_add_js( path_to_theme().'/js/TweenLite.min.js');
 	if($path == "home") drupal_add_js( path_to_theme().'/js/map.js', array('weight' => 1000));
   
