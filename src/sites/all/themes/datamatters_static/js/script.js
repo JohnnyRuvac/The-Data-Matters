@@ -576,9 +576,10 @@ o.welcome = function(){
 o.checkSVG = function () {
 	
 	var mobile = o.ww <= 768 || o.wh < 630,
-			ie9 = o.$html.hasClass("ie9");
+			isIE = o.$html.hasClass("ie"),
+			isIE11 = !(window.ActiveXObject) && "ActiveXObject" in window;
 
-	if ( !o.svgSupport || mobile || ie9 ) {
+	if ( !o.svgSupport || mobile || isIE || isIE11) {
 		window.location = "/projects";
 	}
 
