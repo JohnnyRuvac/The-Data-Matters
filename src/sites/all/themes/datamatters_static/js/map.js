@@ -502,7 +502,8 @@ o.map.zoomOut = function (e) {
 	var rounded = Math.round(currentScale);
 	
 	if ( (rounded - 1) >= o.minZoom ) {
-		o.mainG.transform('s0.5,0.5...');
+		var scaleMultiplier = (rounded - 1) / rounded;
+		o.mainG.transform('s' + scaleMultiplier + ',' + scaleMultiplier + '...');
 	}
 
 };
@@ -516,13 +517,12 @@ o.map.zoomIn = function (e) {
 	var rounded = Math.round(currentScale);
 	
 	if ( (rounded + 1) <= o.maxZoom ) {
-		o.mainG.transform('s2,2...');
+		var scaleMultiplier = (rounded + 1) / rounded;
+		o.mainG.transform('s' + scaleMultiplier + ',' + scaleMultiplier + '...');
 	}
 
 };
 o.map.activateZoomBtns = function () {
-
-	o.map.zoomLevels = [2, 3, 4, 5, 6];
 
 	var ua = navigator.userAgent,
     	evt = (ua.match(/iPad/i)) ? "touchstart" : "click";
