@@ -63,7 +63,35 @@ o.saveStateToDummyObject = function () {
 	});
 
 };
+o.map.limitDrag = function (x, y) {
 
+	var bbox = o.mainG.getBBox();
+
+	//check left edge
+	var isOnLeftEdge = ( (bbox.x - x) >= 0 );
+	var isOnRightEdge = ( (bbox.x2 + x) <= o.ww );
+	var isOnTopEdge = ( (bbox.y - y) >= 0 );
+	var isOnBottomEdge = ( (bbox.y2 + y) <= o.wh );
+
+	if ( isOnLeftEdge ) {
+		x = ( x > 0 ) ? 0 : x;
+	}
+	if ( isOnRightEdge ) {
+		x = ( x < 0 ) ? 0 : x;
+	}
+	if ( isOnTopEdge ) {
+		y = ( y > 0 ) ? 0 : y;
+	}
+	if ( isOnBottomEdge ) {
+		y = ( y < 0 ) ? 0 : y;
+	}
+
+	return {
+		x: x,
+		y: y
+	};
+
+};
 o.map.activateDrag = function () {
 
 	//add for map dragging also outside of the countries
@@ -81,13 +109,13 @@ o.map.activateDrag = function () {
 			return;
 		}
 
-		var current = {
-			x: o.mainG.transform().globalMatrix.e,
-			y: o.mainG.transform().globalMatrix.f
-		};
-
 		var x = dx - o.drag.x;
 		var y = dy - o.drag.y;
+		console.log('x: ' + x + ' y: ' + y);
+
+		//limit drag
+		x = o.map.limitDrag(x, y).x;
+		y = o.map.limitDrag(x, y).y;		
 		
 		TweenLite.to(o.dummyObj, 0, {
 			x: x,
