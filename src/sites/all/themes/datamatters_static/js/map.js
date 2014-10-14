@@ -107,7 +107,6 @@ o.map.activateDrag = function () {
 
 		var x = dx - o.drag.x;
 		var y = dy - o.drag.y;
-		console.log('x: ' + x + ' y: ' + y);
 
 		//limit drag
 		x = o.map.limitDrag(x, y).x;
@@ -594,7 +593,6 @@ $(function(){
 
 	o.map.fixIpad();
 	o.map.init();
-	o.listenToGestures();
 
 });
 // End DOM ready
