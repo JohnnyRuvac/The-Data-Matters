@@ -965,7 +965,6 @@ body.slideout-menu-opened{
   }
 }
 
-
 .filter-button .label.active {
   color: #f00;
   background-image: none;
@@ -1188,8 +1187,14 @@ body.slideout-menu-opened{
     padding-top: 0;
     margin-top: -2px;
   }
+  .page-node-22 #wrapper {
+    position: relative;
+  }
   .page-node-22 h1.logo {
-    display: none;
+    display: block;
+    position: absolute;
+    top: 64px;
+    z-index: 100;
   }
 }
 

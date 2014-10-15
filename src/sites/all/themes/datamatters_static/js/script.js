@@ -575,7 +575,7 @@ o.welcome = function(){
 // Check SVG support
 o.checkSVG = function () {
 	
-	var mobile = o.ww <= 768 || o.wh < 630,
+	var mobile = o.ww < 768 || o.wh < 630,
 			isIE = o.$html.hasClass("ie"),
 			isIE11 = !(window.ActiveXObject) && "ActiveXObject" in window;
 
