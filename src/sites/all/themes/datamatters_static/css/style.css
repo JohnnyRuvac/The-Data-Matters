@@ -1302,22 +1302,25 @@ body.loaded.show_filter .right .filter-button{
 }
 .map-zoom-container {
   position: absolute;
-  width: 30px;
-  height: 60px;
-  bottom: 18px;
-  left: 20px;
+  width: 50px;
+  height: 100px;
+  bottom: 0;
+  left: 0;
   z-index: 100;
 }
 .map-zoom-btn {
   display: block;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
 }
 #map-zoom-out {
-  background: url(../img/zoom_minus.png);
+  background-image: url(../img/zoom_minus.png);
+  background-position: 18px 0;
 }
 #map-zoom-in {
-  background: url(../img/zoom_plus.png);
+  background-image: url(../img/zoom_plus.png);
+  background-position: 18px 20px;
 }
 
 /* END of Interactive Map */
@@ -2047,12 +2050,12 @@ only screen and (min-device-pixel-ratio: 1.5) {
     background-size: 90px 82px;
   }
   #map-zoom-out {
-    background: url(../img/zoom_minus@2x.png);
+    background-image: url(../img/zoom_minus@2x.png);
     -webkit-background-size: 30px 30px;
     background-size: 30px 30px;
   }
   #map-zoom-in {
-    background: url(../img/zoom_plus@2x.png);
+    background-image: url(../img/zoom_plus@2x.png);
     -webkit-background-size: 30px 30px;
     background-size: 30px 30px;
   }
