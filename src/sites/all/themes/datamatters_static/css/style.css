@@ -181,7 +181,7 @@ header .content.affix-top .logo {
 .logo a {
   position: absolute;
   width: 90px;
-  height: 41px;
+  height: 36px;
   text-indent: -9999px;
   background: url(../img/logo.png) no-repeat top left;
 }
@@ -2043,13 +2043,13 @@ only screen and (min-device-pixel-ratio: 1.5) {
   
   .logo a {
     background: url(../img/logo@2x.png) no-repeat top left;
-    -webkit-background-size: 180px 41px;
-    background-size: 180px 41px;
+    -webkit-background-size: 180px 72px;
+    background-size: 180px 72px;
   }
   .logo a:hover {
     background: url(../img/logo@2x.png) no-repeat top right;
-    -webkit-background-size: 180px 41px;
-    background-size: 180px 41px;
+    -webkit-background-size: 180px 72px;
+    background-size: 180px 72px;
   }
   #map-zoom-out {
     background-image: url(../img/zoom_minus@2x.png);
