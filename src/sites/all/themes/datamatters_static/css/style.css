@@ -1956,11 +1956,6 @@ only screen and (-moz-min-device-pixel-ratio: 1.5),
 only screen and (-o-min-device-pixel-ratio: 3/2),
 only screen and (min-device-pixel-ratio: 1.5) {
   
-  .osf-logo {
-    background-image: url(../img/osf-logo@2x.png);
-    -webkit-background-size: 117px 27px;
-    background-size: 117px 27px;
-  }
   .filter-content h3 a {
     background: white url(../img/close-icon@2x.png) no-repeat 0 0;
     -webkit-background-size: 10px 10px;
