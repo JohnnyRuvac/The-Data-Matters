@@ -1313,14 +1313,16 @@ body.loaded.show_filter .right .filter-button{
   width: 50px;
   height: 50px;
   background-repeat: no-repeat;
+  background-position: 0 0;
 }
 #map-zoom-out {
   background-image: url(../img/zoom_minus.png);
-  background-position: 18px 0;
 }
 #map-zoom-in {
   background-image: url(../img/zoom_plus.png);
-  background-position: 18px 20px;
+}
+.no-touch .map-zoom-btn:hover {
+  background-position: -50px 0;
 }
 
 /* END of Interactive Map */
@@ -2051,13 +2053,13 @@ only screen and (min-device-pixel-ratio: 1.5) {
   }
   #map-zoom-out {
     background-image: url(../img/zoom_minus@2x.png);
-    -webkit-background-size: 30px 30px;
-    background-size: 30px 30px;
+    -webkit-background-size: 116px 50px;
+    background-size: 116px 50px;
   }
   #map-zoom-in {
     background-image: url(../img/zoom_plus@2x.png);
-    -webkit-background-size: 30px 30px;
-    background-size: 30px 30px;
+    -webkit-background-size: 116px 50px;
+    background-size: 116px 50px; 
   }
 
 }

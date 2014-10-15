@@ -195,12 +195,6 @@ o.map.highlightCountriesWithProject = function () {
 	o.patternInactive = Snap("#pattern-inactive");
 	o.patternActive = Snap("#pattern-active");
 	
-	// o.patternActive.attr({
-	// 	"vector-effect": "non-scaling-stroke"
-	// });
-	// o.patternInactive.attr({
-	// 	"vector-effect": "non-scaling-stroke"
-	// });
 	o.patternActive.selectAll('line').attr({
 		"vector-effect": "non-scaling-stroke",
 		strokeWidth: 1
@@ -209,6 +203,12 @@ o.map.highlightCountriesWithProject = function () {
 		"vector-effect": "non-scaling-stroke",
 		strokeWidth: 1
 	});
+
+	//zoom patterns
+	var m = new Snap.Matrix();
+	m.scale(0.5, 0.5);
+	o.patternActive.transform(m);
+	o.patternInactive.transform(m);
 
 	//highlight countries
 	o.countries.withProject = [];
